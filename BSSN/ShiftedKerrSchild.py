@@ -13,7 +13,6 @@
 # 
 # * The black hole mass, M
 # * The black hole spin parameter, a
- 
 
 # Step P0: Load needed modules
 import sympy as sp

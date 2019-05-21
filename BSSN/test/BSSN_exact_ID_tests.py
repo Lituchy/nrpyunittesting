@@ -23,9 +23,9 @@ class TestStringMethods(unittest.TestCase):
 
     def test_BL_ID_ADM(self):
         everything = bl.alphaCart
-        for i in range(3):
+        for i in range(DIM):
             everything += bl.betaCartU[i] + bl.BCartU[i]
-            for j in range(3):
+            for j in range(DIM):
                 everything += bl.gammaCartDD[i][j] + bl.KCartDD[i][j]
         md5sum = "empty"
         if sys.version_info[0]==2:
@@ -34,16 +34,16 @@ class TestStringMethods(unittest.TestCase):
             md5sum = hashlib.md5(str(everything).encode('utf-8')).hexdigest()
 
         #print(md5sum)
-        self.assertEqual(md5sum, 'd1d9fb9bd0c0ce61c06e6e2f6e386040')
+        self.assertEqual(md5sum, 'Kd1d9fb9bd0c0ce61c06e6e2f6e386040')
 
     def test_BL_ID(self):
         cf,hDD,lambdaU,aDD,trK,alpha,vetU,betU = \
                                                  AtoB.Convert_Spherical_or_Cartesian_ADM_to_BSSN_curvilinear("Cartesian", bl.Cartxyz, bl.gammaCartDD, 
                                                                                                              bl.KCartDD, bl.alphaCart, bl.betaCartU, bl.BCartU)
         everything = cf+alpha+trK
-        for i in range(3):
+        for i in range(DIM):
             everything += lambdaU[i]+vetU[i]+betU[i]
-            for j in range(i,3):
+            for j in range(i,DIM):
                 everything += hDD[i][j] + aDD[i][j]
         md5sum = "empty"
         if sys.version_info[0]==2:
