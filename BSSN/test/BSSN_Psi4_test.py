@@ -6,10 +6,14 @@ import grid as gri
 
 import BSSN.Psi4 as psi
 
+import hashlib
+import sys
+
+
 class TestStringMethods(unittest.TestCase):
     
     # Set spatial dimension (must be 3 for BSSN)
-    global DIM = 3
+    DIM = 3
     par.set_parval_from_str("grid::DIM",DIM)
 
     # Then we set the coordinate system for the numerical grid
@@ -33,7 +37,7 @@ class TestStringMethods(unittest.TestCase):
             
         self.assertEqual(md5sum, "real")
         
-    def test_im_part(self)
+    def test_im_part(self):
     
         everything = 0
         
@@ -46,4 +50,4 @@ class TestStringMethods(unittest.TestCase):
         elif sys.version_info[0]==3:
             md5sum = hashlib.md5(str(everything).encode('utf-8')).hexdigest()
             
-        self.assertEqual(md5sum, "real")
+        self.assertEqual(md5sum, "im")
