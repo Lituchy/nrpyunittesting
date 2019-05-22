@@ -58,6 +58,7 @@ class TestStringMethods(unittest.TestCase):
             everything += psit.l4U[i] + psit.n4U[i] + psit.mre4U[i] +  psit.mim4U[i]
             
         self.assertEqual(get_md5sum(everything), '7413124a0d0f978c297ec6060b4fdbcc')
+        # '3281aeab30dc47adef909f70af0c0288'
         
         
         
