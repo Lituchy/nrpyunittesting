@@ -18,7 +18,7 @@ class TestStringMethods(unittest.TestCase):
     # Then we set the coordinate system for the numerical grid
     par.set_parval_from_str("reference_metric::CoordSystem","Spherical")
     rfm.reference_metric() # Create ReU, ReDD needed for rescaling B-L initial data, generating BSSN RHSs, etc.
-    
+
     bl.BrillLindquist(ComputeADMGlobalsOnly = True)
 
     def test_BL_ID_ADM(self):
@@ -34,7 +34,9 @@ class TestStringMethods(unittest.TestCase):
             md5sum = hashlib.md5(str(everything).encode('utf-8')).hexdigest()
 
         #print(md5sum)
-        self.assertEqual(md5sum, 'Kd1d9fb9bd0c0ce61c06e6e2f6e386040')
+#         print(self.assertEqual(md5sum, 'd1d9fb9bd0c0ce61c06e6e2f6e386040'))
+#         print(self.assertEqual(md5sum, 'ZACHd1d9fb9bd0c0ce61c06e6e2f6e386040'))
+        self.assertEqual(md5sum, 'ZACHd1d9fb9bd0c0ce61c06e6e2f6e386040')
 
     def test_BL_ID(self):
         cf,hDD,lambdaU,aDD,trK,alpha,vetU,betU = \
@@ -57,4 +59,4 @@ class TestStringMethods(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
-    
+
