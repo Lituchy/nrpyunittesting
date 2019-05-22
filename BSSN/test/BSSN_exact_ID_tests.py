@@ -36,7 +36,7 @@ class TestStringMethods(unittest.TestCase):
         #print(md5sum)
 #         print(self.assertEqual(md5sum, 'd1d9fb9bd0c0ce61c06e6e2f6e386040'))
 #         print(self.assertEqual(md5sum, 'ZACHd1d9fb9bd0c0ce61c06e6e2f6e386040'))
-        self.assertEqual(md5sum, 'ZACHd1d9fb9bd0c0ce61c06e6e2f6e386040')
+        self.assertEqual(md5sum, 'd1d9fb9bd0c0ce61c06e6e2f6e386040')
 
     def test_BL_ID(self):
         cf,hDD,lambdaU,aDD,trK,alpha,vetU,betU = \
