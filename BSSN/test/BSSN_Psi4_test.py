@@ -22,11 +22,11 @@ class TestStringMethods(unittest.TestCase):
     
     psi.Psi4(specify_tetrad=False)
     
-    def test_real_part(self):
+    def test_real_part_tetrad_false(self):
         
         everything = 0
         
-        for i in range(DIM):
+        for i in range(3):
             everything += psi.psi4_re_pt[i]
             
         md5sum = "empty"
@@ -35,13 +35,13 @@ class TestStringMethods(unittest.TestCase):
         elif sys.version_info[0]==3:
             md5sum = hashlib.md5(str(everything).encode('utf-8')).hexdigest()
             
-        self.assertEqual(md5sum, "real")
+        self.assertEqual(md5sum, 'ff50fef2003fedf3a1466f707d6fce54')
         
-    def test_im_part(self):
+    def test_im_part_tetrad_false(self):
     
         everything = 0
         
-        for i in range(DIM): 
+        for i in range(3): 
             everything += psi.psi4_im_pt[i]
             
         md5sum = "empty"
@@ -50,4 +50,7 @@ class TestStringMethods(unittest.TestCase):
         elif sys.version_info[0]==3:
             md5sum = hashlib.md5(str(everything).encode('utf-8')).hexdigest()
             
-        self.assertEqual(md5sum, "im")
+        self.assertEqual(md5sum, '645f487f414e489af60189160c533383')
+        
+if __name__ == '__main__':
+    unittest.main()
