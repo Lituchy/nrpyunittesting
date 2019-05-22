@@ -32,6 +32,23 @@ sphHashADM = ['41a4babe88c5572f99856d8488d2dd33','aa6595a764673abcd90d0cee586695
 cartHashID = ['eb6f859a0016fc1679c45af662ea32ef']
 sphHashID = ['d3d62ac5b46869dd94d2bf19441822b2','b20d6ca8bf5dfeee0ad73a4018837585','6a0d074ccafa4f9361811032ce4c0e08']
 
+# Turns expression into hashed value
+def get_md5sum(sympy_expr):
+    if sys.version_info[0]==2:
+        return hashlib.md5(str(sympy_expr)).hexdigest()
+    elif sys.version_info[0]==3:
+        return hashlib.md5(str(sympy_expr).encode('utf-8')).hexdigest()
+    sys.exit(1)
+    
+# Subfunction to generate the hash value for ID tests
+def generateIDHash(cf,hDD,lambdaU,aDD,trK,alpha,vetU,betU):
+    everything = cf+alpha+trK
+    for i in range(3):
+        everything += lambdaU[i]+vetU[i]+betU[i]
+        for j in range(i,3):
+            everything += hDD[i][j] + aDD[i][j]
+    return get_md5sum(everything)    
+
 # Python unittest class
 class TestStringMethods(unittest.TestCase):
     
@@ -57,14 +74,9 @@ class TestStringMethods(unittest.TestCase):
                 everything += mod.betaCartU[i] + mod.BCartU[i]
                 for j in range(3):
                     everything += mod.gammaCartDD[i][j] + mod.KCartDD[i][j]
-            md5sum = "empty"
-            if sys.version_info[0]==2:
-                md5sum = hashlib.md5(str(everything)).hexdigest()
-            elif sys.version_info[0]==3:
-                md5sum = hashlib.md5(str(everything).encode('utf-8')).hexdigest()
-
+            
             #print(md5sum)
-            self.assertEqual(md5sum, val)
+            self.assertEqual(get_md5sum(everything), val)
     
     # Testing sum of parameters for spherical modules
     def test_sph_ID_ADM(self):
@@ -74,14 +86,9 @@ class TestStringMethods(unittest.TestCase):
                 everything += mod.betaSphU[i] + mod.BSphU[i]
                 for j in range(3):
                     everything += mod.gammaSphDD[i][j] + mod.KSphDD[i][j]
-            md5sum = "empty"
-            if sys.version_info[0]==2:
-                md5sum = hashlib.md5(str(everything)).hexdigest()
-            elif sys.version_info[0]==3:
-                md5sum = hashlib.md5(str(everything).encode('utf-8')).hexdigest()
             
             #print(md5sum)
-            self.assertEqual(md5sum, val)
+            self.assertEqual(get_md5sum(everything), val)
         
     # Testing sum of converted parameters for cartesian modules
     def test_cart_ID(self):
@@ -105,19 +112,6 @@ class TestStringMethods(unittest.TestCase):
             #print(md5sum)
             self.assertEqual(md5sum, val)     
 
-# Subfunction to generate the hash value for ID tests
-def generateIDHash(cf,hDD,lambdaU,aDD,trK,alpha,vetU,betU):
-    everything = cf+alpha+trK
-    for i in range(3):
-        everything += lambdaU[i]+vetU[i]+betU[i]
-        for j in range(i,3):
-            everything += hDD[i][j] + aDD[i][j]
-    md5sum = "empty"
-    if sys.version_info[0]==2:
-        md5sum = hashlib.md5(str(everything)).hexdigest()
-    elif sys.version_info[0]==3:
-        md5sum = hashlib.md5(str(everything).encode('utf-8')).hexdigest()
-    return md5sum
 
 if __name__ == '__main__':
     unittest.main()
