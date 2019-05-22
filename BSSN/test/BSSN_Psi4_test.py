@@ -3,6 +3,7 @@ import unittest
 import NRPy_param_funcs as par
 import reference_metric as rfm
 import grid as gri
+import sympy as sp
 
 import BSSN.Psi4 as psi
 import BSSN.Psi4_tetrads as psit
@@ -34,33 +35,30 @@ class TestStringMethods(unittest.TestCase):
     
     def test_real_part_tetrad_false(self):
         
-        everything = 0
+        everyvector = sp.sympify(0)
         
         for i in range(3):
-            everything += psi.psi4_re_pt[i]
+            everyvector += psi.psi4_re_pt[i]
                         
-        self.assertEqual(get_md5sum(everything), 'ff50fef2003fedf3a1466f707d6fce54')
+        self.assertEqual(get_md5sum(everyvector), 'ff50fef2003fedf3a1466f707d6fce54')
         
     def test_im_part_tetrad_false(self):
     
-        everything = 0
+        everyvector = sp.sympify(0)
         
         for i in range(3): 
-            everything += psi.psi4_im_pt[i]
+            everyvector += psi.psi4_im_pt[i]
                        
-        self.assertEqual(get_md5sum(everything), '645f487f414e489af60189160c533383')
+        self.assertEqual(get_md5sum(everyvector), '645f487f414e489af60189160c533383')
         
     def test_tetrads(self):
         
-        everything = 0
+        everyvector = sp.sympify(0)
         
         for i in range(4):
-            everything += psit.l4U[i] + psit.n4U[i] + psit.mre4U[i] +  psit.mim4U[i]
+            everyvector += psit.l4U[i] + psit.n4U[i] + psit.mre4U[i] +  psit.mim4U[i]
             
-        self.assertEqual(get_md5sum(everything), '7413124a0d0f978c297ec6060b4fdbcc')
-        # '3281aeab30dc47adef909f70af0c0288'
-        
-        
+        self.assertEqual(get_md5sum(everyvector), '7413124a0d0f978c297ec6060b4fdbcc')        
         
         
 if __name__ == '__main__':
