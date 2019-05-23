@@ -81,7 +81,7 @@ class TestStringMethods(unittest.TestCase):
         for mod, trusted_list in zip(sphMods,sphSumADM):
             
             print
-            print(mod)
+            print("module = ",mod)
             print
             # Creates list of parameters
             lst = createADMList(mod.alphaSph,mod.betaSphU,mod.BSphU,mod.gammaSphDD,mod.KSphDD)
@@ -222,7 +222,9 @@ def listToValueList(lst):
     
     for var in list_free_symbols:
         stringexec += str(var)+" = symbols(\'"+str(var)+"\')\n"
-        stringexec += str(var)+" = "+str(sqrt(mpf(random.random())))+"\n"
+        # BE CAREFUL: You must declare all variables using mpf('string')!
+        #   http://mpmath.org/doc/1.1.0/basics.html#providing-correct-input
+        stringexec += str(var)+" = mpf(\'"+str(sqrt(mpf(random.random())))+"\')\n"
 
     # Then it creates the code that evaluates the result
     #    to 30 significant digits.
