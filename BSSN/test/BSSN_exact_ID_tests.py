@@ -3,6 +3,10 @@ import unittest
 import NRPy_param_funcs as par
 import reference_metric as rfm
 import grid as gri
+import sympy as sp
+from mpmath import *
+import random
+import trustedValues as tv
 
 
 # Cartesian
@@ -25,29 +29,14 @@ sphMods = [sks,st,ubh]
 # Lists of hash values for respective modules
 
 # ADM test hash values
-cartHashADM = ['d1d9fb9bd0c0ce61c06e6e2f6e386040']
-sphHashADM = ['41a4babe88c5572f99856d8488d2dd33','aa6595a764673abcd90d0cee586695ca','9e64640593017f2cbdba08da59690674']
+cartSumADM = [tv.BSSN_cart_BL_ADM]
+sphSumADM = [tv.BSSN_sph_SKS_ADM,tv.BSSN_sph_SKS_ADM,tv.BSSN_sph_UBH_ADM]
 
 # ID test hash values
-cartHashID = ['eb6f859a0016fc1679c45af662ea32ef']
-sphHashID = ['d3d62ac5b46869dd94d2bf19441822b2','b20d6ca8bf5dfeee0ad73a4018837585','6a0d074ccafa4f9361811032ce4c0e08']
+cartSumID = [tv.BSSN_cart_BL_ID]
+sphSumID = [tv.BSSN_sph_SKS_ID,tv.BSSN_sph_SKS_ID,tv.BSSN_sph_UBH_ID]
 
-# Turns expression into hashed value
-def get_md5sum(sympy_expr):
-    if sys.version_info[0]==2:
-        return hashlib.md5(str(sympy_expr)).hexdigest()
-    elif sys.version_info[0]==3:
-        return hashlib.md5(str(sympy_expr).encode('utf-8')).hexdigest()
-    sys.exit(1)
-    
-# Subfunction to generate the hash value for ID tests
-def generateIDHash(cf,hDD,lambdaU,aDD,trK,alpha,vetU,betU):
-    everything = cf+alpha+trK
-    for i in range(3):
-        everything += lambdaU[i]+vetU[i]+betU[i]
-        for j in range(i,3):
-            everything += hDD[i][j] + aDD[i][j]
-    return get_md5sum(everything)    
+mp.dps = tv.precision
 
 # Python unittest class
 class TestStringMethods(unittest.TestCase):
@@ -67,52 +56,139 @@ class TestStringMethods(unittest.TestCase):
     sphMods[2].UIUCBlackHole(ComputeADMGlobalsOnly = True)
     
     # Testing sum of parameters for cartesian modules
-    def test_cart_ID_ADM(self):
-        for mod, val in zip(cartMods,cartHashADM):
-            everything = mod.alphaCart
-            for i in range(3):
-                everything += mod.betaCartU[i] + mod.BCartU[i]
-                for j in range(3):
-                    everything += mod.gammaCartDD[i][j] + mod.KCartDD[i][j]
+    def test_cart_ADM(self):
+        for mod, trusted_list in zip(cartMods,cartSumADM):
             
-            #print(md5sum)
-            self.assertEqual(get_md5sum(everything), val)
+            # Creates list of parameters
+            lst = createADMList(mod.alphaCart,mod.betaCartU,mod.BCartU,mod.gammaCartDD,mod.KCartDD)
+            
+            # Creates list of values
+            result_list = listToValueList(lst)
+
+            # Next we compute the log_10 of the relative error. It should
+            #    be a number < -2/3 * precision (i.e., when precision is 30, we
+            #    should get more than 20 significant digits of agreement with the 
+            #    trusted result, or the test fails.
+            for res, val in zip(result_list, trusted_list):
+                if val == 0:
+                    log10_relative_error = log10(fabs(res))
+                else:
+                    log10_relative_error = log10(fabs( (val - res ) / val ) )
+                print(log10_relative_error)    
+                self.assertTrue(log10_relative_error < tv.precision* (-2/3))
     
-    # Testing sum of parameters for spherical modules
-    def test_sph_ID_ADM(self):
-        for mod, val in zip(sphMods,sphHashADM):
-            everything = mod.alphaSph
-            for i in range(3):
-                everything += mod.betaSphU[i] + mod.BSphU[i]
-                for j in range(3):
-                    everything += mod.gammaSphDD[i][j] + mod.KSphDD[i][j]
+#     # Testing sum of parameters for spherical modules
+#     def test_sph_ID_ADM(self):
+#         for mod, val in zip(sphMods,sphSumADM):
+#             everything = mod.alphaSph
+#             for i in range(3):
+#                 everything += mod.betaSphU[i] + mod.BSphU[i]
+#                 for j in range(3):
+#                     everything += mod.gammaSphDD[i][j] + mod.KSphDD[i][j]
             
-            #print(md5sum)
-            self.assertEqual(get_md5sum(everything), val)
+#             # BE CAREFUL: http://mpmath.org/doc/1.1.0/basics.html#providing-correct-input
+#             # We must import the trusted result manually:
+#             trusted_result = mpf(val)
+#             result = expression2num(everything)
+
+#             # Next we compute the log_10 of the relative error. It should
+#             #    be a number < -20 (i.e., we should get more than 20 significant
+#             #    digits of agreement with the trusted result, or the test fails.
+#             log10_relative_error = log10(fabs( ( trusted_result - result ) / trusted_result) )
+#             self.assertTrue(log10_relative_error < -20) 
         
     # Testing sum of converted parameters for cartesian modules
-    def test_cart_ID(self):
-        for mod, val in zip(cartMods,cartHashID):
-            cf,hDD,lambdaU,aDD,trK,alpha,vetU,betU = AtoB.Convert_Spherical_or_Cartesian_ADM_to_BSSN_curvilinear( "Cartesian", mod.Cartxyz, mod.gammaCartDD,mod.KCartDD, mod.alphaCart, mod.betaCartU, mod.BCartU)
+#     def test_cart_ID(self):
+#         for mod, val in zip(cartMods,cartSumID):
+#             cf,hDD,lambdaU,aDD,trK,alpha,vetU,betU = AtoB.Convert_Spherical_or_Cartesian_ADM_to_BSSN_curvilinear( "Cartesian", mod.Cartxyz, mod.gammaCartDD,mod.KCartDD, mod.alphaCart, mod.betaCartU, mod.BCartU)
             
-            md5sum = generateIDHash(cf,hDD,lambdaU,aDD,trK,alpha,vetU,betU)
+#             everything = idTestEverything(cf,hDD,lambdaU,aDD,trK,alpha,vetU,betU)
 
-            #print(md5sum)
-            self.assertEqual(md5sum, val)
+#             #print(md5sum)
+#             self.assertEqual(expression2num(everything), val)
             
             
     # Testing sum of converted parameters for spherical modules        
-    def test_sph_ID(self):
-        for mod, val in zip(sphMods,sphHashID):
-            Sph_r_th_ph = [mod.r,mod.th,mod.ph]
-            cf,hDD,lambdaU,aDD,trK,alpha,vetU,betU = AtoB.Convert_Spherical_or_Cartesian_ADM_to_BSSN_curvilinear( "Spherical", Sph_r_th_ph, mod.gammaSphDD, mod.KSphDD, mod.alphaSph, mod.betaSphU, mod.BSphU)
+#     def test_sph_ID(self):
+#         for mod, val in zip(sphMods,sphSumID):
+#             Sph_r_th_ph = [mod.r,mod.th,mod.ph]
+#             cf,hDD,lambdaU,aDD,trK,alpha,vetU,betU = AtoB.Convert_Spherical_or_Cartesian_ADM_to_BSSN_curvilinear( "Spherical", Sph_r_th_ph, mod.gammaSphDD, mod.KSphDD, mod.alphaSph, mod.betaSphU, mod.BSphU)
             
-            md5sum = generateIDHash(cf,hDD,lambdaU,aDD,trK,alpha,vetU,betU)
+#             everything = idTestEverything(cf,hDD,lambdaU,aDD,trK,alpha,vetU,betU)
 
-            #print(md5sum)
-            self.assertEqual(md5sum, val)     
+#             #print(md5sum)
+#             self.assertEqual(expression2num(everything), val)  
+            
+            
+# def idTestEverything(cf,hDD,lambdaU,aDD,trK,alpha,vetU,betU):
+#     everything = cf+alpha+trK
+#     for i in range(3):
+#         everything += lambdaU[i]+vetU[i]+betU[i]
+#         for j in range(i,3):
+#             everything += hDD[i][j] + aDD[i][j]
+#     return everything   
+            
+# Creates [lst] which contains all information stored in inputs [alpha,...,K]
+def createADMList(alpha,beta,B,gamma,K):
+    
+    lst = [alpha]
+    for i in range(3):
+        lst.append(beta[i])
+        lst.append(B[i])
+        for j in range(3):
+            lst.append(gamma[i][j])
+            lst.append(K[i][j])   
+    return lst       
 
+# Takes in a list [lst] and returns the list with each index evaluated 
+#     according to parameters (seed, precision) in trustedValues 
+def listToValueList(lst):
+    
+    # List all the free symbols in the expressions in [lst].
+    #   These variables will be automatically set to random
+    #   values in the range [0,1) below.
+    list_free_symbols = sum(lst).free_symbols
 
+    # To ensure the random values are consistent for testing purposes, we will
+    #    sort the list of free symbols. This requires that we first convert
+    #    all SymPy symbols to strings, storing to list_symbol_strings,
+    #    and then we'll use zip() to sort both lists in alphabetical order,
+    #    based on the strings in the first list:
+    list_symbol_strings = []
+    for var in list_free_symbols:
+        list_symbol_strings.append(str(var))
+
+    # https://stackoverflow.com/questions/13668393/python-sorting-two-lists
+    list_symbol_strings, list_free_symbols = (list(x) for x in zip(*sorted(zip(list_symbol_strings, list_free_symbols))))
+
+    # Set the random seed according to trustedValues.seed:
+    random.seed(tv.seed)
+
+    # Next we will write a short Python code that first declares all
+    #    of the free variables in the "everything" expression
+    #    to random values with 30 significant digits of precision.
+    #    (This is accomplished by calling random.random() to get
+    #     a 16-significant-digit random number between 0 and 1,
+    #     and then taking the 30-significant-digit square root
+    #     of that number.)
+    stringexec = "from sympy import *\n" + "from mpmath import *\n" + "mp.dps = " + str(tv.precision) + "\n"
+    
+    for var in list_free_symbols:
+        stringexec += str(var)+" = symbols(\'"+str(var)+"\')\n"
+        stringexec += str(var)+" = "+str(sqrt(mpf(random.random())))+"\n"
+
+    # Then it creates the code that evaluates the result
+    #    to 30 significant digits.
+    stringexec += "lst = " + str(lst)
+    
+    # https://stackoverflow.com/questions/38817962/python-3-need-from-exec-to-return-values
+    # Finally we execute stringexec to a local namespace "loc", and store the
+    #    result of the evaluated "everything" expression to "result".
+    loc = {}
+    exec(stringexec, {}, loc)
+    return loc['lst']
+
+# Necessary for unittest class to work properly
 if __name__ == '__main__':
     unittest.main()
 
