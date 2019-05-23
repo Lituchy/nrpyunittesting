@@ -30,11 +30,11 @@ sphMods = [sks,st,ubh]
 
 # ADM test hash values
 cartSumADM = [tv.BSSN_cart_BL_ADM]
-sphSumADM = [tv.BSSN_sph_SKS_ADM,tv.BSSN_sph_SKS_ADM,tv.BSSN_sph_UBH_ADM]
+sphSumADM = [tv.BSSN_sph_SKS_ADM,tv.BSSN_sph_ST_ADM,tv.BSSN_sph_UBH_ADM]
 
 # ID test hash values
 cartSumID = [tv.BSSN_cart_BL_ID]
-sphSumID = [tv.BSSN_sph_SKS_ID,tv.BSSN_sph_SKS_ID,tv.BSSN_sph_UBH_ID]
+sphSumID = [tv.BSSN_sph_SKS_ID,tv.BSSN_sph_ST_ID,tv.BSSN_sph_UBH_ID]
 
 mp.dps = tv.precision
 
@@ -74,30 +74,34 @@ class TestStringMethods(unittest.TestCase):
                     log10_relative_error = log10(fabs(res))
                 else:
                     log10_relative_error = log10(fabs( (val - res ) / val ) )
-                print(log10_relative_error)    
-                self.assertTrue(log10_relative_error < tv.precision* (-2/3))
-    
-#     # Testing sum of parameters for spherical modules
-#     def test_sph_ID_ADM(self):
-#         for mod, val in zip(sphMods,sphSumADM):
-#             everything = mod.alphaSph
-#             for i in range(3):
-#                 everything += mod.betaSphU[i] + mod.BSphU[i]
-#                 for j in range(3):
-#                     everything += mod.gammaSphDD[i][j] + mod.KSphDD[i][j]
+                self.assertTrue(log10_relative_error < tv.precision * (-2/3))
+                
+    # Testing sum of parameters for spherical modules
+    def test_sph_ADM(self):
+        for mod, trusted_list in zip(sphMods,sphSumADM):
             
-#             # BE CAREFUL: http://mpmath.org/doc/1.1.0/basics.html#providing-correct-input
-#             # We must import the trusted result manually:
-#             trusted_result = mpf(val)
-#             result = expression2num(everything)
-
-#             # Next we compute the log_10 of the relative error. It should
-#             #    be a number < -20 (i.e., we should get more than 20 significant
-#             #    digits of agreement with the trusted result, or the test fails.
-#             log10_relative_error = log10(fabs( ( trusted_result - result ) / trusted_result) )
-#             self.assertTrue(log10_relative_error < -20) 
+            # Creates list of parameters
+            lst = createADMList(mod.alphaSph,mod.betaSphU,mod.BSphU,mod.gammaSphDD,mod.KSphDD)
+            
+            # Creates list of values
+            result_list = listToValueList(lst)
+            
+            # Uncomment if need to calculate trustedValue for the first time
+            # print(mod)
+            # print(result_list)
+            
+            # Next we compute the log_10 of the relative error. It should
+            #    be a number < -2/3 * precision (i.e., when precision is 30, we
+            #    should get more than 20 significant digits of agreement with the 
+            #    trusted result, or the test fails.
+            for res, val in zip(result_list, trusted_list):
+                if val == 0:
+                    log10_relative_error = log10(fabs(res))
+                else:
+                    log10_relative_error = log10(fabs( (val - res ) / val ) )
+                self.assertTrue(log10_relative_error < tv.precision * (-2/3))                
         
-    # Testing sum of converted parameters for cartesian modules
+# # Testing sum of converted parameters for cartesian modules
 #     def test_cart_ID(self):
 #         for mod, val in zip(cartMods,cartSumID):
 #             cf,hDD,lambdaU,aDD,trK,alpha,vetU,betU = AtoB.Convert_Spherical_or_Cartesian_ADM_to_BSSN_curvilinear( "Cartesian", mod.Cartxyz, mod.gammaCartDD,mod.KCartDD, mod.alphaCart, mod.betaCartU, mod.BCartU)
@@ -108,7 +112,7 @@ class TestStringMethods(unittest.TestCase):
 #             self.assertEqual(expression2num(everything), val)
             
             
-    # Testing sum of converted parameters for spherical modules        
+#     # Testing sum of converted parameters for spherical modules        
 #     def test_sph_ID(self):
 #         for mod, val in zip(sphMods,sphSumID):
 #             Sph_r_th_ph = [mod.r,mod.th,mod.ph]
@@ -118,15 +122,18 @@ class TestStringMethods(unittest.TestCase):
 
 #             #print(md5sum)
 #             self.assertEqual(expression2num(everything), val)  
+
+################################
+######## Subfunctions ##########
+################################
             
-            
-# def idTestEverything(cf,hDD,lambdaU,aDD,trK,alpha,vetU,betU):
-#     everything = cf+alpha+trK
-#     for i in range(3):
-#         everything += lambdaU[i]+vetU[i]+betU[i]
-#         for j in range(i,3):
-#             everything += hDD[i][j] + aDD[i][j]
-#     return everything   
+def idTestEverything(cf,hDD,lambdaU,aDD,trK,alpha,vetU,betU):
+    everything = cf+alpha+trK
+    for i in range(3):
+        everything += lambdaU[i]+vetU[i]+betU[i]
+        for j in range(i,3):
+            everything += hDD[i][j] + aDD[i][j]
+    return everything  
             
 # Creates [lst] which contains all information stored in inputs [alpha,...,K]
 def createADMList(alpha,beta,B,gamma,K):
