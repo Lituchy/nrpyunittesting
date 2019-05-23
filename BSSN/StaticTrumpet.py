@@ -52,9 +52,6 @@ def StaticTrumpet(ComputeADMGlobalsOnly = False):
     # Input parameters:
     M = par.Cparameters("REAL", thismodule, ["M"])
 
-    # Auxiliary variables:
-    psi0 = sp.symbols('psi0', real=True)
-    
     # *** The StaticTrumpet conformal factor ***
     # Dennison and Baumgarte (2014) Eq. 13
     # https://arxiv.org/pdf/1403.5484.pdf

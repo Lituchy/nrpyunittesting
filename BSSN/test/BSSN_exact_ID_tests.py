@@ -55,7 +55,7 @@ class TestStringMethods(unittest.TestCase):
     sphMods[1].StaticTrumpet(ComputeADMGlobalsOnly = True)
     sphMods[2].UIUCBlackHole(ComputeADMGlobalsOnly = True)
     
-    # Testing sum of parameters for cartesian modules
+    # Testing [alpha,beta,...,K] for cartesian modules
     def test_cart_ADM(self):
         for mod, trusted_list in zip(cartMods,cartSumADM):
             
@@ -76,10 +76,13 @@ class TestStringMethods(unittest.TestCase):
                     log10_relative_error = log10(fabs( (val - res ) / val ) )
                 self.assertTrue(log10_relative_error < tv.precision * (-2/3))
                 
-    # Testing sum of parameters for spherical modules
+    # Testing [alpha,beta,...,K] for spherical modules
     def test_sph_ADM(self):
         for mod, trusted_list in zip(sphMods,sphSumADM):
             
+            print
+            print(mod)
+            print
             # Creates list of parameters
             lst = createADMList(mod.alphaSph,mod.betaSphU,mod.BSphU,mod.gammaSphDD,mod.KSphDD)
             
@@ -89,6 +92,9 @@ class TestStringMethods(unittest.TestCase):
             # Uncomment if need to calculate trustedValue for the first time
             # print(mod)
             # print(result_list)
+            print
+            print(trusted_list)
+            
             
             # Next we compute the log_10 of the relative error. It should
             #    be a number < -2/3 * precision (i.e., when precision is 30, we
@@ -101,50 +107,82 @@ class TestStringMethods(unittest.TestCase):
                     log10_relative_error = log10(fabs( (val - res ) / val ) )
                 self.assertTrue(log10_relative_error < tv.precision * (-2/3))                
         
-# # Testing sum of converted parameters for cartesian modules
+#     # Testing [cf,hDD,...,bet] for cartesian modules
 #     def test_cart_ID(self):
-#         for mod, val in zip(cartMods,cartSumID):
+#         for mod, trusted_list in zip(cartMods,cartSumID):
 #             cf,hDD,lambdaU,aDD,trK,alpha,vetU,betU = AtoB.Convert_Spherical_or_Cartesian_ADM_to_BSSN_curvilinear( "Cartesian", mod.Cartxyz, mod.gammaCartDD,mod.KCartDD, mod.alphaCart, mod.betaCartU, mod.BCartU)
             
-#             everything = idTestEverything(cf,hDD,lambdaU,aDD,trK,alpha,vetU,betU)
+#             lst = createIDList(cf,hDD,lambdaU,aDD,trK,alpha,vetU,betU)
+            
+#             result_list = listToValueList(lst)
+            
+#             # Uncomment if need to calculate trustedValue for the first time
+#             # print(mod)
+#             # print(result_list)
 
-#             #print(md5sum)
-#             self.assertEqual(expression2num(everything), val)
+#             for res, val in zip(result_list, trusted_list):
+#                 if val == 0:
+#                     log10_relative_error = log10(fabs(res))
+#                 else:
+#                     log10_relative_error = log10(fabs( (val - res ) / val ) )
+#                 self.assertTrue(log10_relative_error < tv.precision * (-2/3))   
             
             
-#     # Testing sum of converted parameters for spherical modules        
+#     # Testing [cf,hDD,...,bet] for spherical modules
 #     def test_sph_ID(self):
-#         for mod, val in zip(sphMods,sphSumID):
+#         for mod, trusted_list in zip(sphMods,sphSumID):
 #             Sph_r_th_ph = [mod.r,mod.th,mod.ph]
 #             cf,hDD,lambdaU,aDD,trK,alpha,vetU,betU = AtoB.Convert_Spherical_or_Cartesian_ADM_to_BSSN_curvilinear( "Spherical", Sph_r_th_ph, mod.gammaSphDD, mod.KSphDD, mod.alphaSph, mod.betaSphU, mod.BSphU)
             
-#             everything = idTestEverything(cf,hDD,lambdaU,aDD,trK,alpha,vetU,betU)
+#             lst = createIDList(cf,hDD,lambdaU,aDD,trK,alpha,vetU,betU)
 
-#             #print(md5sum)
-#             self.assertEqual(expression2num(everything), val)  
+#             result_list = listToValueList(lst)
+            
+#             # Uncomment if need to calculate trustedValue for the first time
+#             print(mod)
+#             print(result_list)
+
+#             for res, val in zip(result_list, trusted_list):
+#                 if val == 0:
+#                     log10_relative_error = log10(fabs(res))
+#                 else:
+#                     log10_relative_error = log10(fabs( (val - res ) / val ) )
+#                 self.assertTrue(log10_relative_error < (tv.precision / -2))
 
 ################################
 ######## Subfunctions ##########
 ################################
             
-def idTestEverything(cf,hDD,lambdaU,aDD,trK,alpha,vetU,betU):
-    everything = cf+alpha+trK
-    for i in range(3):
-        everything += lambdaU[i]+vetU[i]+betU[i]
-        for j in range(i,3):
-            everything += hDD[i][j] + aDD[i][j]
-    return everything  
+# def createIDList(cf,hDD,lambdaU,aDD,trK,alpha,vetU,betU):
+#     lst = [cf,alpha,trK]
+#     for i in range(3):
+#         lst.append(lambdaU[i])
+#         lst.append(vetU[i])
+#         lst.append(betU[i])
+#         for j in range(i,3):
+#             lst.append(hDD[i][j])
+#             lst.append(aDD[i][j])
+#     return lst 
             
 # Creates [lst] which contains all information stored in inputs [alpha,...,K]
 def createADMList(alpha,beta,B,gamma,K):
     
+    slst = ['alpha']
     lst = [alpha]
     for i in range(3):
         lst.append(beta[i])
         lst.append(B[i])
+        slst.append('beta ' + str(i))
+        slst.append('B ' + str(i))
         for j in range(3):
             lst.append(gamma[i][j])
             lst.append(K[i][j])   
+            slst.append('gamma (' + str(i) + ',' + str(j) + ')')
+            slst.append('K (' + str(i) + ',' + str(j) + ')')
+    print
+    print(lst)
+    print
+    print(slst)
     return lst       
 
 # Takes in a list [lst] and returns the list with each index evaluated 
@@ -167,7 +205,9 @@ def listToValueList(lst):
 
     # https://stackoverflow.com/questions/13668393/python-sorting-two-lists
     list_symbol_strings, list_free_symbols = (list(x) for x in zip(*sorted(zip(list_symbol_strings, list_free_symbols))))
+    
 
+    
     # Set the random seed according to trustedValues.seed:
     random.seed(tv.seed)
 
