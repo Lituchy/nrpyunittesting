@@ -86,13 +86,12 @@ class TestStringMethods(unittest.TestCase):
                     log10_relative_error = log10(fabs(res))
                 else:
                     log10_relative_error = log10(fabs( (val - res ) / val ) )
-                good = (log10_relative_error < (tv.precision / -2)) and good
-            
-            if not good:
-                logging.error('\n\n Failed with ' + str(mod) + '\n\n')
-            else:
-                logging.info('\nJust completed ADM module ' + str(mod))
-            self.assertTrue(good)
+                good = (log10_relative_error < (tv.precision / -2))
+                if not good:
+                    logging.error('\n\n Failed with ' + str(mod) + '\n\n')
+                    self.assertTrue(good)
+
+            logging.info('\nJust completed ADM module ' + str(mod))
             
                 
     # Testing [alpha,beta,...,K] for spherical modules
@@ -121,13 +120,12 @@ class TestStringMethods(unittest.TestCase):
                     log10_relative_error = log10(fabs(res))
                 else:
                     log10_relative_error = log10(fabs( (val - res ) / val ) )
-                good = (log10_relative_error < (tv.precision / -2)) and good
-            
-            if not good:
-                logging.error('\n\n Failed with ' + str(mod) + '\n\n')
-            else:
-                logging.info('\nJust completed ADM module ' + str(mod))
-            self.assertTrue(good)
+                good = (log10_relative_error < (tv.precision / -2))
+                if not good:
+                    logging.error('\n\n Failed with ' + str(mod) + '\n\n')
+                    self.assertTrue(good)
+
+            logging.info('\nJust completed ADM module ' + str(mod))
             
     # Testing [cf,hDD,...,bet] for cartesian modules
     def test_cart_ID(self):
@@ -150,20 +148,18 @@ class TestStringMethods(unittest.TestCase):
                     log10_relative_error = log10(fabs(res))
                 else:
                     log10_relative_error = log10(fabs( (val - res ) / val ) )
-                good = (log10_relative_error < (tv.precision / -2)) and good
-            
-            if not good:
-                logging.error('\n\n Failed with ' + str(mod) + '\n\n')
-            else:
-                logging.info('\nJust completed ID module ' + str(mod))
-            self.assertTrue(good)
+                good = (log10_relative_error < (tv.precision / -2))
+                if not good:
+                    logging.error('\n\n Failed with ' + str(mod) + '\n\n')
+                    self.assertTrue(good)
+
+            logging.info('\nJust completed ID module ' + str(mod))
             
     # Testing [cf,hDD,...,bet] for spherical modules
     def test_sph_ID(self):
         for mod, trusted_list in zip(sphMods,sphSumID):
                         
             logging.info('\nCurrently working on ID module ' + str(mod))
-            good = True
             
             Sph_r_th_ph = [mod.r,mod.th,mod.ph]
             cf,hDD,lambdaU,aDD,trK,alpha,vetU,betU = AtoB.Convert_Spherical_or_Cartesian_ADM_to_BSSN_curvilinear( "Spherical", Sph_r_th_ph, mod.gammaSphDD, mod.KSphDD, mod.alphaSph, mod.betaSphU, mod.BSphU)
@@ -180,13 +176,12 @@ class TestStringMethods(unittest.TestCase):
                     log10_relative_error = log10(fabs(res))
                 else:
                     log10_relative_error = log10(fabs( (val - res ) / val ) )
-                good = (log10_relative_error < (tv.precision / -2)) and good
-            
-            if not good:
-                logging.error('\n\n Failed with ' + str(mod) + '\n\n')
-            else:
-                logging.info('\nJust completed ID module ' + str(mod))
-            self.assertTrue(good)
+                good = (log10_relative_error < (tv.precision / -2))
+                if not good:
+                    logging.error('\n\n Failed with ' + str(mod) + '\n\n')
+                    self.assertTrue(good)
+
+            logging.info('\nJust completed ID module ' + str(mod))
             
 
                 
