@@ -3,43 +3,132 @@ import sympy as sp
 import NRPy_param_funcs as par
 import BSSN.BSSN_RHSs_new as rhs
 import BSSN.BSSN_gauge_RHSs as gaugerhs
-import hashlib
+import random
 import sys
+import logging
+import trustedValues as tv
+from mpmath import *
 
-def get_md5sum(sympy_expr):
-    if sys.version_info[0]==2:
-        return hashlib.md5(str(sympy_expr)).hexdigest()
-    elif sys.version_info[0]==3:
-        return hashlib.md5(str(sympy_expr).encode('utf-8')).hexdigest()
-    sys.exit(1)
+
+RHS_scalars = [tv.BSSN_rhs_scalars,tv.BSSN_gaugerhs_scalars]
+RHS_vectors = [tv.BSSN_rhs_vectors,tv.BSSN_gaugerhs_vectors]
+RHS_tensors = [tv.BSSN_rhs_tensors]
 
 class TestStringMethods(unittest.TestCase):
     par.set_parval_from_str("BSSN.BSSN_gauge_RHSs::ShiftEvolutionOption", "GammaDriving2ndOrder_Covariant")
     rhs.BSSN_RHSs()
     gaugerhs.BSSN_gauge_RHSs()
+       
+    logging.basicConfig(level=logging.DEBUG)
+
 
     def test_BSSN_RHSs_scalars(self):
-        everyscalar = gaugerhs.alpha_rhs + rhs.cf_rhs + rhs.trK_rhs
-        md5sum = get_md5sum(everyscalar)
-#        print(md5sum)
-        self.assertEqual(md5sum, 'b7b76505a53a38a507f45417857ebb7c')
+        
+        # Testing RHS scalars
+        logging.info('\nCurrently working on RHS scalars module ' + str(rhs))
+        
+        lst = [rhs.cf_rhs,rhs.trK_rhs]
+        
+        result_list = tv.listToValueList(lst)
+        trusted_list = RHS_scalars[0]
+        
+        # Uncomment following line if need to calculate trustedValue for the first time
+        # tv.firstTimePrint(rhs,result_list,trusted_list) 
+        
+        good = tv.calcError(rhs,result_list,trusted_list)
+        if good:     
+            logging.info('\nJust completed RHS scalars module ' + str(rhs))
+        else:
+            self.assertTrue(good)
+        
+        # Testing gauge RHS scalars
+        logging.info('\nCurrently working on gauge RHS scalars module ' + str(gaugerhs))
+        
+        lst = [gaugerhs.alpha_rhs]
+        
+        result_list = tv.listToValueList(lst)
+        trusted_list = RHS_scalars[1]
+        
+        # Uncomment following line if need to calculate trustedValue for the first time
+        # tv.firstTimePrint(gaugerhs,result_list,trusted_list) 
+        
+        good = tv.calcError(gaugerhs,result_list,trusted_list)
+        if good:     
+            logging.info('\nJust completed gauge RHS scalars module ' + str(gaugerhs))
+        else:
+            self.assertTrue(good)
 
     def test_BSSN_RHSs_vectors(self):
-        everyvector = sp.sympify(0)
+    
+        # Testing RHS scalars
+        logging.info('\nCurrently working on RHS vectors module ' + str(rhs))
+        
+        lst = []
         for i in range(3):
-            everyvector += gaugerhs.bet_rhsU[i] + gaugerhs.vet_rhsU[i] + rhs.lambda_rhsU[i]
-        md5sum = get_md5sum(everyvector)
-#        print("vector: ",md5sum)
-        self.assertEqual(md5sum, '24b47058967ebe5501790f3d813d6c84')
+            lst.append(rhs.lambda_rhsU[i])
+        
+        result_list = tv.listToValueList(lst)
+        trusted_list = RHS_vectors[0]
+        
+        # Uncomment following line if need to calculate trustedValue for the first time
+        # tv.firstTimePrint(rhs,result_list,trusted_list) 
+        
+        good = tv.calcError(rhs,result_list,trusted_list)
+        if good:     
+            logging.info('\nJust completed RHS vectors module ' + str(rhs))
+        else:
+            self.assertTrue(good)
+        
+        # Testing gauge RHS scalars
+        logging.info('\nCurrently working on gauge RHS vectors module ' + str(gaugerhs))
+        
+        lst = []
+        for i in range(3):
+            lst.append(gaugerhs.bet_rhsU[i])
+            lst.append(gaugerhs.vet_rhsU[i])
+        
+        result_list = tv.listToValueList(lst)
+        trusted_list = RHS_vectors[1]
+        
+        # Uncomment following line if need to calculate trustedValue for the first time
+        # tv.firstTimePrint(gaugerhs,result_list,trusted_list) 
+        
+        good = tv.calcError(gaugerhs,result_list,trusted_list)
+        if good:     
+            logging.info('\nJust completed gauge RHS scalars vectors ' + str(gaugerhs))
+        else:
+            self.assertTrue(good)
+
 
     def test_BSSN_RHSs_tensors(self):
-        everytensor = sp.sympify(0)
+#         everytensor = sp.sympify(0)
+#         for i in range(3):
+#             for j in range(i,3):
+#                 everytensor += rhs.a_rhsDD[i][j] + rhs.h_rhsDD[i][j]
+#         md5sum = get_md5sum(everytensor)
+# #        print("tensor: ",md5sum)
+#         self.assertEqual(md5sum, 'd84fc94358305b7135dc18680089dff9')
+    
+        # Testing RHS tensors
+        logging.info('\nCurrently working on RHS tensors module ' + str(rhs))
+        
+        lst = []
         for i in range(3):
             for j in range(i,3):
-                everytensor += rhs.a_rhsDD[i][j] + rhs.h_rhsDD[i][j]
-        md5sum = get_md5sum(everytensor)
-#        print("tensor: ",md5sum)
-        self.assertEqual(md5sum, 'd84fc94358305b7135dc18680089dff9')
+                lst.append(rhs.a_rhsDD[i][j])
+                lst.append(rhs.h_rhsDD[i][j])
+        
+        result_list = tv.listToValueList(lst)
+        trusted_list = RHS_tensors[0]
+        
+        # Uncomment following line if need to calculate trustedValue for the first time
+        tv.firstTimePrint(rhs,result_list,trusted_list) 
+        
+        good = tv.calcError(rhs,result_list,trusted_list)
+        if good:     
+            logging.info('\nJust completed RHS tensors module ' + str(rhs))
+        else:
+            self.assertTrue(good)
 
 if __name__ == '__main__':
     unittest.main()

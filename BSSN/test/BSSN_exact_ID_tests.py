@@ -66,13 +66,12 @@ class TestStringMethods(unittest.TestCase):
         for mod, trusted_list in zip(cartMods,cartSumADM):
             
             logging.info('\nCurrently working on ADM module ' + str(mod))
-            good = True
             
             # Creates list of parameters
             lst = createADMList(mod.alphaCart,mod.betaCartU,mod.BCartU,mod.gammaCartDD,mod.KCartDD)
             
             # Creates list of values
-            result_list = listToValueList(lst)
+            result_list = tv.listToValueList(lst)
             
             # Uncomment following line if need to calculate trustedValue for the first time
             # tv.firstTimePrint(mod,result_list,trusted_list)
@@ -99,13 +98,12 @@ class TestStringMethods(unittest.TestCase):
         for mod, trusted_list in zip(sphMods,sphSumADM):
             
             logging.info('\nCurrently working on ADM module ' + str(mod))
-            good = True
             
             # Creates list of parameters
             lst = createADMList(mod.alphaSph,mod.betaSphU,mod.BSphU,mod.gammaSphDD,mod.KSphDD)
             
             # Creates list of values
-            result_list = listToValueList(lst)
+            result_list = tv.listToValueList(lst)
             
             # Uncomment following line if need to calculate trustedValue for the first time
             # tv.firstTimePrint(mod,result_list,trusted_list)
@@ -132,13 +130,12 @@ class TestStringMethods(unittest.TestCase):
         for mod, trusted_list in zip(cartMods,cartSumID):
             
             logging.info('\nCurrently working on ID module ' + str(mod))
-            good = True
             
             cf,hDD,lambdaU,aDD,trK,alpha,vetU,betU = AtoB.Convert_Spherical_or_Cartesian_ADM_to_BSSN_curvilinear( "Cartesian", mod.Cartxyz, mod.gammaCartDD,mod.KCartDD, mod.alphaCart, mod.betaCartU, mod.BCartU)
             
             lst = createIDList(cf,hDD,lambdaU,aDD,trK,alpha,vetU,betU)
             
-            result_list = listToValueList(lst)
+            result_list = tv.listToValueList(lst)
             
             # Uncomment following line if need to calculate trustedValue for the first time
             # tv.firstTimePrint(mod,result_list,trusted_list)
@@ -166,7 +163,7 @@ class TestStringMethods(unittest.TestCase):
             
             lst = createIDList(cf,hDD,lambdaU,aDD,trK,alpha,vetU,betU)
 
-            result_list = listToValueList(lst)
+            result_list = tv.listToValueList(lst)
             
             # Uncomment following line if need to calculate trustedValue for the first time
             # tv.firstTimePrint(mod,result_list,trusted_list)
@@ -213,57 +210,6 @@ def createADMList(alpha,beta,B,gamma,K):
             lst.append(K[i][j])   
     return lst       
 
-# Takes in a list [lst] and returns the list with each index evaluated 
-#     according to parameters (seed, precision) in trustedValues 
-def listToValueList(lst):
-    
-    # List all the free symbols in the expressions in [lst].
-    #   These variables will be automatically set to random
-    #   values in the range [0,1) below.
-    list_free_symbols = sum(lst).free_symbols
-
-    # To ensure the random values are consistent for testing purposes, we will
-    #    sort the list of free symbols. This requires that we first convert
-    #    all SymPy symbols to strings, storing to list_symbol_strings,
-    #    and then we'll use zip() to sort both lists in alphabetical order,
-    #    based on the strings in the first list:
-    list_symbol_strings = []
-    for var in list_free_symbols:
-        list_symbol_strings.append(str(var))
-
-    # https://stackoverflow.com/questions/13668393/python-sorting-two-lists
-    list_symbol_strings, list_free_symbols = (list(x) for x in zip(*sorted(zip(list_symbol_strings, list_free_symbols))))
-    
-
-    
-    # Set the random seed according to trustedValues.seed:
-    random.seed(tv.seed)
-
-    # Next we will write a short Python code that first declares all
-    #    of the free variables in the "everything" expression
-    #    to random values with 30 significant digits of precision.
-    #    (This is accomplished by calling random.random() to get
-    #     a 16-significant-digit random number between 0 and 1,
-    #     and then taking the 30-significant-digit square root
-    #     of that number.)
-    stringexec = "from sympy import *\n" + "from mpmath import *\n" + "mp.dps = " + str(tv.precision) + "\n"
-    
-    for var in list_free_symbols:
-        stringexec += str(var)+" = symbols(\'"+str(var)+"\')\n"
-        # BE CAREFUL: You must declare all variables using mpf('string')!
-        #   http://mpmath.org/doc/1.1.0/basics.html#providing-correct-input
-        stringexec += str(var)+" = mpf(\'"+str(sqrt(mpf(random.random())))+"\')\n"
-
-    # Then it creates the code that evaluates the result
-    #    to 30 significant digits.
-    stringexec += "lst = " + str(lst)
-    
-    # https://stackoverflow.com/questions/38817962/python-3-need-from-exec-to-return-values
-    # Finally we execute stringexec to a local namespace "loc", and store the
-    #    result of the evaluated "everything" expression to "result".
-    loc = {}
-    exec(stringexec, {}, loc)
-    return loc['lst']
 
 # Necessary for unittest class to work properly
 if __name__ == '__main__':

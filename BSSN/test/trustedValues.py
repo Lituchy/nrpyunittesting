@@ -1,4 +1,7 @@
 from mpmath import *
+import random
+import logging
+
 
 ## Constants to be used throughout test files
 global precision, seed
@@ -9,6 +12,20 @@ seed = 1234
 
 ## Common functions
 
+def calcError(mod,result_list,trusted_list):
+    for res, val in zip(result_list, trusted_list):
+        if val == 0:
+            log10_relative_error = log10(fabs(res))
+        else:
+            log10_relative_error = log10(fabs( (val - res ) / val ) )
+        good = (log10_relative_error < (precision / -2))
+        if not good:
+            logging.error('\n\n Failed with ' + str(mod) + '\n\n')
+            return False
+    return True
+    
+
+
 # Prints module, result list, and current trusted list to console window
 def firstTimePrint(mod,result_list,trusted_list):
     print('\nModule: ')
@@ -18,6 +35,58 @@ def firstTimePrint(mod,result_list,trusted_list):
     print('\nTrusted list:')
     print(trusted_list)
     return
+
+# Takes in a list [lst] and returns the list with each index evaluated 
+#     according to parameters (seed, precision) in trustedValues 
+def listToValueList(lst):
+    
+    # List all the free symbols in the expressions in [lst].
+    #   These variables will be automatically set to random
+    #   values in the range [0,1) below.
+    list_free_symbols = sum(lst).free_symbols
+
+    # To ensure the random values are consistent for testing purposes, we will
+    #    sort the list of free symbols. This requires that we first convert
+    #    all SymPy symbols to strings, storing to list_symbol_strings,
+    #    and then we'll use zip() to sort both lists in alphabetical order,
+    #    based on the strings in the first list:
+    list_symbol_strings = []
+    for var in list_free_symbols:
+        list_symbol_strings.append(str(var))
+
+    # https://stackoverflow.com/questions/13668393/python-sorting-two-lists
+    list_symbol_strings, list_free_symbols = (list(x) for x in zip(*sorted(zip(list_symbol_strings, list_free_symbols))))
+    
+
+    
+    # Set the random seed according to trustedValues.seed:
+    random.seed(seed)
+
+    # Next we will write a short Python code that first declares all
+    #    of the free variables in the "everything" expression
+    #    to random values with 30 significant digits of precision.
+    #    (This is accomplished by calling random.random() to get
+    #     a 16-significant-digit random number between 0 and 1,
+    #     and then taking the 30-significant-digit square root
+    #     of that number.)
+    stringexec = "from sympy import *\n" + "from mpmath import *\n" + "mp.dps = " + str(precision) + "\n"
+    
+    for var in list_free_symbols:
+        stringexec += str(var)+" = symbols(\'"+str(var)+"\')\n"
+        # BE CAREFUL: You must declare all variables using mpf('string')!
+        #   http://mpmath.org/doc/1.1.0/basics.html#providing-correct-input
+        stringexec += str(var)+" = mpf(\'"+str(sqrt(mpf(random.random())))+"\')\n"
+
+    # Then it creates the code that evaluates the result
+    #    to 30 significant digits.
+    stringexec += "lst = " + str(lst)
+    
+    # https://stackoverflow.com/questions/38817962/python-3-need-from-exec-to-return-values
+    # Finally we execute stringexec to a local namespace "loc", and store the
+    #    result of the evaluated "everything" expression to "result".
+    loc = {}
+    exec(stringexec, {}, loc)
+    return loc['lst']
 
 ## Trusted Values:
 
@@ -41,8 +110,6 @@ BSSN_sph_ST_ADM = [mpf('0.403092176323945252455401083264855'), mpf('0.2406088737
 
 BSSN_sph_UBH_ADM = [1, 0, 0, mpf('1395.79778503827727330438811733733'), 0, 0, 0, 0, mpf('4.81517781103762810906853631572986'), 0, 0, 0, 0, mpf('9.61434498113641434805550645852601'), 0, 0, mpf('0.0035315484611782893268295136320798'), 0, 0, 0, mpf('4.81517781103762810906853631572986'), 0, mpf('0.0035315484611782893268295136320798'), mpf('6.70941611174433767041669495976436'), 0]
 
-#
-
 # Trusted values for BSSN ID
 global BSSN_cart_BL_ID, BSSN_sph_SKS_ID, BSSN_sph_ST_ID, BSSN_sph_UBH_ID
 
@@ -54,8 +121,19 @@ BSSN_sph_ST_ID = [0.403092176323945252455401083265, mpf('0.403092176323945252455
 
 BSSN_sph_UBH_ID = [mpf('0.000000000415033854876444477286285893579512'), 1, 0, mpf('-95747350686634955.2990447037942658'), 0, 0, mpf('1394.79778503827727330438811733733'), 0, 0, 0, 0, mpf('68.1774297079879249492943239915913'), mpf('-38201931430976591.6020627256016624'), 0, 0, mpf('1282.37227619509095380577148705319'), 0, 0, mpf('0.57771007481884038882051828035855'), 0, 0, 0, mpf('1344.05894729887689495988360659524'), 0]
 
+# Trusted values for BSSN RHS
+global BSSN_rhs_scalars, BSSN_rhs_vectors, BSSN_rhs_tensors, BSSN_gaugerhs_scalars, BSSN_gaugerhs_vectors
+
+BSSN_rhs_scalars = [mpf('1.17088725081123717976036013389338'), mpf('2.4203168731041778276785631821572')]
+BSSN_gaugerhs_scalars = [mpf('-0.642547930155001380559044161367303')]
+
+BSSN_rhs_vectors = [mpf('4.5416685128144842973532181122077'), mpf('-26.292021081498246002785894358253'), mpf('-3.91565108795835425950242828436205')]
+BSSN_gaugerhs_vectors = [mpf('19.1253301349717903059126760275783'), mpf('6.73377751498821779817923223971379'), mpf('-14.3252852575698761674049866366367'), mpf('-0.416046528730366515540680736079711'), mpf('111.380322321824694940721028671132'), mpf('13.097737197938302234221188787723')]
+
+BSSN_rhs_tensors = [mpf('-0.0263260284069148577059637000538504'), mpf('0.975839919679223756941181380326283'), mpf('1.38130334638529214604701755241765'), mpf('-0.133052195096384779869483191297963'), mpf('2.74699696368025413060359760185334'), mpf('3.37462047768649834195688176828246'), mpf('0.181924456363985578660086274768599'), mpf('-0.390726294642051073527657924515473'), mpf('2.97745157106802559535679276411241'), mpf('2.64061873661409646885708292890556'), mpf('3.0897580173644791657503704144862'), mpf('6.99877414802463331695008858530444')]
 
 
-#
+
+
 
 # Add ReadMe.md
