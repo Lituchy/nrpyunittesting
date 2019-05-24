@@ -39,6 +39,12 @@ sphSumADM = [tv.BSSN_sph_SKS_ADM,tv.BSSN_sph_ST_ADM,tv.BSSN_sph_UBH_ADM]
 cartSumID = [tv.BSSN_cart_BL_ID]
 sphSumID = [tv.BSSN_sph_SKS_ID,tv.BSSN_sph_ST_ID,tv.BSSN_sph_UBH_ID]
 
+# Change level based on desired amount of output. 
+# ERROR -> Ouputs minimal information -- only when there's an error
+# INFO -> Outputs when starting and finishing a module, as well as everything in ERROR
+# DEBUG -> Displays all pairs of values being compared, as well as everything in INFO
+logging.basicConfig(level=logging.DEBUG)
+
 
 # Python unittest class
 class TestStringMethods(unittest.TestCase):
@@ -58,11 +64,6 @@ class TestStringMethods(unittest.TestCase):
     sphMods[1].StaticTrumpet(ComputeADMGlobalsOnly = True)
     sphMods[2].UIUCBlackHole(ComputeADMGlobalsOnly = True)
     
-    # Change level based on desired amount of output. 
-    # ERROR -> Ouputs minimal information -- only when there's an error
-    # INFO -> Outputs when starting and finishing a module, as well as everything in ERROR
-    # DEBUG -> Displays all pairs of values being compared, as well as everything in INFO
-    logging.basicConfig(level=logging.INFO)
     
     # Testing [alpha,beta,...,K] for cartesian modules
     def test_cart_ADM(self):
@@ -84,17 +85,11 @@ class TestStringMethods(unittest.TestCase):
             #    be a number < -2/3 * precision (i.e., when precision is 30, we
             #    should get more than 20 significant digits of agreement with the 
             #    trusted result, or the test fails.
-            for res, val in zip(result_list, trusted_list):
-                if val == 0:
-                    log10_relative_error = log10(fabs(res))
-                else:
-                    log10_relative_error = log10(fabs( (val - res ) / val ) )
-                good = (log10_relative_error < (tv.precision / -2))
-                if not good:
-                    logging.error('\n\n Failed with ' + str(mod) + '\n\n')
-                    self.assertTrue(good)
-
-            logging.info('\nJust completed ADM module ' + str(mod))
+            good = tv.calcError(mod,result_list,trusted_list)
+            if good:     
+                logging.info('\nJust completed cart ADM module ' + str(mod) + '\n')
+            else:
+                self.assertTrue(good)
             
                 
     # Testing [alpha,beta,...,K] for spherical modules
@@ -117,17 +112,11 @@ class TestStringMethods(unittest.TestCase):
             #    be a number < -2/3 * precision (i.e., when precision is 30, we
             #    should get more than 20 significant digits of agreement with the 
             #    trusted result, or the test fails.
-            for res, val in zip(result_list, trusted_list):
-                if val == 0:
-                    log10_relative_error = log10(fabs(res))
-                else:
-                    log10_relative_error = log10(fabs( (val - res ) / val ) )
-                good = (log10_relative_error < (tv.precision / -2))
-                if not good:
-                    logging.error('\n\n Failed with ' + str(mod) + '\n\n')
-                    self.assertTrue(good)
-
-            logging.info('\nJust completed ADM module ' + str(mod))
+            good = tv.calcError(mod,result_list,trusted_list)
+            if good:     
+                logging.info('\nJust completed sph ADM module ' + str(mod) + '\n')
+            else:
+                self.assertTrue(good)
             
     # Testing [cf,hDD,...,bet] for cartesian modules
     def test_cart_ID(self):
@@ -144,17 +133,11 @@ class TestStringMethods(unittest.TestCase):
             # Uncomment following line if need to calculate trustedValue for the first time
             # tv.firstTimePrint(mod,result_list,trusted_list)
             
-            for res, val in zip(result_list, trusted_list):
-                if val == 0:
-                    log10_relative_error = log10(fabs(res))
-                else:
-                    log10_relative_error = log10(fabs( (val - res ) / val ) )
-                good = (log10_relative_error < (tv.precision / -2))
-                if not good:
-                    logging.error('\n\n Failed with ' + str(mod) + '\n\n')
-                    self.assertTrue(good)
-
-            logging.info('\nJust completed ID module ' + str(mod))
+            good = tv.calcError(mod,result_list,trusted_list)
+            if good:     
+                logging.info('\nJust completed cart ID module ' + str(mod) + '\n')
+            else:
+                self.assertTrue(good)
             
     # Testing [cf,hDD,...,bet] for spherical modules
     def test_sph_ID(self):
@@ -172,17 +155,11 @@ class TestStringMethods(unittest.TestCase):
             # Uncomment following line if need to calculate trustedValue for the first time
             # tv.firstTimePrint(mod,result_list,trusted_list)
 
-            for res, val in zip(result_list, trusted_list):
-                if val == 0:
-                    log10_relative_error = log10(fabs(res))
-                else:
-                    log10_relative_error = log10(fabs( (val - res ) / val ) )
-                good = (log10_relative_error < (tv.precision / -2))
-                if not good:
-                    logging.error('\n\n Failed with ' + str(mod) + '\n\n')
-                    self.assertTrue(good)
-
-            logging.info('\nJust completed ID module ' + str(mod))
+            good = tv.calcError(mod,result_list,trusted_list)
+            if good:     
+                logging.info('\nJust completed sph ID module ' + str(mod) + '\n')
+            else:
+                self.assertTrue(good)
             
 
                 

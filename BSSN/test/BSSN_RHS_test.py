@@ -26,8 +26,6 @@ class TestStringMethods(unittest.TestCase):
     gaugerhs.BSSN_gauge_RHSs()
     
 
-
-
     def test_BSSN_RHSs_scalars(self):
         
         # Testing RHS scalars
@@ -43,7 +41,7 @@ class TestStringMethods(unittest.TestCase):
         
         good = tv.calcError(rhs,result_list,trusted_list)
         if good:     
-            logging.info('\nJust completed RHS scalars module ' + str(rhs))
+            logging.info('\nJust completed RHS scalars module ' + str(rhs) + '\n')
         else:
             self.assertTrue(good)
         
@@ -60,7 +58,7 @@ class TestStringMethods(unittest.TestCase):
         
         good = tv.calcError(gaugerhs,result_list,trusted_list)
         if good:     
-            logging.info('\nJust completed gauge RHS scalars module ' + str(gaugerhs))
+            logging.info('\nJust completed gauge RHS scalars module ' + str(gaugerhs) + '\n')
         else:
             self.assertTrue(good)
 
@@ -81,7 +79,7 @@ class TestStringMethods(unittest.TestCase):
         
         good = tv.calcError(rhs,result_list,trusted_list)
         if good:     
-            logging.info('\nJust completed RHS vectors module ' + str(rhs))
+            logging.info('\nJust completed RHS vectors module ' + str(rhs) + '\n')
         else:
             self.assertTrue(good)
         
@@ -101,7 +99,7 @@ class TestStringMethods(unittest.TestCase):
         
         good = tv.calcError(gaugerhs,result_list,trusted_list)
         if good:     
-            logging.info('\nJust completed gauge RHS scalars vectors ' + str(gaugerhs))
+            logging.info('\nJust completed gauge RHS scalars vectors ' + str(gaugerhs) + '\n')
         else:
             self.assertTrue(good)
 
@@ -116,7 +114,7 @@ class TestStringMethods(unittest.TestCase):
 #         self.assertEqual(md5sum, 'd84fc94358305b7135dc18680089dff9')
     
         # Testing RHS tensors
-        logging.info('\nCurrently working on RHS tensors module ' + str(rhs))
+        logging.info('\nCurrently working on RHS tensors module ' + str(rhs)+ '\n Note: This may take a while.')
         
         lst = []
         for i in range(3):
@@ -132,7 +130,7 @@ class TestStringMethods(unittest.TestCase):
         
         good = tv.calcError(rhs,result_list,trusted_list)
         if good:     
-            logging.info('\nJust completed RHS tensors module ' + str(rhs))
+            logging.info('\nJust completed RHS tensors module ' + str(rhs) + '\n')
         else:
             self.assertTrue(good)
 

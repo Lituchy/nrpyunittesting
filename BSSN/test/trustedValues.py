@@ -13,8 +13,9 @@ seed = 1234
 ## Common functions
 
 def calcError(mod,result_list,trusted_list):
+    print
     for res, val in zip(result_list, trusted_list):
-        logging.debug('Result, value: \n' + str(res) + '\n'+ str(val)+'\n')
+        logging.debug('\nResult, value: \n\t' + str(res) + '\n\t'+ str(val)+'\n')
         if val == 0:
             log10_relative_error = log10(fabs(res))
         else:
