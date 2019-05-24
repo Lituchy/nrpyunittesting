@@ -12,6 +12,12 @@ seed = 1234
 
 ## Common functions
 
+# Takes in a module [mod], a result list [result_list], and a trusted list [trusted_list]
+# and computes the error for each result-trusted pair for each respective index.
+# Logs debug statements for each pair of values if the logging level is <= DEBUG
+# and logs a failure message if logging level is <= ERROR.
+# Returns a boolean [good] that represents if any two value pairs didn't differ
+# by more than (precision/2) decimal places.
 def calcError(mod,result_list,trusted_list):
     print
     for res, val in zip(result_list, trusted_list):
@@ -28,7 +34,8 @@ def calcError(mod,result_list,trusted_list):
     
 
 
-# Prints module, result list, and current trusted list to console window
+# Prints module, result list, and current trusted list to console window.
+# Useful for determining the inital trusted_list
 def firstTimePrint(mod,result_list,trusted_list):
     print('\nModule: ')
     print(mod)
@@ -39,7 +46,7 @@ def firstTimePrint(mod,result_list,trusted_list):
     return
 
 # Takes in a list [lst] and returns the list with each index evaluated 
-#     according to parameters (seed, precision) in trustedValues 
+# according to parameters (seed, precision) in trustedValues 
 def listToValueList(lst):
     
     # List all the free symbols in the expressions in [lst].
@@ -57,9 +64,7 @@ def listToValueList(lst):
         list_symbol_strings.append(str(var))
 
     # https://stackoverflow.com/questions/13668393/python-sorting-two-lists
-    list_symbol_strings, list_free_symbols = (list(x) for x in zip(*sorted(zip(list_symbol_strings, list_free_symbols))))
-    
-
+    list_symbol_strings, list_free_symbols = (list(x) for x in zip(*sorted(zip(list_symbol_strings, list_free_symbols))))    
     
     # Set the random seed according to trustedValues.seed:
     random.seed(seed)
@@ -133,9 +138,6 @@ BSSN_rhs_vectors = [mpf('4.5416685128144842973532181122077'), mpf('-26.292021081
 BSSN_gaugerhs_vectors = [mpf('19.1253301349717903059126760275783'), mpf('6.73377751498821779817923223971379'), mpf('-14.3252852575698761674049866366367'), mpf('-0.416046528730366515540680736079711'), mpf('111.380322321824694940721028671132'), mpf('13.097737197938302234221188787723')]
 
 BSSN_rhs_tensors = [mpf('-0.0263260284069148577059637000538504'), mpf('0.975839919679223756941181380326283'), mpf('1.38130334638529214604701755241765'), mpf('-0.133052195096384779869483191297963'), mpf('2.74699696368025413060359760185334'), mpf('3.37462047768649834195688176828246'), mpf('0.181924456363985578660086274768599'), mpf('-0.390726294642051073527657924515473'), mpf('2.97745157106802559535679276411241'), mpf('2.64061873661409646885708292890556'), mpf('3.0897580173644791657503704144862'), mpf('6.99877414802463331695008858530444')]
-
-
-
 
 
 # Add ReadMe.md
