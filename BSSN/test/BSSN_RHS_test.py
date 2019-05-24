@@ -14,12 +14,18 @@ RHS_scalars = [tv.BSSN_rhs_scalars,tv.BSSN_gaugerhs_scalars]
 RHS_vectors = [tv.BSSN_rhs_vectors,tv.BSSN_gaugerhs_vectors]
 RHS_tensors = [tv.BSSN_rhs_tensors]
 
+# Change level based on desired amount of output. 
+# ERROR -> Ouputs minimal information -- only when there's an error
+# INFO -> Outputs when starting and finishing a module, as well as everything in ERROR
+# DEBUG -> Displays all pairs of values being compared, as well as everything in INFO
+logging.basicConfig(level=logging.DEBUG)
+
 class TestStringMethods(unittest.TestCase):
     par.set_parval_from_str("BSSN.BSSN_gauge_RHSs::ShiftEvolutionOption", "GammaDriving2ndOrder_Covariant")
     rhs.BSSN_RHSs()
     gaugerhs.BSSN_gauge_RHSs()
-       
-    logging.basicConfig(level=logging.DEBUG)
+    
+
 
 
     def test_BSSN_RHSs_scalars(self):

@@ -58,7 +58,11 @@ class TestStringMethods(unittest.TestCase):
     sphMods[1].StaticTrumpet(ComputeADMGlobalsOnly = True)
     sphMods[2].UIUCBlackHole(ComputeADMGlobalsOnly = True)
     
-    logging.basicConfig(level=logging.DEBUG)
+    # Change level based on desired amount of output. 
+    # ERROR -> Ouputs minimal information -- only when there's an error
+    # INFO -> Outputs when starting and finishing a module, as well as everything in ERROR
+    # DEBUG -> Displays all pairs of values being compared, as well as everything in INFO
+    logging.basicConfig(level=logging.INFO)
     
     # Testing [alpha,beta,...,K] for cartesian modules
     def test_cart_ADM(self):
