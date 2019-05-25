@@ -57,7 +57,9 @@ def listToValueList(modname,lst):
         orig_lst.append(expr)
         string = srepr(expr)
         string2 = re.sub('Rational\(([0-9]+), ([0-9]+)\)',
-                         "(Function('RationalTMP')(Float('\\1',"+str(precision)+"),(Float('\\2',"+str(precision)+"))))", string)
+                         "((Float('\\1',"+str(2*precision)+"))/(Float('\\2',"+str(2*precision)+")))", string)
+        string2 = re.sub('Rational\((-[0-9]+), ([0-9]+)\)',
+                         "((Float('\\1',"+str(2*precision)+"))/(Float('\\2',"+str(2*precision)+")))", string)
         newexpr = eval(string2)
         lst[index] = newexpr
         index += 1
@@ -66,7 +68,7 @@ def listToValueList(modname,lst):
     #   These variables will be automatically set to random
     #   values in the range [0,1) below.
     list_free_symbols = sum(lst).free_symbols
-    print(modname,list_free_symbols)
+    #print(modname,list_free_symbols)
     
     # To ensure the random values are consistent for testing purposes, we will
     #    sort the list of free symbols. This requires that we first convert
@@ -105,8 +107,6 @@ mp.dps = """+str(precision)+"\n"
     #    to 30 significant digits.
     stringexec += "lst = " + str(lst)
 
-    stringexec = stringexec.replace("RationalTMP","Rational")
-    
     #print(stringexec)
     # https://stackoverflow.com/questions/38817962/python-3-need-from-exec-to-return-values
     # Finally we execute stringexec to a local namespace "loc", and store the
@@ -163,7 +163,7 @@ global BSSN_cart_BL_ID, BSSN_sph_SKS_ID, BSSN_sph_ST_ID, BSSN_sph_UBH_ID
 
 BSSN_cart_BL_ID = [mpf('0.00000152945193754914710102797581545574690110587794307605132787629007'), mpf('0.107338611314116766643501398442930285916746733582518833426811998'), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, mpf('0.161055482670286463304622943011459403016958037964688069705458009'), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
-BSSN_sph_SKS_ID = [mpf('0.207086860796909267930015101795005'), mpf('0.611873766692798472488570416617989'), mpf('1.21858035102666444790483180889003'), mpf('1.28916771193302754243737391704002'), mpf('0.625610493633166822638772330973041'), 0, mpf('0.580255027545770279395126141662004'), mpf('-1.46259273496056085998174138135008'), 0, mpf('0.106408584277122239635526695294998'), mpf('-0.906159268068323383083226915440986'), mpf('0.710491768470231168596999021987033'), mpf('-0.220858919172338256479691902159994'), 0, 0, mpf('-0.204506913439394310010538473162005'), mpf('0.368131215795545228522226310885993'), 0, mpf('-0.0610174453894916064477480258476979'), mpf('-1.49445058386278572550590201228991'), 0, 0, mpf('0.31510834156243584376774183148199'), mpf('0.0342282092344932568783347043980992')]
+BSSN_sph_SKS_ID = [mpf('0.769175467430265431321069317908965'), mpf('0.611873766692798472488570416617989'), mpf('0.749645216318693661248829716553029'), mpf('-8.50190543299665899499977111719023'), mpf('0.625610493633166822638772330973041'), 0, mpf('1.54935192205356147315597570906996'), mpf('-1.7225394793652162129311014606001'), 0, mpf('0.171664018858514818215855728819989'), mpf('-1.46186459240340478427005092296001'), mpf('0.917696761284986595107747687088009'), mpf('-6.28480537993201767278373108644968'), 0, 0, mpf('0.283331989997330860016181144884004'), mpf('0.794488784748600832389890610705952'), 0, mpf('-0.0984366060990071292779671010682047'), mpf('0.509787083317040113656220567403027'), 0, 0, mpf('1.12160310825131108428924137074001'), mpf('0.386850190774130044881220547060013')]
 
 BSSN_sph_ST_ID = [mpf('0.403092176323945252455401083265003'), mpf('0.403092176323945252455401083265003'), mpf('0.362429928060732398869599212975998'), 0, mpf('0.240608873710370682916226625465004'), 0, 0, mpf('-0.483239904080976531826132283967998'), 0, 0, 0, 0, 0, 0, 0, 0, mpf('0.241619952040488265913066141983999'), 0, 0, 0, 0, 0, 0, mpf('0.241619952040488265913066141983999')]
 
