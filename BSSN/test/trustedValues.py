@@ -1,7 +1,9 @@
-from mpmath import *
+from sympy import Integer,Symbol,symbols,simplify,Rational,Function,srepr,sin,cos,exp,log,Abs,Add,Mul,Pow,preorder_traversal,N,Float,S,var,sympify,sqrt,sign,mathematica_code
+# WARNING: Importing more than the bare minimum with mpmath will result in errors on eval() below. This is because we need SymPy to evaluate that expression, not mpmath.
+from mpmath import mpf,mp,log10,fabs #
 import random
 import logging
-
+import re
 
 ## Constants to be used throughout test files
 global precision, seed
@@ -47,13 +49,25 @@ def firstTimePrint(mod,result_list,trusted_list):
 
 # Takes in a list [lst] and returns the list with each index evaluated 
 # according to parameters (seed, precision) in trustedValues 
-def listToValueList(lst):
-    
+def listToValueList(modname,lst):
+
+    index = 0
+    orig_lst = []
+    for expr in lst:
+        orig_lst.append(expr)
+        string = srepr(expr)
+        string2 = re.sub('Rational\(([0-9]+), ([0-9]+)\)',
+                         "(Function('RationalTMP')(Float('\\1',"+str(precision)+"),(Float('\\2',"+str(precision)+"))))", string)
+        newexpr = eval(string2)
+        lst[index] = newexpr
+        index += 1
+
     # List all the free symbols in the expressions in [lst].
     #   These variables will be automatically set to random
     #   values in the range [0,1) below.
     list_free_symbols = sum(lst).free_symbols
-
+    print(modname,list_free_symbols)
+    
     # To ensure the random values are consistent for testing purposes, we will
     #    sort the list of free symbols. This requires that we first convert
     #    all SymPy symbols to strings, storing to list_symbol_strings,
@@ -76,10 +90,13 @@ def listToValueList(lst):
     #     a 16-significant-digit random number between 0 and 1,
     #     and then taking the 30-significant-digit square root
     #     of that number.)
-    stringexec = "from sympy import *\n" + "from mpmath import *\n" + "mp.dps = " + str(precision) + "\n"
+    stringexec = """
+from sympy import Integer,Symbol,symbols,simplify,Rational,Function,srepr,sin,cos,exp,log,Abs,Add,Mul,Pow,preorder_traversal,N,Float,S,var,sympify
+from mpmath import *
+mp.dps = """+str(precision)+"\n"
     
     for var in list_free_symbols:
-        stringexec += str(var)+" = symbols(\'"+str(var)+"\')\n"
+        stringexec += str(var)+" = symbols(\'"+str(var)+"\',Real=True)\n"
         # BE CAREFUL: You must declare all variables using mpf('string')!
         #   http://mpmath.org/doc/1.1.0/basics.html#providing-correct-input
         stringexec += str(var)+" = mpf(\'"+str(sqrt(mpf(random.random())))+"\')\n"
@@ -87,13 +104,40 @@ def listToValueList(lst):
     # Then it creates the code that evaluates the result
     #    to 30 significant digits.
     stringexec += "lst = " + str(lst)
+
+    stringexec = stringexec.replace("RationalTMP","Rational")
     
+    #print(stringexec)
     # https://stackoverflow.com/questions/38817962/python-3-need-from-exec-to-return-values
     # Finally we execute stringexec to a local namespace "loc", and store the
     #    result of the evaluated "everything" expression to "result".
+    #
     loc = {}
     exec(stringexec, {}, loc)
-    return loc['lst']
+    evaled_lst = loc['lst']
+
+    # FIXME: Should only be run if first_time == True.
+    if True == True:
+        index = 0
+        for result in evaled_lst:
+            if result != 0 and fabs(result) < 100*10**(-precision):
+                print("Found |result| ("+str(fabs(result))+") close to zero. Checking if indeed it should be zero.")
+                # Now double the precision and redo. If number drops in magnitude
+                loc2xprec = {}
+                stringexec = stringexec.replace("mp.dps = "+str(precision),"mp.dps = "+str(2*precision))
+                exec(stringexec, {}, loc2xprec)
+                evaled_lst2xprec = loc2xprec['lst']
+                if fabs(evaled_lst2xprec[index]) < 100*10**(-2*precision):
+                    print("After re-evaluating with twice the digits of precision, |result| dropped to "+str(evaled_lst2xprec[index])+". Setting value to zero")
+                    evaled_lst[index] = 0
+            index += 1
+
+    # Make sure that all results in evaled_lst *except* zeros are mpf type!
+    for i in range(len(evaled_lst)):
+        if evaled_lst[i] != 0:
+            evaled_lst[i] = mpf(str(evaled_lst[i]))
+        
+    return evaled_lst
 
 ## Trusted Values:
 
@@ -110,23 +154,20 @@ BSSN_cart_BL_ADM = [mpf('0.122483331574515176153136610247666'), 0, 0, mpf('66.65
 
 BSSN_sph_SKS_ADM = [mpf('0.611873766692798472488570416618186'), mpf('0.625610493633166822638772330972943'), 0, mpf('2.67101503379259532016438346708211'), mpf('-1.3871883522683154071806190217075'), 0, mpf('0.171664018858514818215855728819767'), mpf('-1.20517572307269882101503709735398'), mpf('0.455406940612776090115394191050947'), 0, 0, 0, mpf('0.171664018858514818215855728819767'), mpf('1.22487699767344797967358950175897'), mpf('1.06437469733833992932303275045972'), 0, mpf('-0.0774556883566536581224962371138576'), 0, 0, mpf('-1.20517572307269882101503709735398'), mpf('0.455406940612776090115394191050947'), 0, mpf('-0.0774556883566536581224962371138576'), mpf('1.37627131033453091934058579009585'), mpf('0.59485248459953340823202605867648')]
 
-
-
 BSSN_sph_ST_ADM = [mpf('0.403092176323945252455401083264855'), mpf('0.240608873710370682916226625464511'), 0, mpf('6.15447854588632421730150623325538'), mpf('-2.23056721663690142814440046331094'), 0, 0, 0, 0, 0, 0, 0, 0, mpf('2.71247932609742473472094943837468'), mpf('0.983083687023713543948423277992989'), 0, 0, 0, 0, 0, 0, 0, 0, mpf('0.0202697649478352484117814815031462'), mpf('0.00734636945185188428754902788373153')]
 
-
-BSSN_sph_UBH_ADM = [1, 0, 0, mpf('1395.79778503827727330438811733733'), 0, 0, 0, 0, mpf('4.81517781103762810906853631572986'), 0, 0, 0, 0, mpf('9.61434498113641434805550645852601'), 0, 0, mpf('0.0035315484611782893268295136320798'), 0, 0, 0, mpf('4.81517781103762810906853631572986'), 0, mpf('0.0035315484611782893268295136320798'), mpf('6.70941611174433767041669495976436'), 0]
+BSSN_sph_UBH_ADM = [mpf('1.0'), 0, 0, mpf('1395.79778503827727330438811733996'), 0, 0, 0, 0, mpf('4.81517781103762810906853631572986'), 0, 0, 0, 0, mpf('9.61434498113641434805550645853074'), 0, 0, mpf('0.00353154846117828932682951363208018'), 0, 0, 0, mpf('4.81517781103762810906853631572986'), 0, mpf('0.00353154846117828932682951363208018'), mpf('6.70941611174433767041669495975963'), 0]
 
 # Trusted values for BSSN ID
 global BSSN_cart_BL_ID, BSSN_sph_SKS_ID, BSSN_sph_ST_ID, BSSN_sph_UBH_ID
 
-BSSN_cart_BL_ID = [mpf('0.00000152945193754914710102797581545575'), mpf('0.10733861131411676664350139844293'), 0, mpf('-1265651143.91068964151022994739147'), 0, 0, mpf('74.9869010504432794736061336923654'), 0, mpf('-3.15544362088404722164691426113114e-30'), 0, 0, 0, mpf('-983861841.67201246515566452541449'), 0, 0, mpf('74.9869010504432794736061336923527'), 0, 0, 0, mpf('-1.40483805438325262556020170609561e-23'), 0, 0, mpf('74.9869010504432794736061336923654'), 0]
+BSSN_cart_BL_ID = [mpf('0.00000152945193754914710102797581545574690110587794307605132787629007'), mpf('0.107338611314116766643501398442930285916746733582518833426811998'), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, mpf('0.161055482670286463304622943011459403016958037964688069705458009'), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
-BSSN_sph_SKS_ID = [mpf('0.207086860796909267930015101794759'), mpf('0.611873766692798472488570416618186'), mpf('0.749645216318693661248829716552832'), mpf('-8.50190543299665899499977111718708'), mpf('0.625610493633166822638772330972943'), 0, mpf('1.54935192205356147315597570906562'), mpf('-1.72253947936521621293110146059516'), 0, mpf('0.171664018858514818215855728819791'), mpf('-1.4618645924034047842700509229606'), mpf('0.917696761284986595107747687088108'), mpf('-6.16212271223487296034208633277397'), 0, 0, mpf('0.283331989997330860016181144884251'), mpf('0.794488784748600832389890610705952'), 0, mpf('-0.098436606099007129277967101068217'), mpf('0.509787083317040113656220567402534'), 0, 0, mpf('1.12160310825131108428924137074257'), mpf('0.386850190774130044881220547059668')]
+BSSN_sph_SKS_ID = [mpf('0.207086860796909267930015101795005'), mpf('0.611873766692798472488570416617989'), mpf('1.21858035102666444790483180889003'), mpf('1.28916771193302754243737391704002'), mpf('0.625610493633166822638772330973041'), 0, mpf('0.580255027545770279395126141662004'), mpf('-1.46259273496056085998174138135008'), 0, mpf('0.106408584277122239635526695294998'), mpf('-0.906159268068323383083226915440986'), mpf('0.710491768470231168596999021987033'), mpf('-0.220858919172338256479691902159994'), 0, 0, mpf('-0.204506913439394310010538473162005'), mpf('0.368131215795545228522226310885993'), 0, mpf('-0.0610174453894916064477480258476979'), mpf('-1.49445058386278572550590201228991'), 0, 0, mpf('0.31510834156243584376774183148199'), mpf('0.0342282092344932568783347043980992')]
 
-BSSN_sph_ST_ID = [0.403092176323945252455401083265, mpf('0.403092176323945252455401083264855'), mpf('0.362429928060732398869599212975653'), 0, mpf('0.240608873710370682916226625464511'), 0, 0, mpf('-0.483239904080976531826132283967554'), 0, 0, 0, 0, mpf('0.0'), 0, 0, 0, mpf('0.241619952040488265913066141983777'), 0, 0, 0, 0, 0, 0, mpf('0.241619952040488265913066141983777')]
+BSSN_sph_ST_ID = [mpf('0.403092176323945252455401083265003'), mpf('0.403092176323945252455401083265003'), mpf('0.362429928060732398869599212975998'), 0, mpf('0.240608873710370682916226625465004'), 0, 0, mpf('-0.483239904080976531826132283967998'), 0, 0, 0, 0, 0, 0, 0, 0, mpf('0.241619952040488265913066141983999'), 0, 0, 0, 0, 0, 0, mpf('0.241619952040488265913066141983999')]
 
-BSSN_sph_UBH_ID = [mpf('0.000000000415033854876444477286285893579512'), 1, 0, mpf('-95747350686634955.2990447037942658'), 0, 0, mpf('1394.79778503827727330438811733733'), 0, 0, 0, 0, mpf('68.1774297079879249492943239915913'), mpf('-38201931430976591.6020627256016624'), 0, 0, mpf('1282.37227619509095380577148705319'), 0, 0, mpf('0.57771007481884038882051828035855'), 0, 0, 0, mpf('1344.05894729887689495988360659524'), 0]
+BSSN_sph_UBH_ID = [mpf('0.000000000415033854876444477286285893579512'), 1, 0, mpf('1.55699965833918002679265097966687'), 0, 0, mpf('0.0411588927405012153876757649017125'), 0, 0, 0, 0, mpf('0.0508551725654984211850772651193721'), mpf('-0.664197526881044398642558247847752'), 0, 0, mpf('-0.0427019784814353709426921991811291'), 0, 0, mpf('0.000430927737721636543292740391356381'), 0, 0, 0, mpf('0.00331158227335832489487970101408967'), 0]
 
 # Trusted values for BSSN RHS
 global BSSN_rhs_scalars, BSSN_rhs_vectors, BSSN_rhs_tensors, BSSN_gaugerhs_scalars, BSSN_gaugerhs_vectors
