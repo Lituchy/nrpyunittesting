@@ -1,5 +1,5 @@
 import unittest
-import sympy as sp
+from sympy import Integer,Symbol,symbols,simplify,Rational,Function,srepr,sin,cos,exp,log,Abs,Add,Mul,Pow,preorder_traversal,N,Float,S,var,sympify
 import NRPy_param_funcs as par
 import BSSN.BSSN_RHSs_new as rhs
 import BSSN.BSSN_gauge_RHSs as gaugerhs
@@ -7,6 +7,9 @@ import random
 import sys
 import logging
 import trustedValues as tv
+import calcError as ce
+import firstTimePrint as ftp
+import listToValueList as ltvl
 from mpmath import *
 
 # Trusted values for scalars, vectors, and tensors
@@ -20,6 +23,8 @@ RHS_tensors = [tv.BSSN_rhs_tensors]
 # DEBUG -> Displays all pairs of values being compared, as well as everything in INFO
 logging.basicConfig(level=logging.DEBUG)
 
+# Set following line to True if need to calculate trustedValue for the first time
+first_time = True
 
 class TestStringMethods(unittest.TestCase):
     
@@ -36,34 +41,34 @@ class TestStringMethods(unittest.TestCase):
         
         lst = [rhs.cf_rhs,rhs.trK_rhs]
         
-        result_list = tv.listToValueList(lst)
+        result_list = ltvl.listToValueList(rhs,lst,first_time)
         trusted_list = RHS_scalars[0]
         
-        # Uncomment following line if need to calculate trustedValue for the first time
-        # tv.firstTimePrint(rhs,result_list,trusted_list) 
-        
-        good = tv.calcError(rhs,result_list,trusted_list)
-        if good:     
-            logging.info('\nJust completed RHS scalars module ' + str(rhs) + '\n')
+        if first_time == True:
+            ftp.firstTimePrint(rhs,result_list,trusted_list) 
         else:
-            self.assertTrue(good)
+            good = ce.calcError(rhs,result_list,trusted_list)
+            if good:     
+                logging.info('\nJust completed RHS scalars module ' + str(rhs) + '\n')
+            else:
+                self.assertTrue(good)
         
         ## Testing gauge RHS scalars
         logging.info('\nCurrently working on gauge RHS scalars module ' + str(gaugerhs))
         
         lst = [gaugerhs.alpha_rhs]
         
-        result_list = tv.listToValueList(lst)
+        result_list = ltvl.listToValueList(gaugerhs,lst,first_time)
         trusted_list = RHS_scalars[1]
         
-        # Uncomment following line if need to calculate trustedValue for the first time
-        # tv.firstTimePrint(gaugerhs,result_list,trusted_list) 
-        
-        good = tv.calcError(gaugerhs,result_list,trusted_list)
-        if good:     
-            logging.info('\nJust completed gauge RHS scalars module ' + str(gaugerhs) + '\n')
+        if first_time == True:
+            ftp.firstTimePrint(rhs,result_list,trusted_list) 
         else:
-            self.assertTrue(good)
+            good = ce.calcError(rhs,result_list,trusted_list)
+            if good:     
+                logging.info('\nJust completed gauge RHS scalars module ' + str(rhs) + '\n')
+            else:
+                self.assertTrue(good)
     
     # Testing vectors
     def test_BSSN_RHSs_vectors(self):
@@ -75,17 +80,17 @@ class TestStringMethods(unittest.TestCase):
         for i in range(3):
             lst.append(rhs.lambda_rhsU[i])
         
-        result_list = tv.listToValueList(lst)
+        result_list = ltvl.listToValueList(rhs,lst,first_time)
         trusted_list = RHS_vectors[0]
         
-        # Uncomment following line if need to calculate trustedValue for the first time
-        # tv.firstTimePrint(rhs,result_list,trusted_list) 
-        
-        good = tv.calcError(rhs,result_list,trusted_list)
-        if good:     
-            logging.info('\nJust completed RHS vectors module ' + str(rhs) + '\n')
+        if first_time == True:
+            ftp.firstTimePrint(rhs,result_list,trusted_list) 
         else:
-            self.assertTrue(good)
+            good = ce.calcError(rhs,result_list,trusted_list)
+            if good:     
+                logging.info('\nJust completed RHS vectors module ' + str(rhs) + '\n')
+            else:
+                self.assertTrue(good)
         
         ## Testing gauge RHS scalars
         logging.info('\nCurrently working on gauge RHS vectors module ' + str(gaugerhs))
@@ -95,17 +100,17 @@ class TestStringMethods(unittest.TestCase):
             lst.append(gaugerhs.bet_rhsU[i])
             lst.append(gaugerhs.vet_rhsU[i])
         
-        result_list = tv.listToValueList(lst)
+        result_list = ltvl.listToValueList(gaugerhs,lst,first_time)
         trusted_list = RHS_vectors[1]
         
-        # Uncomment following line if need to calculate trustedValue for the first time
-        # tv.firstTimePrint(gaugerhs,result_list,trusted_list) 
-        
-        good = tv.calcError(gaugerhs,result_list,trusted_list)
-        if good:     
-            logging.info('\nJust completed gauge RHS scalars vectors ' + str(gaugerhs) + '\n')
+        if first_time == True:
+            ftp.firstTimePrint(rhs,result_list,trusted_list) 
         else:
-            self.assertTrue(good)
+            good = ce.calcError(rhs,result_list,trusted_list)
+            if good:     
+                logging.info('\nJust completed gauge RHS vectors module ' + str(rhs) + '\n')
+            else:
+                self.assertTrue(good)
 
     # Testing tensors
     def test_BSSN_RHSs_tensors(self):
@@ -119,17 +124,17 @@ class TestStringMethods(unittest.TestCase):
                 lst.append(rhs.a_rhsDD[i][j])
                 lst.append(rhs.h_rhsDD[i][j])
         
-        result_list = tv.listToValueList(lst)
+        result_list = ltvl.listToValueList(rhs,lst,first_time)
         trusted_list = RHS_tensors[0]
         
-        # Uncomment following line if need to calculate trustedValue for the first time
-        tv.firstTimePrint(rhs,result_list,trusted_list) 
-        
-        good = tv.calcError(rhs,result_list,trusted_list)
-        if good:     
-            logging.info('\nJust completed RHS tensors module ' + str(rhs) + '\n')
+        if first_time == True:
+            ftp.firstTimePrint(rhs,result_list,trusted_list) 
         else:
-            self.assertTrue(good)
+            good = ce.calcError(rhs,result_list,trusted_list)
+            if good:     
+                logging.info('\nJust completed RHS tensors module ' + str(rhs) + '\n')
+            else:
+                self.assertTrue(good)
         
         ## No gauge RHS tensors to test
 
