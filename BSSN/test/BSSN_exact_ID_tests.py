@@ -86,7 +86,7 @@ class TestStringMethods(unittest.TestCase):
             else:
                 # Next we compute the log_10 of the relative error. It should
                 #    be a number < -2/3 * precision (i.e., when precision is 30, we
-                #    should get more than 20 significant digits of agreement with the 
+                #    should get more than 15 significant digits of agreement with the 
                 #    trusted result, or the test fails.
                 good = ce.calcError(mod,result_list,trusted_list)
                 if good:

@@ -1,5 +1,5 @@
 import logging
-from mpmath import log10
+from mpmath import log10,fabs
 
 # Takes in a module [mod], a result list [result_list], and a trusted list [trusted_list]
 # and computes the error for each result-trusted pair for each respective index.
