@@ -1,6 +1,6 @@
 from sympy import Integer,Symbol,symbols,simplify,Rational,Function,srepr,sin,cos,exp,log,Abs,Add,Mul,Pow,preorder_traversal,N,Float,S,var,sympify,sqrt,sign,mathematica_code
 # WARNING: Importing more than the bare minimum with mpmath will result in errors on eval() below. This is because we need SymPy to evaluate that expression, not mpmath.
-from mpmath import mpf,mp,log10,fabs #
+from mpmath import mpf,mp,log10,fabs
 import random
 import logging
 import re
