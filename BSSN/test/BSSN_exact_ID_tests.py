@@ -6,7 +6,7 @@ import grid as gri
 from sympy import Integer,Symbol,symbols,simplify,Rational,Function,srepr,sin,cos,exp,log,Abs,Add,Mul,Pow,preorder_traversal,N,Float,S,var,sympify
 from mpmath import *
 import random
-import trustedValues as tv
+from trustedValuesDict import tvDict
 import calcError as ce
 import firstTimePrint as ftp
 import listToValueList as ltvl
@@ -24,7 +24,7 @@ import BSSN.ADM_Exact_Spherical_or_Cartesian_to_BSSNCurvilinear as AtoB
 import sys
 import logging
 
-mp.dps = tv.precision
+mp.dps = tvDict["precision"]
 
 # Lists of modules
 cartMods = [bl]
@@ -33,12 +33,12 @@ sphMods = [sks,st,ubh]
 # Lists of hash values for respective modules
 
 # ADM test hash values
-cartSumADM = [tv.BSSN_cart_BL_ADM]
-sphSumADM = [tv.BSSN_sph_SKS_ADM,tv.BSSN_sph_ST_ADM,tv.BSSN_sph_UBH_ADM]
+cartSumADM = [tvDict["BSSN_cart_BL_ADM"]]
+sphSumADM = [tvDict["BSSN_sph_SKS_ADM"],tvDict["BSSN_sph_ST_ADM"],tvDict["BSSN_sph_UBH_ADM"]]
 
 # ID test hash values
-cartSumID = [tv.BSSN_cart_BL_ID]
-sphSumID = [tv.BSSN_sph_SKS_ID,tv.BSSN_sph_ST_ID,tv.BSSN_sph_UBH_ID]
+cartSumID = [tvDict["BSSN_cart_BL_ID"]]
+sphSumID = [tvDict["BSSN_sph_SKS_ID"],tvDict["BSSN_sph_ST_ID"],tvDict["BSSN_sph_UBH_ID"]]
 
 # Change level based on desired amount of output. 
 # ERROR -> Ouputs minimal information -- only when there's an error

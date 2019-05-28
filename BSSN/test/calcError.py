@@ -1,4 +1,5 @@
 import logging
+from trustedValuesDict import tvDict
 from mpmath import log10,fabs
 
 # Takes in a module [mod], a result list [result_list], and a trusted list [trusted_list]
@@ -15,7 +16,7 @@ def calcError(mod,result_list,trusted_list):
             log10_relative_error = log10(fabs(res))
         else:
             log10_relative_error = log10(fabs( (val - res ) / val ) )
-        good = (log10_relative_error < (precision / -2))
+        good = (log10_relative_error < (tvDict["precision"] / -2))
         if not good:
             logging.error('\n\n Failed with ' + str(mod) + '\n\n')
             return False

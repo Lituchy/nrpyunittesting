@@ -4,13 +4,14 @@ from mpmath import mpf,mp,log10,fabs #
 import random
 import logging
 import re
-import trustedValues as tv
-
+from trustedValuesDict import tvDict
 
 # Takes in a list [lst] and returns the list with each index evaluated 
 # according to parameters (seed, precision) in trustedValues 
 def listToValueList(modname,lst,first_time):
-
+    
+    precision = tvDict["precision"]
+    
     # Replace all integer fractions with the correct floating point representation:
     index = 0
     orig_lst = []
@@ -18,9 +19,9 @@ def listToValueList(modname,lst,first_time):
         orig_lst.append(expr)
         string = srepr(expr)
         string2 = re.sub('Rational\(([0-9]+), ([0-9]+)\)',
-                         "((Float('\\1',"+str(2*tv.precision)+"))/(Float('\\2',"+str(2*tv.precision)+")))", string)
+                         "((Float('\\1',"+str(2*precision)+"))/(Float('\\2',"+str(2*precision)+")))", string)
         string3 = re.sub('Rational\((-[0-9]+), ([0-9]+)\)',
-                         "((Float('\\1',"+str(2*tv.precision)+"))/(Float('\\2',"+str(2*tv.precision)+")))", string2)
+                         "((Float('\\1',"+str(2*precision)+"))/(Float('\\2',"+str(2*precision)+")))", string2)
         newexpr = eval(string3)
         lst[index] = newexpr
         index += 1
@@ -44,7 +45,7 @@ def listToValueList(modname,lst,first_time):
     list_symbol_strings, list_free_symbols = (list(x) for x in zip(*sorted(zip(list_symbol_strings, list_free_symbols))))    
     
     # Set the random seed according to trustedValues.seed:
-    random.seed(tv.seed)
+    random.seed(tvDict["seed"])
 
     # Next we will write a short Python code that first declares all
     #    of the free variables in the "everything" expression
@@ -56,7 +57,7 @@ def listToValueList(modname,lst,first_time):
     stringexec = """
 from sympy import Integer,Symbol,symbols,simplify,Rational,Function,srepr,sin,cos,exp,log,Abs,Add,Mul,Pow,preorder_traversal,N,Float,S,var,sympify
 from mpmath import *
-mp.dps = """+str(tv.precision)+"\n"
+mp.dps = """+str(precision)+"\n"
     
     for var in list_free_symbols:
         stringexec += str(var)+" = symbols(\'"+str(var)+"\',Real=True)\n"
@@ -81,14 +82,14 @@ mp.dps = """+str(tv.precision)+"\n"
     if first_time == True:
         index = 0
         for result in evaled_lst:
-            if result != 0 and fabs(result) < 100*10**(-tv.precision):
+            if result != 0 and fabs(result) < 100*10**(-precision):
                 print("Found |result| ("+str(fabs(result))+") close to zero. Checking if indeed it should be zero.")
                 # Now double the precision and redo. If number drops in magnitude
                 loc2xprec = {}
-                stringexec = stringexec.replace("mp.dps = "+str(tv.precision),"mp.dps = "+str(2*tv.precision))
+                stringexec = stringexec.replace("mp.dps = "+str(precision),"mp.dps = "+str(2*precision))
                 exec(stringexec, {}, loc2xprec)
                 evaled_lst2xprec = loc2xprec['lst']
-                if fabs(evaled_lst2xprec[index]) < 100*10**(-2*tv.precision):
+                if fabs(evaled_lst2xprec[index]) < 100*10**(-2*precision):
                     print("After re-evaluating with twice the digits of precision, |result| dropped to "+str(evaled_lst2xprec[index])+". Setting value to zero")
                     evaled_lst[index] = 0
             index += 1
