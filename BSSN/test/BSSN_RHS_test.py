@@ -6,16 +6,16 @@ import BSSN.BSSN_gauge_RHSs as gaugerhs
 import random
 import sys
 import logging
-import trustedValues as tv
+from trustedValuesDict import tvDict
 import calcError as ce
 import firstTimePrint as ftp
 import listToValueList as ltvl
 from mpmath import *
 
 # Trusted values for scalars, vectors, and tensors
-RHS_scalars = [tv.BSSN_rhs_scalars,tv.BSSN_gaugerhs_scalars]
-RHS_vectors = [tv.BSSN_rhs_vectors,tv.BSSN_gaugerhs_vectors]
-RHS_tensors = [tv.BSSN_rhs_tensors]
+RHS_scalars = [tvDict["BSSN_rhs_scalars"],tvDict["BSSN_gaugerhs_scalars"]]
+RHS_vectors = [tvDict["BSSN_rhs_vectors"],tvDict["BSSN_gaugerhs_vectors"]]
+RHS_tensors = [tvDict["BSSN_rhs_tensors"]]
 
 # Change level based on desired amount of output. 
 # ERROR -> Ouputs minimal information -- only when there's an error

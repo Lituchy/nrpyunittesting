@@ -30,8 +30,6 @@ mp.dps = tvDict["precision"]
 cartMods = [bl]
 sphMods = [sks,st,ubh]
 
-# Lists of hash values for respective modules
-
 # ADM test hash values
 cartSumADM = [tvDict["BSSN_cart_BL_ADM"]]
 sphSumADM = [tvDict["BSSN_sph_SKS_ADM"],tvDict["BSSN_sph_ST_ADM"],tvDict["BSSN_sph_UBH_ADM"]]
@@ -44,7 +42,7 @@ sphSumID = [tvDict["BSSN_sph_SKS_ID"],tvDict["BSSN_sph_ST_ID"],tvDict["BSSN_sph_
 # ERROR -> Ouputs minimal information -- only when there's an error
 # INFO -> Outputs when starting and finishing a module, as well as everything in ERROR
 # DEBUG -> Displays all pairs of values being compared, as well as everything in INFO
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.INFO)
 
 # Set following line to True if need to calculate trustedValue for the first time
 first_time = False
@@ -52,6 +50,7 @@ first_time = False
 # Python unittest class
 class TestStringMethods(unittest.TestCase):
     
+    ## Have user set up initialization function
     # Set spatial dimension (must be 3 for BSSN)
     DIM = 3
     par.set_parval_from_str("grid::DIM",DIM)
