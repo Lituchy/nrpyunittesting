@@ -20,8 +20,10 @@ ModDict = {
 
 resultDict = eg.evaluateGlobals(ModDict,globals())
 
-for key,value in resultDict.items():
-    print(key + ':\n')
-    print(value)
-    print
+for key,valueDict in resultDict.items():
+    print('\n#####' + key + '#####\n')
+    for val,expr in valueDict.items():
+        print(key + ' ' + val + ':')
+        print(expr)
+        print
     
