@@ -28,8 +28,6 @@ ModDict = {
 }
 
 
-
-
 resultDict = eg.evaluateGlobals(ModDict,globals())
 
 tvDict = dict()

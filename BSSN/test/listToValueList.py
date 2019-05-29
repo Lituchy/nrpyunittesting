@@ -4,13 +4,13 @@ from mpmath import mpf,mp,log10,fabs #
 import random
 import logging
 import re
-from trustedValuesDict import tvDict
+from trustedValuesDict import trustedValuesDict
 
 # Takes in a list [lst] and returns the list with each index evaluated 
 # according to parameters (seed, precision) in trustedValues 
 def listToValueList(modname,lst,first_time):
     
-    precision = tvDict["precision"]
+    precision = trustedValuesDict["precision"]
     
     # Replace all integer fractions with the correct floating point representation:
     index = 0
@@ -45,7 +45,7 @@ def listToValueList(modname,lst,first_time):
     list_symbol_strings, list_free_symbols = (list(x) for x in zip(*sorted(zip(list_symbol_strings, list_free_symbols))))    
     
     # Set the random seed according to trustedValues.seed:
-    random.seed(tvDict["seed"])
+    random.seed(trustedValuesDict["seed"])
 
     # Next we will write a short Python code that first declares all
     #    of the free variables in the "everything" expression

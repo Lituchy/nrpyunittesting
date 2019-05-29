@@ -1,4 +1,3 @@
-
 # Takes in a variable in string form (i.e. 'gammaCartDD') and returns the 
 # dimension of that variable according to nrpy convention.
 # 0 -> scalar
