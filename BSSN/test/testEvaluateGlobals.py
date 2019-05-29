@@ -1,29 +1,53 @@
 import makeFunctionAndGlobalDict as mfgd
 import evaluateGlobals as eg
+import getVariableDimension as getVarDim
+import moduleDictToList as modDictToLst
+import listToValueList as lstToValLst
 
-import BSSN.BrillLindquist as bl
-import BSSN.ShiftedKerrSchild as sks
-import BSSN.StaticTrumpet as st
-import BSSN.UIUCBlackHole as ubh
+import BSSN.BrillLindquist as BrillLindquist
+import BSSN.ShiftedKerrSchild as ShiftedKerrSchild
+import BSSN.StaticTrumpet as StaticTrumpet
+import BSSN.UIUCBlackHole as UIUCBlackHole
 
+import sympy as sp
+
+CartGlobalList = ['alphaCart','betaCartU','BCartU', 'gammaCartDD','KCartDD']
 SphGlobalList = ['alphaSph', 'betaSphU', 'BSphU','gammaSphDD', 'KSphDD']
 
 ModDict = {
-    'bl': mfgd.makeFunctionAndGlobalDict( ['BrillLindquist(ComputeADMGlobalsOnly = True)'] , ['alphaCart','betaCartU','BCartU', 'gammaCartDD','KCartDD'] ),
+    'BrillLindquist': mfgd.makeFunctionAndGlobalDict( ['BrillLindquist(ComputeADMGlobalsOnly = True)'] , CartGlobalList ),
     
-    'sks': mfgd.makeFunctionAndGlobalDict( ['ShiftedKerrSchild(ComputeADMGlobalsOnly = True)'] , SphGlobalList ),
+    'ShiftedKerrSchild': mfgd.makeFunctionAndGlobalDict( ['ShiftedKerrSchild(ComputeADMGlobalsOnly = True)'] , SphGlobalList ),
     
-    'st': mfgd.makeFunctionAndGlobalDict( ['StaticTrumpet(ComputeADMGlobalsOnly = True)'] , SphGlobalList ),
+    'StaticTrumpet': mfgd.makeFunctionAndGlobalDict( ['StaticTrumpet(ComputeADMGlobalsOnly = True)'] , SphGlobalList ),
     
-    'ubh': mfgd.makeFunctionAndGlobalDict( ['UIUCBlackHole(ComputeADMGlobalsOnly = True)'] , SphGlobalList )
+    'UIUCBlackHole': mfgd.makeFunctionAndGlobalDict( ['UIUCBlackHole(ComputeADMGlobalsOnly = True)'] , SphGlobalList )
 }
 
 resultDict = eg.evaluateGlobals(ModDict,globals())
 
-for key,valueDict in resultDict.items():
-    print('\n#####' + key + '#####\n')
-    for val,expr in valueDict.items():
-        print(key + ' ' + val + ':')
-        print(expr)
-        print
+tvDict = dict()
+
+for mod in resultDict:
+
+    (varList,nameList) = modDictToLst.moduleDictToList(resultDict[mod])
+    numList = lstToValLst.listToValueList(mod,varList,True)
+    modDict = dict()
+    for num, name in zip(numList,nameList):
+        modDict[name] = num
+    tvDict[mod] = modDict
     
+for mod, vals in tvDict.items():
+    print(mod + ':\n' + str(vals) + '\n')
+
+#     valueList = lstToValLst.listToValueList(mod,lst,True)
+#     print(mod + ': ')
+#     print(str(valueList) + '\n')
+
+# print(resultDict['BrillLindquist']['KCartDD'])
+
+
+
+
+
+

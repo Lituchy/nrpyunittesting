@@ -1,6 +1,8 @@
 # Evaluates the supplied globals for each module in ModDict after calling each supplied function.
 # Example usage is as follows:
 ###
+# import Module1 as Module1
+# import Module2 as Module2
 # import makeFunctionAndGlobalDict as mfgd
 # import evaluateGlobals as eg
 # ModDict = {
@@ -17,7 +19,7 @@
 # Note: Must pass in globals() as second argument to insure that all imports that have been done are accessible
 #       by the evaluateGlobals module
 
-def evaluateGlobals(ModDict,oldGlobs):
+def evaluateGlobals(ModDict,oldGlobals):
 
     resultDict = dict()
     
@@ -40,7 +42,7 @@ def evaluateGlobals(ModDict,oldGlobs):
 
         # Executing string of execution with current globals
         # and storing resulting globals in loc
-        exec(stringexec,oldGlobs,loc)
+        exec(stringexec,oldGlobals,loc)
 
         # Deleting self-reference to newGlobals
         del loc['newGlobals']
