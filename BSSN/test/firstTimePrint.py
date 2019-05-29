@@ -8,4 +8,5 @@ def firstTimePrint(mod,result_list,trusted_list):
     print(result_list)
     print('\nTrusted list:')
     print(trusted_list)
+    print
     return

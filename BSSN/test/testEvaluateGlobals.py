@@ -11,6 +11,9 @@ import BSSN.UIUCBlackHole as UIUCBlackHole
 
 import sympy as sp
 
+import trustedValuesDict as trustedDict
+
+
 CartGlobalList = ['alphaCart','betaCartU','BCartU', 'gammaCartDD','KCartDD']
 SphGlobalList = ['alphaSph', 'betaSphU', 'BSphU','gammaSphDD', 'KSphDD']
 
@@ -23,6 +26,9 @@ ModDict = {
     
     'UIUCBlackHole': mfgd.makeFunctionAndGlobalDict( ['UIUCBlackHole(ComputeADMGlobalsOnly = True)'] , SphGlobalList )
 }
+
+
+
 
 resultDict = eg.evaluateGlobals(ModDict,globals())
 
@@ -39,6 +45,15 @@ for mod in resultDict:
     
 for mod, vals in tvDict.items():
     print(mod + ':\n' + str(vals) + '\n')
+
+print('Result:\n' + str(tvDict['UIUCBlackHole']) + '\n')
+print('Trusted:\n' + str(trustedDict.tvDict['UIUCBlackHole']))
+
+    
+print(cmp(tvDict['UIUCBlackHole'],trustedDict.tvDict['UIUCBlackHole']))
+
+print(set(tvDict))
+    
 
 #     valueList = lstToValLst.listToValueList(mod,lst,True)
 #     print(mod + ': ')
