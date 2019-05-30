@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="84f9775a-ff87-4f96-b64b-74cc8f43cddb" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/BSSN/test/run_BSSN_tests.sh" beforeDir="false" afterPath="$PROJECT_DIR$/BSSN/test/run_BSSN_tests.sh" afterDir="false" />
-    </list>
+    <list default="true" id="84f9775a-ff87-4f96-b64b-74cc8f43cddb" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,8 +22,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/BSSN/test/run_BSSN_tests.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" column="39" selection-start-line="4" selection-start-column="39" selection-end-line="4" selection-end-column="39" />
+            <state relative-caret-position="120">
+              <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
             </state>
           </provider>
         </entry>
@@ -296,7 +294,7 @@
     </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="422" y="64" width="1400" height="992" extended-state="0" />
+    <frame x="422" y="64" width="1400" height="992" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.24981844" />
@@ -555,8 +553,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/BSSN/test/run_BSSN_tests.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="39" selection-start-line="4" selection-start-column="39" selection-end-line="4" selection-end-column="39" />
+        <state relative-caret-position="120">
+          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
         </state>
       </provider>
     </entry>

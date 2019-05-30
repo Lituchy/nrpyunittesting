@@ -5,6 +5,8 @@ from firstTimePrint import firstTimePrint
 from evaluateGlobals import evaluateGlobals
 from moduleDictToList import moduleDictToList
 from listToValueList import listToValueList
+from isFirstTime import isFirstTime
+from createTrustedGlobalsDict import createTrustedGlobalsDict
 
 
 # runTest takes in :
@@ -14,7 +16,14 @@ from listToValueList import listToValueList
 # [first_time]- A boolean describing if this is the first time the code is being run
 # [globs]- The current globals in the workspace. Should ALWAYS be globals()
 # It then runs a unittest, comparing calculated values with trusted values.
-def runTest(self, ModDict, TrustedDict, first_time, globs):
+def runTest(self, ModDict, globs):
+
+    # Determining if this is the first time the code is run based of the existence of trusted values
+    first_time = isFirstTime(ModDict)
+
+    # Creating trusted dictionary based off names of modules in ModDict
+    TrustedDict = createTrustedGlobalsDict(ModDict, first_time)
+
     # Creating dictionary of expressions for all modules in ModDict
     resultDict = evaluateGlobals(ModDict, globs)
 

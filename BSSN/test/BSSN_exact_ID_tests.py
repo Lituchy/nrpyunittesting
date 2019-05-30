@@ -3,8 +3,6 @@ import logging
 
 from runTest import runTest
 from functionsAndGlobals import functionsAndGlobals
-from createTrustedGlobalsDict import createTrustedGlobalsDict
-from isFirstTime import isFirstTime
 
 # Note: User-imported
 import BSSN.BrillLindquist as BrillLindquist
@@ -46,13 +44,7 @@ class Test_BSSN_Exact(unittest.TestCase):
             'UIUCBlackHole': functionsAndGlobals(['UIUCBlackHole(ComputeADMGlobalsOnly = True)'], SphGlobalList)
         }
 
-        # Determining if this is the first time the code is run based of the existence of trusted values
-        first_time = isFirstTime(ModDict)
-
-        # Creating trusted dictionary based off names of modules in ModDict
-        TrustedDict = createTrustedGlobalsDict(ModDict, first_time)
-        
-        runTest(self, ModDict, TrustedDict, first_time, globals())
+        runTest(self, ModDict, globals())
 
 # Necessary for unittest class to work properly
 if __name__ == '__main__':
