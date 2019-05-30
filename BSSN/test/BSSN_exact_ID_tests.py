@@ -2,7 +2,7 @@ import unittest
 import logging
 
 from trustedValuesDict import trustedValuesDict
-import calcError as calcErr
+from calcError import calcError
 from firstTimePrint import firstTimePrint
 
 from makeFunctionAndGlobalDict import makeFunctionAndGlobalDict
@@ -37,7 +37,7 @@ SphGlobalList = ['alphaSph', 'betaSphU', 'BSphU','gammaSphDD', 'KSphDD']
 ModDict = {
     'BrillLindquist': makeFunctionAndGlobalDict( ['BrillLindquist(ComputeADMGlobalsOnly = True)'] , CartGlobalList ),
     
-    'ShiftedKerrSchild': makeFunctionAndGlobalDict( ['ShiftedKerrSchild(ComputeADMGlobalsOnly = True)'] , SphGlobalList ),
+    'ShiftedKerrSchild': makeFunctionAndGlobalDict( ['ShiftedKerrSchild(ComputeADMGlobalsOnly = True)'] ,SphGlobalList),
     
     'StaticTrumpet': makeFunctionAndGlobalDict( ['StaticTrumpet(ComputeADMGlobalsOnly = True)'] , SphGlobalList ),
     
@@ -77,7 +77,7 @@ class TestBSSNExact(unittest.TestCase):
                 modDict[name] = num
             
             # If being run for the first time, print the code that must be copied into trustedValuesDict
-            if first_time == True:
+            if first_time:
                 firstTimePrint(mod,modDict)
             # Otherwise, compare calculated values to trusted values
             else:
@@ -95,27 +95,21 @@ class TestBSSNExact(unittest.TestCase):
                     logging.debug('Symbolic expression: \n' + str(tempDict) + '\n')
 
                     del tempDict
-                                    
-                logging.debug('Trusted values: \n' + str(TrustedDict[mod]) + '\n')
-                logging.debug('Calculated values: \n' + str(modDict) + '\n')
                 
                 # TODO: Update this. Should be calling calcError
-                valuesIdentical = cmp(modDict,TrustedDict[mod])
-                
-                # If trusted value and calculated value differ, print the values and error out
-                if valuesIdentical != 0:
-                    logging.error(mod + ': Found difference between calculated values and trusted values.')
-                    logging.error('Now printing each value.')
-                    
-                    for var in modDict:
-                        logging.error('\n' + var + ': Trusted value = ' + str(TrustedDict[mod][var]) + ' , Calculated Value = ' + str(modDict[var]))
+                valuesIdentical = calcError(mod,modDict,TrustedDict[mod])
+
+                # If at least one value differs, print exit message and fail the unittest
+                if not valuesIdentical:
+                    logging.debug('Now exiting. Please check trusted values and result values and update if necessary.')
+                    self.assertTrue(valuesIdentical)
                 
                 # If every value is the same, completed module.
                 else:
                     logging.info('Completed module ' + mod + ' with no errors.\n')
-                self.assertEqual(valuesIdentical, 0)
+                self.assertTrue(valuesIdentical)
                 
-        if first_time == True:
+        if first_time:
             print("\n### WARNING: ###\nDon't forget to change first_time to False")
 
 

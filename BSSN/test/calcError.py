@@ -10,18 +10,23 @@ from mpmath import log10,fabs
 # by more than (precision/2) decimal places.
 
 def calcError(mod,resultDict,trustedDict):
-    
+
     if set(resultDict) != set(trustedDict):
-        logging.error(mod + ': Calculated dictionary and trusted dictionary')
+        logging.error(mod + ': Calculated dictionary and trusted dictionary have different variables.')
+        logging.error('Calculated Dictionary variables: ' + str(resultDict.keys()))
+        logging.error('Trusted Dictionary variables: ' + str(trustedDict.keys()))
+        return False
     
-    for res, val in zip(result_list, trusted_list):
-        logging.debug('\nResult, value: \n\t' + str(res) + '\n\t'+ str(val)+'\n')
-        if val == 0:
-            log10_relative_error = log10(fabs(res))
+    for var in resultDict:
+        resultNum = resultDict[var]
+        trustedNum = trustedDict[var]
+        logging.debug('\n' + var + ': \n\tCalculated: ' + str(resultNum) + '\n\tTrusted:    '+ str(trustedNum)+'\n')
+        if trustedNum == 0:
+            log10_relative_error = log10(fabs(resultNum))
         else:
-            log10_relative_error = log10(fabs( (val - res ) / val ) )
+            log10_relative_error = log10(fabs( (trustedNum - resultNum ) / trustedNum ) )
         good = (log10_relative_error < (trustedValuesDict["precision"] / -2))
         if not good:
-            logging.error('\n\n Failed with ' + str(mod) + '\n\n')
+            logging.error('\n\n Variable ' + var + ' in module ' + str(mod) + 'failed. Please check values.\n\n')
             return False
     return True
