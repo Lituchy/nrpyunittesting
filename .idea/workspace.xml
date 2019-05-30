@@ -2,17 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="84f9775a-ff87-4f96-b64b-74cc8f43cddb" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSSN/test/BSSN_RHS_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/BSSN/test/BSSN_RHS_test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSSN/test/BSSN_exact_ID_tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/BSSN/test/BSSN_exact_ID_tests.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSSN/test/createTrustedGlobalsDict.py" beforeDir="false" afterPath="$PROJECT_DIR$/BSSN/test/createTrustedGlobalsDict.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSSN/test/firstTimePrint.py" beforeDir="false" afterPath="$PROJECT_DIR$/BSSN/test/firstTimePrint.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSSN/test/getVariableDimension.py" beforeDir="false" afterPath="$PROJECT_DIR$/BSSN/test/getVariableDimension.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSSN/test/isFirstTime.py" beforeDir="false" afterPath="$PROJECT_DIR$/BSSN/test/isFirstTime.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSSN/test/modulesToImport.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/BSSN/test/run_BSSN_tests.sh" beforeDir="false" afterPath="$PROJECT_DIR$/BSSN/test/run_BSSN_tests.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSSN/test/trustedValues.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSSN/test/trustedValuesDict.py" beforeDir="false" afterPath="$PROJECT_DIR$/BSSN/test/trustedValuesDict.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -26,7 +16,7 @@
         <entry file="file://$PROJECT_DIR$/BSSN/test/BSSN_exact_ID_tests.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="195">
-              <caret line="22" column="66" lean-forward="true" selection-start-line="22" selection-start-column="66" selection-end-line="22" selection-end-column="66" />
+              <caret line="22" column="66" selection-start-line="22" selection-start-column="66" selection-end-line="22" selection-end-column="66" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
               </folding>
@@ -34,10 +24,10 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BSSN/test/BSSN_RHS_test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
+            <state relative-caret-position="255">
               <caret line="17" column="14" selection-start-line="17" selection-start-column="14" selection-end-line="17" selection-end-column="14" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
@@ -49,8 +39,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BSSN/test/run_BSSN_tests.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+            <state relative-caret-position="135">
+              <caret line="9" selection-start-line="9" selection-end-line="9" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.travis.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="105">
+              <caret line="7" column="21" selection-start-line="7" selection-start-column="21" selection-end-line="7" selection-end-column="21" />
             </state>
           </provider>
         </entry>
@@ -58,8 +57,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BSSN/test/trustedValuesDict.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="367">
-              <caret line="38" lean-forward="true" selection-start-line="38" selection-end-line="38" />
+            <state relative-caret-position="570">
+              <caret line="38" selection-start-line="38" selection-end-line="38" />
             </state>
           </provider>
         </entry>
@@ -104,9 +103,9 @@
         <option value="$PROJECT_DIR$/BSSN/test/modulesToImport.py" />
         <option value="$PROJECT_DIR$/BSSN/BSSN_RHSs_new.py" />
         <option value="$PROJECT_DIR$/BSSN/test/trustedValuesDict.py" />
-        <option value="$PROJECT_DIR$/BSSN/test/run_BSSN_tests.sh" />
         <option value="$PROJECT_DIR$/BSSN/test/BSSN_RHS_test.py" />
         <option value="$PROJECT_DIR$/BSSN/test/BSSN_exact_ID_tests.py" />
+        <option value="$PROJECT_DIR$/BSSN/test/run_BSSN_tests.sh" />
       </list>
     </option>
   </component>
@@ -501,13 +500,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BSSN/test/trustedValuesDict.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="367">
-          <caret line="38" lean-forward="true" selection-start-line="38" selection-end-line="38" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/BSSN/test/calcError.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="511">
@@ -518,17 +510,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BSSN/test/run_BSSN_tests.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/BSSN/test/BSSN_exact_ID_tests.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
-          <caret line="22" column="66" lean-forward="true" selection-start-line="22" selection-start-column="66" selection-end-line="22" selection-end-column="66" />
+          <caret line="22" column="66" selection-start-line="22" selection-start-column="66" selection-end-line="22" selection-end-column="66" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
           </folding>
@@ -537,11 +522,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/BSSN/test/BSSN_RHS_test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
+        <state relative-caret-position="255">
           <caret line="17" column="14" selection-start-line="17" selection-start-column="14" selection-end-line="17" selection-end-column="14" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BSSN/test/trustedValuesDict.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="570">
+          <caret line="38" selection-start-line="38" selection-end-line="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BSSN/test/run_BSSN_tests.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" selection-start-line="9" selection-end-line="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.travis.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="21" selection-start-line="7" selection-start-column="21" selection-end-line="7" selection-end-column="21" />
         </state>
       </provider>
     </entry>
