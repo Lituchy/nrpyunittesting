@@ -13,7 +13,9 @@ def createTrustedGlobalsDict(ModDict,first_time):
         for mod in ModDict:
             globalString = mod + 'Globals'
             if not globalString in trustedValuesDict:
-                logging.error('\n\t' + mod + ': Reference to nonexistant values in trustedValuesDict. Make sure that ' + globalString + ' is set in trustedValuesDict.\n')
+                logging.error('\n ' + mod + ': Reference to nonexistent values in trustedValuesDict. \n Make sure that '
+                              + globalString + ' is set in trustedValuesDict.\n Set first_time to True if the trusted'
+                              + 'values have not been calculated and pasted into trustedValuesDict yet.')
                 assert(False)
             else:
                 trustedDict[mod] = trustedValuesDict[globalString]

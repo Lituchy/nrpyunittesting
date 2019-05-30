@@ -1,9 +1,5 @@
-from sympy import Integer,Symbol,symbols,simplify,Rational,Function,srepr,sin,cos,exp,log,Abs,Add,Mul,Pow,preorder_traversal,N,Float,S,var,sympify,sqrt,sign,mathematica_code
-# WARNING: Importing more than the bare minimum with mpmath will result in errors on eval() below. This is because we need SymPy to evaluate that expression, not mpmath.
-from mpmath import mpf,mp,log10,fabs
-import random
-import logging
-import re
+from mpmath import mpf,mp
+
 
 ## Dictionary of trusted values to be used throughout files
 global trustedValuesDict
@@ -15,14 +11,13 @@ trustedValuesDict = {
 
 mp.dps = trustedValuesDict["precision"]
 
-
 ## Trusted Values:
 
 # These values come from running the tests for the first time on a trusted verison of nrpy.
 # Since the current version is known to be correct, these values should be consistent with any
 # subsequent versions of the software. If the tests stop working, something was likely broken.
 
-# Trusted values for BSSN Exact Globals
+# Trusted values for BSSN Exact Globals with precision == 30 and seed == 1234
 
 trustedValuesDict['BrillLindquistGlobals'] = {'alphaCart': mpf('0.122483331574515176153136610247999'), 'betaCartU[0]': 0, 'betaCartU[1]': 0, 'betaCartU[2]': 0, 'BCartU[0]': 0, 'BCartU[1]': 0, 'BCartU[2]': 0, 'gammaCartDD[0][0]': mpf('66.6570391079152319165851690989984'), 'gammaCartDD[0][1]': 0, 'gammaCartDD[0][2]': 0, 'gammaCartDD[1][0]': 0, 'gammaCartDD[1][1]': mpf('66.6570391079152319165851690989984'), 'gammaCartDD[1][2]': 0, 'gammaCartDD[2][0]': 0, 'gammaCartDD[2][1]': 0, 'gammaCartDD[2][2]': mpf('66.6570391079152319165851690989984'), 'KCartDD[0][0]': 0, 'KCartDD[0][1]': 0, 'KCartDD[0][2]': 0, 'KCartDD[1][0]': 0, 'KCartDD[1][1]': 0, 'KCartDD[1][2]': 0, 'KCartDD[2][0]': 0, 'KCartDD[2][1]': 0, 'KCartDD[2][2]': 0}
 

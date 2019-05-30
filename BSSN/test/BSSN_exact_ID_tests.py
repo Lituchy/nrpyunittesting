@@ -5,21 +5,25 @@ from trustedValuesDict import trustedValuesDict
 from calcError import calcError
 from firstTimePrint import firstTimePrint
 
-from makeFunctionAndGlobalDict import makeFunctionAndGlobalDict
+from functionsAndGlobals import functionsAndGlobals
 from evaluateGlobals import evaluateGlobals
 from moduleDictToList import moduleDictToList
 from listToValueList import listToValueList
 from createTrustedGlobalsDict import createTrustedGlobalsDict
+from isFirstTime import isFirstTime
 
+# Note: User-imported
 import BSSN.BrillLindquist as BrillLindquist
 import BSSN.ShiftedKerrSchild as ShiftedKerrSchild
 import BSSN.StaticTrumpet as StaticTrumpet
 import BSSN.UIUCBlackHole as UIUCBlackHole
 
+### TODO:
 
-# Set following line to True if you need to generate the trusted values for your modules.
-# Set following line to False if the trusted values for your modules are correctly pasted into trustedValuesDict
-first_time = False
+# In error message when first_time == True,
+# Look into git commit
+# Look into pulling last correct travis build and print difference
+#
 
 # Change level based on desired amount of output. 
 # ERROR -> Ouputs minimal information -- only when there's an error
@@ -33,22 +37,26 @@ CartGlobalList = ['alphaCart','betaCartU','BCartU', 'gammaCartDD','KCartDD']
 SphGlobalList = ['alphaSph', 'betaSphU', 'BSphU','gammaSphDD', 'KSphDD']
 
 # Change to BSSN.BrillLindquist soon
+
 # Creating our module dictionary
 ModDict = {
-    'BrillLindquist': makeFunctionAndGlobalDict( ['BrillLindquist(ComputeADMGlobalsOnly = True)'] , CartGlobalList ),
+    'BrillLindquist': functionsAndGlobals(['BrillLindquist(ComputeADMGlobalsOnly = True)'], CartGlobalList),
     
-    'ShiftedKerrSchild': makeFunctionAndGlobalDict( ['ShiftedKerrSchild(ComputeADMGlobalsOnly = True)'] ,SphGlobalList),
+    'ShiftedKerrSchild': functionsAndGlobals(['ShiftedKerrSchild(ComputeADMGlobalsOnly = True)'], SphGlobalList),
     
-    'StaticTrumpet': makeFunctionAndGlobalDict( ['StaticTrumpet(ComputeADMGlobalsOnly = True)'] , SphGlobalList ),
+    'StaticTrumpet': functionsAndGlobals(['StaticTrumpet(ComputeADMGlobalsOnly = True)'], SphGlobalList),
     
-    'UIUCBlackHole': makeFunctionAndGlobalDict( ['UIUCBlackHole(ComputeADMGlobalsOnly = True)'] , SphGlobalList )
+    'UIUCBlackHole': functionsAndGlobals(['UIUCBlackHole(ComputeADMGlobalsOnly = True)'], SphGlobalList)
 }
 
+###
+
+# Determining if this is the first time the code is run based of the existence of trusted values
+first_time = isFirstTime(ModDict)
 
 # Creating trusted dictionary based off names of modules in ModDict
 TrustedDict = createTrustedGlobalsDict(ModDict,first_time)
 
-    
 # Python unittest class
 class TestBSSNExact(unittest.TestCase):
         
@@ -60,8 +68,9 @@ class TestBSSNExact(unittest.TestCase):
         
         # Looping through each module in resultDict
         for mod in resultDict:
-            
-            logging.info('Currently working on module ' + mod + '...')
+
+            if not first_time:
+                logging.info('Currently working on module ' + mod + '...')
             
             # Generating variable list and name list for module
             (varList,nameList) = moduleDictToList(resultDict[mod])
@@ -82,38 +91,28 @@ class TestBSSNExact(unittest.TestCase):
             # Otherwise, compare calculated values to trusted values
             else:
             
-                # If in NOTSET mode, print symbolic dictionary
-                if logging.getLogger().getEffectiveLevel() == 0:
+                symbolicDict = dict()
 
-                    # Create temporary dictionary
-                    tempDict = dict()
+                # Store symbolic expressions in dictionary
+                for var, name in zip(varList, nameList):
+                    symbolicDict[name] = var
 
-                    # Store symbolic expressions in dictionary
-                    for var, name in zip(varList,nameList):
-                        tempDict[name] = var
-
-                    logging.debug('Symbolic expression: \n' + str(tempDict) + '\n')
-
-                    del tempDict
-                
-                # TODO: Update this. Should be calling calcError
-                valuesIdentical = calcError(mod,modDict,TrustedDict[mod])
+                # Calculates the error between modDict and TrustedDict[mod] for the current module
+                valuesIdentical = calcError(mod,modDict,TrustedDict[mod],symbolicDict)
 
                 # If at least one value differs, print exit message and fail the unittest
                 if not valuesIdentical:
-                    logging.debug('Now exiting. Please check trusted values and result values and update if necessary.')
-                    self.assertTrue(valuesIdentical)
+                    self.assertTrue(valuesIdentical,'Variable above has different calculated and trusted values. Follow '
+                                                    'above instructions.')
                 
                 # If every value is the same, completed module.
                 else:
                     logging.info('Completed module ' + mod + ' with no errors.\n')
                 self.assertTrue(valuesIdentical)
-                
         if first_time:
-            print("\n### WARNING: ###\nDon't forget to change first_time to False")
-
+            self.assertTrue(False, 'Automatically fails after running for the first time. Follow above instructions'
+                                   ' and run again')
 
 # Necessary for unittest class to work properly
 if __name__ == '__main__':
     unittest.main()
-
