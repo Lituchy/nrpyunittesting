@@ -5,7 +5,6 @@ from trustedValuesDict import trustedValuesDict
 # Requires: The name of the trusted values dictionary is the same as the convention set by createTrustedGlobalsDict
 def isFirstTime(ModDict):
 
-    # Checks every module in ModDict
     for mod in ModDict:
         if not (mod + 'Globals') in trustedValuesDict:
             return True

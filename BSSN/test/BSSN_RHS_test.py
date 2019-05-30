@@ -1,143 +1,100 @@
 import unittest
-from sympy import Integer,Symbol,symbols,simplify,Rational,Function,srepr,sin,cos,exp,log,Abs,Add,Mul,Pow,preorder_traversal,N,Float,S,var,sympify
-import NRPy_param_funcs as par
-import BSSN.BSSN_RHSs_new as rhs
-import BSSN.BSSN_gauge_RHSs as gaugerhs
-import random
-import sys
 import logging
-from trustedValuesDict import tvDict
-import calcError as ce
-import firstTimePrint as ftp
-import listToValueList as ltvl
-from mpmath import *
 
-# Trusted values for scalars, vectors, and tensors
-RHS_scalars = [tvDict["BSSN_rhs_scalars"],tvDict["BSSN_gaugerhs_scalars"]]
-RHS_vectors = [tvDict["BSSN_rhs_vectors"],tvDict["BSSN_gaugerhs_vectors"]]
-RHS_tensors = [tvDict["BSSN_rhs_tensors"]]
+from trustedValuesDict import trustedValuesDict
+from calcError import calcError
+from firstTimePrint import firstTimePrint
+from functionsAndGlobals import functionsAndGlobals
+from evaluateGlobals import evaluateGlobals
+from moduleDictToList import moduleDictToList
+from listToValueList import listToValueList
+from createTrustedGlobalsDict import createTrustedGlobalsDict
+from isFirstTime import isFirstTime
 
-# Change level based on desired amount of output. 
-# ERROR -> Ouputs minimal information -- only when there's an error
+import BSSN.BSSN_RHSs_new as RHS
+import BSSN.BSSN_gauge_RHSs as gaugeRHS
+
+# Change level based on desired amount of output.
+# ERROR -> Outputs minimal information -- only when there's an error
 # INFO -> Outputs when starting and finishing a module, as well as everything in ERROR
 # DEBUG -> Displays all pairs of values being compared, as well as everything in INFO
+# NOTSET -> Displays symbolic dictionary for all modules, as well as everything in DEBUG
 logging.basicConfig(level=logging.DEBUG)
 
-# Set following line to True if need to calculate trustedValue for the first time
-first_time = True
+# Globals we want to calculate
+RHSGlobalList = ['cf_rhs', 'trK_rhs', 'lambda_rhsU', 'a_rhsDD', 'h_rhsDD']
+gaugeRHSGlobalList = ['alpha_rhs', 'bet_rhsU', 'vet_rhsU']
 
-class TestStringMethods(unittest.TestCase):
-    
-    # Initial setup for calculations
-    par.set_parval_from_str("BSSN.BSSN_gauge_RHSs::ShiftEvolutionOption", "GammaDriving2ndOrder_Covariant")
-    rhs.BSSN_RHSs()
-    gaugerhs.BSSN_gauge_RHSs()
-    
+ModDict = {
+    'RHS': functionsAndGlobals(['BSSN_RHSs()'], RHSGlobalList),
+
+    'gaugeRHS': functionsAndGlobals(['BSSN_gauge_RHSs()'], gaugeRHSGlobalList)
+}
+
+# Determining if this is the first time the code is run based of the existence of trusted values
+first_time = isFirstTime(ModDict)
+
+# Creating trusted dictionary based off names of modules in ModDict
+TrustedDict = createTrustedGlobalsDict(ModDict,first_time)
+
+class Test_BSSN_RHS(unittest.TestCase):
+
     # Testing scalars
-    def test_BSSN_RHSs_scalars(self):
-        
-        ## Testing RHS scalars
-        logging.info('\nCurrently working on RHS scalars module ' + str(rhs))
-        
-        lst = [rhs.cf_rhs,rhs.trK_rhs]
-        
-        result_list = ltvl.listToValueList(rhs,lst,first_time)
-        trusted_list = RHS_scalars[0]
-        
-        if first_time == True:
-            ftp.firstTimePrint(rhs,result_list,trusted_list) 
-        else:
-            good = ce.calcError(rhs,result_list,trusted_list)
-            if good:     
-                logging.info('\nJust completed RHS scalars module ' + str(rhs) + '\n')
-            else:
-                self.assertTrue(good)
-        
-        ## Testing gauge RHS scalars
-        logging.info('\nCurrently working on gauge RHS scalars module ' + str(gaugerhs))
-        
-        lst = [gaugerhs.alpha_rhs]
-        
-        result_list = ltvl.listToValueList(gaugerhs,lst,first_time)
-        trusted_list = RHS_scalars[1]
-        
-        if first_time == True:
-            ftp.firstTimePrint(rhs,result_list,trusted_list) 
-        else:
-            good = ce.calcError(rhs,result_list,trusted_list)
-            if good:     
-                logging.info('\nJust completed gauge RHS scalars module ' + str(rhs) + '\n')
-            else:
-                self.assertTrue(good)
-    
-    # Testing vectors
-    def test_BSSN_RHSs_vectors(self):
-    
-        ## Testing RHS scalars
-        logging.info('\nCurrently working on RHS vectors module ' + str(rhs))
-        
-        lst = []
-        for i in range(3):
-            lst.append(rhs.lambda_rhsU[i])
-        
-        result_list = ltvl.listToValueList(rhs,lst,first_time)
-        trusted_list = RHS_vectors[0]
-        
-        if first_time == True:
-            ftp.firstTimePrint(rhs,result_list,trusted_list) 
-        else:
-            good = ce.calcError(rhs,result_list,trusted_list)
-            if good:     
-                logging.info('\nJust completed RHS vectors module ' + str(rhs) + '\n')
-            else:
-                self.assertTrue(good)
-        
-        ## Testing gauge RHS scalars
-        logging.info('\nCurrently working on gauge RHS vectors module ' + str(gaugerhs))
-        
-        lst = []
-        for i in range(3):
-            lst.append(gaugerhs.bet_rhsU[i])
-            lst.append(gaugerhs.vet_rhsU[i])
-        
-        result_list = ltvl.listToValueList(gaugerhs,lst,first_time)
-        trusted_list = RHS_vectors[1]
-        
-        if first_time == True:
-            ftp.firstTimePrint(rhs,result_list,trusted_list) 
-        else:
-            good = ce.calcError(rhs,result_list,trusted_list)
-            if good:     
-                logging.info('\nJust completed gauge RHS vectors module ' + str(rhs) + '\n')
-            else:
-                self.assertTrue(good)
+    def testRHSGlobals(self):
 
-    # Testing tensors
-    def test_BSSN_RHSs_tensors(self):
-    
-        ## Testing RHS tensors
-        logging.info('\nCurrently working on RHS tensors module ' + str(rhs)+ '\n Note: This may take a while.')
-        
-        lst = []
-        for i in range(3):
-            for j in range(i,3):
-                lst.append(rhs.a_rhsDD[i][j])
-                lst.append(rhs.h_rhsDD[i][j])
-        
-        result_list = ltvl.listToValueList(rhs,lst,first_time)
-        trusted_list = RHS_tensors[0]
-        
-        if first_time == True:
-            ftp.firstTimePrint(rhs,result_list,trusted_list) 
-        else:
-            good = ce.calcError(rhs,result_list,trusted_list)
-            if good:     
-                logging.info('\nJust completed RHS tensors module ' + str(rhs) + '\n')
-            else:
-                self.assertTrue(good)
-        
-        ## No gauge RHS tensors to test
+        # Creating dictionary of expressions for all modules in ModDict
+        resultDict = evaluateGlobals(ModDict, globals())
 
+        # Looping through each module in resultDict
+        for mod in resultDict:
+
+            if not first_time:
+                logging.info('Currently working on module ' + mod + '...')
+
+            # Generating variable list and name list for module
+            (varList, nameList) = moduleDictToList(resultDict[mod])
+
+            # Calculating numerical list for module
+            numList = listToValueList(mod, varList, first_time)
+
+            # Initalizing dictionary for the current module
+            modDict = dict()
+
+            # Assigning each numerical value to a name in the module's dictionary
+            for num, name in zip(numList, nameList):
+                modDict[name] = num
+
+            # If being run for the first time, print the code that must be copied into trustedValuesDict
+            if first_time:
+                firstTimePrint(mod, modDict)
+            # Otherwise, compare calculated values to trusted values
+            else:
+
+                symbolicDict = dict()
+
+                # Store symbolic expressions in dictionary
+                for var, name in zip(varList, nameList):
+                    symbolicDict[name] = var
+
+                # Calculates the error between modDict and TrustedDict[mod] for the current module
+                valuesIdentical = calcError(mod, modDict, TrustedDict[mod], symbolicDict)
+
+                # If at least one value differs, print exit message and fail the unittest
+                if not valuesIdentical:
+                    self.assertTrue(valuesIdentical,
+                                    'Variable above has different calculated and trusted values. Follow '
+                                    'above instructions.')
+
+                # If every value is the same, completed module.
+                else:
+                    logging.info('Completed module ' + mod + ' with no errors.\n')
+                self.assertTrue(valuesIdentical)
+
+        if first_time:
+            self.assertTrue(False, 'Automatically fails after running for the first time. Follow above instructions'
+                                   ' and run again')
+
+
+# Necessary for unittest class to work properly
 if __name__ == '__main__':
-    unittest.main()
-    
+        unittest.main()

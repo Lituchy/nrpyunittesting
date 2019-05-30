@@ -4,7 +4,6 @@ import logging
 from trustedValuesDict import trustedValuesDict
 from calcError import calcError
 from firstTimePrint import firstTimePrint
-
 from functionsAndGlobals import functionsAndGlobals
 from evaluateGlobals import evaluateGlobals
 from moduleDictToList import moduleDictToList
@@ -18,15 +17,13 @@ import BSSN.ShiftedKerrSchild as ShiftedKerrSchild
 import BSSN.StaticTrumpet as StaticTrumpet
 import BSSN.UIUCBlackHole as UIUCBlackHole
 
-### TODO:
+# TODO:
 
-# In error message when first_time == True,
 # Look into git commit
 # Look into pulling last correct travis build and print difference
-#
 
 # Change level based on desired amount of output. 
-# ERROR -> Ouputs minimal information -- only when there's an error
+# ERROR -> Outputs minimal information -- only when there's an error
 # INFO -> Outputs when starting and finishing a module, as well as everything in ERROR
 # DEBUG -> Displays all pairs of values being compared, as well as everything in INFO
 # NOTSET -> Displays symbolic dictionary for all modules, as well as everything in DEBUG
@@ -58,7 +55,7 @@ first_time = isFirstTime(ModDict)
 TrustedDict = createTrustedGlobalsDict(ModDict,first_time)
 
 # Python unittest class
-class TestBSSNExact(unittest.TestCase):
+class Test_BSSN_Exact(unittest.TestCase):
         
     # Testing globals for BSSN exact modules
     def testExactGlobals(self):
