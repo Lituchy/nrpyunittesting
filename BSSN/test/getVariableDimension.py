@@ -1,16 +1,14 @@
-# Takes in a variable in string form (i.e. 'gammaCartDD') and returns the 
-# dimension of that variable according to nrpy convention.
-# 0 -> scalar
-# 1 -> vector
-# 2 -> tensor
-def getVariableDimension(strVar):
+# Takes in a tensor [tensor] and returns the rank of that tensor
+# 0 -> rank 0 tensor -> scalar
+# 1 -> rank 1 tensor -> vector
+# ...
+
+def getVariableDimension(tensor):
     
-    length = len(strVar)
-    chars = strVar[length-2:length]
-    
-    if chars == 'DD'or chars == 'UU':
-        return 2
-    elif chars[1] == 'D' or chars[1] == 'U':
-        return 1
-    else:
-        return 0
+    dim = 0
+
+    while isinstance(tensor, list):
+        dim += 1
+        tensor = tensor[0]
+
+    return dim

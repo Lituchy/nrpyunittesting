@@ -12,8 +12,6 @@ from createTrustedGlobalsDict import createTrustedGlobalsDict
 # runTest takes in :
 # [self]- The unittest self object,
 # [ModDict]- The user-supplied dictionary of Modules
-# [TrustedDict]- The dictionary of trusted values based on ModDict
-# [first_time]- A boolean describing if this is the first time the code is being run
 # [globs]- The current globals in the workspace. Should ALWAYS be globals()
 # It then runs a unittest, comparing calculated values with trusted values.
 def runTest(self, ModDict, globs):

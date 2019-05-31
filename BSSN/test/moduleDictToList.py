@@ -5,13 +5,14 @@ import getVariableDimension as getVarDim
 # list [nameList] is the respective corresponding name for each expression in [varList].
 # Example: varList[0] -> r/(M+r) 
 #          nameList[0] -> 'alphaSph'
+
 def moduleDictToList(moduleDict):
     
     varList = []
     nameList = []
     
     for var, exprList in moduleDict.items():
-        dim = getVarDim.getVariableDimension(var)
+        dim = getVarDim.getVariableDimension(exprList)
         if dim == 0:
             varList.append(exprList)
             nameList.append(var)
@@ -21,7 +22,7 @@ def moduleDictToList(moduleDict):
                 varList.append(i)
                 nameList.append(var + '[' + str(num) + ']')
                 num += 1
-        else:
+        elif dim == 2:
             num1 = 0
             for lst in exprList:
                 num2 = 0
@@ -30,4 +31,34 @@ def moduleDictToList(moduleDict):
                     nameList.append(var + '[' + str(num1) + ']' + '[' + str(num2) + ']')
                     num2 += 1
                 num1 += 1
+        elif dim == 3:
+            num1 = 0
+            for lst1 in exprList:
+                num2 = 0
+                for lst0 in lst1:
+                    num3 = 0
+                    for i in lst0:
+                        varList.append(i)
+                        nameList.append(var + '[' + str(num1) + ']' + '[' + str(num2) + ']' + '[' + str(num3) + ']')
+                        num3 += 1
+                    num2 += 1
+                num1 += 1
+        elif dim == 4:
+            num1 = 0
+            for lst2 in exprList:
+                num2 = 0
+                for lst1 in lst2:
+                    num3 = 0
+                    for lst0 in lst1:
+                        num4 = 0
+                        for i in lst0:
+                            varList.append(i)
+                            nameList.append(var + '[' + str(num1) + ']' + '[' + str(num2) + ']' +
+                                                  '[' + str(num3) + ']' + '[' + str(num4) + ']')
+                            num4 += 1
+                        num3 += 1
+                    num2 += 1
+                num1 += 1
+
+
     return (varList,nameList)
