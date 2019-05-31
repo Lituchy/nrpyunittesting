@@ -8,9 +8,11 @@ from trustedValuesDict import trustedValuesDict
 
 # Takes in a list [lst] and returns the list with each index evaluated 
 # according to parameters (seed, precision) in trustedValues 
-def listToValueList(modname,lst,first_time):
+def listToValueList(lst,first_time):
     
     precision = trustedValuesDict["precision"]
+
+    mp.dps = precision
     
     # Replace all integer fractions with the correct floating point representation:
     index = 0

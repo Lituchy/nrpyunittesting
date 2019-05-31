@@ -35,7 +35,7 @@ def runTest(self, ModDict, globs):
         (varList, nameList) = moduleDictToList(resultDict[mod])
 
         # Calculating numerical list for module
-        numList = listToValueList(mod, varList, first_time)
+        numList = listToValueList(varList, first_time)
 
         # Initalizing dictionary for the current module
         modDict = dict()

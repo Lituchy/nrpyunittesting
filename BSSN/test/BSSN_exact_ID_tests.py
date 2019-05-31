@@ -2,8 +2,9 @@
 # Necessary imports for unit testing framework
 import unittest
 import logging
-from runTest import runTest
-from functionsAndGlobals import functionsAndGlobals
+#import coverage
+from BSSN.test.runTest import runTest
+from BSSN.test.functionsAndGlobals import functionsAndGlobals
 
 # TODO: Import modules to be tested
 import BSSN.BrillLindquist as BrillLindquist
@@ -22,12 +23,15 @@ import BSSN.UIUCBlackHole as UIUCBlackHole
 # NOTSET -> Displays symbolic dictionary for all modules, as well as everything in DEBUG
 logging.basicConfig(level=logging.DEBUG)
 
+#cov = coverage.Coverage()
 
 # Python unittest class
 class TestBSSNExact(unittest.TestCase):
         
     # Testing globals for BSSN exact modules
     def testExactGlobals(self):
+
+        #cov.start()
 
         # TODO: Create lists of globals to calculate
         CartGlobalList = ['alphaCart', 'betaCartU', 'BCartU', 'gammaCartDD', 'KCartDD']
@@ -49,6 +53,10 @@ class TestBSSNExact(unittest.TestCase):
 
         # TODO: Call runTest with arguments (self, ModDict, globals())
         runTest(self, ModDict, globals())
+
+        # cov.stop()
+        # cov.save()
+        # cov.html_report()
 
 
 # Necessary for unittest class to work properly

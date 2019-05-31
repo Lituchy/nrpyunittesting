@@ -2,8 +2,8 @@
 # Necessary imports for unit testing framework
 import unittest
 import logging
-from runTest import runTest
-from functionsAndGlobals import functionsAndGlobals
+from BSSN.test.runTest import runTest
+from BSSN.test.functionsAndGlobals import functionsAndGlobals
 
 # TODO: Import modules to be tested
 import BSSN.Psi4 as Psi4

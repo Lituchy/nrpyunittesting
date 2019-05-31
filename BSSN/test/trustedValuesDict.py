@@ -16,7 +16,7 @@ mp.dps = trustedValuesDict["precision"]
 
 # These values come from running the tests for the first time on a trusted verison of nrpy.
 # Since the current version is known to be correct, these values should be consistent with any
-# subsequent versions of the software. If the tests stop working, something was likely broken.
+# subsequent versions of the software.
 
 # Trusted values for BSSN Exact Globals with precision == 30 and seed == 1234
 

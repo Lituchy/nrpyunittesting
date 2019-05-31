@@ -1,8 +1,8 @@
 # Necessary imports for unit testing framework
 import unittest
 import logging
-from runTest import runTest
-from functionsAndGlobals import functionsAndGlobals
+from BSSN.test.runTest import runTest
+from BSSN.test.functionsAndGlobals import functionsAndGlobals
 
 # TODO: Import modules to be tested
 import BSSN.ADM_in_terms_of_BSSN as ADM_in_terms_of_BSSN
@@ -12,7 +12,7 @@ import BSSN.ADM_in_terms_of_BSSN as ADM_in_terms_of_BSSN
 # INFO -> Outputs when starting and finishing a module, as well as everything in ERROR
 # DEBUG -> Displays all pairs of values being compared, as well as everything in INFO
 # NOTSET -> Displays symbolic dictionary for all modules, as well as everything in DEBUG
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.DEBUG)
 
 
 # Python unittest class
@@ -33,6 +33,7 @@ class TestADM(unittest.TestCase):
 
         # TODO: Call runTest with arguments (self, ModDict, globals())
         runTest(self, ModDict, globals())
+
 
 
 if __name__ == '__main__':
