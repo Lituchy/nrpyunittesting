@@ -1,6 +1,7 @@
 from sympy import Integer,Symbol,symbols,simplify,Rational,Function,srepr,sin,cos,exp,log,Abs,Add,Mul,Pow,preorder_traversal,N,Float,S,var,sympify,sqrt,sign,mathematica_code
 # WARNING: Importing more than the bare minimum with mpmath will result in errors on eval() below. This is because we need SymPy to evaluate that expression, not mpmath.
-from mpmath import mpf,mp,log10,fabs #
+import mpmath as mpm
+#from mpmath import mpf,mp,log10,fabs #
 import random
 import logging
 import re
@@ -12,7 +13,7 @@ def listToValueList(lst,first_time):
     
     precision = trustedValuesDict["precision"]
 
-    mp.dps = precision
+    mpm.mp.dps = precision
     
     # Replace all integer fractions with the correct floating point representation:
     index = 0
@@ -58,14 +59,21 @@ def listToValueList(lst,first_time):
     #     of that number.)
     stringexec = """
 from sympy import Integer,Symbol,symbols,simplify,Rational,Function,srepr,sin,cos,exp,log,Abs,Add,Mul,Pow,preorder_traversal,N,Float,S,var,sympify
-from mpmath import *
-mp.dps = """+str(precision)+"\n"
+import mpmath as mpm
+mpm.mp.dps = """+str(precision)+"\n"
     
     for var in list_free_symbols:
-        stringexec += str(var)+" = symbols(\'"+str(var)+"\',Real=True)\n"
-        # BE CAREFUL: You must declare all variables using mpf('string')!
+        # BE CAREFUL: You must declare all variables using mpm.mpf('string')!
         #   http://mpmath.org/doc/1.1.0/basics.html#providing-correct-input
-        stringexec += str(var)+" = mpf(\'"+str(sqrt(mpf(random.random())))+"\')\n"
+        # First make sure M_PI is set to its correct value, pi, to the desired number of significant digits:
+        if str(var) == "M_PI":
+            stringexec += str(var)+" = mpm.pi\n"
+        # Then make sure M_SQRT1_2 is set to its correct value, 1/sqrt(2), to the desired number of significant digits:
+        elif str(var) == "M_SQRT1_2":
+            stringexec += str(var)+" = mpm.mpf(1/mpm.sqrt(2))\n"
+        # All other free variables are set to random numbers
+        else:
+            stringexec += str(var)+" = mpm.mpf(\'"+str(mpm.sqrt(mpm.mpf(random.random())))+"\')\n"
 
     # Then it creates the code that evaluates the result
     #    to 30 significant digits.
@@ -84,21 +92,21 @@ mp.dps = """+str(precision)+"\n"
     if first_time == True:
         index = 0
         for result in evaled_lst:
-            if result != 0 and fabs(result) < 100*10**(-precision):
-                print("Found |result| ("+str(fabs(result))+") close to zero. Checking if indeed it should be zero.")
+            if result != 0 and mpm.fabs(result) < 100*10**(-precision):
+                print("Found |result| ("+str(mpm.fabs(result))+") close to zero. Checking if indeed it should be zero.")
                 # Now double the precision and redo. If number drops in magnitude
                 loc2xprec = {}
-                stringexec = stringexec.replace("mp.dps = "+str(precision),"mp.dps = "+str(2*precision))
+                stringexec = stringexec.replace("mpm.mp.dps = "+str(precision),"mpm.mp.dps = "+str(2*precision))
                 exec(stringexec, {}, loc2xprec)
                 evaled_lst2xprec = loc2xprec['lst']
-                if fabs(evaled_lst2xprec[index]) < 100*10**(-2*precision):
+                if mpm.fabs(evaled_lst2xprec[index]) < 100*10**(-2*precision):
                     print("After re-evaluating with twice the digits of precision, |result| dropped to "+str(evaled_lst2xprec[index])+". Setting value to zero")
                     evaled_lst[index] = 0
             index += 1
 
-    # Make sure that all results in evaled_lst *except* zeros are mpf type!
+    # Make sure that all results in evaled_lst *except* zeros are mpm.mpf type!
     for i in range(len(evaled_lst)):
         if evaled_lst[i] != 0:
-            evaled_lst[i] = mpf(str(evaled_lst[i]))
+            evaled_lst[i] = mpm.mpf(str(evaled_lst[i]))
         
     return evaled_lst
