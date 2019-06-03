@@ -34,7 +34,5 @@ class TestADM(unittest.TestCase):
         # TODO: Call runTest with arguments (self, ModDict, globals())
         runTest(self, ModDict, globals())
 
-
-
 if __name__ == '__main__':
     unittest.main()

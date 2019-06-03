@@ -17,16 +17,31 @@ from createTrustedGlobalsDict import createTrustedGlobalsDict
 def runTest(self, ModDict, globs):
 
     # Determining if this is the first time the code is run based of the existence of trusted values
-    first_time = isFirstTime(ModDict)
+    first_times = isFirstTime(ModDict)
 
     # Creating trusted dictionary based off names of modules in ModDict
-    TrustedDict = createTrustedGlobalsDict(ModDict, first_time)
+    TrustedDict = createTrustedGlobalsDict(ModDict, first_times)
 
     # Creating dictionary of expressions for all modules in ModDict
     resultDict = evaluateGlobals(ModDict, globs)
 
+    # If it is the first time for at least one module, sort the module dictionary based on first_times.
+    # This makes it so the new modules are done last. This makes it easy to copy the necessary modules' code.
+    if True in first_times:
+        # Sorts two lists as found in https://stackoverflow.com/questions/13668393/python-sorting-two-lists
+        first_times, resultMods = (list(x) for x in zip(*sorted(zip(first_times, resultDict))))
+        tempDict = dict()
+
+        # Creates dictionary based on order of first_times
+        for mod in resultMods:
+            tempDict[mod] = resultDict[mod]
+
+        # Updates resultDict to be in this new order
+        resultDict = tempDict
+        del tempDict
+
     # Looping through each module in resultDict
-    for mod in resultDict:
+    for mod, first_time in zip(resultDict, first_times):
 
         if not first_time:
             logging.info('Currently working on module ' + mod + '...')
@@ -47,6 +62,7 @@ def runTest(self, ModDict, globs):
         # If being run for the first time, print the code that must be copied into trustedValuesDict
         if first_time:
             firstTimePrint(mod, modDict)
+
         # Otherwise, compare calculated values to trusted values
         else:
 
@@ -69,6 +85,7 @@ def runTest(self, ModDict, globs):
             else:
                 logging.info('Completed module ' + mod + ' with no errors.\n')
             self.assertTrue(valuesIdentical)
-    if first_time:
-        self.assertTrue(False, 'Automatically fails after running for the first time. Follow above instructions'
-                               ' and run again')
+
+    if first_times[-1]:
+        self.assertTrue(False, 'Automatically failing due to first time for at least one module. Please see above'
+                               'for the code to copy into your trustedValuesDict.')
