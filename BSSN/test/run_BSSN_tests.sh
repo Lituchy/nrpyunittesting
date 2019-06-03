@@ -9,4 +9,3 @@ pypy BSSN/test/BSSN_ADM_Test.py # &&
 # pypy BSSN/test/BSSN_RHS_test.py #&&
 # pypy BSSN/test/BSSN_Quantities_Test.py
 # pypy BSSN/test/BSSN_T4UUmunu_vars_Test.py
-
