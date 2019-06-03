@@ -1,13 +1,12 @@
 # Necessary imports for unit testing framework
 import unittest
 import logging
-import coverage
 from BSSN.test.runTest import runTest
 from BSSN.test.functionsAndGlobals import functionsAndGlobals
-import subprocess
+import BSSN.test.coverageReport as coverageReport
 
-
-cov = coverage.Coverage()
+# TODO: Set coverage to True or False depending if you want a coverage report
+coverage = False
 
 # TODO: Import modules to be tested
 import BSSN.ADM_in_terms_of_BSSN as ADM_in_terms_of_BSSN
@@ -17,7 +16,7 @@ import BSSN.ADM_in_terms_of_BSSN as ADM_in_terms_of_BSSN
 # INFO -> Outputs when starting and finishing a module, as well as everything in ERROR
 # DEBUG -> Displays all pairs of values being compared, as well as everything in INFO
 # NOTSET -> Displays symbolic dictionary for all modules, as well as everything in DEBUG
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.INFO)
 
 
 # Python unittest class
@@ -25,7 +24,8 @@ class TestADM(unittest.TestCase):
 
     def testADMGlobals(self):
 
-        cov.start()
+        # Start coverage
+        coverageReport.coverageStart(coverage)
 
         # TODO: Create lists of globals to calculate
         ADMInTermsOfBSSNGlobalList = ['gammaDD', 'gammaDDdD', 'gammaDDdDD', 'gammaUU', 'detgamma',
@@ -41,10 +41,8 @@ class TestADM(unittest.TestCase):
         # TODO: Call runTest with arguments (self, ModDict, globals())
         runTest(self, ModDict, globals())
 
-        cov.stop()
-        cov.save()
-        cov.html_report()
-        subprocess.call("firefox htmlcov/index.html", shell=True)
+        # End coverage
+        coverageReport.coverageEnd('+BSSN', coverage)
 
 
 

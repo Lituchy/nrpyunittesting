@@ -4,13 +4,10 @@ import unittest
 import logging
 from BSSN.test.runTest import runTest
 from BSSN.test.functionsAndGlobals import functionsAndGlobals
-import subprocess
+import BSSN.test.coverageReport as coverageReport
 
-CoverageReport = True
-
-if CoverageReport:
-    import coverage
-    cov = coverage.Coverage()
+# TODO: Set coverage to True or False depending if you want a coverage report
+coverage = False
 
 # TODO: Import modules to be tested
 import BSSN.BrillLindquist as BrillLindquist
@@ -36,8 +33,8 @@ class TestBSSNExact(unittest.TestCase):
     # Testing globals for BSSN exact modules
     def testExactGlobals(self):
 
-        if CoverageReport:
-            cov.start()
+        # Start coverage
+        coverageReport.coverageStart(coverage)
 
         # TODO: Create lists of globals to calculate
         CartGlobalList = ['alphaCart', 'betaCartU', 'BCartU', 'gammaCartDD', 'KCartDD']
@@ -60,12 +57,8 @@ class TestBSSNExact(unittest.TestCase):
         # TODO: Call runTest with arguments (self, ModDict, globals())
         runTest(self, ModDict, globals())
 
-        if CoverageReport:
-            cov.stop()
-            cov.save()
-            cov.html_report()
-
-            subprocess.call("firefox htmlcov/index.html", shell=True)
+        # End coverage
+        coverageReport.coverageEnd('+BSSN', coverage)
 
 
 # Necessary for unittest class to work properly
