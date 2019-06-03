@@ -2,9 +2,15 @@
 # Necessary imports for unit testing framework
 import unittest
 import logging
-#import coverage
 from BSSN.test.runTest import runTest
 from BSSN.test.functionsAndGlobals import functionsAndGlobals
+import subprocess
+
+CoverageReport = True
+
+if CoverageReport:
+    import coverage
+    cov = coverage.Coverage()
 
 # TODO: Import modules to be tested
 import BSSN.BrillLindquist as BrillLindquist
@@ -21,9 +27,8 @@ import BSSN.UIUCBlackHole as UIUCBlackHole
 # INFO -> Outputs when starting and finishing a module, as well as everything in ERROR
 # DEBUG -> Displays all pairs of values being compared, as well as everything in INFO
 # NOTSET -> Displays symbolic dictionary for all modules, as well as everything in DEBUG
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.INFO)
 
-#cov = coverage.Coverage()
 
 # Python unittest class
 class TestBSSNExact(unittest.TestCase):
@@ -31,7 +36,8 @@ class TestBSSNExact(unittest.TestCase):
     # Testing globals for BSSN exact modules
     def testExactGlobals(self):
 
-        #cov.start()
+        if CoverageReport:
+            cov.start()
 
         # TODO: Create lists of globals to calculate
         CartGlobalList = ['alphaCart', 'betaCartU', 'BCartU', 'gammaCartDD', 'KCartDD']
@@ -54,9 +60,12 @@ class TestBSSNExact(unittest.TestCase):
         # TODO: Call runTest with arguments (self, ModDict, globals())
         runTest(self, ModDict, globals())
 
-        # cov.stop()
-        # cov.save()
-        # cov.html_report()
+        if CoverageReport:
+            cov.stop()
+            cov.save()
+            cov.html_report()
+
+            subprocess.call("firefox htmlcov/index.html", shell=True)
 
 
 # Necessary for unittest class to work properly

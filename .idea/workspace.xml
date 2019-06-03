@@ -2,10 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="84f9775a-ff87-4f96-b64b-74cc8f43cddb" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/BSSN/test/BSSN_Constraints_Test.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BSSN/test/BSSN_Quantities_Test.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BSSN/test/BSSN_T4UUmunu_vars_Test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.coverage" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSSN/test/BSSN_ADM_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/BSSN/test/BSSN_ADM_Test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSSN/test/BSSN_Quantities_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/BSSN/test/BSSN_Quantities_Test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSSN/test/BSSN_exact_ID_tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/BSSN/test/BSSN_exact_ID_tests.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BSSN/test/run_BSSN_tests.sh" beforeDir="false" afterPath="$PROJECT_DIR$/BSSN/test/run_BSSN_tests.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BSSN/test/trustedValuesDict.py" beforeDir="false" afterPath="$PROJECT_DIR$/BSSN/test/trustedValuesDict.py" afterDir="false" />
     </list>
@@ -17,31 +19,22 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/BSSN/test/run_BSSN_tests.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" column="42" selection-start-line="8" selection-start-column="42" selection-end-line="8" selection-end-column="42" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/BSSN/test/trustedValuesDict.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="18" column="38" lean-forward="true" selection-start-line="18" selection-start-column="38" selection-end-line="18" selection-end-column="38" />
+            <state relative-caret-position="90">
+              <caret line="6" column="2" selection-start-line="6" selection-start-column="2" selection-end-line="6" selection-end-column="2" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/BSSN/test/BSSN_ADM_Test.py">
+        <entry file="file://$PROJECT_DIR$/BSSN/test/BSSN_exact_ID_tests.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="28" column="108" selection-start-line="28" selection-start-column="108" selection-end-line="28" selection-end-column="108" />
+            <state relative-caret-position="150">
+              <caret line="10" column="16" selection-start-line="10" selection-start-column="16" selection-end-line="10" selection-end-column="16" />
               <folding>
-                <element signature="e#47#62#0" expanded="true" />
+                <element signature="e#48#63#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -77,6 +70,7 @@
       <find>global</find>
       <find>glo</find>
       <find>glob</find>
+      <find>quant</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -98,8 +92,6 @@
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_1.py" />
         <option value="$PROJECT_DIR$/BSSN/test/BSSN_Psi4_test.py" />
         <option value="$PROJECT_DIR$/BSSN/test/BSSN_RHS_test.py" />
-        <option value="$PROJECT_DIR$/BSSN/test/BSSN_exact_ID_tests.py" />
-        <option value="$PROJECT_DIR$/BSSN/test/BSSN_ADM_Test.py" />
         <option value="$PROJECT_DIR$/BSSN/test/runTest.py" />
         <option value="$PROJECT_DIR$/BSSN/test/functionsAndGlobals.py" />
         <option value="$PROJECT_DIR$/BSSN/test/getVariableDimension.py" />
@@ -111,10 +103,15 @@
         <option value="$PROJECT_DIR$/BSSN/test/isFirstTime.py" />
         <option value="$PROJECT_DIR$/BSSN/test/createTrustedGlobalsDict.py" />
         <option value="$PROJECT_DIR$/BSSN/BSSN_Constraints_Test.py" />
-        <option value="$PROJECT_DIR$/BSSN/test/BSSN_Quantities_Test.py" />
         <option value="$PROJECT_DIR$/BSSN/test/BSSN_T4UUmunu_vars_Test.py" />
-        <option value="$PROJECT_DIR$/BSSN/test/run_BSSN_tests.sh" />
         <option value="$PROJECT_DIR$/BSSN/test/trustedValuesDict.py" />
+        <option value="$PROJECT_DIR$/BSSN/BSSN_quantities.py" />
+        <option value="$PROJECT_DIR$/BSSN/test/BSSN_Quantities_Test.py" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/BSSN/BrillLindquist.py" />
+        <option value="$PROJECT_DIR$/BSSN/test/BSSN_ADM_Test.py" />
+        <option value="$PROJECT_DIR$/BSSN/test/BSSN_exact_ID_tests.py" />
+        <option value="$PROJECT_DIR$/BSSN/test/run_BSSN_tests.sh" />
       </list>
     </option>
   </component>
@@ -184,7 +181,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.scratch_1">
+  <component name="RunManager" selected="Bash.run_BSSN_tests.sh">
     <configuration name="run_BSSN_tests.sh" type="BashConfigurationType" factoryName="Bash" temporary="true">
       <module name="nrpyunittesting" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -275,8 +272,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.scratch_1" />
         <item itemvalue="Bash.run_BSSN_tests.sh" />
+        <item itemvalue="Python.scratch_1" />
         <item itemvalue="Python tests.Unittests in BSSN_exact_ID_tests.py" />
         <item itemvalue="Python.calcError" />
         <item itemvalue="Python.newTest" />
@@ -312,7 +309,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="386" y="30" width="1400" height="992" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.24981844" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -353,9 +349,6 @@
     </layout-to-restore>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/BSSN/test/getGlobalsDict.py" />
-    <entry file="file://$PROJECT_DIR$/BSSN/test/modulesToImport.py" />
-    <entry file="file://$PROJECT_DIR$/BSSN/test/trustedValues.py" />
     <entry file="file://$PROJECT_DIR$/BSSN/test/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
@@ -453,13 +446,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BSSN/BrillLindquist.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="58" column="67" lean-forward="true" selection-start-line="58" selection-start-column="67" selection-end-line="58" selection-end-column="67" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/BSSN/test/functionsAndGlobals.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
@@ -502,16 +488,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="8" column="19" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BSSN/test/listToValueList.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="106">
-          <caret line="10" column="19" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
-          <folding>
-            <element signature="e#0#173#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -578,16 +554,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BSSN/test/BSSN_exact_ID_tests.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="33" column="9" selection-start-line="33" selection-start-column="9" selection-end-line="33" selection-end-column="9" />
-          <folding>
-            <element signature="e#48#63#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/BSSN/test/BSSN_Constraints_Test.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
@@ -619,16 +585,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BSSN/test/BSSN_Quantities_Test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="30" column="9" lean-forward="true" selection-start-line="30" selection-start-column="9" selection-end-line="30" selection-end-column="9" />
-          <folding>
-            <element signature="e#47#62#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/BSSN/test/calcError.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
@@ -636,23 +592,6 @@
           <folding>
             <element signature="e#0#14#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BSSN/BSSN_quantities.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="53" lean-forward="true" selection-start-line="18" selection-start-column="53" selection-end-line="18" selection-end-column="53" />
-          <folding>
-            <element signature="e#206#236#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/reference_metric.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3555">
-          <caret line="242" column="19" selection-start-line="242" selection-start-column="15" selection-end-line="242" selection-end-column="19" />
         </state>
       </provider>
     </entry>
@@ -701,27 +640,98 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BSSN/test/BSSN_ADM_Test.py">
+    <entry file="file://$PROJECT_DIR$/../site-packages/sympy/core/basic.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="28" column="108" selection-start-line="28" selection-start-column="108" selection-end-line="28" selection-end-column="108" />
+        <state relative-caret-position="180">
+          <caret line="191" selection-start-line="191" selection-end-line="191" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/reference_metric.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1197">
+          <caret line="230" column="63" selection-start-line="230" selection-start-column="63" selection-end-line="230" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BSSN/test/listToValueList.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="10" column="19" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#173#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BSSN/BSSN_quantities.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="296">
+          <caret line="29" column="49" lean-forward="true" selection-start-line="29" selection-start-column="49" selection-end-line="29" selection-end-column="49" />
+          <folding>
+            <element signature="e#206#236#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BSSN/test/BSSN_Quantities_Test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="35" selection-start-line="35" selection-end-line="35" />
           <folding>
             <element signature="e#47#62#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BSSN/test/run_BSSN_tests.sh">
+    <entry file="file://$PROJECT_DIR$/BSSN/test/trustedValuesDict.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="42" selection-start-line="8" selection-start-column="42" selection-end-line="8" selection-end-column="42" />
+        <state relative-caret-position="412">
+          <caret line="65" lean-forward="true" selection-start-line="65" selection-end-line="65" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BSSN/test/trustedValuesDict.py">
+    <entry file="file://$PROJECT_DIR$/.coverage">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="38" lean-forward="true" selection-start-line="18" selection-start-column="38" selection-end-line="18" selection-end-column="38" />
+        <state>
+          <caret column="5" selection-start-column="5" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BSSN/BrillLindquist.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="281">
+          <caret line="38" column="69" lean-forward="true" selection-start-line="38" selection-start-column="69" selection-end-line="38" selection-end-column="69" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BSSN/test/BSSN_ADM_Test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" selection-start-line="7" selection-end-line="7" />
+          <folding>
+            <element signature="e#47#62#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BSSN/test/BSSN_exact_ID_tests.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="16" selection-start-line="10" selection-start-column="16" selection-end-line="10" selection-end-column="16" />
+          <folding>
+            <element signature="e#48#63#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BSSN/test/run_BSSN_tests.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="2" selection-start-line="6" selection-start-column="2" selection-end-line="6" selection-end-column="2" />
         </state>
       </provider>
     </entry>

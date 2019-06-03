@@ -1,8 +1,13 @@
 # Necessary imports for unit testing framework
 import unittest
 import logging
+import coverage
 from BSSN.test.runTest import runTest
 from BSSN.test.functionsAndGlobals import functionsAndGlobals
+import subprocess
+
+
+cov = coverage.Coverage()
 
 # TODO: Import modules to be tested
 import BSSN.ADM_in_terms_of_BSSN as ADM_in_terms_of_BSSN
@@ -20,6 +25,8 @@ class TestADM(unittest.TestCase):
 
     def testADMGlobals(self):
 
+        cov.start()
+
         # TODO: Create lists of globals to calculate
         ADMInTermsOfBSSNGlobalList = ['gammaDD', 'gammaDDdD', 'gammaDDdDD', 'gammaUU', 'detgamma',
                                       'GammaUDD', 'KDD', 'KDDdD']
@@ -33,6 +40,13 @@ class TestADM(unittest.TestCase):
 
         # TODO: Call runTest with arguments (self, ModDict, globals())
         runTest(self, ModDict, globals())
+
+        cov.stop()
+        cov.save()
+        cov.html_report()
+        subprocess.call("firefox htmlcov/index.html", shell=True)
+
+
 
 if __name__ == '__main__':
     unittest.main()
