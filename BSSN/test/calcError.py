@@ -10,6 +10,8 @@ from datetime import datetime
 # Returns a boolean [good] that represents if any two value pairs didn't differ
 # by more than (precision/2) decimal places.
 
+# Called by runTest
+
 def calcError(mod,resultDict,trustedDict,symbolicDict):
 
     resultSet = set(resultDict)

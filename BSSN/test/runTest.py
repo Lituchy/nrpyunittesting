@@ -28,8 +28,9 @@ def runTest(self, ModDict, globs):
     # If it is the first time for at least one module, sort the module dictionary based on first_times.
     # This makes it so the new modules are done last. This makes it easy to copy the necessary modules' code.
     if True in first_times:
-        # Sorts two lists as found in https://stackoverflow.com/questions/13668393/python-sorting-two-lists
+        # https://stackoverflow.com/questions/13668393/python-sorting-two-lists
         first_times, resultMods = (list(x) for x in zip(*sorted(zip(first_times, resultDict))))
+
         tempDict = dict()
 
         # Creates dictionary based on order of first_times

@@ -19,6 +19,8 @@
 # Note: Must pass in globals() as second argument to insure that all imports that have been done are accessible
 #       by the evaluateGlobals module
 
+# Called by runTest
+
 def evaluateGlobals(ModDict,oldGlobals):
 
     resultDict = dict()

@@ -3,6 +3,8 @@
 # 1 -> rank 1 tensor -> vector
 # ...
 
+# Called by moduleDictToList
+
 def getVariableDimension(tensor):
     
     dim = 0

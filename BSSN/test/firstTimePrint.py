@@ -3,6 +3,9 @@ from datetime import datetime
 
 # Takes in a module and a module dictionary, and prints the code that needs to be copied
 # into trustedValuesDict.
+
+# Called by runTest
+
 def firstTimePrint(mod,modDict):
     print('\nModule: ')
     print(mod)

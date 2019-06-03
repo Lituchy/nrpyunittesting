@@ -8,6 +8,9 @@ import logging
 # respective dictionary from trustedValuesDict as values. The naming convention for the dictionaries is as follows:
 #   trustedValuesDict['(MODULE_NAME)Globals'] -- The module name with 'Globals' concatenated on the end. This is
 #   consistent throughout all files.
+
+# Called by runTest
+
 def createTrustedGlobalsDict(ModDict,first_times):
     
     TrustedDict = dict()

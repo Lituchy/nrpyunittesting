@@ -1,14 +1,15 @@
 from sympy import Integer,Symbol,symbols,simplify,Rational,Function,srepr,sin,cos,exp,log,Abs,Add,Mul,Pow,preorder_traversal,N,Float,S,var,sympify,sqrt,sign,mathematica_code
 # WARNING: Importing more than the bare minimum with mpmath will result in errors on eval() below. This is because we need SymPy to evaluate that expression, not mpmath.
 import mpmath as mpm
-#from mpmath import mpf,mp,log10,fabs #
 import random
-import logging
 import re
 from trustedValuesDict import trustedValuesDict
 
 # Takes in a list [lst] and returns the list with each index evaluated 
-# according to parameters (seed, precision) in trustedValues 
+# according to parameters (seed, precision) in trustedValues
+
+# Called by runTest
+
 def listToValueList(lst,first_time):
     
     precision = trustedValuesDict["precision"]
@@ -33,8 +34,7 @@ def listToValueList(lst,first_time):
     #   These variables will be automatically set to random
     #   values in the range [0,1) below.
     list_free_symbols = sum(lst).free_symbols
-    #print(modname,list_free_symbols)
-    
+
     # To ensure the random values are consistent for testing purposes, we will
     #    sort the list of free symbols. This requires that we first convert
     #    all SymPy symbols to strings, storing to list_symbol_strings,

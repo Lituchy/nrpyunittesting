@@ -4,6 +4,8 @@ from trustedValuesDict import trustedValuesDict
 # based off the existence of trusted values for every module in [ModDict]
 # Requires: The name of the trusted values dictionary is the same as the convention set by createTrustedGlobalsDict
 
+# Called by runTest
+
 def isFirstTime(ModDict):
 
     resBool = []

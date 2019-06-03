@@ -6,6 +6,8 @@ import getVariableDimension as getVarDim
 # Example: varList[0] -> r/(M+r) 
 #          nameList[0] -> 'alphaSph'
 
+# Called by runTest
+
 def moduleDictToList(moduleDict):
     
     varList = []
