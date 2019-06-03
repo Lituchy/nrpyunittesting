@@ -3,10 +3,12 @@ import unittest
 import logging
 from BSSN.test.runTest import runTest
 from BSSN.test.functionsAndGlobals import functionsAndGlobals
-import BSSN.test.coverageReport as coverageReport
 
 # TODO: Set coverage to True or False depending if you want a coverage report
 coverage = False
+
+if coverage:
+    import BSSN.test.coverageReport as coverageReport
 
 # TODO: Import modules to be tested
 import BSSN.ADM_in_terms_of_BSSN as ADM_in_terms_of_BSSN
@@ -25,7 +27,8 @@ class TestADM(unittest.TestCase):
     def testADMGlobals(self):
 
         # Start coverage
-        coverageReport.coverageStart(coverage)
+        if coverage:
+            coverageReport.coverageStart()
 
         # TODO: Create lists of globals to calculate
         ADMInTermsOfBSSNGlobalList = ['gammaDD', 'gammaDDdD', 'gammaDDdDD', 'gammaUU', 'detgamma',
@@ -42,7 +45,8 @@ class TestADM(unittest.TestCase):
         runTest(self, ModDict, globals())
 
         # End coverage
-        coverageReport.coverageEnd('+BSSN', coverage)
+        if coverage:
+            coverageReport.coverageEnd('+BSSN')
 
 
 

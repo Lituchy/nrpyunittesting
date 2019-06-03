@@ -4,10 +4,12 @@ import unittest
 import logging
 from BSSN.test.runTest import runTest
 from BSSN.test.functionsAndGlobals import functionsAndGlobals
-import BSSN.test.coverageReport as coverageReport
 
 # TODO: Set coverage to True or False depending if you want a coverage report
 coverage = False
+
+if coverage:
+    import BSSN.test.coverageReport as coverageReport
 
 # TODO: Import modules to be tested
 import BSSN.BrillLindquist as BrillLindquist
@@ -34,15 +36,16 @@ class TestBSSNExact(unittest.TestCase):
     def testExactGlobals(self):
 
         # Start coverage
-        coverageReport.coverageStart(coverage)
+        if coverage:
+            coverageReport.coverageStart()
 
         # TODO: Create lists of globals to calculate
         CartGlobalList = ['alphaCart', 'betaCartU', 'BCartU', 'gammaCartDD', 'KCartDD']
         SphGlobalList = ['alphaSph', 'betaSphU', 'BSphU', 'gammaSphDD', 'KSphDD']
 
         # TODO: Create Module dictionary based on imported modules, functions to initialize the modules, and globals
-        # Note that the name of the modules in ModDicT MUST have the same name as the imported module.
-        # Example: If you say 'import MyModules.Module1 as M1', then ModDict should have the entry 'M1' as a string.
+        # IMPORTANT: The name of the modules in ModDicT MUST have the same name as the imported module.
+        # Example: If you say 'import MyModules.Module1 as M1', then ModDict should have the entry 'M1',not 'Module1'.
         ModDict = {
             'BrillLindquist': functionsAndGlobals(['BrillLindquist(ComputeADMGlobalsOnly = True)'], CartGlobalList),
 
@@ -58,7 +61,8 @@ class TestBSSNExact(unittest.TestCase):
         runTest(self, ModDict, globals())
 
         # End coverage
-        coverageReport.coverageEnd('+BSSN', coverage)
+        if coverage:
+            coverageReport.coverageEnd('+BSSN')
 
 
 # Necessary for unittest class to work properly

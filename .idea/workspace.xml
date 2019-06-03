@@ -2,14 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="84f9775a-ff87-4f96-b64b-74cc8f43cddb" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.coveragerc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BSSN/test/coverageReport.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BSSN/test/myKeyboard.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.travis.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSSN/test/BSSN_ADM_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/BSSN/test/BSSN_ADM_Test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BSSN/test/BSSN_exact_ID_tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/BSSN/test/BSSN_exact_ID_tests.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSSN/test/run_BSSN_tests.sh" beforeDir="false" afterPath="$PROJECT_DIR$/BSSN/test/run_BSSN_tests.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSSN/test/coverageReport.py" beforeDir="false" afterPath="$PROJECT_DIR$/BSSN/test/coverageReport.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -28,11 +23,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/BSSN/test/BSSN_exact_ID_tests.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="666">
-              <caret line="46" column="52" selection-start-line="46" selection-start-column="52" selection-end-line="46" selection-end-column="52" />
+            <state relative-caret-position="90">
+              <caret line="6" column="49" lean-forward="true" selection-start-line="6" selection-end-line="7" />
               <folding>
                 <element signature="e#48#63#0" expanded="true" />
               </folding>
@@ -40,11 +35,23 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/BSSN/test/coverageReport.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="165">
+              <caret line="11" column="27" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="27" />
+              <folding>
+                <element signature="e#0#11#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BSSN/test/BSSN_ADM_Test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="456">
-              <caret line="43" column="22" selection-start-line="43" selection-start-column="22" selection-end-line="43" selection-end-column="22" />
+            <state relative-caret-position="120">
+              <caret line="8" column="16" selection-start-line="8" selection-start-column="16" selection-end-line="8" selection-end-column="16" />
               <folding>
                 <element signature="e#47#62#0" expanded="true" />
               </folding>
@@ -122,10 +129,10 @@
         <option value="$PROJECT_DIR$/BSSN/BrillLindquist.py" />
         <option value="$PROJECT_DIR$/.travis.yml" />
         <option value="$PROJECT_DIR$/.coveragerc" />
-        <option value="$PROJECT_DIR$/BSSN/test/BSSN_exact_ID_tests.py" />
         <option value="$PROJECT_DIR$/BSSN/test/run_BSSN_tests.sh" />
-        <option value="$PROJECT_DIR$/BSSN/test/BSSN_ADM_Test.py" />
         <option value="$PROJECT_DIR$/BSSN/test/myKeyboard.py" />
+        <option value="$PROJECT_DIR$/BSSN/test/BSSN_ADM_Test.py" />
+        <option value="$PROJECT_DIR$/BSSN/test/BSSN_exact_ID_tests.py" />
         <option value="$PROJECT_DIR$/BSSN/test/coverageReport.py" />
       </list>
     </option>
@@ -324,6 +331,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="348" y="45" width="1400" height="992" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.24981844" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -690,34 +698,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.coveragerc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" selection-start-line="4" selection-end-line="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BSSN/test/run_BSSN_tests.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" selection-start-line="12" selection-end-line="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.travis.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="8" selection-start-line="8" selection-end-line="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BSSN/test/BSSN_exact_ID_tests.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="666">
-          <caret line="46" column="52" selection-start-line="46" selection-start-column="52" selection-end-line="46" selection-end-column="52" />
-          <folding>
-            <element signature="e#48#63#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -728,22 +712,46 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/.coveragerc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BSSN/test/BSSN_ADM_Test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="16" selection-start-line="8" selection-start-column="16" selection-end-line="8" selection-end-column="16" />
+          <folding>
+            <element signature="e#47#62#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BSSN/test/run_BSSN_tests.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" selection-start-line="12" selection-end-line="12" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/BSSN/test/coverageReport.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="25" selection-start-line="5" selection-start-column="25" selection-end-line="5" selection-end-column="25" />
+        <state relative-caret-position="165">
+          <caret line="11" column="27" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="27" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BSSN/test/BSSN_ADM_Test.py">
+    <entry file="file://$PROJECT_DIR$/BSSN/test/BSSN_exact_ID_tests.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="456">
-          <caret line="43" column="22" selection-start-line="43" selection-start-column="22" selection-end-line="43" selection-end-column="22" />
+        <state relative-caret-position="90">
+          <caret line="6" column="49" lean-forward="true" selection-start-line="6" selection-end-line="7" />
           <folding>
-            <element signature="e#47#62#0" expanded="true" />
+            <element signature="e#48#63#0" expanded="true" />
           </folding>
         </state>
       </provider>
