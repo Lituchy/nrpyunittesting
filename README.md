@@ -1,7 +1,5 @@
 # NRPy+, SENRv2, and the NRPy+ Jupyter Tutorial
 [![Build Status](https://travis-ci.org/Lituchy/nrpyunittesting.svg?branch=master)](https://travis-ci.com/Lituchy/nrpyunittesting)
-
-
 [![codecov](https://codecov.io/gh/Lituchy/nrpyunittesting/branch/master/graph/badge.svg)](https://codecov.io/gh/Lituchy/nrpyunittesting)
 
 
