@@ -6,7 +6,7 @@ from BSSN.test.functionsAndGlobals import functionsAndGlobals
 
 # TODO: Set coverage to True if you want a coverage report, False if you don't
 # Note that coverage reports don't work on travis-ci, so it's best to set to False before pushing.
-coverage = False
+coverage = True
 
 # TODO: Import modules to be tested
 import BSSN.ADM_in_terms_of_BSSN as ADM_in_terms_of_BSSN
@@ -45,7 +45,7 @@ class TestADM(unittest.TestCase):
 
         # End coverage
         if coverage:
-            coverageReport.coverageEnd('+BSSN')
+            coverageReport.coverageEnd()
 
 
 if __name__ == '__main__':

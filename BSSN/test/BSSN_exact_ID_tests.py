@@ -7,11 +7,11 @@ from BSSN.test.functionsAndGlobals import functionsAndGlobals
 
 # TODO: Set coverage to True if you want a coverage report, False if you don't
 # Note that coverage reports don't work on travis-ci, so it's best to set to False before pushing.
-coverage = False
+coverage = True
 
 # TODO: Import modules to be tested
 # Note: Even though it says the modules are unused, these imports are vital for runTest to work properly.
-# Their infomation gets passed into runTest through globals()
+# Their infromation gets passed into runTest through globals()
 import BSSN.BrillLindquist as BrillLindquist
 import BSSN.ShiftedKerrSchild as ShiftedKerrSchild
 import BSSN.StaticTrumpet as StaticTrumpet
@@ -63,7 +63,7 @@ class TestBSSNExact(unittest.TestCase):
 
         # End coverage
         if coverage:
-            coverageReport.coverageEnd('+BSSN')
+            coverageReport.coverageEnd()
 
 
 # Necessary for unittest class to work properly

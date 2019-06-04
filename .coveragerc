@@ -1,4 +1,20 @@
+
 [report]
 exclude_lines =
+    # Have to re-enable the standard pragma
     pragma: no cover
+
+    # Don't care about import statements in our modules, as we're calling their functions
     import
+
+[run]
+omit =
+    # omit the test files being called to run the modules
+    */BSSN/test/*
+
+    # omit BSSN_quantities as it's only partially used by many tests
+    */BSSN/BSSN_quantities.py
+
+include =
+    # only include the modules being tested
+    */BSSN/*
