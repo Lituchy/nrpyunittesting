@@ -75,7 +75,7 @@ class TestBSSNGlobals(unittest.TestCase):
         runTest(self, ModDict, locals())
 
     # Testing globals for BSSN Constraints
-    def testConstraintsGlobals(self):
+    def ftestConstraintsGlobals(self):
 
         # TODO: Import modules to be tested
         # Note: Even though it says the modules are unused, these imports are vital for runTest to work properly.
@@ -96,7 +96,7 @@ class TestBSSNGlobals(unittest.TestCase):
         runTest(self, ModDict, locals())
 
     # Testing globals for BSSN Psi4 Globals
-    def testPsi4Globals(self):
+    def ftestPsi4Globals(self):
 
         # TODO: Import modules to be tested
         # Note: Even though it says the modules are unused, these imports are vital for runTest to work properly.
@@ -121,7 +121,7 @@ class TestBSSNGlobals(unittest.TestCase):
         runTest(self, ModDict, locals())
 
     # Testing globals for BSSN RHS
-    def testRHSGlobals(self):
+    def ftestRHSGlobals(self):
 
         # TODO: Import modules to be tested
         # Note: Even though it says the modules are unused, these imports are vital for runTest to work properly.
