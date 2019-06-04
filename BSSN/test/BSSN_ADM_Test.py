@@ -4,10 +4,6 @@ import logging
 from BSSN.test.runTest import runTest
 from BSSN.test.functionsAndGlobals import functionsAndGlobals
 
-# TODO: Set coverage to True if you want a coverage report, False if you don't
-# Note that coverage reports don't work on travis-ci, so it's best to set to False before pushing.
-coverage = True
-
 # TODO: Import modules to be tested
 import BSSN.ADM_in_terms_of_BSSN as ADM_in_terms_of_BSSN
 
@@ -24,11 +20,6 @@ class TestADM(unittest.TestCase):
 
     def testADMGlobals(self):
 
-        # Start coverage
-        if coverage:
-            import BSSN.test.coverageReport as coverageReport
-            coverageReport.coverageStart()
-
         # TODO: Create lists of globals to calculate
         ADMInTermsOfBSSNGlobalList = ['gammaDD', 'gammaDDdD', 'gammaDDdDD', 'gammaUU', 'detgamma',
                                       'GammaUDD', 'KDD', 'KDDdD']
@@ -42,10 +33,6 @@ class TestADM(unittest.TestCase):
 
         # TODO: Call runTest with arguments (self, ModDict, globals())
         runTest(self, ModDict, globals())
-
-        # End coverage
-        if coverage:
-            coverageReport.coverageEnd()
 
 
 if __name__ == '__main__':

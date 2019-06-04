@@ -5,9 +5,9 @@ import logging
 from BSSN.test.runTest import runTest
 from BSSN.test.functionsAndGlobals import functionsAndGlobals
 
-# TODO: Set coverage to True if you want a coverage report, False if you don't
-# Note that coverage reports don't work on travis-ci, so it's best to set to False before pushing.
-coverage = True
+# # TODO: Set coverage to True if you want a coverage report, False if you don't
+# # Note that coverage reports don't work on travis-ci, so it's best to set to False before pushing.
+# coverage = False
 
 # TODO: Import modules to be tested
 # Note: Even though it says the modules are unused, these imports are vital for runTest to work properly.
@@ -35,10 +35,10 @@ class TestBSSNExact(unittest.TestCase):
     # Testing globals for BSSN exact modules
     def testExactGlobals(self):
 
-        # Start coverage
-        if coverage:
-            import BSSN.test.coverageReport as coverageReport
-            coverageReport.coverageStart()
+        # # Start coverage
+        # if coverage:
+        #     import BSSN.test.coverageReport as coverageReport
+        #     coverageReport.coverageStart()
 
         # TODO: Create lists of globals to calculate
         CartGlobalList = ['alphaCart', 'betaCartU', 'BCartU', 'gammaCartDD', 'KCartDD']
@@ -61,9 +61,9 @@ class TestBSSNExact(unittest.TestCase):
         # TODO: Call runTest with arguments (self, ModDict, globals())
         runTest(self, ModDict, globals())
 
-        # End coverage
-        if coverage:
-            coverageReport.coverageEnd()
+        # # End coverage
+        # if coverage:
+        #     coverageReport.coverageEnd()
 
 
 # Necessary for unittest class to work properly
