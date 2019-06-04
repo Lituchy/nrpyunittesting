@@ -2,7 +2,7 @@
 
 export PYTHONPATH=$PYTHONPATH:`pwd`
 
-travis_wait 60 mvn install coverage run BSSN/test/BSSN_Globals_Tests.py #&&
+coverage run BSSN/test/BSSN_Globals_Tests.py #&&
 # pypy BSSN/test/BSSN_Constraints_Test.py
 # coverage run BSSN/test/BSSN_ADM_Test.py # &&
 # coverage run BSSN/test/BSSN_Psi4_test.py #&&
