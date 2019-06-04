@@ -12,10 +12,7 @@ install:
 #  - pip install -r requirements.txt
 # command to run tests
 script:
-  - coverage run BSSN/test/BSSN_exact_ID_tests.py
-  - bash <(curl -s https://codecov.io/bash) -cF python
-  - coverage run BSSN/test/BSSN_ADM_Test.py
-  - bash <(curl -s https://codecov.io/bash) -cF python
+  - run_BSSN_tests.sh
 
 # After completion, push results to codecov
 after_success:

@@ -5,17 +5,13 @@ import logging
 from BSSN.test.runTest import runTest
 from BSSN.test.functionsAndGlobals import functionsAndGlobals
 
-# # TODO: Set coverage to True if you want a coverage report, False if you don't
-# # Note that coverage reports don't work on travis-ci, so it's best to set to False before pushing.
-# coverage = False
 
-# TODO: Import modules to be tested
-# Note: Even though it says the modules are unused, these imports are vital for runTest to work properly.
-# Their infromation gets passed into runTest through globals()
-import BSSN.BrillLindquist as BrillLindquist
-import BSSN.ShiftedKerrSchild as ShiftedKerrSchild
-import BSSN.StaticTrumpet as StaticTrumpet
-import BSSN.UIUCBlackHole as UIUCBlackHole
+
+# Exact Modules
+
+
+# ADM Modules
+
 
 # TODO Kevin:
 # Look into git commit
@@ -30,15 +26,18 @@ logging.basicConfig(level=logging.INFO)
 
 
 # Python unittest class
-class TestBSSNExact(unittest.TestCase):
+class TestBSSNGlobals(unittest.TestCase):
         
     # Testing globals for BSSN exact modules
     def testExactGlobals(self):
 
-        # # Start coverage
-        # if coverage:
-        #     import BSSN.test.coverageReport as coverageReport
-        #     coverageReport.coverageStart()
+        # TODO: Import modules to be tested
+        # Note: Even though it says the modules are unused, these imports are vital for runTest to work properly.
+        # Their information gets passed into runTest through locals()
+        import BSSN.BrillLindquist as BrillLindquist
+        import BSSN.ShiftedKerrSchild as ShiftedKerrSchild
+        import BSSN.StaticTrumpet as StaticTrumpet
+        import BSSN.UIUCBlackHole as UIUCBlackHole
 
         # TODO: Create lists of globals to calculate
         CartGlobalList = ['alphaCart', 'betaCartU', 'BCartU', 'gammaCartDD', 'KCartDD']
@@ -58,12 +57,30 @@ class TestBSSNExact(unittest.TestCase):
             'UIUCBlackHole': functionsAndGlobals(['UIUCBlackHole(ComputeADMGlobalsOnly = True)'], SphGlobalList)
         }
 
-        # TODO: Call runTest with arguments (self, ModDict, globals())
-        runTest(self, ModDict, globals())
+        # TODO: Call runTest with arguments (self, ModDict, locals())
+        runTest(self, ModDict, locals())
 
-        # # End coverage
-        # if coverage:
-        #     coverageReport.coverageEnd()
+    # Testing globlas for ADM in terms of BSSN module
+    def testADMGlobals(self):
+
+        # TODO: Import modules to be tested
+        # Note: Even though it says the modules are unused, these imports are vital for runTest to work properly.
+        # Their information gets passed into runTest through locals()
+        import BSSN.ADM_in_terms_of_BSSN as ADM_in_terms_of_BSSN
+
+        # TODO: Create lists of globals to calculate
+        ADMInTermsOfBSSNGlobalList = ['gammaDD', 'gammaDDdD', 'gammaDDdDD', 'gammaUU', 'detgamma',
+                                      'GammaUDD', 'KDD', 'KDDdD']
+
+        # TODO: Create Module dictionary based on imported modules, functions to initialize the modules, and globals
+        # Note that the name of the modules in ModDicT MUST have the same name as the imported module.
+        # Example: If you say 'import MyModules.Module1 as M1', then ModDict should have the entry 'M1' as a string.
+        ModDict = {
+            'ADM_in_terms_of_BSSN': functionsAndGlobals(['ADM_in_terms_of_BSSN()'], ADMInTermsOfBSSNGlobalList)
+        }
+
+        # TODO: Call runTest with arguments (self, ModDict, locals())
+        runTest(self, ModDict, locals())
 
 
 # Necessary for unittest class to work properly

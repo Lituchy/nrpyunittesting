@@ -12,8 +12,13 @@ omit =
     # omit the test files being called to run the modules
     */BSSN/test/*
 
-    # omit BSSN_quantities as it's only partially used by many tests
+    # omit init
+    */__init__.py
+
+    # omitting specific files that are called by our modules
     */BSSN/BSSN_quantities.py
+    */BSSN/ADM_Exact_Spherical_or_Cartesian_to_BSSNCurvilinear.py
+    */BSSN/BSSN_ID_function_string.py
 
 include =
     # only include the modules being tested

@@ -12,9 +12,9 @@ from createTrustedGlobalsDict import createTrustedGlobalsDict
 # runTest takes in :
 # [self]- The unittest self object,
 # [ModDict]- The user-supplied dictionary of Modules
-# [globs]- The current globals in the workspace. Should ALWAYS be globals()
+# [locs]- The current local variables in the workspace. Should ALWAYS be locals()
 # It then runs a unittest, comparing calculated values with trusted values.
-def runTest(self, ModDict, globs):
+def runTest(self, ModDict, locs):
 
     # Determining if this is the first time the code is run based of the existence of trusted values
     first_times = isFirstTime(ModDict)
@@ -23,7 +23,7 @@ def runTest(self, ModDict, globs):
     TrustedDict = createTrustedGlobalsDict(ModDict, first_times)
 
     # Creating dictionary of expressions for all modules in ModDict
-    resultDict = evaluateGlobals(ModDict, globs)
+    resultDict = evaluateGlobals(ModDict, locs)
 
     # If it is the first time for at least one module, sort the module dictionary based on first_times.
     # This makes it so the new modules are done last. This makes it easy to copy the necessary modules' code.
