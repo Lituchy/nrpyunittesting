@@ -11,7 +11,9 @@ install:
 # We generally don't need to install matplotlib for the test.
 #  - pip install -r requirements.txt
 # command to run tests
-script: travis_wait 30 BSSN/test/run_BSSN_tests.sh
+before_script: BSSN/test/run_BSSN_tests.sh
+
+script: travis_wait 30 pypy BSSN/test/BSSN_Globals_Tests.py
 # After completion, push results to codecov
 #after_success:
 #  - codecov
