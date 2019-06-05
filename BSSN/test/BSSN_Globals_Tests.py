@@ -21,8 +21,9 @@ logging.basicConfig(level=logging.INFO)
 class TestBSSNGlobals(unittest.TestCase):
 
     @classmethod
-    def setUpClass(cls):
-        printStillRunning()
+    def tearDownClass(cls):
+        Timer.stop()
+
 
     # Testing globals for ADM in terms of BSSN module
     def testADMGlobals(self):
@@ -214,11 +215,12 @@ class TestBSSNGlobals(unittest.TestCase):
         # TODO: Call runTest with arguments (self, ModDict, locals())
         runTest(self, ModDict, locals())
 
+from RepeatedTimer import RepeatedTimer
 
-def printStillRunning():
-    import threading
-    threading.Timer(300.0, printStillRunning).start()
-    logging.info("\nStill running!\n")
+def printRunning():
+    logging.info("\nCurrently running!\n")
+
+Timer = RepeatedTimer(300,printRunning)
 
 
 # Necessary for unittest class to work properly
