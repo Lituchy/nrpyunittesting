@@ -20,8 +20,9 @@ logging.basicConfig(level=logging.INFO)
 # Python unittest class
 class TestBSSNGlobals(unittest.TestCase):
 
-    def setUp(self):
-        printit()
+    @classmethod
+    def setUpClass(cls):
+        printStillRunning()
 
     # Testing globals for ADM in terms of BSSN module
     def testADMGlobals(self):
@@ -214,9 +215,9 @@ class TestBSSNGlobals(unittest.TestCase):
         runTest(self, ModDict, locals())
 
 
-def printit():
+def printStillRunning():
     import threading
-    threading.Timer(300.0, printit).start()
+    threading.Timer(300.0, printStillRunning).start()
     logging.info("\nStill running!\n")
 
 
