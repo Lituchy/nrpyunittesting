@@ -1,6 +1,5 @@
 from mpmath import mpf,mp
 
-
 # Dictionary of trusted values to be used throughout files.
 # Standard precision and seed values are precision: 30, seed: 1234.
 # Note that changing these may drastically change the calculated values.

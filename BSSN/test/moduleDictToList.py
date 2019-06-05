@@ -62,5 +62,4 @@ def moduleDictToList(moduleDict):
                     num2 += 1
                 num1 += 1
 
-
-    return (varList,nameList)
+    return varList, nameList

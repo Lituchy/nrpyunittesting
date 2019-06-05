@@ -24,7 +24,6 @@ class TestBSSNGlobals(unittest.TestCase):
     def tearDownClass(cls):
         Timer.stop()
 
-
     # Testing globals for ADM in terms of BSSN module
     def testADMGlobals(self):
 
@@ -215,12 +214,14 @@ class TestBSSNGlobals(unittest.TestCase):
         # TODO: Call runTest with arguments (self, ModDict, locals())
         runTest(self, ModDict, locals())
 
-from RepeatedTimer import RepeatedTimer
 
+# https://stackoverflow.com/questions/3393612/run-certain-code-every-n-seconds/13151299
 def printRunning():
     logging.info("\nCurrently running!\n")
 
-Timer = RepeatedTimer(300,printRunning)
+
+from RepeatedTimer import RepeatedTimer
+Timer = RepeatedTimer(300, printRunning)
 
 
 # Necessary for unittest class to work properly

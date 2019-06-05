@@ -36,6 +36,8 @@ def evaluateGlobals(ModDict,oldGlobals):
         for glob in funcGlobDict['globalList']:
             stringexec += glob + '=' + mod + '.' + glob + '\n'
 
+        del function, glob, funcGlobDict
+
         # Assigning newGlobals
         stringexec += 'newGlobals = globals()'
 
@@ -53,4 +55,3 @@ def evaluateGlobals(ModDict,oldGlobals):
         resultDict[mod] = loc
         
     return resultDict
-        

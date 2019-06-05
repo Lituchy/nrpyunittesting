@@ -1,8 +1,8 @@
-from sympy import Integer,Symbol,symbols,simplify,Rational,Function,srepr,sin,cos,exp,log,Abs,Add,Mul,Pow,preorder_traversal,N,Float,S,var,sympify,sqrt,sign,mathematica_code
+from sympy import srepr, Pow, Add, Mul, Float, Symbol, Integer, cos, sin
 # WARNING: Importing more than the bare minimum with mpmath will result in errors on eval() below. This is because we need SymPy to evaluate that expression, not mpmath.
-import mpmath as mpm
-import random
-import re
+from mpmath import mp, mpf, fabs, sqrt
+from random import seed, random
+from re import sub
 from trustedValuesDict import trustedValuesDict
 
 # Takes in a list [lst] and returns the list with each index evaluated 
@@ -14,7 +14,7 @@ def listToValueList(lst,first_time):
     
     precision = trustedValuesDict["precision"]
 
-    mpm.mp.dps = precision
+    mp.dps = precision
     
     # Replace all integer fractions with the correct floating point representation:
     index = 0
@@ -22,13 +22,17 @@ def listToValueList(lst,first_time):
     for expr in lst:
         orig_lst.append(expr)
         string = srepr(expr)
-        string2 = re.sub('Rational\(([0-9]+), ([0-9]+)\)',
+        string2 = sub('Rational\(([0-9]+), ([0-9]+)\)',
                          "((Float('\\1',"+str(2*precision)+"))/(Float('\\2',"+str(2*precision)+")))", string)
-        string3 = re.sub('Rational\((-[0-9]+), ([0-9]+)\)',
+        string3 = sub('Rational\((-[0-9]+), ([0-9]+)\)',
                          "((Float('\\1',"+str(2*precision)+"))/(Float('\\2',"+str(2*precision)+")))", string2)
         newexpr = eval(string3)
         lst[index] = newexpr
         index += 1
+
+        del string, string2, string3, newexpr
+
+    del index
 
     # List all the free symbols in the expressions in [lst].
     #   These variables will be automatically set to random
@@ -46,9 +50,11 @@ def listToValueList(lst,first_time):
 
     # https://stackoverflow.com/questions/13668393/python-sorting-two-lists
     list_symbol_strings, list_free_symbols = (list(x) for x in zip(*sorted(zip(list_symbol_strings, list_free_symbols))))    
-    
+
+    del list_symbol_strings
+
     # Set the random seed according to trustedValues.seed:
-    random.seed(trustedValuesDict["seed"])
+    seed(trustedValuesDict["seed"])
 
     # Next we will write a short Python code that first declares all
     #    of the free variables in the "everything" expression
@@ -73,7 +79,9 @@ mpm.mp.dps = """+str(precision)+"\n"
             stringexec += str(var)+" = mpm.mpf(1/mpm.sqrt(2))\n"
         # All other free variables are set to random numbers
         else:
-            stringexec += str(var)+" = mpm.mpf(\'"+str(mpm.sqrt(mpm.mpf(random.random())))+"\')\n"
+            stringexec += str(var)+" = mpm.mpf(\'"+str(sqrt(mpf(random())))+"\')\n"
+
+    del list_free_symbols
 
     # Then it creates the code that evaluates the result
     #    to 30 significant digits.
@@ -89,17 +97,17 @@ mpm.mp.dps = """+str(precision)+"\n"
     exec(stringexec, {}, loc)
     evaled_lst = loc['lst']
 
-    if first_time == True:
+    if first_time:
         index = 0
         for result in evaled_lst:
-            if result != 0 and mpm.fabs(result) < 100*10**(-precision):
-                print("Found |result| ("+str(mpm.fabs(result))+") close to zero. Checking if indeed it should be zero.")
+            if result != 0 and fabs(result) < 100*10**(-precision):
+                print("Found |result| ("+str(fabs(result))+") close to zero. Checking if indeed it should be zero.")
                 # Now double the precision and redo. If number drops in magnitude
                 loc2xprec = {}
                 stringexec = stringexec.replace("mpm.mp.dps = "+str(precision),"mpm.mp.dps = "+str(2*precision))
                 exec(stringexec, {}, loc2xprec)
                 evaled_lst2xprec = loc2xprec['lst']
-                if mpm.fabs(evaled_lst2xprec[index]) < 100*10**(-2*precision):
+                if fabs(evaled_lst2xprec[index]) < 100*10**(-2*precision):
                     print("After re-evaluating with twice the digits of precision, |result| dropped to "+str(evaled_lst2xprec[index])+". Setting value to zero")
                     evaled_lst[index] = 0
             index += 1
@@ -107,6 +115,6 @@ mpm.mp.dps = """+str(precision)+"\n"
     # Make sure that all results in evaled_lst *except* zeros are mpm.mpf type!
     for i in range(len(evaled_lst)):
         if evaled_lst[i] != 0:
-            evaled_lst[i] = mpm.mpf(str(evaled_lst[i]))
+            evaled_lst[i] = mpf(str(evaled_lst[i]))
         
     return evaled_lst

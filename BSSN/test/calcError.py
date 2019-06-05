@@ -12,6 +12,7 @@ from datetime import datetime
 
 # Called by runTest
 
+
 def calcError(mod,resultDict,trustedDict,symbolicDict):
 
     resultSet = set(resultDict)
@@ -27,6 +28,8 @@ def calcError(mod,resultDict,trustedDict,symbolicDict):
         if trustedMinusResult != set([]):
             logging.error('Trusted Dictionary variables not in Calculated Dictionary: \n\t' + str(trustedMinusResult))
         return False
+
+    del resultSet, trustedSet
 
 
     # For each variable, print calculated and trusted values
