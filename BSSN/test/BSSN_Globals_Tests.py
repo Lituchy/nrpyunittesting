@@ -20,6 +20,9 @@ logging.basicConfig(level=logging.INFO)
 # Python unittest class
 class TestBSSNGlobals(unittest.TestCase):
 
+    def setUp(self):
+        printit()
+
     # Testing globals for ADM in terms of BSSN module
     def testADMGlobals(self):
 
@@ -209,6 +212,12 @@ class TestBSSNGlobals(unittest.TestCase):
 
         # TODO: Call runTest with arguments (self, ModDict, locals())
         runTest(self, ModDict, locals())
+
+
+def printit():
+    import threading
+    threading.Timer(300.0, printit).start()
+    logging.info("\nStill running!\n")
 
 
 # Necessary for unittest class to work properly
