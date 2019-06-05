@@ -39,7 +39,6 @@ def runTest(self, ModDict, locs):
         for mod in resultMods:
             tempDict[mod] = resultDict[mod]
 
-
         # Updates resultDict to be in this new order
         resultDict = tempDict
         del tempDict, resultMods
@@ -52,7 +51,6 @@ def runTest(self, ModDict, locs):
 
         # Generating variable list and name list for module
         (varList, nameList) = moduleDictToList(res)
-
 
         # Calculating numerical list for module
         numList = listToValueList(varList, first_time)

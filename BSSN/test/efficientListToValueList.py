@@ -5,28 +5,34 @@ from random import seed, random
 from re import sub
 from trustedValuesDict import trustedValuesDict
 
-# Takes in a list [lst] and returns the list with each index evaluated 
+
+# Takes in a list [lst] and returns the list with each index evaluated
 # according to parameters (seed, precision) in trustedValues
 
 # Called by runTest
 
 
-def listToValueList(lst,first_time):
-    
-    precision = trustedValuesDict["precision"]
+resultDict = {'BSSN_T4UUmunu_vars': {'rho': rho, 'S': S, 'sD': [sD0, sD1, sD2], 'sDD': [[sDD00, sDD01, sDD02], [sDD01, sDD11, sDD12], [sDD02, sDD12, sDD22]]}}
 
+
+def efficientListToValueList(lst, first_time):
+
+    precision = trustedValuesDict["precision"]
     mp.dps = precision
-    
+
     # Replace all integer fractions with the correct floating point representation:
     index = 0
-    for index, expr in enumerate(lst):
+    orig_lst = []
+    for expr in lst:
+        orig_lst.append(expr)
         string = srepr(expr)
         string2 = sub('Rational\(([0-9]+), ([0-9]+)\)',
-                         "((Float('\\1',"+str(2*precision)+"))/(Float('\\2',"+str(2*precision)+")))", string)
+                      "((Float('\\1'," + str(2 * precision) + "))/(Float('\\2'," + str(2 * precision) + ")))", string)
         string3 = sub('Rational\((-[0-9]+), ([0-9]+)\)',
-                         "((Float('\\1',"+str(2*precision)+"))/(Float('\\2',"+str(2*precision)+")))", string2)
+                      "((Float('\\1'," + str(2 * precision) + "))/(Float('\\2'," + str(2 * precision) + ")))", string2)
         newexpr = eval(string3)
         lst[index] = newexpr
+        index += 1
 
         del string, string2, string3, newexpr
 
@@ -47,7 +53,8 @@ def listToValueList(lst,first_time):
         list_symbol_strings.append(str(var))
 
     # https://stackoverflow.com/questions/13668393/python-sorting-two-lists
-    list_symbol_strings, list_free_symbols = (list(x) for x in zip(*sorted(zip(list_symbol_strings, list_free_symbols))))
+    list_symbol_strings, list_free_symbols = (list(x) for x in
+                                              zip(*sorted(zip(list_symbol_strings, list_free_symbols))))
 
     del list_symbol_strings
 
@@ -64,20 +71,20 @@ def listToValueList(lst,first_time):
     stringexec = """
 from sympy import Integer,Symbol,symbols,simplify,Rational,Function,srepr,sin,cos,exp,log,Abs,Add,Mul,Pow,preorder_traversal,N,Float,S,var,sympify
 import mpmath as mpm
-mpm.mp.dps = """+str(precision)+"\n"
-    
+mpm.mp.dps = """ + str(precision) + "\n"
+
     for var in list_free_symbols:
         # BE CAREFUL: You must declare all variables using mpm.mpf('string')!
         #   http://mpmath.org/doc/1.1.0/basics.html#providing-correct-input
         # First make sure M_PI is set to its correct value, pi, to the desired number of significant digits:
         if str(var) == "M_PI":
-            stringexec += str(var)+" = mpm.pi\n"
+            stringexec += str(var) + " = mpm.pi\n"
         # Then make sure M_SQRT1_2 is set to its correct value, 1/sqrt(2), to the desired number of significant digits:
         elif str(var) == "M_SQRT1_2":
-            stringexec += str(var)+" = mpm.mpf(1/mpm.sqrt(2))\n"
+            stringexec += str(var) + " = mpm.mpf(1/mpm.sqrt(2))\n"
         # All other free variables are set to random numbers
         else:
-            stringexec += str(var)+" = mpm.mpf(\'"+str(sqrt(mpf(random())))+"\')\n"
+            stringexec += str(var) + " = mpm.mpf(\'" + str(sqrt(mpf(random()))) + "\')\n"
 
     del list_free_symbols
 
@@ -95,15 +102,16 @@ mpm.mp.dps = """+str(precision)+"\n"
     if first_time:
         index = 0
         for result in evaled_lst:
-            if result != 0 and fabs(result) < 100*10**(-precision):
-                print("Found |result| ("+str(fabs(result))+") close to zero. Checking if indeed it should be zero.")
+            if result != 0 and fabs(result) < 100 * 10 ** (-precision):
+                print("Found |result| (" + str(fabs(result)) + ") close to zero. Checking if indeed it should be zero.")
                 # Now double the precision and redo. If number drops in magnitude
                 loc2xprec = {}
-                stringexec = stringexec.replace("mpm.mp.dps = "+str(precision),"mpm.mp.dps = "+str(2*precision))
+                stringexec = stringexec.replace("mpm.mp.dps = " + str(precision), "mpm.mp.dps = " + str(2 * precision))
                 exec(stringexec, {}, loc2xprec)
                 evaled_lst2xprec = loc2xprec['lst']
-                if fabs(evaled_lst2xprec[index]) < 100*10**(-2*precision):
-                    print("After re-evaluating with twice the digits of precision, |result| dropped to "+str(evaled_lst2xprec[index])+". Setting value to zero")
+                if fabs(evaled_lst2xprec[index]) < 100 * 10 ** (-2 * precision):
+                    print("After re-evaluating with twice the digits of precision, |result| dropped to " + str(
+                        evaled_lst2xprec[index]) + ". Setting value to zero")
                     evaled_lst[index] = 0
             index += 1
 
@@ -111,5 +119,5 @@ mpm.mp.dps = """+str(precision)+"\n"
     for i in range(len(evaled_lst)):
         if evaled_lst[i] != 0:
             evaled_lst[i] = mpf(str(evaled_lst[i]))
-        
+
     return evaled_lst

@@ -4,10 +4,7 @@ import unittest
 import logging
 from BSSN.test.runTest import runTest
 from BSSN.test.functionsAndGlobals import functionsAndGlobals
-
-# TODO Kevin:
-# Look into git commit
-# Look into pulling last correct travis build and print difference
+from RepeatedTimer import RepeatedTimer
 
 # TODO: Change level based on desired amount of output.
 # ERROR -> Outputs minimal information -- only when there's an error
@@ -15,6 +12,13 @@ from BSSN.test.functionsAndGlobals import functionsAndGlobals
 # DEBUG -> Displays all pairs of values being compared, as well as everything in INFO
 # NOTSET -> Displays symbolic dictionary for all modules, as well as everything in DEBUG
 logging.basicConfig(level=logging.INFO)
+
+# https://stackoverflow.com/questions/3393612/run-certain-code-every-n-seconds/13151299
+# Creates a threaded timer object that prints to the console every 5 minutes
+
+def printFn(msg):
+    logging.info(msg)
+Timer = RepeatedTimer(300, printFn, "\nPrinting every 5 minutes to prevent timeouts.\n")
 
 
 # Python unittest class
@@ -97,12 +101,12 @@ class TestBSSNGlobals(unittest.TestCase):
         ModDict = {
             'BrillLindquist': functionsAndGlobals(['BrillLindquist(ComputeADMGlobalsOnly = True)'], CartGlobalList),
 
-            'ShiftedKerrSchild': functionsAndGlobals(['ShiftedKerrSchild(ComputeADMGlobalsOnly = True)'],
-                                                     SphGlobalList),
-
-            'StaticTrumpet': functionsAndGlobals(['StaticTrumpet(ComputeADMGlobalsOnly = True)'], SphGlobalList),
-
-            'UIUCBlackHole': functionsAndGlobals(['UIUCBlackHole(ComputeADMGlobalsOnly = True)'], SphGlobalList)
+            # 'ShiftedKerrSchild': functionsAndGlobals(['ShiftedKerrSchild(ComputeADMGlobalsOnly = True)'],
+            #                                          SphGlobalList),
+            #
+            # 'StaticTrumpet': functionsAndGlobals(['StaticTrumpet(ComputeADMGlobalsOnly = True)'], SphGlobalList),
+            #
+            # 'UIUCBlackHole': functionsAndGlobals(['UIUCBlackHole(ComputeADMGlobalsOnly = True)'], SphGlobalList)
         }
 
         # TODO: Call runTest with arguments (self, ModDict, locals())
@@ -184,7 +188,7 @@ class TestBSSNGlobals(unittest.TestCase):
         ModDict = {
             'RHS': functionsAndGlobals(['BSSN_RHSs()'], RHSGlobalList),
 
-            'gaugeRHS': functionsAndGlobals(['BSSN_gauge_RHSs()'], gaugeRHSGlobalList)
+            'gaugeRHS': functionsAndGlobals(['BSSN_gauge_RHSs()'], gaugeRHSGlobalList),
         }
 
         # TODO: Call runTest with arguments (self, ModDict, locals())
@@ -213,15 +217,6 @@ class TestBSSNGlobals(unittest.TestCase):
 
         # TODO: Call runTest with arguments (self, ModDict, locals())
         runTest(self, ModDict, locals())
-
-
-# https://stackoverflow.com/questions/3393612/run-certain-code-every-n-seconds/13151299
-def printRunning():
-    logging.info("\nCurrently running!\n")
-
-
-from RepeatedTimer import RepeatedTimer
-Timer = RepeatedTimer(300, printRunning)
 
 
 # Necessary for unittest class to work properly
