@@ -12,9 +12,6 @@ def isFirstTime(ModDict):
     result = []
 
     for mod in ModDict:
-        if not (mod + 'Globals') in trustedValuesDict:
-            result.append(True)
-        else:
-            result.append(False)
+        result.append((mod + 'Globals') not in trustedValuesDict)
 
     return result

@@ -4,6 +4,7 @@ from calcError import calcError
 from firstTimePrint import firstTimePrint
 from evaluateGlobals import evaluateGlobals
 from moduleDictToList import moduleDictToList
+from efficientListToValueList import efficientListToValueList
 from listToValueList import listToValueList
 from isFirstTime import isFirstTime
 from createTrustedGlobalsDict import createTrustedGlobalsDict
@@ -53,7 +54,7 @@ def runTest(self, ModDict, locs):
         (varList, nameList) = moduleDictToList(res)
 
         # Calculating numerical list for module
-        numList = listToValueList(varList, first_time)
+        numList = efficientListToValueList(varList, first_time)
 
         # Initalizing dictionary for the current module
         modDict = dict()

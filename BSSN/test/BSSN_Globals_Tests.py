@@ -29,7 +29,7 @@ class TestBSSNGlobals(unittest.TestCase):
         Timer.stop()
 
     # Testing globals for ADM in terms of BSSN module
-    def testADMGlobals(self):
+    def ftestADMGlobals(self):
 
         # TODO: Import modules to be tested
         # Note: Even though it says the modules are unused, these imports are vital for runTest to work properly.
@@ -54,7 +54,7 @@ class TestBSSNGlobals(unittest.TestCase):
         runTest(self, ModDict, locals())
 
     # Testing globals for BSSN Constraints
-    def testConstraintsGlobals(self):
+    def ftestConstraintsGlobals(self):
 
         # TODO: Import modules to be tested
         # Note: Even though it says the modules are unused, these imports are vital for runTest to work properly.
@@ -78,7 +78,7 @@ class TestBSSNGlobals(unittest.TestCase):
         runTest(self, ModDict, locals())
         
     # Testing globals for BSSN exact modules
-    def testExactGlobals(self):
+    def ftestExactGlobals(self):
 
         # TODO: Import modules to be tested
         # Note: Even though it says the modules are unused, these imports are vital for runTest to work properly.
@@ -101,19 +101,19 @@ class TestBSSNGlobals(unittest.TestCase):
         ModDict = {
             'BrillLindquist': functionsAndGlobals(['BrillLindquist(ComputeADMGlobalsOnly = True)'], CartGlobalList),
 
-            # 'ShiftedKerrSchild': functionsAndGlobals(['ShiftedKerrSchild(ComputeADMGlobalsOnly = True)'],
-            #                                          SphGlobalList),
-            #
-            # 'StaticTrumpet': functionsAndGlobals(['StaticTrumpet(ComputeADMGlobalsOnly = True)'], SphGlobalList),
-            #
-            # 'UIUCBlackHole': functionsAndGlobals(['UIUCBlackHole(ComputeADMGlobalsOnly = True)'], SphGlobalList)
+            'ShiftedKerrSchild': functionsAndGlobals(['ShiftedKerrSchild(ComputeADMGlobalsOnly = True)'],
+                                                     SphGlobalList),
+
+            'StaticTrumpet': functionsAndGlobals(['StaticTrumpet(ComputeADMGlobalsOnly = True)'], SphGlobalList),
+
+            'UIUCBlackHole': functionsAndGlobals(['UIUCBlackHole(ComputeADMGlobalsOnly = True)'], SphGlobalList)
         }
 
         # TODO: Call runTest with arguments (self, ModDict, locals())
         runTest(self, ModDict, locals())
 
     # Testing globals for BSSN Psi4 Globals
-    def testPsi4Globals(self):
+    def ftestPsi4Globals(self):
 
         # TODO: Import modules to be tested
         # Note: Even though it says the modules are unused, these imports are vital for runTest to work properly.
@@ -141,7 +141,7 @@ class TestBSSNGlobals(unittest.TestCase):
         runTest(self, ModDict, locals())
 
     # Testing globals for BSSN quantities
-    def testQuantitiesGlobals(self):
+    def ftestQuantitiesGlobals(self):
 
         # TODO: Import modules to be tested
         # Note: Even though it says the modules are unused, these imports are vital for runTest to work properly.
@@ -195,7 +195,7 @@ class TestBSSNGlobals(unittest.TestCase):
         runTest(self, ModDict, locals())
 
     # Testing globals for BSSN T4UUmunu_vars
-    def testT4UUGlobals(self):
+    def ftestT4UUGlobals(self):
 
         # TODO: Import modules to be tested
         # Note: Even though it says the modules are unused, these imports are vital for runTest to work properly.
