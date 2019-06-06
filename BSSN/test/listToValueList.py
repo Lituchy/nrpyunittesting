@@ -52,14 +52,13 @@ def listToValueList(lst, first_time):
     # Set the random seed according to trustedValues.seed:
     random.seed(trustedValuesDict["seed"])
 
-
     # Next we will write a short Python code that first declares all
-    #    of the free variables in the "everything" expression
-    #    to random values with 30 significant digits of precision.
-    #    (This is accomplished by calling random.random() to get
-    #     a 16-significant-digit random number between 0 and 1,
-    #     and then taking the 30-significant-digit square root
-    #     of that number.)
+    # of the free variables in the "everything" expression
+    # to random values with 30 significant digits of precision.
+    # (This is accomplished by calling random.random() to get
+    # a 16-significant-digit random number between 0 and 1,
+    # and then taking the 30-significant-digit square root
+    # of that number.)
     stringexec = """
 from sympy import Integer,Symbol,symbols,simplify,Rational,Function,srepr,sin,cos,exp,log,Abs,Add,Mul,Pow,preorder_traversal,N,Float,S,var,sympify
 import mpmath as mpm

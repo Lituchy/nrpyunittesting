@@ -29,7 +29,7 @@ class TestBSSNGlobals(unittest.TestCase):
         Timer.stop()
 
     # Testing globals for ADM in terms of BSSN module
-    def ftestADMGlobals(self):
+    def testADMGlobals(self):
 
         # TODO: Import modules to be tested
         # Note: Even though it says the modules are unused, these imports are vital for runTest to work properly.
@@ -54,7 +54,7 @@ class TestBSSNGlobals(unittest.TestCase):
         runTest(self, ModDict, locals())
 
     # Testing globals for BSSN Constraints
-    def ftestConstraintsGlobals(self):
+    def testConstraintsGlobals(self):
 
         # TODO: Import modules to be tested
         # Note: Even though it says the modules are unused, these imports are vital for runTest to work properly.
@@ -78,7 +78,7 @@ class TestBSSNGlobals(unittest.TestCase):
         runTest(self, ModDict, locals())
         
     # Testing globals for BSSN exact modules
-    def ftestExactGlobals(self):
+    def testExactGlobals(self):
 
         # TODO: Import modules to be tested
         # Note: Even though it says the modules are unused, these imports are vital for runTest to work properly.
@@ -113,7 +113,7 @@ class TestBSSNGlobals(unittest.TestCase):
         runTest(self, ModDict, locals())
 
     # Testing globals for BSSN Psi4 Globals
-    def ftestPsi4Globals(self):
+    def testPsi4Globals(self):
 
         # TODO: Import modules to be tested
         # Note: Even though it says the modules are unused, these imports are vital for runTest to work properly.
@@ -141,7 +141,7 @@ class TestBSSNGlobals(unittest.TestCase):
         runTest(self, ModDict, locals())
 
     # Testing globals for BSSN quantities
-    def ftestQuantitiesGlobals(self):
+    def testQuantitiesGlobals(self):
 
         # TODO: Import modules to be tested
         # Note: Even though it says the modules are unused, these imports are vital for runTest to work properly.
@@ -195,7 +195,7 @@ class TestBSSNGlobals(unittest.TestCase):
         runTest(self, ModDict, locals())
 
     # Testing globals for BSSN T4UUmunu_vars
-    def ftestT4UUGlobals(self):
+    def testT4UUGlobals(self):
 
         # TODO: Import modules to be tested
         # Note: Even though it says the modules are unused, these imports are vital for runTest to work properly.
