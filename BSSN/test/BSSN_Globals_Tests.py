@@ -16,8 +16,11 @@ logging.basicConfig(level=logging.INFO)
 # https://stackoverflow.com/questions/3393612/run-certain-code-every-n-seconds/13151299
 # Creates a threaded timer object that prints to the console every 5 minutes
 
+
 def printFn(msg):
     logging.info(msg)
+
+
 Timer = RepeatedTimer(300, printFn, "\nPrinting every 5 minutes to prevent timeouts.\n")
 
 
