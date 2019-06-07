@@ -36,20 +36,11 @@ def evaluateGlobals(ModDict,oldGlobals):
         for glob in funcGlobDict['globalList']:
             stringexec += glob + '=' + mod + '.' + glob + '\n'
 
-        del function, glob, funcGlobDict
-
-        # Assigning newGlobals
-        stringexec += 'newGlobals = globals()'
-
         # Initializing location 
         loc = {}
 
-        # Executing string of execution with current globals
-        # and storing resulting globals in loc
+        # Executing string of execution with current globals and storing resulting globals in loc
         exec(stringexec,oldGlobals,loc)
-
-        # Deleting self-reference to newGlobals
-        del loc['newGlobals']
         
         # Storing the module-variable pair [mod],[loc] into the dictionary [resultDict]
         resultDict[mod] = loc

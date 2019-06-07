@@ -5,6 +5,7 @@ import getVariableDimension as getVarDim
 # list [nameList] is the respective corresponding name for each expression in [varList].
 # Example: varList[0] -> r/(M+r) 
 #          nameList[0] -> 'alphaSph'
+# Note: Not currently equipped to deal with any tensors of rank >= 5
 
 # Called by runTest
 

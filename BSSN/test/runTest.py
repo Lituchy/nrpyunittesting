@@ -8,6 +8,8 @@ from efficientListToValueList import efficientListToValueList
 from listToValueList import listToValueList
 from isFirstTime import isFirstTime
 from createTrustedGlobalsDict import createTrustedGlobalsDict
+import cProfile
+from time import time
 
 
 # runTest takes in :
@@ -23,8 +25,12 @@ def runTest(self, ModDict, locs):
     # Creating trusted dictionary based off names of modules in ModDict
     TrustedDict = createTrustedGlobalsDict(ModDict, first_times)
 
+    t = time()
+
     # Creating dictionary of expressions for all modules in ModDict
     resultDict = evaluateGlobals(ModDict, locs)
+
+    logging.info(str(time()-t) + ' seconds to run evaluateGlobals')
 
     del ModDict
 
@@ -53,14 +59,21 @@ def runTest(self, ModDict, locs):
         # Generating variable list and name list for module
         (varList, nameList) = moduleDictToList(res)
 
+        # Calculate profile for efficientListToValueList
+        # cProfile.runctx('efficientListToValueList(varList, first_time)', globals(), locals(), sort='tottime')
+
+        t = time()
+
         # Calculating numerical list for module
-        numList = efficientListToValueList(varList, first_time)
+        numList = efficientListToValueList(varList,first_time)
+
+        logging.info(str(time()-t) + ' seconds to run efficientListToValueList')
 
         # Initalizing dictionary for the current module
         modDict = dict()
 
         # Assigning each numerical value to a name in the module's dictionary
-        for num, name in zip(numList, nameList):
+        for name, num in zip(nameList, numList):
             modDict[name] = num
 
         # If being run for the first time, print the code that must be copied into trustedValuesDict
@@ -72,9 +85,11 @@ def runTest(self, ModDict, locs):
 
             symbolicDict = dict()
 
-            # Store symbolic expressions in dictionary
-            for var, name in zip(varList, nameList):
-                symbolicDict[name] = var
+            if logging.getLogger().getEffectiveLevel() == 0:
+
+                # Store symbolic expressions in dictionary
+                for var, name in zip(varList, nameList):
+                    symbolicDict[name] = var
 
             # Calculates the error between modDict and TrustedDict[mod] for the current module
             valuesIdentical = calcError(mod, modDict, TrustedDict[mod], symbolicDict)

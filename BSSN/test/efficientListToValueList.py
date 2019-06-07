@@ -1,8 +1,7 @@
-# from sympy import srepr, Pow, Add, Mul, Float, Symbol, Integer, cos, sin, Abs, evalf
-# WARNING: Importing more than the bare minimum with mpmath will result in errors on eval() below. This is because we need SymPy to evaluate that expression, not mpmath.
+# WARNING: Importing more than the bare minimum with mpmath will result in errors on eval() below.
+# This is because we need SymPy to evaluate that expression, not mpmath.
 from mpmath import mp, mpf, sqrt, pi
 from random import seed, random
-# from re import sub
 from trustedValuesDict import trustedValuesDict
 
 

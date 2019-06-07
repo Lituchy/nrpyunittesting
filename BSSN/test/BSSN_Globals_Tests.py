@@ -5,6 +5,7 @@ import logging
 from BSSN.test.runTest import runTest
 from BSSN.test.functionsAndGlobals import functionsAndGlobals
 from RepeatedTimer import RepeatedTimer
+import cProfile
 
 # TODO: Change level based on desired amount of output.
 # ERROR -> Outputs minimal information -- only when there's an error
@@ -13,10 +14,9 @@ from RepeatedTimer import RepeatedTimer
 # NOTSET -> Displays symbolic dictionary for all modules, as well as everything in DEBUG
 logging.basicConfig(level=logging.INFO)
 
+
 # https://stackoverflow.com/questions/3393612/run-certain-code-every-n-seconds/13151299
 # Creates a threaded timer object that prints to the console every 5 minutes
-
-
 def printFn(msg):
     logging.info(msg)
 

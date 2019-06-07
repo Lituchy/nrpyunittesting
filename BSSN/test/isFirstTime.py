@@ -12,6 +12,8 @@ def isFirstTime(ModDict):
     result = []
 
     for mod in ModDict:
+
+        # Boolean stating whether or not the module has an entry with the proper name in trustedValuesDict
         result.append((mod + 'Globals') not in trustedValuesDict)
 
     return result

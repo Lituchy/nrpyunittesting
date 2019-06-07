@@ -31,7 +31,6 @@ def calcError(mod,resultDict,trustedDict,symbolicDict):
 
     del resultSet, trustedSet
 
-
     # For each variable, print calculated and trusted values
     for var in resultDict:
         resultNum = resultDict[var]
