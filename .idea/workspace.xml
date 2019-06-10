@@ -2,15 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="84f9775a-ff87-4f96-b64b-74cc8f43cddb" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/BSSN/test/testListToValueList.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BSSN/test/BSSN_Globals_Tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/BSSN/test/BSSN_Globals_Tests.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSSN/test/calcError.py" beforeDir="false" afterPath="$PROJECT_DIR$/BSSN/test/calcError.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BSSN/test/efficientListToValueList.py" beforeDir="false" afterPath="$PROJECT_DIR$/BSSN/test/efficientListToValueList.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSSN/test/evaluateGlobals.py" beforeDir="false" afterPath="$PROJECT_DIR$/BSSN/test/evaluateGlobals.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSSN/test/isFirstTime.py" beforeDir="false" afterPath="$PROJECT_DIR$/BSSN/test/isFirstTime.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSSN/test/moduleDictToList.py" beforeDir="false" afterPath="$PROJECT_DIR$/BSSN/test/moduleDictToList.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSSN/test/runTest.py" beforeDir="false" afterPath="$PROJECT_DIR$/BSSN/test/runTest.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -32,11 +25,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/BSSN/test/BSSN_Globals_Tests.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="120" column="43" lean-forward="true" selection-start-line="120" selection-start-column="43" selection-end-line="120" selection-end-column="43" />
+            <state relative-caret-position="464">
+              <caret line="172" column="8" lean-forward="true" selection-start-line="172" selection-start-column="8" selection-end-line="172" selection-end-column="8" />
               <folding>
                 <element signature="e#48#63#0" expanded="true" />
               </folding>
@@ -45,9 +38,21 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/BSSN/test/efficientListToValueList.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="213">
+              <caret line="52" column="30" lean-forward="true" selection-start-line="52" selection-start-column="30" selection-end-line="52" selection-end-column="30" />
+              <folding>
+                <element signature="e#172#208#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BSSN/test/testListToValueList.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
+            <state relative-caret-position="225">
               <caret line="43" lean-forward="true" selection-start-line="43" selection-end-line="43" />
               <folding>
                 <element signature="e#172#208#0" expanded="true" />
@@ -56,11 +61,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/BSSN/test/CtestList.C">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/BSSN/test/trustedValuesDict.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1501">
-              <caret line="536" column="25" lean-forward="true" selection-start-line="536" selection-start-column="25" selection-end-line="536" selection-end-column="25" />
+            <state relative-caret-position="-102">
+              <caret line="15" column="94" lean-forward="true" selection-start-line="15" selection-start-column="94" selection-end-line="15" selection-end-column="94" />
             </state>
           </provider>
         </entry>
@@ -157,16 +162,16 @@
         <option value="$PROJECT_DIR$/BSSN/test/moduleDictToList.py" />
         <option value="$PROJECT_DIR$/BSSN/test/calcError.py" />
         <option value="$PROJECT_DIR$/BSSN/test/runTest.py" />
-        <option value="$PROJECT_DIR$/BSSN/test/efficientListToValueList.py" />
         <option value="$PROJECT_DIR$/BSSN/test/vars.C" />
-        <option value="$PROJECT_DIR$/BSSN/test/BSSN_Globals_Tests.py" />
         <option value="$PROJECT_DIR$/BSSN/test/CtestList.C" />
         <option value="$PROJECT_DIR$/BSSN/test/testListToValueList.py" />
+        <option value="$PROJECT_DIR$/BSSN/test/efficientListToValueList.py" />
+        <option value="$PROJECT_DIR$/BSSN/test/BSSN_Globals_Tests.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="439" />
+    <option name="x" value="334" />
     <option name="y" value="35" />
     <option name="width" value="1390" />
     <option name="height" value="1004" />
@@ -208,7 +213,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.testListToValueList">
+  <component name="RunManager" selected="Python tests.Unittests for BSSN_Globals_Tests.TestBSSNGlobals">
     <configuration name="run_BSSN_tests.sh" type="BashConfigurationType" factoryName="Bash" temporary="true">
       <module name="nrpyunittesting" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -299,9 +304,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python tests.Unittests for BSSN_Globals_Tests.TestBSSNGlobals" />
         <item itemvalue="Python.testListToValueList" />
         <item itemvalue="Python.efficientListToValueList" />
-        <item itemvalue="Python tests.Unittests for BSSN_Globals_Tests.TestBSSNGlobals" />
         <item itemvalue="Bash.run_BSSN_tests.sh" />
         <item itemvalue="Python.isFirstTime" />
       </list>
@@ -321,9 +326,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests_for_BSSN_Globals_Tests_TestBSSNGlobals_testRHSGlobals - 2019.06.05 at 10h 52m 09s.xml">
-      <configuration name="Unittests for BSSN_Globals_Tests.TestBSSNGlobals.testRHSGlobals" configurationId="tests" />
-    </history-entry>
     <history-entry file="Unittests_for_BSSN_Globals_Tests_TestBSSNGlobals_testQuantitiesGlobals - 2019.06.05 at 10h 53m 08s.xml">
       <configuration name="Unittests for BSSN_Globals_Tests.TestBSSNGlobals.testQuantitiesGlobals" configurationId="tests" />
     </history-entry>
@@ -351,6 +353,9 @@
     <history-entry file="Unittests_for_BSSN_Globals_Tests_TestBSSNGlobals - 2019.06.06 at 13h 30m 01s.xml">
       <configuration name="Unittests for BSSN_Globals_Tests.TestBSSNGlobals" configurationId="tests" />
     </history-entry>
+    <history-entry file="Unittests_for_BSSN_Globals_Tests_TestBSSNGlobals - 2019.06.10 at 10h 22m 03s.xml">
+      <configuration name="Unittests for BSSN_Globals_Tests.TestBSSNGlobals" configurationId="tests" />
+    </history-entry>
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -362,21 +367,20 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="439" y="35" width="1390" height="1004" extended-state="0" />
-    <editor active="true" />
+    <frame x="334" y="35" width="1390" height="1004" extended-state="0" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.24981844" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" weight="0.32991952" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32792583" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32792583" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32792583" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32902467" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32902467" />
-      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49891067" weight="0.3244496" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="8" sideWeight="0.49891067" visible="true" weight="0.3244496" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50108933" side_tool="true" weight="0.32902467" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.32902467" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -618,16 +622,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BSSN/test/efficientListToValueList.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" selection-start-line="5" selection-end-line="5" />
-          <folding>
-            <element signature="e#172#208#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/BSSN/test/vars">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="369">
@@ -652,13 +646,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BSSN/test/trustedValuesDict.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="213">
-          <caret line="15" column="94" lean-forward="true" selection-start-line="15" selection-start-column="94" selection-end-line="15" selection-end-column="94" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/BSSN/test/run_BSSN_tests.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
@@ -676,19 +663,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BSSN/test/BSSN_Globals_Tests.py">
+    <entry file="file://$PROJECT_DIR$/BSSN/test/trustedValuesDict.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="120" column="43" lean-forward="true" selection-start-line="120" selection-start-column="43" selection-end-line="120" selection-end-column="43" />
-          <folding>
-            <element signature="e#48#63#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="-102">
+          <caret line="15" column="94" lean-forward="true" selection-start-line="15" selection-start-column="94" selection-end-line="15" selection-end-column="94" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BSSN/test/CtestList.C">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="661" column="30" lean-forward="true" selection-start-line="661" selection-start-column="30" selection-end-line="661" selection-end-column="30" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/BSSN/test/testListToValueList.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
+        <state relative-caret-position="225">
           <caret line="43" lean-forward="true" selection-start-line="43" selection-end-line="43" />
           <folding>
             <element signature="e#172#208#0" expanded="true" />
@@ -696,10 +687,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BSSN/test/CtestList.C">
+    <entry file="file://$PROJECT_DIR$/BSSN/test/efficientListToValueList.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1501">
-          <caret line="536" column="25" lean-forward="true" selection-start-line="536" selection-start-column="25" selection-end-line="536" selection-end-column="25" />
+        <state relative-caret-position="213">
+          <caret line="52" column="30" lean-forward="true" selection-start-line="52" selection-start-column="30" selection-end-line="52" selection-end-column="30" />
+          <folding>
+            <element signature="e#172#208#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BSSN/test/BSSN_Globals_Tests.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="464">
+          <caret line="172" column="8" lean-forward="true" selection-start-line="172" selection-start-column="8" selection-end-line="172" selection-end-column="8" />
+          <folding>
+            <element signature="e#48#63#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

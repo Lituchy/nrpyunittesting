@@ -3,6 +3,7 @@
 from mpmath import mp, mpf, sqrt, pi
 from random import seed, random
 from trustedValuesDict import trustedValuesDict
+from sympy import cse
 
 
 # Takes in a list [lst] and returns the list with each index evaluated
@@ -39,12 +40,26 @@ def efficientListToValueList(varList, first_time):
     # Evaluating each expression using the values in variable_dictionary
     value_list = []
     for expression in varList:
-        # Getting free symbols for expression
-        keys = expression.free_symbols
+        # Copying variable_dictionary into a new variable dictionary
+        new_var_dict = dict(variable_dictionary)
+
+        # Using sympy's cse algorithm to optimize our value substitution
+        repl, redu = cse(expression, order='none')
+        redu = redu[0]
+
+        # Replacing old expressions with new expressions and putting result in new variable dictionary
+        for new, old in repl:
+            keys = old.free_symbols
+            for key in keys:
+                old = old.subs(key, new_var_dict[key])
+            new_var_dict[new] = old
+
+        # Evaluating expression after cse optimization
+        keys = redu.free_symbols
         for key in keys:
-            # Replacing each free symbol with its value in variable_dictionary
-            expression = expression.subs(key, variable_dictionary[key])
-        # Create list of values found by evaluating expression
-        value_list.append(mpf(expression))
+            redu = redu.subs(key, new_var_dict[key])
+
+        # Appending our result to value_list
+        value_list.append(mpf(redu))
 
     return value_list
