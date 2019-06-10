@@ -13,7 +13,7 @@ from trustedValuesDict import trustedValuesDict
 
 def createTrustedGlobalsDict(ModDict, first_times):
 
-    assert(len(ModDict) == len(first_times))
+    assert len(ModDict) == len(first_times)
 
     TrustedDict = dict()
     

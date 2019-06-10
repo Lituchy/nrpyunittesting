@@ -79,8 +79,26 @@ class TestFunctions(unittest.TestCase):
 
         logging.info('\nAll getVariableDimension tests passed.\n')
 
-    def ftestIsFirstTime(self):
-        self.assertTrue(False)
+    def testIsFirstTime(self):
+        from isFirstTime import isFirstTime
+
+        ModDict = {'BrillLindquist': 'Hello World'}
+        FakeModDict = {'FakeModule': 'Goodbye World'}
+
+        self.assertEqual(isFirstTime({}), [])
+
+        self.assertEqual(isFirstTime(ModDict), [False])
+        self.assertEqual(isFirstTime(FakeModDict), [True])
+
+        ModDict.update(FakeModDict)
+
+        self.assertEqual(isFirstTime(ModDict), [False, True])
+
+        ModDictWrongCapitalization = {'brillLindquist': 'Foo'}
+
+        self.assertEqual(isFirstTime(ModDictWrongCapitalization), [True])
+
+        logging.info('\nAll isFirstTime tests passed.\n')
 
     def ftestListToValueList(self):
         self.assertTrue(False)
