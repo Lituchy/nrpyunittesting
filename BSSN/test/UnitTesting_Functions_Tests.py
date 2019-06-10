@@ -24,8 +24,37 @@ class TestFunctions(unittest.TestCase):
     def ftestEvaluateGlobals(self):
         self.assertTrue(False)
 
-    def ftestFunctionsAndGlobals(self):
-        self.assertTrue(False)
+    def testFunctionsAndGlobals(self):
+        from functionsAndGlobals import functionsAndGlobals
+
+        basicFunctionList = ['func1(), func2()']
+        basicGlobalList = ['x', 'y', 'z']
+
+        self.assertEqual(functionsAndGlobals([], []), {'functionList': [], 'globalList': []})
+
+        self.assertEqual(functionsAndGlobals([], basicGlobalList),
+                         {'functionList': [], 'globalList': basicGlobalList})
+        self.assertEqual(functionsAndGlobals(basicFunctionList, []),
+                         {'functionList': basicFunctionList, 'globalList': []})
+        self.assertEqual(functionsAndGlobals(basicFunctionList, basicGlobalList),
+                         {'functionList': basicFunctionList, 'globalList': basicGlobalList})
+
+        with self.assertRaises(AssertionError):
+            functionsAndGlobals([1,'hello','world'], [])
+
+        with self.assertRaises(AssertionError):
+            functionsAndGlobals(['hello','world'], [2])
+
+        with self.assertRaises(AssertionError):
+            functionsAndGlobals(['hello', 'world', 42], basicGlobalList)
+
+        with self.assertRaises(AssertionError):
+            functionsAndGlobals('function()', [])
+
+        with self.assertRaises(AssertionError):
+            functionsAndGlobals([], 'glob')
+
+        logging.info('\nAll functionsAndGlobals tests passed.\n')
 
     def testGetVariableDimension(self):
         from getVariableDimension import getVariableDimension
