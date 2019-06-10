@@ -44,22 +44,22 @@ def efficientListToValueList(varList, first_time):
         new_var_dict = dict(variable_dictionary)
 
         # Using sympy's cse algorithm to optimize our value substitution
-        repl, redu = cse(expression, order='none')
-        redu = redu[0]
+        replace, reduce = cse(expression, order='none')
+        reduce = reduce[0]
 
         # Replacing old expressions with new expressions and putting result in new variable dictionary
-        for new, old in repl:
+        for new, old in replace:
             keys = old.free_symbols
             for key in keys:
                 old = old.subs(key, new_var_dict[key])
             new_var_dict[new] = old
 
         # Evaluating expression after cse optimization
-        keys = redu.free_symbols
+        keys = reduce.free_symbols
         for key in keys:
-            redu = redu.subs(key, new_var_dict[key])
+            reduce = reduce.subs(key, new_var_dict[key])
 
         # Appending our result to value_list
-        value_list.append(mpf(redu))
+        value_list.append(mpf(reduce))
 
     return value_list

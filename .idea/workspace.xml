@@ -2,8 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="84f9775a-ff87-4f96-b64b-74cc8f43cddb" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/BSSN/test/TestingModule.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BSSN/test/UnitTesting_Functions_Tests.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BSSN/test/testEvaluateGlobals.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BSSN/test/BSSN_Globals_Tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/BSSN/test/BSSN_Globals_Tests.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BSSN/test/efficientListToValueList.py" beforeDir="false" afterPath="$PROJECT_DIR$/BSSN/test/efficientListToValueList.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSSN/test/evaluateGlobals.py" beforeDir="false" afterPath="$PROJECT_DIR$/BSSN/test/evaluateGlobals.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSSN/test/getVariableDimension.py" beforeDir="false" afterPath="$PROJECT_DIR$/BSSN/test/getVariableDimension.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSSN/test/runTest.py" beforeDir="false" afterPath="$PROJECT_DIR$/BSSN/test/runTest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSSN/test/run_BSSN_tests.sh" beforeDir="false" afterPath="$PROJECT_DIR$/BSSN/test/run_BSSN_tests.sh" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -19,17 +27,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BSSN/test/run_BSSN_tests.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" column="4" lean-forward="true" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
+            <state relative-caret-position="75">
+              <caret line="5" column="2" selection-start-line="5" selection-start-column="2" selection-end-line="5" selection-end-column="2" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BSSN/test/BSSN_Globals_Tests.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="464">
-              <caret line="172" column="8" lean-forward="true" selection-start-line="172" selection-start-column="8" selection-end-line="172" selection-end-column="8" />
+            <state relative-caret-position="120">
+              <caret line="8" selection-start-line="8" selection-end-line="13" selection-end-column="39" />
               <folding>
                 <element signature="e#48#63#0" expanded="true" />
               </folding>
@@ -38,34 +46,31 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/BSSN/test/efficientListToValueList.py">
+        <entry file="file://$PROJECT_DIR$/BSSN/test/UnitTesting_Functions_Tests.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="213">
-              <caret line="52" column="30" lean-forward="true" selection-start-line="52" selection-start-column="30" selection-end-line="52" selection-end-column="30" />
+            <state relative-caret-position="315">
+              <caret line="45" column="65" selection-start-line="45" selection-start-column="65" selection-end-line="45" selection-end-column="65" />
               <folding>
-                <element signature="e#172#208#0" expanded="true" />
+                <element signature="e#1#16#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/BSSN/test/testListToValueList.py">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/BSSN/test/isFirstTime.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="43" lean-forward="true" selection-start-line="43" selection-end-line="43" />
-              <folding>
-                <element signature="e#172#208#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="285">
+              <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/BSSN/test/trustedValuesDict.py">
+        <entry file="file://$PROJECT_DIR$/BSSN/test/getVariableDimension.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-102">
-              <caret line="15" column="94" lean-forward="true" selection-start-line="15" selection-start-column="94" selection-end-line="15" selection-end-column="94" />
+            <state relative-caret-position="180">
+              <caret line="12" column="4" lean-forward="true" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="4" />
             </state>
           </provider>
         </entry>
@@ -81,7 +86,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>trusted</find>
       <find>lambda</find>
       <find>gauge</find>
       <find>rhs.</find>
@@ -111,6 +115,7 @@
       <find>print</find>
       <find>PI</find>
       <find>{</find>
+      <find>cpro</find>
     </findStrings>
     <replaceStrings>
       <replace>test</replace>
@@ -152,27 +157,31 @@
         <option value="$PROJECT_DIR$/.travis.yml" />
         <option value="$PROJECT_DIR$/BSSN/test/RepeatingTimer.py" />
         <option value="$PROJECT_DIR$/BSSN/test/KevinTest.py" />
-        <option value="$PROJECT_DIR$/BSSN/test/getVariableDimension.py" />
         <option value="$PROJECT_DIR$/BSSN/test/RepeatedTimer.py" />
         <option value="$PROJECT_DIR$/BSSN/test/listToValueList.py" />
-        <option value="$PROJECT_DIR$/BSSN/test/trustedValuesDict.py" />
-        <option value="$PROJECT_DIR$/BSSN/test/run_BSSN_tests.sh" />
-        <option value="$PROJECT_DIR$/BSSN/test/evaluateGlobals.py" />
         <option value="$PROJECT_DIR$/BSSN/test/isFirstTime.py" />
         <option value="$PROJECT_DIR$/BSSN/test/moduleDictToList.py" />
         <option value="$PROJECT_DIR$/BSSN/test/calcError.py" />
-        <option value="$PROJECT_DIR$/BSSN/test/runTest.py" />
         <option value="$PROJECT_DIR$/BSSN/test/vars.C" />
         <option value="$PROJECT_DIR$/BSSN/test/CtestList.C" />
         <option value="$PROJECT_DIR$/BSSN/test/testListToValueList.py" />
+        <option value="$PROJECT_DIR$/BSSN/test/trustedValuesDict.py" />
         <option value="$PROJECT_DIR$/BSSN/test/efficientListToValueList.py" />
+        <option value="$PROJECT_DIR$/BSSN/test/evaluateGlobals.py" />
+        <option value="$PROJECT_DIR$/BSSN/test/testEvaluateGlobals.py" />
+        <option value="$PROJECT_DIR$/BSSN/test/runTest.py" />
+        <option value="$PROJECT_DIR$/BSSN/test/UnitTest_Functions_Tests.py" />
         <option value="$PROJECT_DIR$/BSSN/test/BSSN_Globals_Tests.py" />
+        <option value="$PROJECT_DIR$/BSSN/test/run_BSSN_tests.sh" />
+        <option value="$PROJECT_DIR$/BSSN/test/getVariableDimension.py" />
+        <option value="$PROJECT_DIR$/BSSN/test/TestingModule.py" />
+        <option value="$PROJECT_DIR$/BSSN/test/UnitTesting_Functions_Tests.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="334" />
-    <option name="y" value="35" />
+    <option name="x" value="426" />
+    <option name="y" value="24" />
     <option name="width" value="1390" />
     <option name="height" value="1004" />
   </component>
@@ -213,82 +222,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python tests.Unittests for BSSN_Globals_Tests.TestBSSNGlobals">
-    <configuration name="run_BSSN_tests.sh" type="BashConfigurationType" factoryName="Bash" temporary="true">
-      <module name="nrpyunittesting" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="INTERPRETER_PATH" value="/bin/bash" />
-      <option name="PROJECT_INTERPRETER" value="false" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/BSSN/test" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/BSSN/test/run_BSSN_tests.sh" />
-      <option name="PARAMETERS" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="efficientListToValueList" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="nrpyunittesting" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/BSSN/test" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/BSSN/test/efficientListToValueList.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="isFirstTime" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="nrpyunittesting" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/BSSN/test" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/BSSN/test/isFirstTime.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="testListToValueList" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="nrpyunittesting" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/BSSN/test" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/BSSN/test/testListToValueList.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Unittests for BSSN_Globals_Tests.TestBSSNGlobals" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python tests.Unittests for UnitTesting_Functions_Tests.TestFunctions.testRunTest">
+    <configuration name="Unittests for UnitTesting_Functions_Tests.TestFunctions" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="nrpyunittesting" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -298,17 +233,73 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;BSSN_Globals_Tests.TestBSSNGlobals&quot;" />
+      <option name="_new_target" value="&quot;UnitTesting_Functions_Tests.TestFunctions&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Unittests for UnitTesting_Functions_Tests.TestFunctions.testCreateTrustedGlobalsDict" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="nrpyunittesting" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/BSSN/test" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;UnitTesting_Functions_Tests.TestFunctions.testCreateTrustedGlobalsDict&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Unittests for UnitTesting_Functions_Tests.TestFunctions.testGetVariableDimension" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="nrpyunittesting" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/BSSN/test" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;UnitTesting_Functions_Tests.TestFunctions.testGetVariableDimension&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Unittests for UnitTesting_Functions_Tests.TestFunctions.testRunTest" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="nrpyunittesting" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/BSSN/test" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;UnitTesting_Functions_Tests.TestFunctions.testRunTest&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Unittests in UnitTesting_Functions_Tests.py" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="nrpyunittesting" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/BSSN/test" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/BSSN/test/UnitTesting_Functions_Tests.py&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python tests.Unittests for BSSN_Globals_Tests.TestBSSNGlobals" />
-        <item itemvalue="Python.testListToValueList" />
-        <item itemvalue="Python.efficientListToValueList" />
-        <item itemvalue="Bash.run_BSSN_tests.sh" />
-        <item itemvalue="Python.isFirstTime" />
+        <item itemvalue="Python tests.Unittests for UnitTesting_Functions_Tests.TestFunctions.testRunTest" />
+        <item itemvalue="Python tests.Unittests in UnitTesting_Functions_Tests.py" />
+        <item itemvalue="Python tests.Unittests for UnitTesting_Functions_Tests.TestFunctions.testCreateTrustedGlobalsDict" />
+        <item itemvalue="Python tests.Unittests for UnitTesting_Functions_Tests.TestFunctions.testGetVariableDimension" />
+        <item itemvalue="Python tests.Unittests for UnitTesting_Functions_Tests.TestFunctions" />
       </list>
     </recent_temporary>
   </component>
@@ -326,24 +317,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests_for_BSSN_Globals_Tests_TestBSSNGlobals_testQuantitiesGlobals - 2019.06.05 at 10h 53m 08s.xml">
-      <configuration name="Unittests for BSSN_Globals_Tests.TestBSSNGlobals.testQuantitiesGlobals" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_for_BSSN_Globals_Tests_TestBSSNGlobals_testT4UUGlobals - 2019.06.05 at 14h 27m 15s.xml">
-      <configuration name="Unittests for BSSN_Globals_Tests.TestBSSNGlobals.testT4UUGlobals" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_for_BSSN_Globals_Tests_TestBSSNGlobals_testT4UUGlobals - 2019.06.05 at 14h 27m 27s.xml">
-      <configuration name="Unittests for BSSN_Globals_Tests.TestBSSNGlobals.testT4UUGlobals" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_for_BSSN_Globals_Tests_TestBSSNGlobals_testT4UUGlobals - 2019.06.05 at 14h 27m 50s.xml">
-      <configuration name="Unittests for BSSN_Globals_Tests.TestBSSNGlobals.testT4UUGlobals" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_for_BSSN_Globals_Tests_TestBSSNGlobals_testT4UUGlobals - 2019.06.05 at 14h 28m 08s.xml">
-      <configuration name="Unittests for BSSN_Globals_Tests.TestBSSNGlobals.testT4UUGlobals" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_for_BSSN_Globals_Tests_TestBSSNGlobals_testT4UUGlobals - 2019.06.05 at 14h 28m 31s.xml">
-      <configuration name="Unittests for BSSN_Globals_Tests.TestBSSNGlobals.testT4UUGlobals" configurationId="tests" />
-    </history-entry>
     <history-entry file="Unittests_for_BSSN_Globals_Tests_TestBSSNGlobals_testT4UUGlobals - 2019.06.05 at 14h 28m 37s.xml">
       <configuration name="Unittests for BSSN_Globals_Tests.TestBSSNGlobals.testT4UUGlobals" configurationId="tests" />
     </history-entry>
@@ -356,6 +329,24 @@
     <history-entry file="Unittests_for_BSSN_Globals_Tests_TestBSSNGlobals - 2019.06.10 at 10h 22m 03s.xml">
       <configuration name="Unittests for BSSN_Globals_Tests.TestBSSNGlobals" configurationId="tests" />
     </history-entry>
+    <history-entry file="Unittests_for_UnitTest_Functions_Tests_TestFunctions - 2019.06.10 at 13h 54m 03s.xml">
+      <configuration name="Unittests for UnitTest_Functions_Tests.TestFunctions" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_UnitTest_Functions_Tests_TestFunctions - 2019.06.10 at 13h 54m 15s.xml">
+      <configuration name="Unittests for UnitTest_Functions_Tests.TestFunctions" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_UnitTesting_Functions_Tests_TestFunctions_testGetVariableDimension - 2019.06.10 at 14h 17m 59s.xml">
+      <configuration name="Unittests for UnitTesting_Functions_Tests.TestFunctions.testGetVariableDimension" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_UnitTesting_Functions_Tests_TestFunctions_testCreateTrustedGlobalsDict - 2019.06.10 at 14h 18m 07s.xml">
+      <configuration name="Unittests for UnitTesting_Functions_Tests.TestFunctions.testCreateTrustedGlobalsDict" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_UnitTesting_Functions_Tests_py - 2019.06.10 at 14h 19m 42s.xml">
+      <configuration name="Unittests in UnitTesting_Functions_Tests.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_UnitTesting_Functions_Tests_TestFunctions_testRunTest - 2019.06.10 at 14h 20m 30s.xml">
+      <configuration name="Unittests for UnitTesting_Functions_Tests.TestFunctions.testRunTest" configurationId="tests" />
+    </history-entry>
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -367,7 +358,8 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="334" y="35" width="1390" height="1004" extended-state="0" />
+    <frame x="426" y="24" width="1390" height="1004" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.24981844" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -375,13 +367,13 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32792583" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32792583" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39976826" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32902467" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32902467" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="8" sideWeight="0.49891067" visible="true" weight="0.3244496" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50108933" side_tool="true" weight="0.32902467" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="8" sideWeight="0.49817118" visible="true" weight="0.3244496" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50182885" side_tool="true" weight="0.3244496" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.32902467" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -408,27 +400,6 @@
     </layout-to-restore>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/BSSN/ID_ADM_SphorCart.h-ADM_Num_ID_validation">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-74">
-          <caret line="20" column="56" selection-start-line="20" selection-start-column="56" selection-end-line="20" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BSSN/Tmunu_Numerical_Spherical_or_Cartesian_to_BSSNCurvilinear.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="31" column="61" selection-start-line="31" selection-start-column="61" selection-end-line="31" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BSSN/WeylScalars.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="18" column="42" selection-start-line="18" selection-start-column="42" selection-end-line="18" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../site-packages/sympy/core/basic.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
@@ -518,18 +489,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BSSN/test/testEvaluateGlobals.py" />
     <entry file="file://$APPLICATION_HOME_DIR$/helpers/typeshed/stdlib/3/unittest/__init__.pyi">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="38" column="8" selection-start-line="38" selection-start-column="8" selection-end-line="38" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BSSN/ADM_in_terms_of_BSSN.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
-          <caret line="50" column="22" selection-start-line="50" selection-start-column="20" selection-end-line="50" selection-end-column="22" />
         </state>
       </provider>
     </entry>
@@ -557,29 +520,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BSSN/test/firstTimePrint.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="19" selection-start-line="6" selection-start-column="19" selection-end-line="6" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/BSSN/test/functionsAndGlobals.py">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BSSN/test/getVariableDimension.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BSSN/test/isFirstTime.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="106" selection-start-line="15" selection-start-column="106" selection-end-line="15" selection-end-column="106" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/BSSN/test/listToValueList.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -598,27 +540,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BSSN/test/calcError.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="15" column="53" lean-forward="true" selection-start-line="15" selection-start-column="53" selection-end-line="15" selection-end-column="53" />
-          <folding>
-            <element signature="e#0#14#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/BSSN/test/moduleDictToList.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="7" column="68" selection-start-line="7" selection-start-column="68" selection-end-line="7" selection-end-column="68" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BSSN/test/evaluateGlobals.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="103">
-          <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
         </state>
       </provider>
     </entry>
@@ -636,23 +561,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BSSN/test/runTest.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="840">
-          <caret line="59" column="49" selection-start-line="59" selection-start-column="49" selection-end-line="59" selection-end-column="49" />
-          <folding>
-            <element signature="e#0#14#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BSSN/test/run_BSSN_tests.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="4" lean-forward="true" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/outputC.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2129">
@@ -663,13 +571,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BSSN/test/trustedValuesDict.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-102">
-          <caret line="15" column="94" lean-forward="true" selection-start-line="15" selection-start-column="94" selection-end-line="15" selection-end-column="94" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/BSSN/test/CtestList.C">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
@@ -677,10 +578,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/BSSN/test/testEvaluateGlobals.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1500">
+          <caret line="100" column="5" lean-forward="true" selection-start-line="100" selection-start-column="5" selection-end-line="100" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BSSN/test/runTest.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="42" lean-forward="true" selection-start-line="42" selection-end-line="42" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BSSN/test/evaluateGlobals.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-42">
+          <caret line="16" column="57" selection-start-line="16" selection-start-column="57" selection-end-line="16" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/BSSN/test/testListToValueList.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="43" lean-forward="true" selection-start-line="43" selection-end-line="43" />
+        <state relative-caret-position="843">
+          <caret line="75" column="13" lean-forward="true" selection-start-line="75" selection-start-column="13" selection-end-line="75" selection-end-column="13" />
           <folding>
             <element signature="e#172#208#0" expanded="true" />
           </folding>
@@ -689,21 +614,96 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/BSSN/test/efficientListToValueList.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="213">
-          <caret line="52" column="30" lean-forward="true" selection-start-line="52" selection-start-column="30" selection-end-line="52" selection-end-column="30" />
+        <state relative-caret-position="435">
+          <caret line="38" lean-forward="true" selection-start-line="38" selection-end-line="38" />
           <folding>
             <element signature="e#172#208#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/BSSN/test/trustedValuesDict.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="19" column="75" selection-start-line="19" selection-start-column="75" selection-end-line="19" selection-end-column="75" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BSSN/test/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="30">
+            <caret line="2" column="13" lean-forward="true" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BSSN/test/calcError.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BSSN/test/run_BSSN_tests.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="2" selection-start-line="5" selection-start-column="2" selection-end-line="5" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BSSN/test/firstTimePrint.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BSSN/ADM_in_terms_of_BSSN.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="36" column="26" lean-forward="true" selection-start-line="36" selection-start-column="26" selection-end-line="36" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BSSN/test/getVariableDimension.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="4" lean-forward="true" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BSSN/test/TestingModule.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/BSSN/test/BSSN_Globals_Tests.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="464">
-          <caret line="172" column="8" lean-forward="true" selection-start-line="172" selection-start-column="8" selection-end-line="172" selection-end-column="8" />
+        <state relative-caret-position="120">
+          <caret line="8" selection-start-line="8" selection-end-line="13" selection-end-column="39" />
           <folding>
             <element signature="e#48#63#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BSSN/test/UnitTesting_Functions_Tests.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="45" column="65" selection-start-line="45" selection-start-column="65" selection-end-line="45" selection-end-column="65" />
+          <folding>
+            <element signature="e#1#16#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BSSN/test/isFirstTime.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
         </state>
       </provider>
     </entry>

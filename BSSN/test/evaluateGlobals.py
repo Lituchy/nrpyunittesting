@@ -9,7 +9,7 @@
 #     'Module1': mfgd.makeFunctionAndGlobalDict( ['mod1Function1','mod1Function2'] , ['mod1global1','mod1global2','mod1global3'] )
 #     'Module2': mfgd.makeFunctionAndGlobalDict( ['mod2Function1'] , ['mod2global1','mod2global2','mod2global3','mod2global4'] )
 # }
-# resultDict = eg.evaluateGlobals(ModDict,globals())
+# resultDict = eg.evaluateGlobals(ModDict,locals())
 ###
 # Requires: Modules can't have the same name. Two globals for a given module can't have the same name.
 #           Functions must be able to be called on their respective module. Globals must 
@@ -21,7 +21,7 @@
 
 # Called by runTest
 
-def evaluateGlobals(ModDict,oldGlobals):
+def evaluateGlobals(ModDict,oldLocs):
 
     resultDict = dict()
     
@@ -40,7 +40,7 @@ def evaluateGlobals(ModDict,oldGlobals):
         loc = {}
 
         # Executing string of execution with current globals and storing resulting globals in loc
-        exec(stringexec,oldGlobals,loc)
+        exec(stringexec,oldLocs,loc)
         
         # Storing the module-variable pair [mod],[loc] into the dictionary [resultDict]
         resultDict[mod] = loc

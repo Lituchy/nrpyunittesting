@@ -5,7 +5,6 @@ import logging
 from BSSN.test.runTest import runTest
 from BSSN.test.functionsAndGlobals import functionsAndGlobals
 from RepeatedTimer import RepeatedTimer
-import cProfile
 
 # TODO: Change level based on desired amount of output.
 # ERROR -> Outputs minimal information -- only when there's an error
@@ -15,21 +14,21 @@ import cProfile
 logging.basicConfig(level=logging.INFO)
 
 
-# https://stackoverflow.com/questions/3393612/run-certain-code-every-n-seconds/13151299
-# Creates a threaded timer object that prints to the console every 5 minutes
-def printFn(msg):
-    logging.info(msg)
-
-
-Timer = RepeatedTimer(300, printFn, "\nPrinting every 5 minutes to prevent timeouts.\n")
+# # https://stackoverflow.com/questions/3393612/run-certain-code-every-n-seconds/13151299
+# # Creates a threaded timer object that prints to the console every 5 minutes
+# def printFn(msg):
+#     logging.info(msg)
+#
+#
+# Timer = RepeatedTimer(300, printFn, "\nPrinting every 5 minutes to prevent timeouts.\n")
 
 
 # Python unittest class
 class TestBSSNGlobals(unittest.TestCase):
 
-    @classmethod
-    def tearDownClass(cls):
-        Timer.stop()
+    # @classmethod
+    # def tearDownClass(cls):
+    #     Timer.stop()
 
     # Testing globals for ADM in terms of BSSN module
     def testADMGlobals(self):
@@ -57,7 +56,7 @@ class TestBSSNGlobals(unittest.TestCase):
         runTest(self, ModDict, locals())
 
     # Testing globals for BSSN Constraints
-    def testConstraintsGlobals(self):
+    def ftestConstraintsGlobals(self):
 
         # TODO: Import modules to be tested
         # Note: Even though it says the modules are unused, these imports are vital for runTest to work properly.
@@ -81,7 +80,7 @@ class TestBSSNGlobals(unittest.TestCase):
         runTest(self, ModDict, locals())
         
     # Testing globals for BSSN exact modules
-    def testExactGlobals(self):
+    def ftestExactGlobals(self):
 
         # TODO: Import modules to be tested
         # Note: Even though it says the modules are unused, these imports are vital for runTest to work properly.
@@ -116,7 +115,7 @@ class TestBSSNGlobals(unittest.TestCase):
         runTest(self, ModDict, locals())
 
     # Testing globals for BSSN Psi4 Globals
-    def testPsi4Globals(self):
+    def ftestPsi4Globals(self):
 
         # TODO: Import modules to be tested
         # Note: Even though it says the modules are unused, these imports are vital for runTest to work properly.
@@ -144,7 +143,7 @@ class TestBSSNGlobals(unittest.TestCase):
         runTest(self, ModDict, locals())
 
     # Testing globals for BSSN quantities
-    def testQuantitiesGlobals(self):
+    def ftestQuantitiesGlobals(self):
 
         # TODO: Import modules to be tested
         # Note: Even though it says the modules are unused, these imports are vital for runTest to work properly.
@@ -170,7 +169,7 @@ class TestBSSNGlobals(unittest.TestCase):
         runTest(self, ModDict, locals())
 
     # Testing globals for BSSN RHS
-    def testRHSGlobals(self):
+    def ftestRHSGlobals(self):
 
         # TODO: Import modules to be tested
         # Note: Even though it says the modules are unused, these imports are vital for runTest to work properly.
@@ -198,7 +197,7 @@ class TestBSSNGlobals(unittest.TestCase):
         runTest(self, ModDict, locals())
 
     # Testing globals for BSSN T4UUmunu_vars
-    def testT4UUGlobals(self):
+    def ftestT4UUGlobals(self):
 
         # TODO: Import modules to be tested
         # Note: Even though it says the modules are unused, these imports are vital for runTest to work properly.

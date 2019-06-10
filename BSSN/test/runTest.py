@@ -5,7 +5,6 @@ from firstTimePrint import firstTimePrint
 from evaluateGlobals import evaluateGlobals
 from moduleDictToList import moduleDictToList
 from efficientListToValueList import efficientListToValueList
-from listToValueList import listToValueList
 from isFirstTime import isFirstTime
 from createTrustedGlobalsDict import createTrustedGlobalsDict
 import cProfile
