@@ -9,6 +9,6 @@ from datetime import datetime
 def first_time_print(mod, mod_dict):
     print('\nModule: ')
     print(mod)
-    print('Please copy the following code between the ##### and paste it into your trustedValuesDict.py file:')
-    print("#####\n\n# Generated on: " + str(datetime.now()) + "\ntrustedValuesDict['" + mod + "Globals'] = "
+    print('Please copy the following code between the ##### and paste it into your trusted_values_dict.py file:')
+    print("#####\n\n# Generated on: " + str(datetime.now()) + "\ntrusted_values_dict['" + mod + "Globals'] = "
           + str(mod_dict) + "\n\n#####")

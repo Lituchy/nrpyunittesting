@@ -2,30 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="84f9775a-ff87-4f96-b64b-74cc8f43cddb" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/BSSN/test/module_dict_to_list.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BSSN/test/run_NRPy_UnitTests.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BSSN/test/trusted_values_dict.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/kevin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/kevin.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSSN/test/BSSN_Globals_Tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/BSSN/test/NRPyUnitTests_Globals_Tests.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSSN/test/CtestList.C" beforeDir="false" afterPath="$PROJECT_DIR$/BSSN/test/old/CtestList.C" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BSSN/test/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/BSSN/test/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSSN/test/RepeatedTimer.py" beforeDir="false" afterPath="$PROJECT_DIR$/BSSN/test/old/RepeatedTimer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSSN/test/UnitTesting_Functions_Tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/BSSN/test/NRPyUnitTests_Function_Tests.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSSN/test/calcError.py" beforeDir="false" afterPath="$PROJECT_DIR$/BSSN/test/calc_error.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSSN/test/createTrustedGlobalsDict.py" beforeDir="false" afterPath="$PROJECT_DIR$/BSSN/test/create_trusted_globals_dict.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSSN/test/efficientListToValueList.py" beforeDir="false" afterPath="$PROJECT_DIR$/BSSN/test/list_to_value_list.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSSN/test/evaluateGlobals.py" beforeDir="false" afterPath="$PROJECT_DIR$/BSSN/test/evaluate_globals.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSSN/test/firstTimePrint.py" beforeDir="false" afterPath="$PROJECT_DIR$/BSSN/test/first_time_print.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSSN/test/functionsAndGlobals.py" beforeDir="false" afterPath="$PROJECT_DIR$/BSSN/test/functions_and_globals.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSSN/test/getVariableDimension.py" beforeDir="false" afterPath="$PROJECT_DIR$/BSSN/test/get_variable_dimension.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSSN/test/isFirstTime.py" beforeDir="false" afterPath="$PROJECT_DIR$/BSSN/test/is_first_time.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSSN/test/listToValueList.py" beforeDir="false" afterPath="$PROJECT_DIR$/BSSN/test/old/listToValueList.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSSN/test/moduleDictToList.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSSN/test/runTest.py" beforeDir="false" afterPath="$PROJECT_DIR$/BSSN/test/run_test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSSN/test/run_BSSN_tests.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSSN/test/testListToValueList.py" beforeDir="false" afterPath="$PROJECT_DIR$/BSSN/test/old/testListToValueList.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSSN/test/trustedValuesDict.py" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -47,23 +24,14 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/BSSN/test/NRPyUnitTests_Globals_Tests.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-60">
-              <caret line="193" column="25" selection-start-line="193" selection-start-column="25" selection-end-line="193" selection-end-column="25" />
+            <state relative-caret-position="285">
+              <caret line="129" column="22" selection-start-line="129" selection-start-column="22" selection-end-line="129" selection-end-column="22" />
               <folding>
                 <element signature="e#47#62#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/BSSN/test/calc_error.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="1" selection-start-line="1" selection-end-line="1" />
             </state>
           </provider>
         </entry>
@@ -72,19 +40,10 @@
         <entry file="file://$PROJECT_DIR$/BSSN/test/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="2145">
-                <caret line="143" column="108" selection-start-line="143" selection-start-column="108" selection-end-line="143" selection-end-column="108" />
+              <first_editor relative-caret-position="390">
+                <caret line="70" column="32" selection-start-line="70" selection-start-column="32" selection-end-line="70" selection-end-column="32" />
               </first_editor>
               <second_editor />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/BSSN/test/trusted_values_dict.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="26" column="42" selection-start-line="26" selection-start-column="42" selection-end-line="26" selection-end-column="42" />
             </state>
           </provider>
         </entry>
@@ -156,8 +115,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/BSSN/test/makeFunctionAndGlobalDict.py" />
-        <option value="$PROJECT_DIR$/BSSN/test/newTest.py" />
         <option value="$PROJECT_DIR$/BSSN/test/modulesToImport.py" />
         <option value="$PROJECT_DIR$/BSSN/BSSN_RHSs_new.py" />
         <option value="$PROJECT_DIR$/BSSN/BSSN_ADM_Terms_Test.py" />
@@ -193,7 +150,6 @@
         <option value="$PROJECT_DIR$/BSSN/test/NRPyUnitTests_Function_Tests.py" />
         <option value="$PROJECT_DIR$/BSSN/test/run_BSSN_tests.sh" />
         <option value="$PROJECT_DIR$/BSSN/test/run_NRPy_UnitTests.sh" />
-        <option value="$PROJECT_DIR$/BSSN/test/README.md" />
         <option value="$PROJECT_DIR$/BSSN/test/calcError.py" />
         <option value="$PROJECT_DIR$/BSSN/test/createTrustedGlobalsDict.py" />
         <option value="$PROJECT_DIR$/BSSN/test/evaluateGlobals.py" />
@@ -207,12 +163,15 @@
         <option value="$PROJECT_DIR$/BSSN/test/trustedValuesDict.py" />
         <option value="$PROJECT_DIR$/BSSN/test/evaluate_globals.py" />
         <option value="$PROJECT_DIR$/BSSN/test/NRPyUnitTests_Globals_Tests.py" />
+        <option value="$PROJECT_DIR$/BSSN/test/calc_error.py" />
+        <option value="$PROJECT_DIR$/BSSN/test/run_test.py" />
+        <option value="$PROJECT_DIR$/BSSN/test/README.md" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="214" />
-    <option name="y" value="117" />
+    <option name="x" value="203" />
+    <option name="y" value="60" />
     <option name="width" value="1608" />
     <option name="height" value="1004" />
   </component>
@@ -414,7 +373,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="214" y="117" width="1608" height="1004" extended-state="0" />
+    <frame x="203" y="60" width="1608" height="1004" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.24945135" />
@@ -642,13 +601,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BSSN/test/create_trusted_globals_dict.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="44" selection-start-line="8" selection-start-column="44" selection-end-line="8" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/BSSN/test/first_time_print.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
@@ -687,16 +639,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BSSN/test/run_test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1500">
-          <caret line="100" column="81" selection-start-line="100" selection-start-column="81" selection-end-line="100" selection-end-column="81" />
-          <folding>
-            <element signature="e#0#14#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/BSSN/test/module_dict_to_list.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
@@ -711,13 +653,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BSSN/test/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="2145">
-            <caret line="143" column="108" selection-start-line="143" selection-start-column="108" selection-end-line="143" selection-end-column="108" />
-          </first_editor>
-          <second_editor />
+    <entry file="file://$PROJECT_DIR$/BSSN/test/calc_error.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="915">
+          <caret line="61" column="8" selection-start-line="61" selection-start-column="8" selection-end-line="61" selection-end-column="8" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BSSN/test/create_trusted_globals_dict.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="44" selection-start-line="8" selection-start-column="44" selection-end-line="8" selection-end-column="44" />
         </state>
       </provider>
     </entry>
@@ -735,20 +684,33 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BSSN/test/NRPyUnitTests_Globals_Tests.py">
+    <entry file="file://$PROJECT_DIR$/BSSN/test/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="390">
+            <caret line="70" column="32" selection-start-line="70" selection-start-column="32" selection-end-line="70" selection-end-column="32" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BSSN/test/run_test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-60">
-          <caret line="193" column="25" selection-start-line="193" selection-start-column="25" selection-end-line="193" selection-end-column="25" />
+        <state relative-caret-position="465">
+          <caret line="31" column="60" selection-start-line="31" selection-start-column="60" selection-end-line="31" selection-end-column="60" />
           <folding>
-            <element signature="e#47#62#0" expanded="true" />
+            <element signature="e#0#14#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BSSN/test/calc_error.py">
+    <entry file="file://$PROJECT_DIR$/BSSN/test/NRPyUnitTests_Globals_Tests.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" selection-start-line="1" selection-end-line="1" />
+        <state relative-caret-position="285">
+          <caret line="129" column="22" selection-start-line="129" selection-start-column="22" selection-end-line="129" selection-end-column="22" />
+          <folding>
+            <element signature="e#47#62#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

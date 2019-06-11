@@ -2,7 +2,7 @@
 
 ### Interactive Modules
 
-**trustedValuesDict:**<br /> 
+**trusted_values_dict:**<br /> 
 This module does this
 
 **Your_UnitTests:**<br />
@@ -10,34 +10,34 @@ This is what you do
 
 ### Functions:
 
-**calcError:**<br /> 
+**calc_error:**<br /> 
 This function does this
 
-**createTrustedGlobalsDict:**<br /> 
+**create_trusted_globals_dict:**<br /> 
 This function does this
 
-**listToValueList:**<br /> 
+**list_to_value_list:**<br /> 
 This function does this
 
-**moduleDictToList:**<br /> 
+**module_dict_to_list:**<br /> 
 This function does this
 
-**evaluateGlobals:**<br /> 
+**evaluate_globals:**<br /> 
 This function does this
 
-**firstTimePrint:**<br /> 
+**first_time_print:**<br /> 
 This function does this
 
-**functionsAndGlobals:**<br /> 
+**functions_and_globals:**<br /> 
 This function does this
 
-**getVariableDimension:**<br /> 
+**get_variable_dimension:**<br /> 
 This function does this
 
-**isFirstTime:**<br /> 
+**is_first_time:**<br /> 
 This function does this
 
-**runTest:**<br /> 
+**run_test:**<br /> 
 This function does this
 
 ### Example Usage:
@@ -51,8 +51,8 @@ as described above. <br />
 
 `import unittest`<br />
 `import logging`<br />
-`from runTest import runTest`<br />
-`from functionsAndGlobals import functionsAndGlobals`<br />
+`from run_test import run_test`<br />
+`from functions_and_globals import functions_and_globals`<br />
 
 We then set the logging level according to the desired level of output. A good default level is INFO.
 
@@ -68,33 +68,34 @@ class and a function for your specific test as follows. Note that the function M
 
 `class TestMyGlobals(unittest.TestCase):`<br />
 
-&nbsp;&nbsp;&nbsp;`def testMyModule(self):`<br />
+&nbsp;&nbsp;&nbsp;`def test_my_module(self):`<br />
 
 The next steps are to import the modules to be tested and any required pre-initialization for the modules, create a list
  of globals, and create a list of functions. We'll use [myModule] as described above.
 
 `import myModule as myMod`<br />
-`functionList = ['myModuleInit()']`<br />
-`globalList = ['x', 'y', 'z']`
+`function_list = ['myModuleInit()']`<br />
+`global_list = ['x', 'y', 'z']`
 
 
 Note that the globals and functions are listed as strings! This is intentional and will cause an  error otherwise.
 
-Next is to create our module dictionary [ModDict], which stores all information for our modules. This is where we use 
-functionsAndGlobals, the function described above. We pass into it first our list of functions then our list of globals.
+Next is to create our module dictionary `mod_dict`, which stores all information for our modules. This is where we use 
+`functions_and_globals`, the function described above. We pass into it first our list of functions then our list of 
+globals.
 
-`ModDict = {'myMod': functionsAndGlobals(functionList, globalList)}`
+`mod_dict = {'myMod': functions_and_globals(function_list, global_list)}`
 
-What this specifically does is create a dictionary with key `myMod` and value `functionsAndGlobals(functionList, 
-globalList)`, which we know to be a dictionary as well from our functions tutorials.<br />
-IMPORTANT NOTE: The key of `ModDict` is `'myMod'`. It MUST be a string, and it MUST have the same name as the imported
+What this specifically does is create a dictionary with key `myMod` and value `functions_and_globals(function_list, 
+global)list)`, which we know to be a dictionary as well from our functions tutorials.<br />
+IMPORTANT NOTE: The key of our entry in `mod_dict` is `'myMod'`. It MUST be a string, and it MUST have the same name as the imported
 module. Since we said `import myModule as myMod` above, its name must be `myMod`. If we had instead said
 `import myModule as exampleMod` then in `ModDict` we would have to have the key as `'exampleMod'`. This is vital
 for the way `runTest` functions.
 
-The next step is to call `runTest` in order to calculate the globals for our modules. 
+The next step is to call `run_test` in order to calculate the globals for our modules. 
 
-`runTest(self, ModDict, locals())`
+`run_test(self, mod_dict, locals())`
 
 Finally, we must put the following if statement at the bottom of our file in order for everything to communicate 
 properly.
@@ -106,22 +107,22 @@ Our resulting file should look as such:
 
 `import unittest`<br />
 `import logging`<br />
-`from runTest import runTest`<br />
-`from functionsAndGlobals import functionsAndGlobals`<br />
+`from run_test import run_test`<br />
+`from functions_and_globals import functions_and_globals`<br />
 
 `logging.basicConfig(level=logging.INFO)`<br />
 
 `class TestMyGlobals(unittest.TestCase):`<br />
 
-&nbsp;&nbsp;&nbsp;`def testMyModule(self):`<br />
+&nbsp;&nbsp;&nbsp;`def test_my_module(self):`<br />
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`import myModule as myMod`<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`functionList = ['myModuleInit()']`<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`globalList = ['x', 'y', 'z']`
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`function_list = ['myModuleInit()']`<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`global_list = ['x', 'y', 'z']`
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ModDict = {'myMod': functionsAndGlobals(functionList, globalList)}`
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`mod_dict = {'myMod': functions_and_globals(function_list, global_list)}`
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`runTest(self, ModDict, locals())`
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`run_test(self, mod_dict, locals())`
 
 `if __name__ == '__main__':`<br />
 &nbsp;&nbsp;&nbsp;`unittest.main()`
@@ -132,11 +133,11 @@ the first time. Run the test file, and you should see that text has been written
 the instructions given by copying the code in between the `#####` into your trustedValuesDict.py file.
 Example output is as follows:
 
-`Please copy the following code between the ##### and paste it into your trustedValuesDict.py file:` <br />
+`Please copy the following code between the ##### and paste it into your trusted_values_dict.py file:` <br />
 `#####`
 
 `# Generated on: 2019-06-11 12:25:19.221572` <br />
-`trustedValuesDict['myModuleGlobals'] = {'x': mpf('0.122483331574515176153136610247876'), 'y': mpf('0.0'), 
+`trusted_values_dict['myModuleGlobals'] = {'x': mpf('0.122483331574515176153136610247876'), 'y': mpf('0.0'), 
 'z': mpf('66.6570391079152319165851690987334')}`
 
 `#####`
