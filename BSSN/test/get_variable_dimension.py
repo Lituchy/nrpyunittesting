@@ -12,9 +12,12 @@
 def get_variable_dimension(tensor):
     
     dim = 0
+    length = 0
 
     while isinstance(tensor, list):
+        if dim == 0:
+            length = len(tensor)
         dim += 1
         tensor = tensor[0]
 
-    return dim
+    return dim, length

@@ -4,6 +4,7 @@ from calc_error import calc_error
 from first_time_print import first_time_print
 from evaluate_globals import evaluate_globals
 from module_dict_to_list import module_dict_to_list
+from new_module_dict_to_list import new_module_dict_to_list
 from list_to_value_list import list_to_value_list
 from is_first_time import is_first_time
 from create_trusted_globals_dict import create_trusted_globals_dict
@@ -108,4 +109,4 @@ def run_test(self, mod_dict, locs):
 
     if first_times[-1]:
         self.assertTrue(False, 'Automatically failing due to first time for at least one module. Please see above'
-                               'for the code to copy into your trustedValuesDict.')
+'for the code to copy into your trustedValuesDict.')

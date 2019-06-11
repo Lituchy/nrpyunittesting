@@ -1,7 +1,6 @@
 from get_variable_dimension import get_variable_dimension
 
-
-# moduleDictToList takes in a module dictionary [module_dict] and returns a tuple
+# moduleDictToList takes in a variable dictionary [variable_dict] and returns a tuple
 # of lists; the first list [var_list] is a list of sympy expressions and the second
 # list [name_list] is the respective corresponding name for each expression in [var_list].
 # Example: var_list[0] -> r/(M+r)
@@ -11,12 +10,65 @@ from get_variable_dimension import get_variable_dimension
 # Called by run_test
 
 
-def module_dict_to_list(module_dict):
+# iter_counter takes in a counter [counter] and a length [length] and returns the next number after counter
+# in base [length].
+# Example: iter_counter('00', 2) -> '01'
+#          iter_counter('02', 3) -> '10'
+#          iter_counter('01111', 2) -> '10000'
+def iter_counter(counter, length):
+
+    # Reverse counter, set return_string to empty string, set num to 1
+    rev_counter = counter[::-1]
+    return_string = ''
+    num = 1
+
+    # Loop through each character [char] in rev_counter
+    for char in rev_counter:
+
+        # Add [num] to the integer representation of [char]
+        digit = int(char) + num
+        # If it's time to loop back around
+        if digit == length:
+            # Add a 0 to the return string, num = 1
+            return_string += '0'
+            num = 1
+            # Add current digit to the return string, num = 0
+        else:
+            return_string += str(digit)
+            num = 0
+
+    return return_string[::-1]
+
+
+def new_module_dict_to_list(variable_dict):
+
     var_list = []
     name_list = []
 
-    for var, expression_list in module_dict.items():
+    for var, expression_list in variable_dict.items():
+
+        print('\nvar: ' + str(var))
+        print('expression list: ' + str(expression_list))
+
         dim, length = get_variable_dimension(expression_list)
+
+        print('dim: ' + str(dim))
+        print('length: ' + str(length))
+
+        if length == 0:
+            total_number_vars = 0
+        else:
+            total_number_vars = length ** dim
+        print('total number vars:' + str(total_number_vars))
+
+        counter = '0' * dim
+        print('counter: ' + counter)
+
+        print(iter_counter(counter, length))
+
+        # TODO: Finish implemtation with iter_counter
+
+
         if dim == 0:
             var_list.append(expression_list)
             name_list.append(var)
