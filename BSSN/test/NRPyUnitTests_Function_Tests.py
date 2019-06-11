@@ -12,101 +12,101 @@ logging.basicConfig(level=logging.INFO)
 
 class TestFunctions(unittest.TestCase):
 
-    def ftestCalcError(self):
+    def ftest_calc_error(self):
         self.assertTrue(False)
 
-    def ftestCreateTrustedGlobalsDict(self):
+    def ftest_create_trusted_globals_dict(self):
         self.assertTrue(False)
 
-    def ftestEfficientListToValueList(self):
+    def ftest_list_to_value_list(self):
         self.assertTrue(False)
 
-    def ftestEvaluateGlobals(self):
+    def ftest_evaluate_globals(self):
         self.assertTrue(False)
 
-    def testFunctionsAndGlobals(self):
-        from functionsAndGlobals import functionsAndGlobals
+    def test_functions_and_globals(self):
+        from functions_and_globals import functions_and_globals
 
-        basicFunctionList = ['func1(), func2()']
-        basicGlobalList = ['x', 'y', 'z']
+        basic_function_list = ['func1(), func2()']
+        basic_global_list = ['x', 'y', 'z']
 
-        self.assertEqual(functionsAndGlobals([], []), {'functionList': [], 'globalList': []})
+        self.assertEqual(functions_and_globals([], []), {'functionList': [], 'globalList': []})
 
-        self.assertEqual(functionsAndGlobals([], basicGlobalList),
-                         {'functionList': [], 'globalList': basicGlobalList})
-        self.assertEqual(functionsAndGlobals(basicFunctionList, []),
-                         {'functionList': basicFunctionList, 'globalList': []})
-        self.assertEqual(functionsAndGlobals(basicFunctionList, basicGlobalList),
-                         {'functionList': basicFunctionList, 'globalList': basicGlobalList})
-
-        with self.assertRaises(AssertionError):
-            functionsAndGlobals([1,'hello','world'], [])
+        self.assertEqual(functions_and_globals([], basic_global_list),
+                         {'functionList': [], 'globalList': basic_global_list})
+        self.assertEqual(functions_and_globals(basic_function_list, []),
+                         {'functionList': basic_function_list, 'globalList': []})
+        self.assertEqual(functions_and_globals(basic_function_list, basic_global_list),
+                         {'functionList': basic_function_list, 'globalList': basic_global_list})
 
         with self.assertRaises(AssertionError):
-            functionsAndGlobals(['hello','world'], [2])
+            functions_and_globals([1, 'hello', 'world'], [])
 
         with self.assertRaises(AssertionError):
-            functionsAndGlobals(['hello', 'world', 42], basicGlobalList)
+            functions_and_globals(['hello', 'world'], [2])
 
         with self.assertRaises(AssertionError):
-            functionsAndGlobals('function()', [])
+            functions_and_globals(['hello', 'world', 42], basic_global_list)
 
         with self.assertRaises(AssertionError):
-            functionsAndGlobals([], 'glob')
+            functions_and_globals('function()', [])
 
-        logging.info('\nAll functionsAndGlobals tests passed.\n')
+        with self.assertRaises(AssertionError):
+            functions_and_globals([], 'glob')
 
-    def testGetVariableDimension(self):
-        from getVariableDimension import getVariableDimension
+        logging.info('\nAll functions_and_globals tests passed.\n')
+
+    def test_get_variable_dimension(self):
+        from get_variable_dimension import get_variable_dimension
 
         rank0 = 4
         rank1 = [rank0, rank0+1, rank0]
         rank2 = [rank1, rank1]
         rank3 = [rank2]
-        self.assertEqual(getVariableDimension(rank0), 0)
-        self.assertEqual(getVariableDimension(rank1), 1)
-        self.assertEqual(getVariableDimension(rank2), 2)
-        self.assertEqual(getVariableDimension(rank3), 3)
+        self.assertEqual(get_variable_dimension(rank0), 0)
+        self.assertEqual(get_variable_dimension(rank1), 1)
+        self.assertEqual(get_variable_dimension(rank2), 2)
+        self.assertEqual(get_variable_dimension(rank3), 3)
 
-        self.assertEqual(getVariableDimension(rank3[0]), 2)
-        self.assertEqual(getVariableDimension(rank2[0]), 1)
-        self.assertEqual(getVariableDimension(rank2[1]), 1)
-        self.assertEqual(getVariableDimension([rank2, rank2]), 3)
-        self.assertEqual(getVariableDimension([[[[[rank0]]]]]), 5)
+        self.assertEqual(get_variable_dimension(rank3[0]), 2)
+        self.assertEqual(get_variable_dimension(rank2[0]), 1)
+        self.assertEqual(get_variable_dimension(rank2[1]), 1)
+        self.assertEqual(get_variable_dimension([rank2, rank2]), 3)
+        self.assertEqual(get_variable_dimension([[[[[rank0]]]]]), 5)
 
         with self.assertRaises(IndexError):
-            getVariableDimension([])
+            get_variable_dimension([])
 
-        logging.info('\nAll getVariableDimension tests passed.\n')
+        logging.info('\nAll get_variable_dimension tests passed.\n')
 
-    def testIsFirstTime(self):
-        from isFirstTime import isFirstTime
+    def test_is_first_time(self):
+        from is_first_time import is_first_time
 
-        ModDict = {'BrillLindquist': 'Hello World'}
-        FakeModDict = {'FakeModule': 'Goodbye World'}
+        mod_dict = {'BrillLindquist': 'Hello World'}
+        fake_mod_dict = {'fake_module': 'Goodbye World'}
 
-        self.assertEqual(isFirstTime({}), [])
+        self.assertEqual(is_first_time({}), [])
 
-        self.assertEqual(isFirstTime(ModDict), [False])
-        self.assertEqual(isFirstTime(FakeModDict), [True])
+        self.assertEqual(is_first_time(mod_dict), [False])
+        self.assertEqual(is_first_time(fake_mod_dict), [True])
 
-        ModDict.update(FakeModDict)
+        mod_dict.update(fake_mod_dict)
 
-        self.assertEqual(isFirstTime(ModDict), [False, True])
+        self.assertEqual(is_first_time(mod_dict), [False, True])
 
-        ModDictWrongCapitalization = {'brillLindquist': 2}
+        mod_dict_wrong_capitalization = {'brillLindquist': 2}
 
-        self.assertEqual(isFirstTime(ModDictWrongCapitalization), [True])
+        self.assertEqual(is_first_time(mod_dict_wrong_capitalization), [True])
 
-        logging.info('\nAll isFirstTime tests passed.\n')
+        logging.info('\nAll is_first_time tests passed.\n')
 
-    def ftestListToValueList(self):
+    def ftest_list_to_value_list(self):
         self.assertTrue(False)
 
-    def ftestModuleDictToList(self):
+    def ftest_module_dict_to_list(self):
         self.assertTrue(False)
 
-    def ftestRunTest(self):
+    def ftest_run_test(self):
         self.assertTrue(False)
 
 
