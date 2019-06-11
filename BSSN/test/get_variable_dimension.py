@@ -6,10 +6,10 @@
 # Assumes that the tensor being passed in is consistent in dimension, i.e. the 0'th index of the list has the same
 # dimension as any other index of the list.
 
-# Called by moduleDictToList
+# Called by module_dict_to_list
 
 
-def getVariableDimension(tensor):
+def get_variable_dimension(tensor):
     
     dim = 0
 

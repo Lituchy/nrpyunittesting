@@ -1,110 +1,110 @@
 import logging
 
-from calcError import calcError
-from firstTimePrint import firstTimePrint
-from evaluateGlobals import evaluateGlobals
-from moduleDictToList import moduleDictToList
-from efficientListToValueList import efficientListToValueList
-from isFirstTime import isFirstTime
-from createTrustedGlobalsDict import createTrustedGlobalsDict
+from calc_error import calc_error
+from first_time_print import first_time_print
+from evaluate_globals import evaluate_globals
+from module_dict_to_list import module_dict_to_list
+from list_to_value_list import list_to_value_list
+from is_first_time import is_first_time
+from create_trusted_globals_dict import create_trusted_globals_dict
 import cProfile
 from time import time
 
 
-# runTest takes in :
+# run_test takes in :
 # [self]- The unittest self object,
-# [ModDict]- The user-supplied dictionary of Modules
+# [mod_dict]- The user-supplied dictionary of modules
 # [locs]- The current local variables in the workspace. Should ALWAYS be locals()
 # It then runs a unittest, comparing calculated values with trusted values.
-def runTest(self, ModDict, locs):
+def run_test(self, mod_dict, locs):
 
     # Determining if this is the first time the code is run based of the existence of trusted values
-    first_times = isFirstTime(ModDict)
+    first_times = is_first_time(mod_dict)
 
     # Creating trusted dictionary based off names of modules in ModDict
-    TrustedDict = createTrustedGlobalsDict(ModDict, first_times)
+    trusted_dict = create_trusted_globals_dict(mod_dict, first_times)
 
     t = time()
 
     # Creating dictionary of expressions for all modules in ModDict
-    resultDict = evaluateGlobals(ModDict, locs)
+    result_dict = evaluate_globals(mod_dict, locs)
 
-    logging.info(str(time()-t) + ' seconds to run evaluateGlobals')
+    logging.info(str(time()-t) + ' seconds to run evaluate_globals')
 
-    del ModDict
+    del mod_dict
 
     # If it is the first time for at least one module, sort the module dictionary based on first_times.
     # This makes it so the new modules are done last. This makes it easy to copy the necessary modules' code.
     if True in first_times:
         # https://stackoverflow.com/questions/13668393/python-sorting-two-lists
-        first_times, resultMods = (list(x) for x in zip(*sorted(zip(first_times, resultDict))))
+        first_times, result_mods = (list(x) for x in zip(*sorted(zip(first_times, result_dict))))
 
-        tempDict = dict()
+        temp_dict = dict()
 
         # Creates dictionary based on order of first_times
-        for mod in resultMods:
-            tempDict[mod] = resultDict[mod]
+        for mod in result_mods:
+            temp_dict[mod] = result_dict[mod]
 
         # Updates resultDict to be in this new order
-        resultDict = tempDict
-        del tempDict, resultMods
+        result_dict = temp_dict
+        del temp_dict, result_mods
 
     # Looping through each module in resultDict
-    for (mod, res), first_time in zip(resultDict.items(), first_times):
+    for (mod, res), first_time in zip(result_dict.items(), first_times):
 
         if not first_time:
             logging.info('Currently working on module ' + mod + '...')
 
         # Generating variable list and name list for module
-        (varList, nameList) = moduleDictToList(res)
+        (var_list, name_list) = module_dict_to_list(res)
 
-        # Calculate profile for efficientListToValueList
+        # # Calculate profile for efficientListToValueList
         # cProfile.runctx('efficientListToValueList(varList, first_time)', globals(), locals(), sort='tottime')
 
         t = time()
 
         # Calculating numerical list for module
-        numList = efficientListToValueList(varList,first_time)
+        num_list = list_to_value_list(var_list,first_time)
 
-        logging.info(str(time()-t) + ' seconds to run efficientListToValueList')
+        logging.info(str(time()-t) + ' seconds to run list_to_value_list')
 
-        # Initalizing dictionary for the current module
-        modDict = dict()
+        # Initializing dictionary for the current module
+        mod_dict = dict()
 
         # Assigning each numerical value to a name in the module's dictionary
-        for name, num in zip(nameList, numList):
-            modDict[name] = num
+        for name, num in zip(name_list, num_list):
+            mod_dict[name] = num
 
         # If being run for the first time, print the code that must be copied into trustedValuesDict
         if first_time:
-            firstTimePrint(mod, modDict)
+            first_time_print(mod, mod_dict)
 
         # Otherwise, compare calculated values to trusted values
         else:
 
-            symbolicDict = dict()
+            symbolic_dict = dict()
 
             if logging.getLogger().getEffectiveLevel() == 0:
 
                 # Store symbolic expressions in dictionary
-                for var, name in zip(varList, nameList):
-                    symbolicDict[name] = var
+                for var, name in zip(var_list, name_list):
+                    symbolic_dict[name] = var
 
-            # Calculates the error between modDict and TrustedDict[mod] for the current module
-            valuesIdentical = calcError(mod, modDict, TrustedDict[mod], symbolicDict)
+            # Calculates the error between mod_dict and trusted_dict[mod] for the current module
+            values_identical = calc_error(mod, mod_dict, trusted_dict[mod], symbolic_dict)
 
-            del symbolicDict
+            del symbolic_dict
 
             # If at least one value differs, print exit message and fail the unittest
-            if not valuesIdentical:
-                self.assertTrue(valuesIdentical,
+            if not values_identical:
+                self.assertTrue(values_identical,
                                 'Variable above has different calculated and trusted values. Follow '
                                 'above instructions.')
 
             # If every value is the same, completed module.
             else:
                 logging.info('Completed module ' + mod + ' with no errors.\n')
-            self.assertTrue(valuesIdentical)
+            self.assertTrue(values_identical)
 
     if first_times[-1]:
         self.assertTrue(False, 'Automatically failing due to first time for at least one module. Please see above'

@@ -94,7 +94,7 @@ class TestFunctions(unittest.TestCase):
 
         self.assertEqual(isFirstTime(ModDict), [False, True])
 
-        ModDictWrongCapitalization = {'brillLindquist': 'Foo'}
+        ModDictWrongCapitalization = {'brillLindquist': 2}
 
         self.assertEqual(isFirstTime(ModDictWrongCapitalization), [True])
 

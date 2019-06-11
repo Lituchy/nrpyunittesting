@@ -2,7 +2,7 @@
 # This is because we need SymPy to evaluate that expression, not mpmath.
 from mpmath import mp, mpf, sqrt, pi
 from random import seed, random
-from trustedValuesDict import trustedValuesDict
+from trusted_values_dict import trusted_values_dict
 from sympy import cse
 
 
@@ -11,19 +11,19 @@ from sympy import cse
 
 # Called by runTest
 
-def efficientListToValueList(varList, first_time):
+def list_to_value_list(var_list, first_time):
 
     # Setting precision
-    mp.dps = trustedValuesDict["precision"]
+    mp.dps = trusted_values_dict["precision"]
 
     # List all the free symbols in the expressions in [lst].
-    free_symbols_list = list(sum(varList).free_symbols)
+    free_symbols_list = list(sum(var_list).free_symbols)
 
     # Sort free symbols list based off the alphanumeric strings for each variable
     free_symbols_list.sort(key=lambda v: str(v))
 
     # Set the random seed according to seed in trustedValuesDict:
-    seed(trustedValuesDict["seed"])
+    seed(trusted_values_dict["seed"])
 
     # Creating dictionary entry for each variable and its pseudorandom value in [0,1) as determined by seed
     variable_dictionary = dict()
@@ -39,7 +39,7 @@ def efficientListToValueList(varList, first_time):
 
     # Evaluating each expression using the values in variable_dictionary
     value_list = []
-    for expression in varList:
+    for expression in var_list:
         # Copying variable_dictionary into a new variable dictionary
         new_var_dict = dict(variable_dictionary)
 
