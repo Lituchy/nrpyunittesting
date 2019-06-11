@@ -30,14 +30,14 @@ class TestFunctions(unittest.TestCase):
         basic_function_list = ['func1(), func2()']
         basic_global_list = ['x', 'y', 'z']
 
-        self.assertEqual(functions_and_globals([], []), {'functionList': [], 'globalList': []})
+        self.assertEqual(functions_and_globals([], []), {'function_list': [], 'global_list': []})
 
         self.assertEqual(functions_and_globals([], basic_global_list),
-                         {'functionList': [], 'globalList': basic_global_list})
+                         {'function_list': [], 'global_list': basic_global_list})
         self.assertEqual(functions_and_globals(basic_function_list, []),
-                         {'functionList': basic_function_list, 'globalList': []})
+                         {'function_list': basic_function_list, 'global_list': []})
         self.assertEqual(functions_and_globals(basic_function_list, basic_global_list),
-                         {'functionList': basic_function_list, 'globalList': basic_global_list})
+                         {'function_list': basic_function_list, 'global_list': basic_global_list})
 
         with self.assertRaises(AssertionError):
             functions_and_globals([1, 'hello', 'world'], [])
