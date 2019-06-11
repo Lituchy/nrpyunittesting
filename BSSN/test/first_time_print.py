@@ -6,9 +6,8 @@ from datetime import datetime
 
 # Called by run_test
 
-def first_time_print(mod, mod_dict):
-    print('\nModule: ')
-    print(mod)
+def first_time_print(mod, value_dict):
+    print('\nModule: ' + mod)
     print('Please copy the following code between the ##### and paste it into your trusted_values_dict.py file:')
     print("#####\n\n# Generated on: " + str(datetime.now()) + "\ntrusted_values_dict['" + mod + "Globals'] = "
-          + str(mod_dict) + "\n\n#####")
+          + str(value_dict) + "\n\n#####")

@@ -29,7 +29,7 @@ def run_test(self, mod_dict, locs):
     # Creating dictionary of expressions for all modules in ModDict
     result_dict = evaluate_globals(mod_dict, locs)
 
-    logging.info(str(time()-t) + ' seconds to run evaluate_globals')
+    logging.debug(str(time()-t) + ' seconds to run evaluate_globals')
 
     del mod_dict
 
@@ -66,18 +66,18 @@ def run_test(self, mod_dict, locs):
         # Calculating numerical list for module
         num_list = list_to_value_list(var_list,first_time)
 
-        logging.info(str(time()-t) + ' seconds to run list_to_value_list')
+        logging.debug(str(time()-t) + ' seconds to run list_to_value_list')
 
-        # Initializing dictionary for the current module
-        mod_dict = dict()
+        # Initializing value dictionary for the current module
+        value_dict = dict()
 
         # Assigning each numerical value to a name in the module's dictionary
         for name, num in zip(name_list, num_list):
-            mod_dict[name] = num
+            value_dict[name] = num
 
         # If being run for the first time, print the code that must be copied into trustedValuesDict
         if first_time:
-            first_time_print(mod, mod_dict)
+            first_time_print(mod, value_dict)
 
         # Otherwise, compare calculated values to trusted values
         else:
@@ -91,7 +91,7 @@ def run_test(self, mod_dict, locs):
                     symbolic_dict[name] = var
 
             # Calculates the error between mod_dict and trusted_dict[mod] for the current module
-            values_identical = calc_error(mod, mod_dict, trusted_dict[mod], symbolic_dict)
+            values_identical = calc_error(mod, value_dict, trusted_dict[mod], symbolic_dict)
 
             del symbolic_dict
 
