@@ -7,6 +7,7 @@ from trusted_values_dict import trusted_values_dict
 # respective dictionary from trustedValuesDict as values. The naming convention for the dictionaries is as follows:
 #   trustedValuesDict['(MODULE_NAME)Globals'] -- The module name with 'Globals' concatenated on the end.
 #   This is consistent throughout all files.
+# Throws an [AssertionError] if [mod_dict] and [first_times] are different sizes.
 
 # Called by run_test
 

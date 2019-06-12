@@ -10,10 +10,10 @@ noticeable, but enough to make a difference.
 
 This is where unit testing comes in. By initially calculating values for the globals of your modules in a **trusted**
 version of your code and storing those values in a dictionary, you can then easily check if something stopped working
-by comparing your newly calculated values to the ones you've stored. On the frontend, there are three modules 
-essential to get your unit tests up and running: `trusted_values_dict`, `functions_and_globals`, and your testing module
-(which we'll simply reference as `Your_Tests`). The usage of each of these modules is outlined in the **Interactive 
-Modules** section. There are many functions at play in the backend as well, all of which will 
+by comparing your newly calculated values to the ones you've stored. On the frontend, there are four modules 
+essential to get your unit tests up and running: `trusted_values_dict`, `functions_and_globals`, `run_test`, and your 
+testing module (which we'll simply reference as `Your_Tests`). The usage of each of these modules is outlined in the 
+**Interactive Modules** section. There are many functions at play in the backend as well, all of which will 
 be described in detail below in the **Functions** section. Understanding of them may not be essential to get your tests 
 up-and-running, but some basic understanding of these modules with undoubtedly streamline the testing process and how 
 to potentially create your own, different types of tests.
@@ -168,10 +168,10 @@ Then it's important to import the necessary modules. Here we import unittest, wh
 logging, which allows us to easily specify the level of desired output, and run_test and functions_and_globals,
 as described above. <br />
 ````
-import unittest`<br />
-import logging`<br />
-from run_test import run_test`<br />
-from functions_and_globals import functions_and_globals`<br />
+import unittest
+import logging
+from run_test import run_test
+from functions_and_globals import functions_and_globals
 ````
 
 We then set the logging level according to the desired level of output. A good default level is INFO.
@@ -275,3 +275,48 @@ trusted_values_dict['myModGlobals'] = {'x': mpf('0.12248333157451517615313661024
 ````
 
 After following the instructions, run the code again and you should see that the test passes with no errors.
+
+Now let's say you have another module that's similar to `myModule` -- say `myModule2`, with initialization function 
+`myMod2Init()` and globals `x2 y2`-- and you want to test it as well
+without having to add an entirely new test file, copying all the code, etc. With some simile variable renaming, we can
+add `myModule2` to our `test_my_module` function to easily test it as well. One possible way of doing this is to 
+adjust our test file as follows:
+
+````
+import unittest
+import logging
+from run_test import run_test
+from functions_and_globals import functions_and_globals
+
+logging.basicConfig(level=logging.INFO)
+
+class TestMyGlobals(unittest.TestCase):
+
+    def test_my_modules(self):
+
+        import myModule as myMod
+        function_list_1 = ['myModuleInit()']
+        global_list_1 = ['x', 'y', 'z']
+        
+        import myModule2 as myMod2
+        function_list_2 = ['myMod2Init()']
+        global_list_2 = ['x2', 'y2']
+
+
+        mod_dict = {'myMod':  functions_and_globals(function_list_1, global_list_1),
+                    'myMod2': functions_and_globals(function_list_2, global_list_2)}
+
+        run_test(self, mod_dict, locals())
+
+if __name__ == '__main__':
+    unittest.main()
+````
+
+It's as simple as that! All we did was change the function name from `test_my_module` to `test_my_modules` (note that
+this isn't necessary, but just makes things more understandable), we renamed `function_list` and `global_list` by
+adding `_1` onto the end, and we imported and created our new modules, function list, and global list. Then 
+by simply adding `myMod2` to the dictionary with the proper function and global list, we are now easily testing 
+`myMod2` as well as the original `myMod`. Of course, after running the code for the first time you'll have to copy
+the calculated values for `trusted_values_dict` into place, but you _don't_ have to redo anything to do with `myMod`.
+Its tests are unaffected by the introduction of `myModule2`, and as such nothing about them will change.
+
