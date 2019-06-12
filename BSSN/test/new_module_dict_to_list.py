@@ -1,11 +1,10 @@
 from get_variable_dimension import get_variable_dimension
 
-# moduleDictToList takes in a variable dictionary [variable_dict] and returns a tuple
+# module_dict_to_list takes in a variable dictionary [variable_dict] and returns a tuple
 # of lists; the first list [var_list] is a list of sympy expressions and the second
 # list [name_list] is the respective corresponding name for each expression in [var_list].
 # Example: var_list[0] -> r/(M+r)
 #          name_list[0] -> 'alphaSph'
-# Note: Not currently equipped to deal with any tensors of rank >= 5
 
 # Called by run_test
 
@@ -17,13 +16,12 @@ from get_variable_dimension import get_variable_dimension
 #          iter_counter('01111', 2) -> '10000'
 def iter_counter(counter, length):
 
-    # Reverse counter, set return_string to empty string, set num to 1
-    rev_counter = counter[::-1]
+    # Set return_string to empty string, set num to 1
     return_string = ''
     num = 1
 
-    # Loop through each character [char] in rev_counter
-    for char in rev_counter:
+    # Loop backwards through each character [char] in [counter]
+    for char in reversed(counter):
 
         # Add [num] to the integer representation of [char]
         digit = int(char) + num
@@ -40,6 +38,30 @@ def iter_counter(counter, length):
     return return_string[::-1]
 
 
+def form_string(var, counter):
+    return_string = var
+    for char in counter:
+        return_string += '[' + char + ']'
+
+    return return_string
+
+
+# Function used for removing nested lists in python.
+# https://www.geeksforgeeks.org/python-convert-a-nested-list-into-a-flat-list/
+def flatten(l, fl):
+    for i in l:
+        if type(i) == list:
+            flatten(i, fl)
+        else:
+            fl.append(i)
+    return fl
+
+
+# Function to call the recursive flatten
+def return_flattened_list(l):
+    return flatten(l, [])
+
+
 def new_module_dict_to_list(variable_dict):
 
     var_list = []
@@ -47,73 +69,28 @@ def new_module_dict_to_list(variable_dict):
 
     for var, expression_list in variable_dict.items():
 
-        print('\nvar: ' + str(var))
-        print('expression list: ' + str(expression_list))
-
+        # Getting the dimension and length of expression list
         dim, length = get_variable_dimension(expression_list)
 
-        print('dim: ' + str(dim))
-        print('length: ' + str(length))
-
-        if length == 0:
-            total_number_vars = 0
-        else:
-            total_number_vars = length ** dim
-        print('total number vars:' + str(total_number_vars))
-
-        counter = '0' * dim
-        print('counter: ' + counter)
-
-        print(iter_counter(counter, length))
-
-        # TODO: Finish implemtation with iter_counter
-
-
+        # If list is a scalar, easy computation with no necessary indexing
         if dim == 0:
             var_list.append(expression_list)
             name_list.append(var)
-        elif dim == 1:
-            num = 0
-            for i in expression_list:
-                var_list.append(i)
-                name_list.append(var + '[' + str(num) + ']')
-                num += 1
-        elif dim == 2:
-            num1 = 0
-            for lst in expression_list:
-                num2 = 0
-                for i in lst:
-                    var_list.append(i)
-                    name_list.append(var + '[' + str(num1) + ']' + '[' + str(num2) + ']')
-                    num2 += 1
-                num1 += 1
-        elif dim == 3:
-            num1 = 0
-            for lst1 in expression_list:
-                num2 = 0
-                for lst0 in lst1:
-                    num3 = 0
-                    for i in lst0:
-                        var_list.append(i)
-                        name_list.append(var + '[' + str(num1) + ']' + '[' + str(num2) + ']' + '[' + str(num3) + ']')
-                        num3 += 1
-                    num2 += 1
-                num1 += 1
-        elif dim == 4:
-            num1 = 0
-            for lst2 in expression_list:
-                num2 = 0
-                for lst1 in lst2:
-                    num3 = 0
-                    for lst0 in lst1:
-                        num4 = 0
-                        for i in lst0:
-                            var_list.append(i)
-                            name_list.append(var + '[' + str(num1) + ']' + '[' + str(num2) + ']' +
-                                             '[' + str(num3) + ']' + '[' + str(num4) + ']')
-                            num4 += 1
-                        num3 += 1
-                    num2 += 1
-                num1 += 1
+        # Otherwise, need to do more work
+        else:
+            # Initialize our counter of the correct dimension
+            counter = '0' * dim
+            # Total number of variables is length ^ dim
+            total_number_vars = length ** dim
+            # Call flatten on our expression list to get a flattened list
+            flattened_list = return_flattened_list(expression_list)
+
+            for elt in flattened_list:
+                # Append element to var list
+                var_list.append(elt)
+                # Create proper string to append to name list based on var and counter
+                name_list.append(form_string(var, counter))
+                # Increment counter based on length
+                counter = iter_counter(counter, length)
 
     return var_list, name_list

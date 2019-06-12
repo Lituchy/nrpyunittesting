@@ -51,13 +51,13 @@ def run_test(self, mod_dict, locs):
         del temp_dict, result_mods
 
     # Looping through each module in resultDict
-    for (mod, res), first_time in zip(result_dict.items(), first_times):
+    for (mod, var_dict), first_time in zip(result_dict.items(), first_times):
 
         if not first_time:
             logging.info('Currently working on module ' + mod + '...')
 
         # Generating variable list and name list for module
-        (var_list, name_list) = module_dict_to_list(res)
+        (var_list, name_list) = new_module_dict_to_list(var_dict)
 
         # # Calculate profile for efficientListToValueList
         # cProfile.runctx('efficientListToValueList(varList, first_time)', globals(), locals(), sort='tottime')
@@ -109,4 +109,4 @@ def run_test(self, mod_dict, locs):
 
     if first_times[-1]:
         self.assertTrue(False, 'Automatically failing due to first time for at least one module. Please see above'
-'for the code to copy into your trustedValuesDict.')
+                               'for the code to copy into your trustedValuesDict.')

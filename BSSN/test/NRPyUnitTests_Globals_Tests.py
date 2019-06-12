@@ -30,7 +30,7 @@ class TestBSSNGlobals(unittest.TestCase):
     #     Timer.stop()
 
     # Testing globals for ADM in terms of BSSN module
-    def test_ADM_globals(self):
+    def test_ADM_Globals(self):
         # TODO: Import modules to be tested
         # Note: Even though it says the modules are unused, these imports are vital for run_test to work properly.
         # Their information gets passed into run_test through locals()
@@ -54,7 +54,7 @@ class TestBSSNGlobals(unittest.TestCase):
         run_test(self, mod_dict, locals())
 
     # Testing globals for BSSN constraints
-    def test_constraints_globals(self):
+    def test_Constraints_Globals(self):
         # TODO: Import modules to be tested
         # Note: Even though it says the modules are unused, these imports are vital for run_test to work properly.
         # Their information gets passed into run_test through locals()
@@ -77,7 +77,7 @@ class TestBSSNGlobals(unittest.TestCase):
         run_test(self, mod_dict, locals())
 
     # Testing globals for BSSN exact modules
-    def test_BSSN_exact_globals(self):
+    def test_Exact_Globals(self):
         # TODO: Import modules to be tested
         # Note: Even though it says the modules are unused, these imports are vital for run_test to work properly.
         # Their information gets passed into run_test through locals()
@@ -111,7 +111,7 @@ class TestBSSNGlobals(unittest.TestCase):
         run_test(self, mod_dict, locals())
 
     # Testing globals for BSSN Psi4 Globals
-    def test_Psi4_globals(self):
+    def test_Psi4_Globals(self):
         # TODO: Import modules to be tested
         # Note: Even though it says the modules are unused, these imports are vital for run_test to work properly.
         # Their information gets passed into run_test through locals()
@@ -138,7 +138,7 @@ class TestBSSNGlobals(unittest.TestCase):
         run_test(self, mod_dict, locals())
 
     # Testing globals for BSSN quantities
-    def test_quantities_globals(self):
+    def test_Quantities_Globals(self):
         # TODO: Import modules to be tested
         # Note: Even though it says the modules are unused, these imports are vital for run_test to work properly.
         # Their information gets passed into run_test through locals()
@@ -171,7 +171,7 @@ class TestBSSNGlobals(unittest.TestCase):
         run_test(self, mod_dict, locals())
 
     # Testing globals for BSSN RHS
-    def test_RHS_globals(self):
+    def test_RHS_Globals(self):
         # TODO: Import modules to be tested
         # Note: Even though it says the modules are unused, these imports are vital for run_test to work properly.
         # Their information gets passed into run_test through locals()
@@ -198,7 +198,7 @@ class TestBSSNGlobals(unittest.TestCase):
         run_test(self, mod_dict, locals())
 
     # Testing globals for BSSN T4UUmunu_vars
-    def test_T4UU_globals(self):
+    def test_T4UU_Globals(self):
         # TODO: Import modules to be tested
         # Note: Even though it says the modules are unused, these imports are vital for run_test to work properly.
         # Their information gets passed into run_test through locals()
