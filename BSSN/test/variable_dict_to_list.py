@@ -14,7 +14,7 @@ from get_variable_dimension import get_variable_dimension
 # Example: iter_counter('00', 2) -> '01'
 #          iter_counter('02', 3) -> '10'
 #          iter_counter('01111', 2) -> '10000'
-def iter_counter(counter, length):
+def increment_counter(counter, length):
 
     # Set return_string to empty string, set num to 1
     return_string = ''
@@ -35,9 +35,11 @@ def iter_counter(counter, length):
             return_string += str(digit)
             num = 0
 
+    # Return reversed return_string since we built it backwards
     return return_string[::-1]
 
 
+# Used to form the proper string to be added to name list based on var and counter
 def form_string(var, counter):
     return_string = var
     for char in counter:
@@ -57,12 +59,7 @@ def flatten(l, fl):
     return fl
 
 
-# Function to call the recursive flatten
-def return_flattened_list(l):
-    return flatten(l, [])
-
-
-def new_module_dict_to_list(variable_dict):
+def module_dict_to_list(variable_dict):
 
     var_list = []
     name_list = []
@@ -83,7 +80,7 @@ def new_module_dict_to_list(variable_dict):
             # Total number of variables is length ^ dim
             total_number_vars = length ** dim
             # Call flatten on our expression list to get a flattened list
-            flattened_list = return_flattened_list(expression_list)
+            flattened_list = flatten(expression_list, [])
 
             for elt in flattened_list:
                 # Append element to var list
@@ -91,6 +88,6 @@ def new_module_dict_to_list(variable_dict):
                 # Create proper string to append to name list based on var and counter
                 name_list.append(form_string(var, counter))
                 # Increment counter based on length
-                counter = iter_counter(counter, length)
+                counter = increment_counter(counter, length)
 
     return var_list, name_list
