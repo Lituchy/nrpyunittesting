@@ -3,12 +3,10 @@ import logging
 from calc_error import calc_error
 from first_time_print import first_time_print
 from evaluate_globals import evaluate_globals
-from module_dict_to_list import module_dict_to_list
-from new_module_dict_to_list import new_module_dict_to_list
+from variable_dict_to_list import variable_dict_to_list
 from list_to_value_list import list_to_value_list
 from is_first_time import is_first_time
 from create_trusted_globals_dict import create_trusted_globals_dict
-import cProfile
 from time import time
 
 
@@ -25,11 +23,13 @@ def run_test(self, mod_dict, locs):
     # Creating trusted dictionary based off names of modules in ModDict
     trusted_dict = create_trusted_globals_dict(mod_dict, first_times)
 
+    # Timing how long evaluate_globals takes
     t = time()
 
     # Creating dictionary of expressions for all modules in ModDict
     result_dict = evaluate_globals(mod_dict, locs)
 
+    # Printing the time it took to run evaluate_globals
     logging.debug(str(time()-t) + ' seconds to run evaluate_globals')
 
     del mod_dict
@@ -57,16 +57,15 @@ def run_test(self, mod_dict, locs):
             logging.info('Currently working on module ' + mod + '...')
 
         # Generating variable list and name list for module
-        (var_list, name_list) = new_module_dict_to_list(var_dict)
+        (var_list, name_list) = variable_dict_to_list(var_dict)
 
-        # # Calculate profile for efficientListToValueList
-        # cProfile.runctx('efficientListToValueList(varList, first_time)', globals(), locals(), sort='tottime')
-
+        # Timing how long list_to_value_list takes
         t = time()
 
         # Calculating numerical list for module
         num_list = list_to_value_list(var_list,first_time)
 
+        # Printing the time it took to run list_to_value_list
         logging.debug(str(time()-t) + ' seconds to run list_to_value_list')
 
         # Initializing value dictionary for the current module
@@ -107,6 +106,7 @@ def run_test(self, mod_dict, locs):
                 logging.info('Completed module ' + mod + ' with no errors.\n')
             self.assertTrue(values_identical)
 
+    # If it's the first time for at least one module
     if first_times[-1]:
         self.assertTrue(False, 'Automatically failing due to first time for at least one module. Please see above'
                                'for the code to copy into your trustedValuesDict.')

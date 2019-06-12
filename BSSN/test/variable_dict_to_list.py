@@ -1,6 +1,6 @@
 from get_variable_dimension import get_variable_dimension
 
-# module_dict_to_list takes in a variable dictionary [variable_dict] and returns a tuple
+# variable_dict_to_list takes in a variable dictionary [variable_dict] and returns a tuple
 # of lists; the first list [var_list] is a list of sympy expressions and the second
 # list [name_list] is the respective corresponding name for each expression in [var_list].
 # Example: var_list[0] -> r/(M+r)
@@ -59,7 +59,7 @@ def flatten(l, fl):
     return fl
 
 
-def module_dict_to_list(variable_dict):
+def variable_dict_to_list(variable_dict):
 
     var_list = []
     name_list = []

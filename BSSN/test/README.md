@@ -1,11 +1,49 @@
 ## NRPy Unit Testing Globals: An In-Depth Guide
 
+### Motivation:
+
+What is the purpose of unit testing, and why should you do it? To begin thinking about that, consider what subtleties 
+can occur with your code that are almost unnoticeable to the eye, but wind up giving you a very incorrect result. You
+could make a small optimization, and observe that nothing changes about your result. However, maybe the optimization 
+you made only works on Python 3 and not Python 2, or it changes a value by some tiny amount -- too small to be obviously
+noticeable, but enough to make a difference.
+
+This is where unit testing comes in. By initially calculating values for the globals of your modules in a **trusted**
+version of your code and storing those values in a dictionary, you can then easily check if something stopped working
+by comparing your newly calculated values to the ones you've stored. On the frontend, there are three modules 
+essential to get your unit tests up and running: `trusted_values_dict`, `functions_and_globals`, and your testing module
+(which we'll simply reference as `Your_Tests`). The usage of each of these modules is outlined in the **Interactive 
+Modules** section. There are many functions at play in the backend as well, all of which will 
+be described in detail below in the **Functions** section. Understanding of them may not be essential to get your tests 
+up-and-running, but some basic understanding of these modules with undoubtedly streamline the testing process and how 
+to potentially create your own, different types of tests.
+
+An important caveat is that the unit testing does not test the **correctness** of your code or your variables. The 
+unit tests function as a protective measure to ensure that nothing was broken. It gets its values by running your code, 
+so if something starts out incorrect, it will be stored as incorrect in the system. There are measures against this, 
+but it relies on the user's knowledge of what versions of their code are correct.
+
 ### Interactive Modules:
 
 **trusted_values_dict:**<br /> 
-This module does this
+`trusted_values_dict` acts as the storage hub for NRPy unit tests. It is a module that stores trusted values of the 
+globals that you calculate in an easily accessible dictionary. It also stores the precision `precision` that is used in 
+comparing your trusted values and calculated values, as well as a seed `seed` that is used by some functions below. A 
+good default value for `precision` is `30`, and a standard `seed` is `1234`. 
 
-**Your_UnitTests:**<br />
+
+**functions_and_globals:**<br /> 
+This function does this
+
+**run_test:**<br /> 
+`run_test` is the culmination of all the functions outlined below. It does all the heavy lifting in calculating values,
+comparing them to trusted values, throwing errors if necessary, printing the desired output, etc. `run_test` takes in 
+`self`, which simply allows it to use the assert functions of `unittest`, `mod_dict`, which is the user-created module 
+dictionary containing the modules they're testing, the necessary functions to run for each module, and the globals to 
+evaluate and compare for each module, and `locs` (almost always a simple call to the built-in function 
+`locals`), which allows the current local variables to be passed into `run_test`.  
+
+**Your_Tests:**<br />
 This is what you do
 
 ### Functions:
@@ -19,15 +57,12 @@ This function does this
 **list_to_value_list:**<br /> 
 This function does this
 
-**module_dict_to_list:**<br /> 
-This function does this
-
 **evaluate_globals:**<br /> 
 This function does this
 
 **first_time_print:**<br /> 
 `first_time_print` takes in a module `mod` and a value dictionary `value_dict`, and prints the code that needs to be 
-copied into trustedValuesDict assuming the entries in `value_dict` correspond to the module `mod`. <br />
+copied into `trusted_values_dict` assuming the entries in `value_dict` correspond to the module `mod`. <br />
 Example Usage:
 ````
 mod = 'myModule'
@@ -52,19 +87,77 @@ Note that `first_time_print` does not check if it _should_ be called at any give
 `mod` in `trusted_values_dict`. It is up to the user to determine when the correct time to call the function is. 
 If `run_test` is used without any modifications (as recommended), `first_time_print` will run as determined by the 
 boolean result from `is_first_time`.
- 
-
-**functions_and_globals:**<br /> 
-This function does this
 
 **get_variable_dimension:**<br /> 
-This function does this
+`get_variable_dimension` takes in a tensor `tensor` and returns a tuple containing the rank of the tensor `dim` and the 
+length of the tensor `length`. `dim` is defined as the number of dimensions of `tensor`. For example, `dim` of a scalar
+is `0`, `dim` of a vector is `1`, etc. `length` is defined as the number of variables in each `dim` of `tensor`. For 
+example, `length` of `[1,2,3]` is `3`. It is assumed that any tensor being passed into the function is 'square'. This
+means that a `d`-dimensional tensor being passed in is made up of `n` tensors of dimension `d-1`, then each `d-1` 
+dimensional tensors must also be made up of `n` tensors of dimension `d-2`, etc. `get_variable_dimension` of an empty 
+list `[]` throws an `IndexError`. Example usage is shown below:
+
+````
+scalar = 2
+get_variable_dimension(scalar) -> 0, 1
+
+vector = [1, 2, 3]
+get_variable_dimension(vector) -> 1, 3
+
+long_vector = [2, 1, 3, 3, 4, 10, 12]
+get_variable_dimension(long_vector) -> 1, 7
+
+basic_tensor = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+get_variable_dimension(basic_tensor) -> 2, 3
+
+high_dim_tensor = [[[[1]]]]
+get_variable_dimension(high_dim_tensor) -> 4
+
+empty_list = []
+get_variable_dimension(empty_list) -> Raises IndexError
+````
+
+**variable_dict_to_list:**<br /> 
+`variable_dict_to_list` takes in a variable dictionary `variable_dict` and returns a tuple containing a list of variables
+`var_list` and its corresponding list of names `name_list`. These lists are created such that each tensor in 
+`variable_dict` is broken down into each of its scalars, the scalar is stored in `var_list`, and the name of the scalar
+according to Python list syntax is stored in the same respective index in `name_list`. Example usage is shown below:
+
+````
+variable_dict = {'alpha' : r / (M + r), 'betaDD': [[r * cos(theta), r * sin(theta)], 
+[r * tan(theta), 0]], 'gammaU': [r, r**2, r**3, r**4]}
+
+variable_dict_to_list(variable_dict) -> 
+[r / (M + r), r * cos(theta), r * sin(theta), r * tan(theta), 0, r, r**2, r**3, r**4] , 
+['alpha', 'betaDD[0][0]', 'betaDD[0][1]','betaDD[1][0]', 'betaDD[1][1]',
+'gammaU[0]', 'gammaU[1]', 'gammaU[2]', 'gammaU[3]']
+````
 
 **is_first_time:**<br /> 
-This function does this
+`is_first_time` takes in a module dictionary `mod_dict` and returns a list containing corresponding booleans for each
+module in `mod_dict`. The boolean for each module `mod` is `True` if `trusted_values_dict` contains a dictionary entry
+for `mod` according to the naming convention defined in `create_trusted_globals_dict`, `False` otherwise. Say we have 
+`trusted_values_dict` with the following keys (and corresponding values which aren't listed):
 
-**run_test:**<br /> 
-This function does this
+````
+trusted_values_dict = {'Module1Globals', 'module1Globals', 'mod1globals', 'Mod2Globals', 'Module3Globs'}
+````
+
+Then we'd get the following results with the following module dictionaries (without their corresponding values):
+
+````
+mod_dict_1 = {'Module1', 'Module2', 'Module3'}
+is_first_time(mod_dict_1) -> [True, False, False]
+
+mod_dict_2 = {'Mod1', 'Mod2', 'Mod3'}
+is_first_time(mod_dict_2) -> [False, True, False]
+
+mod_dict_3 = {'module1', 'Module3', 'Mod2', 'mod1'}
+is_first_time(mod_dict_3) -> [True, False, True, False]
+````
+
+An important note is that the order of keys in the module dictionary is the same order that `is_first_time` generates
+its boolean list. This ensures that the resulting boolean list properly corresponds with the input module dictionary.
 
 ### Example Usage:
 
