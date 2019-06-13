@@ -83,7 +83,31 @@ This function does this
 This function does this
 
 **list_to_value_list:**<br /> 
-This function does this
+`list_to_value_list` takes in a list of sympy expressions `var_list` and returns a version of `var_list` where each
+expression is evaluated by assigning every variable a pseudorandom number. Since the pseudorandom number is assigned
+according to the `seed` value in `trusted_values_dict`, we expect that over multiple iterations, the same pseudorandom
+numbers will be generated in the same order. This ensures that our trusted and calculated `mpf` values for every 
+variable is using the same number for each of their expressions. Say you had a list of sympy expressions `var_list` as 
+follows,  and you want to calculate values for them according to the algorithm in `list_to_value_list`. Then it's as 
+simple as doing the following:
+
+````
+var_list = [a + b / (a * b), r**2, r*cos(t) + a, r*sin(t) + b]
+value_list = list_to_value_list(var_list)
+````
+This will result in output of `mpf` values along the lines of:
+
+````
+value_list -> [mpf('2.00029108574223017786936345469015'), mpf('0.00749147005858719072790563586749991'), 
+mpf('1.03311642840535379455820753746684'), mpf('0.734504099569315555167726889705803')]
+````
+In the backend, what `list_to_value_list` does first is get all the `free_symbols` in `var_list` and sort it by variable
+name. Then each variable is assigned a pseudorandom number using Python's `random` module. The standardized `seed` in
+`trusted_values_dict` and the sorting based on variable name act to ensure that the same variable gets the same number
+every time the code is run. Next, Sympy's `cse` (common subexpression elimination) algorithm is used to optimize the 
+calculation. For example, if the term `a**2` appears multiple times in `var_list`, it is more efficient to store 
+`a**2` as its own variable and replace all instances of `a**2` with that new variable. Finally, each variable 
+in the optimized `var_list` is replaced with its `mpf` value, and the value list is returned.
 
 **evaluate_globals:**<br /> 
 This function does this
