@@ -1,10 +1,9 @@
 # from https://docs.travis-ci.com/user/languages/python/
 language: python
 python:
+  - "2.7"
+  - "3.3"
   # PyPy versions
-  - "pypy"
-  - "pypy3.5"
-  - "3.7”
 # command to install dependencies
 install:
   - pip install sympy
