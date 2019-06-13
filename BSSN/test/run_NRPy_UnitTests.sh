@@ -2,5 +2,14 @@
 
 export PYTHONPATH=$PYTHONPATH:`pwd`
 
-pypy BSSN/test/NRPyUnitTests_Function_Tests.py &&
-pypy BSSN/test/NRPyUnitTests_Globals_Tests.py
+PYTHONEXEC=python
+if [ -x "$(command -v pypy)" ]; then
+    # pypy is NOT installed
+    PYTHONEXEC=pypy
+fi
+
+echo "########################################"
+echo Using $PYTHONEXEC as Python interpreter.
+echo "########################################"
+$PYTHONEXEC BSSN/test/NRPyUnitTests_Function_Tests.py &&
+$PYTHONEXEC BSSN/test/NRPyUnitTests_Globals_Tests.py
