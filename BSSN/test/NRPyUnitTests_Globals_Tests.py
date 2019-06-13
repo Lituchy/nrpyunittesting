@@ -36,9 +36,6 @@ class TestBSSNGlobals(unittest.TestCase):
         # Their information gets passed into run_test through locals()
         import BSSN.ADM_in_terms_of_BSSN as ADM_in_terms_of_BSSN
 
-        # TODO: Modules that need to be imported to pre-initialize module and their function calls
-        # None
-
         # TODO: Create lists of globals to calculate
         ADM_in_terms_of_BSSN_global_list = ['gammaDD', 'gammaDDdD', 'gammaDDdDD', 'gammaUU', 'detgamma',
                                       'GammaUDD', 'KDD', 'KDDdD']
@@ -59,9 +56,6 @@ class TestBSSNGlobals(unittest.TestCase):
         # Note: Even though it says the modules are unused, these imports are vital for run_test to work properly.
         # Their information gets passed into run_test through locals()
         import BSSN.BSSN_constraints as BSSN_constraints
-
-        # TODO: Modules that need to be imported to pre-initialize module and their function calls
-        # None
 
         # TODO: Create lists of globals to calculate
         constraints_global_list = ['H', 'MU']
@@ -85,9 +79,6 @@ class TestBSSNGlobals(unittest.TestCase):
         import BSSN.ShiftedKerrSchild as ShiftedKerrSchild
         import BSSN.StaticTrumpet as StaticTrumpet
         import BSSN.UIUCBlackHole as UIUCBlackHole
-
-        # TODO: Modules that need to be imported to pre-initialize module and their function calls
-        # None
 
         # TODO: Create lists of globals to calculate
         cart_global_list = ['alphaCart', 'betaCartU', 'BCartU', 'gammaCartDD', 'KCartDD']
@@ -118,9 +109,6 @@ class TestBSSNGlobals(unittest.TestCase):
         import BSSN.Psi4 as Psi4
         import BSSN.Psi4_tetrads as Psi4Tetrads
 
-        # TODO: Modules that need to be imported to pre-initialize module and their function calls
-        # None
-
         # TODO: Create lists of globals to calculate
         psi4_global_list = ['psi4_re_pt', 'psi4_im_pt']
         psi4_tetrads_global_list = ['l4U', 'n4U', 'mre4U', 'mim4U']
@@ -149,6 +137,10 @@ class TestBSSNGlobals(unittest.TestCase):
         rfm.reference_metric()
 
         # TODO: Create lists of globals to calculate
+        quantities_function_list = ['declare_BSSN_gridfunctions_if_not_declared_already()', 'BSSN_basic_tensors()',
+                 'gammabar__inverse_and_derivs()', 'detgammabar_and_derivs()', 'AbarUU_AbarUD_trAbar_AbarDD_dD()',
+                 'RicciBar__gammabarDD_dHatD__DGammaUDD__DGammaU()', 'betaU_derivs()', 'phi_and_derivs()']
+
         quantities_global_list = ['hDD', 'aDD', 'lambdaU', 'vetU', 'betU', 'trK', 'cf', 'alpha', 'gammabarDD', 'AbarDD',
                                 'LambdabarU', 'betaU', 'BU', 'gammabarUU', 'gammabarDD_dD', 'gammabarDD_dupD',
                                 'gammabarDD_dDD', 'GammabarUDD', 'detgammabar', 'detgammabar_dD', 'detgammabar_dDD',
@@ -160,11 +152,7 @@ class TestBSSNGlobals(unittest.TestCase):
         # Note that the name of the modules in mod_dict MUST have the same name as the imported module.
         # Example: If you say 'import MyModules.Module1 as M1', then mod_dict should have the entry 'M1' as a string.
         mod_dict = {
-            'BSSN_quantities': functions_and_globals(
-                ['declare_BSSN_gridfunctions_if_not_declared_already()', 'BSSN_basic_tensors()',
-                 'gammabar__inverse_and_derivs()', 'detgammabar_and_derivs()', 'AbarUU_AbarUD_trAbar_AbarDD_dD()',
-                 'RicciBar__gammabarDD_dHatD__DGammaUDD__DGammaU()', 'betaU_derivs()', 'phi_and_derivs()'],
-                quantities_global_list)
+            'BSSN_quantities': functions_and_globals(quantities_function_list, quantities_global_list)
         }
 
         # TODO: Call run_test with arguments (self, mod_dict, locals())
@@ -177,9 +165,6 @@ class TestBSSNGlobals(unittest.TestCase):
         # Their information gets passed into run_test through locals()
         import BSSN.BSSN_RHSs_new as RHS
         import BSSN.BSSN_gauge_RHSs as gaugeRHS
-
-        # TODO: Modules that need to be imported to pre-initialize module and their function calls
-        # None
 
         # TODO: Create lists of globals to calculate
         RHS_global_list = ['cf_rhs', 'trK_rhs', 'lambda_rhsU', 'a_rhsDD', 'h_rhsDD']
@@ -203,9 +188,6 @@ class TestBSSNGlobals(unittest.TestCase):
         # Note: Even though it says the modules are unused, these imports are vital for run_test to work properly.
         # Their information gets passed into run_test through locals()
         import BSSN.BSSN_T4UUmunu_vars as BSSN_T4UUmunu_vars
-
-        # TODO: Modules that need to be imported to pre-initialize module and their function calls
-        # None
 
         # TODO: Create lists of globals to calculate
         T4UU_global_list = ['rho', 'S', 'sD', 'sDD']

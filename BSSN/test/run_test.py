@@ -63,7 +63,7 @@ def run_test(self, mod_dict, locs):
         t = time()
 
         # Calculating numerical list for module
-        num_list = list_to_value_list(var_list,first_time)
+        num_list = list_to_value_list(var_list)
 
         # Printing the time it took to run list_to_value_list
         logging.debug(str(time()-t) + ' seconds to run list_to_value_list')

@@ -33,7 +33,26 @@ good default value for `precision` is `30`, and a standard `seed` is `1234`.
 
 
 **functions_and_globals:**<br /> 
-This function does this
+`functions_and_globals` is a simple function that takes in a list of functions and a list of globals, and returns a
+dictionary containing those functions and globals in a format that is readable by the other functions. The purpose of
+this function is to be called to create the value for your module in your module dictionary. Examples are shown below:
+
+````
+my_function_list = ['function_1()', 'function_2(True)', 'function_3(1, 2, True)']
+my_global_list = ['x', 'y', 'z']
+functions_and_globals(function_list, global_list) -> {'function_list': ['function_1()', 
+'function_2(True)', 'function_3(1, 2, True)'], 'global_list': ['x', 'y', 'z']}
+````
+
+Once in this format, the resulting dictionary can easily be passed into your module dictionary without having to 
+concern yourself with formatting the dictionary correctly. Example usage is as follows:
+
+````
+mod_dict = {'myMod': functions_and_globals(function_list, global_list)}
+````
+
+`functions_and_globals` throws an `assertion_error` if either argument passed in isn't a list, or if any entry 
+in each list passed in isn't a string.
 
 **run_test:**<br /> 
 `run_test` is the culmination of all the functions outlined below. It does all the heavy lifting in calculating values,
@@ -41,7 +60,16 @@ comparing them to trusted values, throwing errors if necessary, printing the des
 `self`, which simply allows it to use the assert functions of `unittest`, `mod_dict`, which is the user-created module 
 dictionary containing the modules they're testing, the necessary functions to run for each module, and the globals to 
 evaluate and compare for each module, and `locs` (almost always a simple call to the built-in function 
-`locals`), which allows the current local variables to be passed into `run_test`.  
+`locals`), which allows the current local variables to be passed into `run_test`.
+
+At the most basic level, an understanding of exactly what `run_test` does isn't necessary to start creating your own
+tests, and as such a simple usage tutorial will be given here, while a more in-depth tutorial will be given below
+in the **Functions** section. Assuming you've created your module dictionary `mod_dict` correctly and imported its 
+necessary modules, running `run_test` is as simple as calling the following:
+
+````
+run_test(self, mod_dict, locals())
+````
 
 **Your_Tests:**<br />
 This is what you do
@@ -158,6 +186,9 @@ is_first_time(mod_dict_3) -> [True, False, True, False]
 
 An important note is that the order of keys in the module dictionary is the same order that `is_first_time` generates
 its boolean list. This ensures that the resulting boolean list properly corresponds with the input module dictionary.
+
+**run_test:**<br />
+This does this
 
 ### Example Usage:
 

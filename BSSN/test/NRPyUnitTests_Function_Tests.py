@@ -15,11 +15,106 @@ class TestFunctions(unittest.TestCase):
     def ftest_calc_error(self):
         self.assertTrue(False)
 
-    def ftest_create_trusted_globals_dict(self):
-        self.assertTrue(False)
+    def test_create_trusted_globals_dict(self):
+        from create_trusted_globals_dict import create_trusted_globals_dict
+        from mpmath import mpf
+        from trusted_values_dict import trusted_values_dict
 
-    def ftest_list_to_value_list(self):
-        self.assertTrue(False)
+        mod_dict = dict()
+        first_times = []
+        self.assertEqual(dict(), create_trusted_globals_dict(mod_dict, first_times))
+
+        mod_dict = {'mod': []}
+        first_times = [True]
+        self.assertEqual({'mod': dict()}, create_trusted_globals_dict(mod_dict, first_times))
+
+        mod_dict = {'mod': ['hello', 'world']}
+        first_times = [True]
+        self.assertEqual({'mod': dict()}, create_trusted_globals_dict(mod_dict, first_times))
+
+        with self.assertRaises(KeyError):
+            mod_dict = {'mod1': ['hello', 'world']}
+            first_times = [False]
+            create_trusted_globals_dict(mod_dict, first_times)
+
+        with self.assertRaises(AssertionError):
+            mod_dict = {'mod': []}
+            first_times = [True, False]
+            create_trusted_globals_dict(mod_dict, first_times)
+
+        with self.assertRaises(AssertionError):
+            mod_dict = {'mod1': 'hello', 'mod2': 'world'}
+            first_times = [True]
+            create_trusted_globals_dict(mod_dict, first_times)
+
+        mod_dict = {'BrillLindquist': ['foo', 'bar']}
+        first_times = [True]
+        self.assertEqual({'BrillLindquist': dict()}, create_trusted_globals_dict(mod_dict, first_times))
+
+        self.maxDiff = None
+
+        mod_dict = {'BrillLindquist': ['foo', 'bar']}
+        first_times = [False]
+        self.assertEqual({'BrillLindquist': {'alphaCart': mpf('0.12248333157451517615309'), 'betaCartU[0]': mpf('0.0'), 'betaCartU[1]': mpf('0.0'), 'betaCartU[2]': mpf('0.0'), 'BCartU[0]': mpf('0.0'), 'BCartU[1]': mpf('0.0'), 'BCartU[2]': mpf('0.0'), 'gammaCartDD[0][0]': mpf('66.657039107915231916559'), 'gammaCartDD[0][1]': mpf('0.0'), 'gammaCartDD[0][2]': mpf('0.0'), 'gammaCartDD[1][0]': mpf('0.0'), 'gammaCartDD[1][1]': mpf('66.657039107915231916559'), 'gammaCartDD[1][2]': mpf('0.0'), 'gammaCartDD[2][0]': mpf('0.0'), 'gammaCartDD[2][1]': mpf('0.0'), 'gammaCartDD[2][2]': mpf('66.657039107915231916559'), 'KCartDD[0][0]': mpf('0.0'), 'KCartDD[0][1]': mpf('0.0'), 'KCartDD[0][2]': mpf('0.0'), 'KCartDD[1][0]': mpf('0.0'), 'KCartDD[1][1]': mpf('0.0'), 'KCartDD[1][2]': mpf('0.0'), 'KCartDD[2][0]': mpf('0.0'), 'KCartDD[2][1]': mpf('0.0'), 'KCartDD[2][2]': mpf('0.0')}}
+                         , create_trusted_globals_dict(mod_dict, first_times))
+
+        mod_dict = {'BrillLindquist': ['foo', 'bar']}
+        first_times = [False]
+        self.assertEqual({'BrillLindquist': trusted_values_dict['BrillLindquistGlobals']}
+                         , create_trusted_globals_dict(mod_dict, first_times))
+
+        mod_dict = {'BrillLindquist': ['foo', 'bar'], 'mod': ['hello world']}
+        first_times = [False, True]
+        self.assertEqual({'BrillLindquist': trusted_values_dict['BrillLindquistGlobals'], 'mod': dict()}
+                         , create_trusted_globals_dict(mod_dict, first_times))
+
+        mod_dict = {'BrillLindquist': 1, 'ShiftedKerrSchild': 2}
+        first_times = [False, False]
+        self.assertEqual({'BrillLindquist': trusted_values_dict['BrillLindquistGlobals']
+                         , 'ShiftedKerrSchild': trusted_values_dict['ShiftedKerrSchildGlobals']}
+                         , create_trusted_globals_dict(mod_dict, first_times))
+
+        mod_dict = {'mod1': 1, 'mod2': 2, 'mod3': 3}
+        first_times = [True, True, True]
+        self.assertEqual({'mod1': dict(), 'mod2': dict(), 'mod3': dict()},
+                         create_trusted_globals_dict(mod_dict, first_times))
+
+        logging.info('\nAll create_trusted_globals_dict tests passed.\n')
+
+    def test_list_to_value_list(self):
+        from list_to_value_list import list_to_value_list
+        from mpmath import mpf
+        from sympy.abc import x, y, z
+
+        var_list = []
+        self.assertEqual([], list_to_value_list(var_list))
+
+        var_list = [x]
+        result_list = [mpf('0.983083687023713543948423277992792')]
+        self.assertEqual(result_list, list_to_value_list(var_list))
+
+        var_list = [y]
+        result_list = [mpf('0.983083687023713543948423277992792')]
+        self.assertEqual(result_list, list_to_value_list(var_list))
+
+        var_list = [x, y]
+        result_list = [mpf('0.983083687023713543948423277992792'), mpf('0.663876945807995865736242729317412')]
+        self.assertEqual(result_list, list_to_value_list(var_list))
+
+        var_list = [y, x]
+        result_list = [mpf('0.663876945807995865736242729317412'), mpf('0.983083687023713543948423277992792')]
+        self.assertEqual(result_list, list_to_value_list(var_list))
+
+        var_list = [x, y, z]
+        result_list = [mpf('0.983083687023713543948423277992792'), mpf('0.663876945807995865736242729317412'),
+                       mpf('0.0865532787281174619276152516348816')]
+        self.assertEqual(result_list, list_to_value_list(var_list))
+
+        var_list = [x+y]
+        result_list = [mpf('1.6469606328317094096846660073103')]
+        self.assertEqual(result_list, list_to_value_list(var_list))
+
+        logging.info('All list_to_value_list tests passed')
 
     def ftest_evaluate_globals(self):
         self.assertTrue(False)
@@ -99,9 +194,6 @@ class TestFunctions(unittest.TestCase):
         self.assertEqual(is_first_time(mod_dict_wrong_capitalization), [True])
 
         logging.info('\nAll is_first_time tests passed.\n')
-
-    def ftest_list_to_value_list(self):
-        self.assertTrue(False)
 
     def test_variable_dict_to_list(self):
         from variable_dict_to_list import variable_dict_to_list

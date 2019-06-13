@@ -9,9 +9,12 @@ from sympy import cse
 # Takes in a list [lst] and returns the list with each index evaluated
 # according to parameters (seed, precision) in trustedValues
 
-# Called by runTest
+# Called by run_test
 
-def list_to_value_list(var_list, first_time):
+def list_to_value_list(var_list):
+
+    if len(var_list) == 0:
+        return []
 
     # Setting precision
     mp.dps = trusted_values_dict["precision"]
