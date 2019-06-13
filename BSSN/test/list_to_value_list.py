@@ -8,12 +8,13 @@ from sympy import cse
 
 # Takes in a list [lst] and returns the list with each index evaluated
 # according to parameters (seed, precision) in trustedValues
+# Throws an [AttributeError] if the variable list being passed in has no sympy symbols
 
 # Called by run_test
 
 def list_to_value_list(var_list):
 
-    if len(var_list) == 0:
+    if not var_list:
         return []
 
     # Setting precision

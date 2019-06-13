@@ -83,36 +83,56 @@ class TestFunctions(unittest.TestCase):
 
     def test_list_to_value_list(self):
         from list_to_value_list import list_to_value_list
-        from mpmath import mpf
+        from mpmath import mpf, sqrt, mp
+        from random import random, seed
+        from trusted_values_dict import trusted_values_dict
         from sympy.abc import x, y, z
+
+        seed(trusted_values_dict['seed'])
+        mp.dps = trusted_values_dict['precision']
 
         var_list = []
         self.assertEqual([], list_to_value_list(var_list))
 
+        first_val = mpf(sqrt(random()))
+        second_val = mpf(sqrt(random()))
+        third_val = mpf(sqrt(random()))
+
         var_list = [x]
-        result_list = [mpf('0.983083687023713543948423277992792')]
+        result_list = [first_val]
         self.assertEqual(result_list, list_to_value_list(var_list))
 
         var_list = [y]
-        result_list = [mpf('0.983083687023713543948423277992792')]
+        result_list = [first_val]
         self.assertEqual(result_list, list_to_value_list(var_list))
 
         var_list = [x, y]
-        result_list = [mpf('0.983083687023713543948423277992792'), mpf('0.663876945807995865736242729317412')]
+        result_list = [first_val, second_val]
         self.assertEqual(result_list, list_to_value_list(var_list))
 
         var_list = [y, x]
-        result_list = [mpf('0.663876945807995865736242729317412'), mpf('0.983083687023713543948423277992792')]
+        result_list = [second_val, first_val]
         self.assertEqual(result_list, list_to_value_list(var_list))
 
         var_list = [x, y, z]
-        result_list = [mpf('0.983083687023713543948423277992792'), mpf('0.663876945807995865736242729317412'),
-                       mpf('0.0865532787281174619276152516348816')]
+        result_list = [first_val, second_val, third_val]
         self.assertEqual(result_list, list_to_value_list(var_list))
 
         var_list = [x+y]
-        result_list = [mpf('1.6469606328317094096846660073103')]
+        result_list = [first_val+second_val]
         self.assertEqual(result_list, list_to_value_list(var_list))
+
+        var_list = [x/y, (x+y)**2/(x*y)]
+        result_list = [first_val/second_val, (first_val+second_val)**2/(first_val*second_val)]
+        self.assertEqual(result_list, list_to_value_list(var_list))
+
+        var_list = [x-x]
+        result_list = [mpf(0.0)]
+        self.assertEqual(result_list, list_to_value_list(var_list))
+
+        with self.assertRaises(AttributeError):
+            var_list = [0]
+            list_to_value_list(var_list)
 
         logging.info('All list_to_value_list tests passed')
 
