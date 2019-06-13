@@ -2,7 +2,7 @@
 language: python
 python:
   # PyPy versions
-  - "pypy3.5"
+  - "pypy3.6"
 # command to install dependencies
 install:
   - pip install sympy
