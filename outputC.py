@@ -36,7 +36,7 @@ def ccode_postproc(string):
         exit(1)
     # ... then we append the above suffix to standard C math library functions:
     for func in ['pow', 'sqrt', 'sin', 'cos', 'tan', 'sinh', 'cosh', 'tanh', 'exp', 'log', 'fabs']:
-        string2 = re.sub(func+'\(', func + cmathsuffix+"(", string); string = string2
+        string2 = re.sub(func+r'\(', func + cmathsuffix+"(", string); string = string2
 
     # Finally, SymPy prefers to output Rationals as long-double fractions.
     #  E.g., Rational(1,3) is output as 1.0L/3.0L.
