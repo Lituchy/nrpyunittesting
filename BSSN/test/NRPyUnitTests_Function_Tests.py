@@ -302,8 +302,12 @@ class TestFunctions(unittest.TestCase):
 
         logging.info('\nAll variable_dict_to_list tests passed.\n')
 
-    def ftest_run_test(self):
-        self.assertTrue(False)
+    def test_run_test(self):
+        from run_test import run_test
+
+        mod_dict = {}
+        with self.assertRaises(AssertionError):
+            run_test(self, mod_dict, locals())
 
 
 # Necessary for unittest class to work properly

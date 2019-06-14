@@ -15,7 +15,11 @@ from time import time
 # [mod_dict]- The user-supplied dictionary of modules
 # [locs]- The current local variables in the workspace. Should ALWAYS be locals()
 # It then runs a unittest, comparing calculated values with trusted values.
+# Throws an [AssertionError] if [mod_dict] is empty
 def run_test(self, mod_dict, locs):
+
+    # Can't use empty module dictionary
+    assert mod_dict != dict()
 
     # Determining if this is the first time the code is run based of the existence of trusted values
     first_times = is_first_time(mod_dict)

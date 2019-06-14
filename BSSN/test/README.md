@@ -89,7 +89,7 @@ mod_dict = {'myMod': functions_and_globals(function_list, global_list)}
 `functions_and_globals` throws an `assertion_error` if either argument passed in isn't a list, or if any entry 
 in each list passed in isn't a string.
 
-#### run_test:
+#### run_test basic:
 `run_test` is the culmination of all the functions outlined below. It does all the heavy lifting in calculating values,
 comparing them to trusted values, throwing errors if necessary, printing the desired output, etc. `run_test` takes in 
 `self`, which simply allows it to use the assert functions of `unittest`, `mod_dict`, which is the user-created module 
@@ -99,7 +99,7 @@ evaluate and compare for each module, and `locs` (almost always a simple call to
 
 At the most basic level, an understanding of exactly what `run_test` does isn't necessary to start creating your own
 tests, and as such a simple usage tutorial will be given here, while a more in-depth tutorial will be given 
-[below](#run_test-in-depth) in the **Functions** section. Assuming you've created your module dictionary `mod_dict` 
+[below](#run_test) in the **Functions** section. Assuming you've created your module dictionary `mod_dict` 
 correctly and imported its necessary modules, running `run_test` is as simple as calling the following:
 
 ````
@@ -240,7 +240,29 @@ calculation. For example, if the term `a**2` appears multiple times in `var_list
 in the optimized `var_list` is replaced with its `mpf` value, and the value list is returned.
 
 #### evaluate_globals:
-TODO
+`evaluate_globals` takes in a module dictionary `mod_dict` and a `locals()` call from where the respective 
+modules were imported `old_locals`, and returns a dictionary `result_dict` that contains all modules in `mod_dict` as 
+its keys and each respective module's globals as its values. Note that `locals()` is a built-in Python function, 
+so it must be passed in with the parenthesis. Example usage:
+
+````
+import myModule as myMod
+
+mod_dict = {'myMod': functions_and_globals(['myModuleInit()'], ['alpha', 'betaU'])}
+
+result_dict = evaluate_globals(mod_dict, locals())
+
+result_dict -> {'myMod': {'alpha': sqrt(x**2 + y**2),
+                          'betaU': [1, cos(x)*sin(y), x/y]}
+````
+
+`evaluate_globals` works by using Python's `exec()` function, which allows the user to create Python code as a string, 
+which we'll refer to as `stringexec`, and then pass it into `exec()` along with any globals and locals that need to be 
+accessed. This allows us to call the functions and globals from `mod_dict` on our module even though they are passed
+in as strings. First, `string_exec` is created by calling all the functions from `mod_dict` on their respective module
+`mod`, then assigning all globals from `mod_dict` to their own variables. `stringexec` is then passed into `exec()` 
+along with `old_locals`, which imports the modules that we initially imported into `exec()`. Then `exec()` runs 
+`stringexec` in this environment, and we extract the resulting variables and store them in `result_dict`.
 
 #### first_time_print:
 `first_time_print` takes in a module `mod` and a value dictionary `value_dict`, and prints the code that needs to be 
@@ -300,8 +322,8 @@ get_variable_dimension(empty_list) -> Raises IndexError
 ````
 
 #### variable_dict_to_list:
-`variable_dict_to_list` takes in a variable dictionary `variable_dict` and returns a tuple containing a list of variables
-`var_list` and its corresponding list of names `name_list`. These lists are created such that each tensor in 
+`variable_dict_to_list` takes in a variable dictionary `variable_dict` and returns a tuple containing a list of 
+variables `var_list` and its corresponding list of names `name_list`. These lists are created such that each tensor in 
 `variable_dict` is broken down into each of its scalars, the scalar is stored in `var_list`, and the name of the scalar
 according to Python list syntax is stored in the same respective index in `name_list`. Example usage is shown below:
 
@@ -341,7 +363,7 @@ is_first_time(mod_dict_3) -> [True, False, True, False]
 An important note is that the order of keys in the module dictionary is the same order that `is_first_time` generates
 its boolean list. This ensures that the resulting boolean list properly corresponds with the input module dictionary.
 
-#### run_test in-depth:
+#### run_test:
 TODO
 
 ### Example Usage:

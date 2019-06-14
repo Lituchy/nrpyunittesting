@@ -32,7 +32,7 @@ def evaluate_globals(mod_dict, old_locals):
         loc = {}
 
         # Executing string of execution with current globals and storing resulting globals in loc
-        exec(stringexec,old_locals,loc)
+        exec(stringexec, old_locals, loc)
         
         # Storing the module-variable pair [mod],[loc] into the dictionary [resultDict]
         result_dict[mod] = loc
