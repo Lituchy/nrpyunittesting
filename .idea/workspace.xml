@@ -5,7 +5,6 @@
       <change beforePath="$PROJECT_DIR$/BSSN/test/NRPyUnitTests_Function_Tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/BSSN/test/NRPyUnitTests_Function_Tests.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BSSN/test/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/BSSN/test/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BSSN/test/calc_error.py" beforeDir="false" afterPath="$PROJECT_DIR$/BSSN/test/calc_error.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSSN/test/run_NRPy_UnitTests.sh" beforeDir="false" afterPath="$PROJECT_DIR$/BSSN/test/run_NRPy_UnitTests.sh" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -18,11 +17,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/BSSN/test/run_NRPy_UnitTests.sh">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="240">
-              <caret line="16" column="55" selection-start-line="16" selection-start-column="55" selection-end-line="16" selection-end-column="55" />
+              <caret line="16" column="54" selection-start-line="16" selection-start-column="54" selection-end-line="16" selection-end-column="54" />
             </state>
           </provider>
         </entry>
@@ -79,12 +78,12 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BSSN/test/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="209">
-                <caret line="100" column="126" selection-start-line="100" selection-start-column="126" selection-end-line="100" selection-end-column="126" />
+              <first_editor relative-caret-position="239">
+                <caret line="105" column="34" lean-forward="true" selection-start-line="105" selection-start-column="34" selection-end-line="105" selection-end-column="34" />
               </first_editor>
               <second_editor />
             </state>
@@ -209,10 +208,10 @@
         <option value="$PROJECT_DIR$/BSSN/test/run_test.py" />
         <option value="$PROJECT_DIR$/BSSN/test/list_to_value_list.py" />
         <option value="$PROJECT_DIR$/BSSN/test/trusted_values_dict.py" />
-        <option value="$PROJECT_DIR$/BSSN/test/run_NRPy_UnitTests.sh" />
         <option value="$PROJECT_DIR$/BSSN/test/NRPyUnitTests_Function_Tests.py" />
         <option value="$PROJECT_DIR$/BSSN/test/calc_error.py" />
         <option value="$PROJECT_DIR$/BSSN/test/README.md" />
+        <option value="$PROJECT_DIR$/BSSN/test/run_NRPy_UnitTests.sh" />
       </list>
     </option>
   </component>
@@ -449,7 +448,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="36" y="45" width="1872" height="1004" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.24945135" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -717,13 +715,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BSSN/test/run_NRPy_UnitTests.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="55" selection-start-line="16" selection-start-column="55" selection-end-line="16" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/BSSN/test/list_to_value_list.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-180">
@@ -819,10 +810,17 @@
     <entry file="file://$PROJECT_DIR$/BSSN/test/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="209">
-            <caret line="100" column="126" selection-start-line="100" selection-start-column="126" selection-end-line="100" selection-end-column="126" />
+          <first_editor relative-caret-position="239">
+            <caret line="105" column="34" lean-forward="true" selection-start-line="105" selection-start-column="34" selection-end-line="105" selection-end-column="34" />
           </first_editor>
           <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BSSN/test/run_NRPy_UnitTests.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="54" selection-start-line="16" selection-start-column="54" selection-end-line="16" selection-end-column="54" />
         </state>
       </provider>
     </entry>

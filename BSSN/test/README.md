@@ -99,7 +99,7 @@ evaluate and compare for each module, and `locs` (almost always a simple call to
 
 At the most basic level, an understanding of exactly what `run_test` does isn't necessary to start creating your own
 tests, and as such a simple usage tutorial will be given here, while a more in-depth tutorial will be given 
-[below](#evaluate_globals) in the [**Functions**](#Functions) section. Assuming you've created your module dictionary `mod_dict` 
+[below](#run_test) in the **Functions** section. Assuming you've created your module dictionary `mod_dict` 
 correctly and imported its necessary modules, running `run_test` is as simple as calling the following:
 
 ````
