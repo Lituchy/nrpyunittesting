@@ -12,27 +12,62 @@ This is where unit testing comes in. By initially calculating values for the glo
 version of your code and storing those values in a dictionary, you can then easily check if something stopped working
 by comparing your newly calculated values to the ones you've stored. On the frontend, there are four modules 
 essential to get your unit tests up and running: `trusted_values_dict`, `functions_and_globals`, `run_test`, and your 
-testing module (which we'll simply reference as `Your_Tests`). The usage of each of these modules is outlined in the 
-**Interactive Modules** section. There are many functions at play in the backend as well, all of which will 
-be described in detail below in the **Functions** section. Understanding of them may not be essential to get your tests 
-up-and-running, but some basic understanding of these modules with undoubtedly streamline the testing process and how 
-to potentially create your own, different types of tests.
+testing module (which we'll simply reference as `Your_Test_File`). The usage of each of these modules is outlined in 
+the  **Interactive Modules** section. There is also some important prerequisite knowledge that may be helpful to grasp
+before beginning your testing. There are many functions at play in the backend as well, all of which will 
+be described in detail below in the **Functions** section. Mastery of these functions may not be essential to get your 
+tests up-and-running, but some basic understanding of these modules with undoubtedly streamline the testing process and 
+how to potentially create your own, different types of tests.
 
 An important caveat is that the unit testing does not test the **correctness** of your code or your variables. The 
-unit tests function as a protective measure to ensure that nothing was broken. It gets its values by running your code, 
-so if something starts out incorrect, it will be stored as incorrect in the system. There are measures against this, 
-but it relies on the user's knowledge of what versions of their code are correct.
+unit tests function as a protective measure to ensure that nothing was broken; it gets its values by running _your_ 
+code, so if something starts out incorrect, it will be stored as incorrect in the system. There are measures against 
+this, but it relies on the user's knowledge of what versions of their code are correct.
+
+### Important Prerequisite Knowledge:
+
+#### Unit Testing:
+TODO
+
+#### Logging:
+`logging` is a Python module with the purpose of creating meaningful and flexible event logging. For the purpose of
+NRPy Unit Testing, we use `logging` to display information, errors, debug statements, etc. to the console in real-time.
+Unlike simple printing, which requires sloppy if-statements to determine whether to print or not and only prints
+once a function call is complete, `logging` has a built-in `level` parameter that makes it easy to set the level of
+output for all functions and an ability to print output during a function call. The following levels and their 
+descriptions are what we'll be using in the NRPy Unit Testing context.
+
+###### Levels:
+````
+ERROR -> Outputs minimal information about processes. Only prints when necessary due to an error.
+INFO -> Outputs when a module begins and finishes being tested, as well as everything above.
+DEBUG -> Outputs all pairs of calculated and trusted values being compared, as well as everything above.
+NOTSET -> Outputs symbolic expressions for each variable, as well as everything above.
+````
+
+The recommended level for `logging` is `INFO`, as it gives the user an understanding of how long each module takes while
+not being overbearing. The logging level should be set at the top of the user's Unit Testing file with the following 
+command:
+
+````
+logging.basicConfig(level=logging.INFO)
+```` 
+
+The level can be changed by simply changing `INFO` to any of `ERROR`, `INFO`, etc. 
+
+#### Your_Test_File.py:
+TODO
 
 ### Interactive Modules:
 
-**trusted_values_dict:**<br /> 
+####trusted_values_dict:
 `trusted_values_dict` acts as the storage hub for NRPy unit tests. It is a module that stores trusted values of the 
 globals that you calculate in an easily accessible dictionary. It also stores the precision `precision` that is used in 
 comparing your trusted values and calculated values, as well as a seed `seed` that is used by some functions below. A 
 good default value for `precision` is `30`, and a standard `seed` is `1234`. 
 
 
-**functions_and_globals:**<br /> 
+#### functions_and_globals:
 `functions_and_globals` is a simple function that takes in a list of functions and a list of globals, and returns a
 dictionary containing those functions and globals in a format that is readable by the other functions. The purpose of
 this function is to be called to create the value for your module in your module dictionary. Examples are shown below:
@@ -54,7 +89,7 @@ mod_dict = {'myMod': functions_and_globals(function_list, global_list)}
 `functions_and_globals` throws an `assertion_error` if either argument passed in isn't a list, or if any entry 
 in each list passed in isn't a string.
 
-**run_test:**<br /> 
+#### run_test:
 `run_test` is the culmination of all the functions outlined below. It does all the heavy lifting in calculating values,
 comparing them to trusted values, throwing errors if necessary, printing the desired output, etc. `run_test` takes in 
 `self`, which simply allows it to use the assert functions of `unittest`, `mod_dict`, which is the user-created module 
@@ -63,26 +98,121 @@ evaluate and compare for each module, and `locs` (almost always a simple call to
 `locals`), which allows the current local variables to be passed into `run_test`.
 
 At the most basic level, an understanding of exactly what `run_test` does isn't necessary to start creating your own
-tests, and as such a simple usage tutorial will be given here, while a more in-depth tutorial will be given below
-in the **Functions** section. Assuming you've created your module dictionary `mod_dict` correctly and imported its 
-necessary modules, running `run_test` is as simple as calling the following:
+tests, and as such a simple usage tutorial will be given here, while a more in-depth tutorial will be given 
+[below](#evaluate_globals) in the [**Functions**](#Functions) section. Assuming you've created your module dictionary `mod_dict` 
+correctly and imported its necessary modules, running `run_test` is as simple as calling the following:
 
 ````
 run_test(self, mod_dict, locals())
 ````
 
-**Your_Tests:**<br />
-This is what you do
-
 ### Functions:
 
-**calc_error:**<br /> 
-This function does this
+#### calc_error:
+`calc_error` takes in a module `mod`, a calculated dictionary `calculated_dict`, a trusted dictionary `trusted_dict`, 
+and a symbolic dictionary `symbolic_dict`. It computes the error between each respective value in `result_dict` and 
+`trusted_dict`, and returns `False` if the error between any values in the two dictionaries is too large, `True` if
+all values in both dictionaries are close enough in value. It prints output to the screen according to the level of
+`logging`. A more in-depth explanation is given after the following example:
 
-**create_trusted_globals_dict:**<br /> 
-This function does this
+````
+mod = 'myMod'
+calculated_dict = {'alpha': mpf('0.12759172659175684561176895'), 'beta': mpf('60.561850917509181234786')}
+trusted_dict = {'alpha': mpf('0.12759172659175684561176904'), 'beta': mpf('60.5618509175149189740873')}
+symbolic_dict = {'alpha': sqrt(x**2 + y**2), 'beta': x**3/y**5}
+calc_error(mod, calculated_dict, trusted_dict, symbolic_dict) -> False
 
-**list_to_value_list:**<br /> 
+Console output:
+
+ERROR:root:
+Variable beta in module myMod failed. Please check values.
+If you are confident that the newly calculated values are correct, comment out the old trusted values 
+for 'myModGlobals' in trustedValuesDict and copy the following code between the ##### into 
+trustedValuesDict. Make sure to fill out the TODO comment describing why the values had to be changed. 
+Then re-run test script.
+#####
+# Generated on: 2019-06-14 14:03:20.771968
+# Reason for changing values: TODO
+trustedValuesDict['myModGlobals'] = {'alpha': mpf('0.127591726591756854380932395542914'), 
+'beta': mpf('60.5618509175091830343262699898332')}
+#####
+
+````
+
+As we can see above, variable `alpha` was within the precision value, and as such was found to be correct. However, 
+variable `beta` was too far off to be considered correct, so `calc_error` returned `False` and output to the console
+with instructions.
+
+Now for a more in-depth look into what calc_error does, how it does it, and what it outputs to the console in what case.
+First, `calc_error` takes `calculated_dict` and `trusted_dict` and creates their sets (`calculated_set` and 
+`trusted_set`, respectively). This makes it super easy to compare the keys in each dictionary. If the sets are not 
+equal, that means at least one of the sets has a value that's not in the other set. For example, this could mean that 
+`calculated_dict` has variables `alpha` and `beta`, while `trusted_dict` only has variable `alpha`. Note that there's 
+nothing special about creating sets out of the dictionaries, other than for ease of comparison. Then, the fact that 
+they differ is printed to the screen under the `Error` level of `logging`, along with the specific variables in each
+set that aren't in the other set:
+
+````
+ERROR:root:
+	myMod: Calculated dictionary and trusted dictionary have different variables.
+ERROR:root:
+    Calculated Dictionary variables not in Trusted Dictionary: 
+	{'beta'}
+````
+
+Since there are no variables in `trusted_dict` that _aren't_ in `calculated_dict`, there is no output of this type. 
+However, if both dictionaries had variables that weren't in the other dictionary, we'd get output from both of them.
+After this printing occurs, `calc_error` returns `False`; it doesn't bother comparing the variables that were in both
+dictionaries, since it'll have to be rerun anyway and that would be a waste of processing power.
+
+In the case that both dictionaries have the same variables, `calc_error` then compares the values for each variable.
+If the `logging` level is `Debug` or lower, both the calculated and trusted values will be printed to the console. 
+Additionally, if the `logging` level is `Notset` (which is strongly not recommended), the symbolic expression will be
+printed as well. Finally, `calc_error` will calculate the error. 
+
+The error is calculated by looking at how many digits of the two values being compared are identical. It does this by 
+taking the `log10` of the error between the trusted value and the calculated value divided by the trusted value.
+A keen eye may notice that this will give us a division by zero in the case where the trusted value is zero; in this
+we simply look at distance from zero of the calculated value.
+
+After we get this number, we compare it with our `precision` value as set in `trusted_values_dict`. Since it'd be 
+unreasonable to expect the calculated and trusted values to be identical, we simply say that the the calculated and 
+trusted values must agree to at least `precision/2` digits. If the error meets this constraint, we easily move on
+to the next variable to be compared. However, if the error is too large, we print to the console at the `Error`
+level of `logging` that two values differed by too much, as well as a potentially correct new entry for 
+`trusted_values_dict` if you're confident that the newly calculated values are correct. `calc_error` then returns 
+`False`. In the case that the error for every value meets the constraint, `True` is returned and `calc_error` is
+finished.
+
+#### create_trusted_globals_dict:
+`create_trusted_globals_dict` takes in a module dictionary `mod_dict` and a boolean list `first_times`  representing 
+if it's the first time running each module in `mod_dict`. For each module, if `first_time` is `True`, then that module 
+gets assigned an empty dictionary. This ensures that, once the result of `create_trusted_globals_dict` is passed into
+`calc_error`, that an error will arise. If `first_time` is False, then that module gets assigned its entry in 
+`trusted_values_dict` along the same naming convention we defined above in `trusted_values_dict`'s tutorial.. If 
+`mod_dict` and `first_times` have different lengths, then an `AssertionError` is thrown. If a module has `first_time` 
+as `False` but it doesn't have an entry in `trusted_values_dict` (this should never happen in the default code), 
+then a `KeyError` is thrown. Example usage is shown below:
+ 
+````
+mod_dict = {'myOldMod': 'arbitrary functions and globals', 
+            'myNewMod': 'arbitrary functions and globals'}
+first_times = [False, True]
+trusted_dict =  create_trusted_globals_dict(mod_dict, first_times)
+````
+
+Then `trusted_dict` would look like the following:
+
+````
+trusted_dict -> {'myOldMod': *trusted_values_dict['myOldModGlobals']*,
+                 'myNewMod': *empty dictionary*}
+````
+
+As we can see, `trusted_dict` fetches the existing trusted values from `trusted_values_dict` and assigns them to their
+respective modules if `first_time` is `True`, and assigns an empty dictionary to their respective modules if `first_time`
+is `False`.
+
+#### list_to_value_list:
 `list_to_value_list` takes in a list of sympy expressions `var_list` and returns a version of `var_list` where each
 expression is evaluated by assigning every variable a pseudorandom number. Since the pseudorandom number is assigned
 according to the `seed` value in `trusted_values_dict`, we expect that over multiple iterations, the same pseudorandom
@@ -109,10 +239,10 @@ calculation. For example, if the term `a**2` appears multiple times in `var_list
 `a**2` as its own variable and replace all instances of `a**2` with that new variable. Finally, each variable 
 in the optimized `var_list` is replaced with its `mpf` value, and the value list is returned.
 
-**evaluate_globals:**<br /> 
-This function does this
+#### evaluate_globals:
+TODO
 
-**first_time_print:**<br /> 
+#### first_time_print:
 `first_time_print` takes in a module `mod` and a value dictionary `value_dict`, and prints the code that needs to be 
 copied into `trusted_values_dict` assuming the entries in `value_dict` correspond to the module `mod`. <br />
 Example Usage:
@@ -140,7 +270,7 @@ Note that `first_time_print` does not check if it _should_ be called at any give
 If `run_test` is used without any modifications (as recommended), `first_time_print` will run as determined by the 
 boolean result from `is_first_time`.
 
-**get_variable_dimension:**<br /> 
+#### get_variable_dimension:
 `get_variable_dimension` takes in a tensor `tensor` and returns a tuple containing the rank of the tensor `dim` and the 
 length of the tensor `length`. `dim` is defined as the number of dimensions of `tensor`. For example, `dim` of a scalar
 is `0`, `dim` of a vector is `1`, etc. `length` is defined as the number of variables in each `dim` of `tensor`. For 
@@ -169,7 +299,7 @@ empty_list = []
 get_variable_dimension(empty_list) -> Raises IndexError
 ````
 
-**variable_dict_to_list:**<br /> 
+#### variable_dict_to_list:
 `variable_dict_to_list` takes in a variable dictionary `variable_dict` and returns a tuple containing a list of variables
 `var_list` and its corresponding list of names `name_list`. These lists are created such that each tensor in 
 `variable_dict` is broken down into each of its scalars, the scalar is stored in `var_list`, and the name of the scalar
@@ -185,7 +315,7 @@ variable_dict_to_list(variable_dict) ->
 'gammaU[0]', 'gammaU[1]', 'gammaU[2]', 'gammaU[3]']
 ````
 
-**is_first_time:**<br /> 
+#### is_first_time:
 `is_first_time` takes in a module dictionary `mod_dict` and returns a list containing corresponding booleans for each
 module in `mod_dict`. The boolean for each module `mod` is `True` if `trusted_values_dict` contains a dictionary entry
 for `mod` according to the naming convention defined in `create_trusted_globals_dict`, `False` otherwise. Say we have 
@@ -211,8 +341,8 @@ is_first_time(mod_dict_3) -> [True, False, True, False]
 An important note is that the order of keys in the module dictionary is the same order that `is_first_time` generates
 its boolean list. This ensures that the resulting boolean list properly corresponds with the input module dictionary.
 
-**run_test:**<br />
-This does this
+#### run_test:
+TODO
 
 ### Example Usage:
 

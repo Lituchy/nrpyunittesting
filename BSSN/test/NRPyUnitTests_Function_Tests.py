@@ -12,8 +12,18 @@ logging.basicConfig(level=logging.INFO)
 
 class TestFunctions(unittest.TestCase):
 
-    def ftest_calc_error(self):
-        self.assertTrue(False)
+    def test_calc_error(self):
+        from calc_error import calc_error
+
+        mod = 'TestModule'
+
+        result_dict = dict()
+        trusted_dict = dict()
+        symbolic_dict = dict()
+
+        self.assertEqual(True, calc_error(mod, result_dict, trusted_dict, symbolic_dict))
+
+        logging.info('All calc_error tests passed.')
 
     def test_create_trusted_globals_dict(self):
         from create_trusted_globals_dict import create_trusted_globals_dict
@@ -50,8 +60,6 @@ class TestFunctions(unittest.TestCase):
         mod_dict = {'BrillLindquist': ['foo', 'bar']}
         first_times = [True]
         self.assertEqual({'BrillLindquist': dict()}, create_trusted_globals_dict(mod_dict, first_times))
-
-        self.maxDiff = None
 
         mod_dict = {'BrillLindquist': ['foo', 'bar']}
         first_times = [False]
@@ -136,8 +144,49 @@ class TestFunctions(unittest.TestCase):
 
         logging.info('All list_to_value_list tests passed')
 
-    def ftest_evaluate_globals(self):
-        self.assertTrue(False)
+    def test_evaluate_globals(self):
+        from evaluate_globals import evaluate_globals
+        from functions_and_globals import functions_and_globals
+        import NRPy_param_funcs as par
+        from sympy import sqrt, symbols, sin
+        import indexedexp as ixp
+        import BSSN.BrillLindquist as BrillLindquist
+        import BSSN.StaticTrumpet as StaticTrumpet
+
+        self.assertEqual(dict(), evaluate_globals(dict(), dict()))
+
+        mod_dict = {'BrillLindquist': functions_and_globals(['BrillLindquist(ComputeADMGlobalsOnly = True)'], ['alphaCart', 'betaCartU', 'BCartU', 'gammaCartDD', 'KCartDD'])}
+
+        locs = dict(locals())
+
+        thismodule = "Brill-Lindquist"
+        BH1_posn_x, BH1_posn_y, BH1_posn_z = par.Cparameters("REAL", thismodule,
+                                                             ["BH1_posn_x", "BH1_posn_y", "BH1_posn_z"])
+        BH1_mass = par.Cparameters("REAL", thismodule, ["BH1_mass"])
+        BH2_posn_x, BH2_posn_y, BH2_posn_z = par.Cparameters("REAL", thismodule,
+                                                             ["BH2_posn_x", "BH2_posn_y", "BH2_posn_z"])
+        BH2_mass = par.Cparameters("REAL", thismodule, ["BH2_mass"])
+        Cartxyz = ixp.declarerank1("Cartxyz")
+        Cartxyz0, Cartxyz1, Cartxyz2 = Cartxyz
+
+        result_dict = {'BrillLindquist': {'alphaCart': (BH1_mass/(2*sqrt((-BH1_posn_x + Cartxyz0)**2 + (-BH1_posn_y + Cartxyz1)**2 + (-BH1_posn_z + Cartxyz2)**2)) + BH2_mass/(2*sqrt((-BH2_posn_x + Cartxyz0)**2 + (-BH2_posn_y + Cartxyz1)**2 + (-BH2_posn_z + Cartxyz2)**2)) + 1)**(-2), 'betaCartU': [0, 0, 0], 'BCartU': [0, 0, 0], 'gammaCartDD': [[(BH1_mass/(2*sqrt((-BH1_posn_x + Cartxyz0)**2 + (-BH1_posn_y + Cartxyz1)**2 + (-BH1_posn_z + Cartxyz2)**2)) + BH2_mass/(2*sqrt((-BH2_posn_x + Cartxyz0)**2 + (-BH2_posn_y + Cartxyz1)**2 + (-BH2_posn_z + Cartxyz2)**2)) + 1)**4, 0, 0], [0, (BH1_mass/(2*sqrt((-BH1_posn_x + Cartxyz0)**2 + (-BH1_posn_y + Cartxyz1)**2 + (-BH1_posn_z + Cartxyz2)**2)) + BH2_mass/(2*sqrt((-BH2_posn_x + Cartxyz0)**2 + (-BH2_posn_y + Cartxyz1)**2 + (-BH2_posn_z + Cartxyz2)**2)) + 1)**4, 0], [0, 0, (BH1_mass/(2*sqrt((-BH1_posn_x + Cartxyz0)**2 + (-BH1_posn_y + Cartxyz1)**2 + (-BH1_posn_z + Cartxyz2)**2)) + BH2_mass/(2*sqrt((-BH2_posn_x + Cartxyz0)**2 + (-BH2_posn_y + Cartxyz1)**2 + (-BH2_posn_z + Cartxyz2)**2)) + 1)**4]], 'KCartDD': [[0, 0, 0], [0, 0, 0], [0, 0, 0]]}}
+
+        self.assertEqual(result_dict, evaluate_globals(mod_dict, locs))
+
+        mod_dict = {'BrillLindquist': functions_and_globals(['BrillLindquist(ComputeADMGlobalsOnly = True)'], ['alphaCart', 'betaCartU', 'BCartU', 'gammaCartDD', 'KCartDD']),
+                    'StaticTrumpet': functions_and_globals(['StaticTrumpet(ComputeADMGlobalsOnly = True)'], ['alphaSph', 'betaSphU', 'BSphU', 'gammaSphDD', 'KSphDD'])}
+
+        locs = locals()
+
+        r, th, ph = symbols('r th ph', real=True)
+        M = par.Cparameters("REAL", thismodule, ["M"])
+
+        result_dict = {'BrillLindquist': {'alphaCart': (BH1_mass/(2*sqrt((-BH1_posn_x + Cartxyz0)**2 + (-BH1_posn_y + Cartxyz1)**2 + (-BH1_posn_z + Cartxyz2)**2)) + BH2_mass/(2*sqrt((-BH2_posn_x + Cartxyz0)**2 + (-BH2_posn_y + Cartxyz1)**2 + (-BH2_posn_z + Cartxyz2)**2)) + 1)**(-2), 'betaCartU': [0, 0, 0], 'BCartU': [0, 0, 0], 'gammaCartDD': [[(BH1_mass/(2*sqrt((-BH1_posn_x + Cartxyz0)**2 + (-BH1_posn_y + Cartxyz1)**2 + (-BH1_posn_z + Cartxyz2)**2)) + BH2_mass/(2*sqrt((-BH2_posn_x + Cartxyz0)**2 + (-BH2_posn_y + Cartxyz1)**2 + (-BH2_posn_z + Cartxyz2)**2)) + 1)**4, 0, 0], [0, (BH1_mass/(2*sqrt((-BH1_posn_x + Cartxyz0)**2 + (-BH1_posn_y + Cartxyz1)**2 + (-BH1_posn_z + Cartxyz2)**2)) + BH2_mass/(2*sqrt((-BH2_posn_x + Cartxyz0)**2 + (-BH2_posn_y + Cartxyz1)**2 + (-BH2_posn_z + Cartxyz2)**2)) + 1)**4, 0], [0, 0, (BH1_mass/(2*sqrt((-BH1_posn_x + Cartxyz0)**2 + (-BH1_posn_y + Cartxyz1)**2 + (-BH1_posn_z + Cartxyz2)**2)) + BH2_mass/(2*sqrt((-BH2_posn_x + Cartxyz0)**2 + (-BH2_posn_y + Cartxyz1)**2 + (-BH2_posn_z + Cartxyz2)**2)) + 1)**4]], 'KCartDD': [[0, 0, 0], [0, 0, 0], [0, 0, 0]]},
+                       'StaticTrumpet': {'alphaSph': r/(M + r), 'betaSphU': [M*r/(M + r)**2, 0, 0], 'BSphU': [0, 0, 0], 'gammaSphDD': [[(M/r + 1)**2, 0, 0], [0, r**2*(M/r + 1)**2, 0], [0, 0, r**2*(M/r + 1)**2*sin(th)**2]], 'KSphDD': [[-M/r**2, 0, 0], [0, M, 0], [0, 0, M*sin(th)**2]]}}
+
+        self.assertEqual(result_dict, evaluate_globals(mod_dict, locs))
+
+        logging.info('\nAll evaluate_globals tests passed.\n')
 
     def test_functions_and_globals(self):
         from functions_and_globals import functions_and_globals

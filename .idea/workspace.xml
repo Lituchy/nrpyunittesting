@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="84f9775a-ff87-4f96-b64b-74cc8f43cddb" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSSN/test/NRPyUnitTests_Function_Tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/BSSN/test/NRPyUnitTests_Function_Tests.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BSSN/test/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/BSSN/test/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSSN/test/calc_error.py" beforeDir="false" afterPath="$PROJECT_DIR$/BSSN/test/calc_error.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSSN/test/run_NRPy_UnitTests.sh" beforeDir="false" afterPath="$PROJECT_DIR$/BSSN/test/run_NRPy_UnitTests.sh" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -20,7 +22,28 @@
         <entry file="file://$PROJECT_DIR$/BSSN/test/run_NRPy_UnitTests.sh">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="240">
-              <caret line="16" column="54" lean-forward="true" selection-start-line="16" selection-start-column="54" selection-end-line="16" selection-end-column="54" />
+              <caret line="16" column="55" selection-start-line="16" selection-start-column="55" selection-end-line="16" selection-end-column="55" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/BSSN/test/NRPyUnitTests_Globals_Tests.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1260">
+              <caret line="84" column="83" lean-forward="true" selection-start-line="84" selection-start-column="26" selection-end-line="84" selection-end-column="83" />
+              <folding>
+                <element signature="e#47#62#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/BSSN/test/trusted_values_dict.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="300">
+              <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
             </state>
           </provider>
         </entry>
@@ -28,12 +51,13 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BSSN/test/NRPyUnitTests_Function_Tests.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="155">
-              <caret line="83" column="38" selection-start-line="83" selection-start-column="38" selection-end-line="83" selection-end-column="38" />
+            <state relative-caret-position="225">
+              <caret line="145" lean-forward="true" selection-start-line="145" selection-end-line="145" />
               <folding>
                 <element signature="e#1#16#0" expanded="true" />
                 <element signature="e#623#3613#0" />
                 <element signature="e#4373#4463#0" />
+                <element signature="e#6283#6823#0" />
                 <element signature="e#840#2197#0" />
                 <element signature="e#2250#3187#0" />
                 <element signature="e#3231#3863#0" />
@@ -44,12 +68,12 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/BSSN/test/list_to_value_list.py">
+        <entry file="file://$PROJECT_DIR$/BSSN/test/calc_error.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-180">
-              <caret line="27" lean-forward="true" selection-start-line="27" selection-end-line="27" />
+            <state relative-caret-position="915">
+              <caret line="61" column="25" selection-start-line="61" selection-start-column="25" selection-end-line="61" selection-end-column="25" />
               <folding>
-                <element signature="e#172#208#0" expanded="true" />
+                <element signature="e#0#14#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -59,10 +83,22 @@
         <entry file="file://$PROJECT_DIR$/BSSN/test/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="316">
-                <caret line="101" selection-start-line="101" selection-end-line="101" />
+              <first_editor relative-caret-position="209">
+                <caret line="100" column="126" selection-start-line="100" selection-start-column="126" selection-end-line="100" selection-end-column="126" />
               </first_editor>
               <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/BSSN/test/run_test.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="375">
+              <caret line="25" column="44" lean-forward="true" selection-start-line="25" selection-start-column="44" selection-end-line="25" selection-end-column="44" />
+              <folding>
+                <element signature="e#0#14#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -78,8 +114,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>detgamma</find>
-      <find>betaU</find>
       <find>resultDict</find>
       <find>exec</find>
       <find>sqrt</find>
@@ -108,6 +142,8 @@
       <find>outputC</find>
       <find>ccode</find>
       <find>simd</find>
+      <find>maxd</find>
+      <find>difference</find>
     </findStrings>
     <replaceStrings>
       <replace>test</replace>
@@ -160,7 +196,6 @@
         <option value="$PROJECT_DIR$/BSSN/test/runTest.py" />
         <option value="$PROJECT_DIR$/BSSN/test/trustedValuesDict.py" />
         <option value="$PROJECT_DIR$/BSSN/test/evaluate_globals.py" />
-        <option value="$PROJECT_DIR$/BSSN/test/calc_error.py" />
         <option value="$PROJECT_DIR$/.travis.yml" />
         <option value="$PROJECT_DIR$/BSSN/test/first_time_print.py" />
         <option value="$PROJECT_DIR$/BSSN/test/get_variable_dimension.py" />
@@ -176,6 +211,7 @@
         <option value="$PROJECT_DIR$/BSSN/test/trusted_values_dict.py" />
         <option value="$PROJECT_DIR$/BSSN/test/run_NRPy_UnitTests.sh" />
         <option value="$PROJECT_DIR$/BSSN/test/NRPyUnitTests_Function_Tests.py" />
+        <option value="$PROJECT_DIR$/BSSN/test/calc_error.py" />
         <option value="$PROJECT_DIR$/BSSN/test/README.md" />
       </list>
     </option>
@@ -413,6 +449,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="36" y="45" width="1872" height="1004" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.24945135" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -592,21 +629,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BSSN/BrillLindquist.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="189" selection-start-line="8" selection-start-column="186" selection-end-line="8" selection-end-column="189" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/BSSN/ShiftedKerrSchild.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1305" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BSSN/StaticTrumpet.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-270" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/BSSN/UIUCBlackHole.py">
@@ -682,23 +707,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BSSN/test/evaluate_globals.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="25" column="41" selection-start-line="25" selection-start-column="41" selection-end-line="25" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BSSN/test/calc_error.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="615">
-          <caret line="41" column="14" selection-start-line="41" selection-start-column="14" selection-end-line="41" selection-end-column="14" />
-          <folding>
-            <element signature="e#0#14#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/BSSN/test/old/oldListToValueList.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
@@ -709,44 +717,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BSSN/test/run_test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="94" lean-forward="true" selection-start-line="94" selection-end-line="94" />
-          <folding>
-            <element signature="e#0#14#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BSSN/test/NRPyUnitTests_Globals_Tests.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="37" lean-forward="true" selection-start-line="37" selection-end-line="37" />
-          <folding>
-            <element signature="e#47#62#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BSSN/test/create_trusted_globals_dict.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" selection-start-line="11" selection-end-line="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BSSN/test/trusted_values_dict.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="16" lean-forward="true" selection-start-line="7" selection-start-column="16" selection-end-line="7" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/BSSN/test/run_NRPy_UnitTests.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
-          <caret line="16" column="54" lean-forward="true" selection-start-line="16" selection-start-column="54" selection-end-line="16" selection-end-column="54" />
+          <caret line="16" column="55" selection-start-line="16" selection-start-column="55" selection-end-line="16" selection-end-column="55" />
         </state>
       </provider>
     </entry>
@@ -760,14 +734,70 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/BSSN/test/evaluate_globals.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="19" column="47" lean-forward="true" selection-start-line="19" selection-start-column="47" selection-end-line="19" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BSSN/BrillLindquist.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-75">
+          <caret line="31" selection-start-line="31" selection-end-line="31" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BSSN/StaticTrumpet.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="52" column="4" selection-start-line="52" selection-start-column="4" selection-end-line="52" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BSSN/test/create_trusted_globals_dict.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" selection-start-line="11" selection-end-line="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BSSN/test/NRPyUnitTests_Globals_Tests.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1260">
+          <caret line="84" column="83" lean-forward="true" selection-start-line="84" selection-start-column="26" selection-end-line="84" selection-end-column="83" />
+          <folding>
+            <element signature="e#47#62#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BSSN/test/calc_error.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="915">
+          <caret line="61" column="25" selection-start-line="61" selection-start-column="25" selection-end-line="61" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BSSN/test/trusted_values_dict.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/BSSN/test/NRPyUnitTests_Function_Tests.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="83" column="38" selection-start-line="83" selection-start-column="38" selection-end-line="83" selection-end-column="38" />
+        <state relative-caret-position="225">
+          <caret line="145" lean-forward="true" selection-start-line="145" selection-end-line="145" />
           <folding>
             <element signature="e#1#16#0" expanded="true" />
             <element signature="e#623#3613#0" />
             <element signature="e#4373#4463#0" />
+            <element signature="e#6283#6823#0" />
             <element signature="e#840#2197#0" />
             <element signature="e#2250#3187#0" />
             <element signature="e#3231#3863#0" />
@@ -776,11 +806,21 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/BSSN/test/run_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="25" column="44" lean-forward="true" selection-start-line="25" selection-start-column="44" selection-end-line="25" selection-end-column="44" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/BSSN/test/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="316">
-            <caret line="101" selection-start-line="101" selection-end-line="101" />
+          <first_editor relative-caret-position="209">
+            <caret line="100" column="126" selection-start-line="100" selection-start-column="126" selection-end-line="100" selection-end-column="126" />
           </first_editor>
           <second_editor />
         </state>
