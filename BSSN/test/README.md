@@ -99,7 +99,7 @@ evaluate and compare for each module, and `locs` (almost always a simple call to
 
 At the most basic level, an understanding of exactly what `run_test` does isn't necessary to start creating your own
 tests, and as such a simple usage tutorial will be given here, while a more in-depth tutorial will be given 
-[below](#run_test) in the **Functions** section. Assuming you've created your module dictionary `mod_dict` 
+[below](#run_test-in-depth) in the **Functions** section. Assuming you've created your module dictionary `mod_dict` 
 correctly and imported its necessary modules, running `run_test` is as simple as calling the following:
 
 ````
@@ -341,7 +341,7 @@ is_first_time(mod_dict_3) -> [True, False, True, False]
 An important note is that the order of keys in the module dictionary is the same order that `is_first_time` generates
 its boolean list. This ensures that the resulting boolean list properly corresponds with the input module dictionary.
 
-#### run_test:
+#### run_test in-depth:
 TODO
 
 ### Example Usage:
