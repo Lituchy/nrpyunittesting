@@ -260,7 +260,7 @@ class TestFunctions(unittest.TestCase):
         if python_implementation() != 'PyPy' and version_info[0] < 3:
             self.assertEqual(is_first_time(large_mod_dict), [True, False])
         elif python_implementation() != 'PyPy' and version_info[1] < 6:
-            self.assertEqual(set(is_first_time(large_mod_dict)), set([False, True]))
+            self.assertEqual(sorted(is_first_time(large_mod_dict)), sorted([False, True]))
         else:
             self.assertEqual(is_first_time(large_mod_dict), [False, True])
 
@@ -301,7 +301,7 @@ class TestFunctions(unittest.TestCase):
         variable_dict = {'alpha': 4, 'beta': 5}
         result_tuple = [4, 5], ['alpha', 'beta']
         if python_implementation() != 'PyPy' and version_info[1] < 6:
-            self.assertEqual(set(result_tuple), set(variable_dict_to_list(variable_dict)))
+            self.assertEqual(sorted(result_tuple), sorted(variable_dict_to_list(variable_dict)))
         else:
             self.assertEqual(result_tuple, variable_dict_to_list(variable_dict))
 
