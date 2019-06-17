@@ -59,7 +59,7 @@ def flatten(l, fl):
     return fl
 
 
-def variable_dict_to_list(variable_dict):
+def expand_variable_dict(variable_dict):
 
     result_dict = dict()
 

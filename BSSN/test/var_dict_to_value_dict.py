@@ -12,7 +12,7 @@ from sympy import cse
 
 # Called by run_test
 
-def list_to_value_list(var_dict):
+def var_dict_to_value_dict(var_dict):
 
     if var_dict == dict():
         return dict()

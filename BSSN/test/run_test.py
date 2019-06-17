@@ -3,8 +3,8 @@ import logging
 from calc_error import calc_error
 from first_time_print import first_time_print
 from evaluate_globals import evaluate_globals
-from variable_dict_to_list import variable_dict_to_list
-from list_to_value_list import list_to_value_list
+from expand_variable_dict import expand_variable_dict
+from var_dict_to_value_dict import var_dict_to_value_dict
 from is_first_time import is_first_time
 from create_trusted_globals_dict import create_trusted_globals_dict
 from time import time
@@ -64,13 +64,13 @@ def run_test(self, mod_dict, locs):
             logging.info('Currently working on module ' + mod + '...')
 
         # Generating variable list and name list for module
-        new_dict = variable_dict_to_list(var_dict)
+        new_dict = expand_variable_dict(var_dict)
 
         # Timing how long list_to_value_list takes
         t = time()
 
         # Calculating numerical list for module
-        value_dict = list_to_value_list(new_dict)
+        value_dict = var_dict_to_value_dict(new_dict)
 
         # Printing the time it took to run list_to_value_list
         logging.debug(str(time()-t) + ' seconds to run list_to_value_list')
