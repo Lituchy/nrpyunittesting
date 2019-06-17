@@ -4,13 +4,9 @@ from calc_error import calc_error
 from first_time_print import first_time_print
 from evaluate_globals import evaluate_globals
 from variable_dict_to_list import variable_dict_to_list
-from variable_dict_to_list import new_variable_dict_to_list
 from list_to_value_list import list_to_value_list
-from list_to_value_list import new_list_to_value_list
 from is_first_time import is_first_time
-from is_first_time import new_is_first_time
 from create_trusted_globals_dict import create_trusted_globals_dict
-from create_trusted_globals_dict import new_create_trusted_globals_dict
 from time import time
 
 
@@ -26,10 +22,10 @@ def run_test(self, mod_dict, locs):
     assert mod_dict != dict()
 
     # Determining if this is the first time the code is run based of the existence of trusted values
-    first_times = new_is_first_time(mod_dict)
+    first_times = is_first_time(mod_dict)
 
     # Creating trusted dictionary based off names of modules in ModDict
-    trusted_dict = new_create_trusted_globals_dict(mod_dict, first_times)
+    trusted_dict = create_trusted_globals_dict(mod_dict, first_times)
 
     # Timing how long evaluate_globals takes
     t = time()
@@ -68,13 +64,13 @@ def run_test(self, mod_dict, locs):
             logging.info('Currently working on module ' + mod + '...')
 
         # Generating variable list and name list for module
-        new_dict = new_variable_dict_to_list(var_dict)
+        new_dict = variable_dict_to_list(var_dict)
 
         # Timing how long list_to_value_list takes
         t = time()
 
         # Calculating numerical list for module
-        value_dict = new_list_to_value_list(new_dict)
+        value_dict = list_to_value_list(new_dict)
 
         # Printing the time it took to run list_to_value_list
         logging.debug(str(time()-t) + ' seconds to run list_to_value_list')
