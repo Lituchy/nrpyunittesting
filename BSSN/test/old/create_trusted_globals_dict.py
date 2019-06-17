@@ -1,6 +1,5 @@
 from trusted_values_dict import trusted_values_dict
 
-
 # createTrustedGlobalsDict takes in a module dictionary [mod_dict] and a boolean list [first_times].
 # For each module, if [first_time] is True, then an empty dict is returned.
 # This ensures that when the dictionary is passed into [calc_error], there will be an error.
@@ -15,13 +14,12 @@ from trusted_values_dict import trusted_values_dict
 
 
 def create_trusted_globals_dict(mod_dict, first_times):
+
     assert len(mod_dict) == len(first_times)
 
     trusted_dict = dict()
-
-    for mod in mod_dict:
-
-        first_time = first_times[mod]
+    
+    for (mod, val), first_time in zip(mod_dict.items(),first_times):
 
         if first_time:
             trusted_dict[mod] = dict()

@@ -12,16 +12,16 @@ from sympy import cse
 
 # Called by run_test
 
-def list_to_value_list(var_dict):
+def list_to_value_list(var_list):
 
-    if var_dict == dict():
-        return dict()
+    if not var_list:
+        return []
 
     # Setting precision
     mp.dps = trusted_values_dict["precision"]
 
     # List all the free symbols in the expressions in [lst].
-    free_symbols_list = list(sum(var_dict.values()).free_symbols)
+    free_symbols_list = list(sum(var_list).free_symbols)
 
     # Sort free symbols list based off the alphanumeric strings for each variable
     free_symbols_list.sort(key=lambda v: str(v))
@@ -41,9 +41,9 @@ def list_to_value_list(var_dict):
         else:
             variable_dictionary[var] = sqrt(mpf(random()))
 
-    value_dict = dict()
     # Evaluating each expression using the values in variable_dictionary
-    for var, expression in var_dict.items():
+    value_list = []
+    for expression in var_list:
         # Copying variable_dictionary into a new variable dictionary
         new_var_dict = dict(variable_dictionary)
 
@@ -64,6 +64,6 @@ def list_to_value_list(var_dict):
             reduce = reduce.subs(key, new_var_dict[key])
 
         # Appending our result to value_list
-        value_dict[var] = mpf(reduce)
+        value_list.append(mpf(reduce))
 
-    return value_dict
+    return value_list

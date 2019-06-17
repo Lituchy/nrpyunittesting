@@ -61,7 +61,8 @@ def flatten(l, fl):
 
 def variable_dict_to_list(variable_dict):
 
-    result_dict = dict()
+    var_list = []
+    name_list = []
 
     for var, expression_list in variable_dict.items():
 
@@ -70,7 +71,8 @@ def variable_dict_to_list(variable_dict):
 
         # If list is a scalar, easy computation with no necessary indexing
         if dim == 0:
-            result_dict[var] = expression_list
+            var_list.append(expression_list)
+            name_list.append(var)
         # Otherwise, need to do more work
         else:
             # Initialize our counter of the correct dimension
@@ -82,7 +84,10 @@ def variable_dict_to_list(variable_dict):
 
             for elt in flattened_list:
                 # Append element to var list
-                result_dict[form_string(var, counter)] = elt
+                var_list.append(elt)
+                # Create proper string to append to name list based on var and counter
+                name_list.append(form_string(var, counter))
+                # Increment counter based on length
                 counter = increment_counter(counter, length)
 
-    return result_dict
+    return var_list, name_list

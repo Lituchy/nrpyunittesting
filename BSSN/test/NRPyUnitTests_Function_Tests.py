@@ -310,6 +310,7 @@ class TestFunctions(unittest.TestCase):
         variable_dict = {'alphaD': [1, 2], 'beta': 3}
         if version_info[0] < 3 and python_implementation() != 'PyPy':
             result_tuple = [3, 1, 2], ['beta', 'alphaD[0]', 'alphaD[1]']
+
         else:
             result_tuple = [1, 2, 3], ['alphaD[0]', 'alphaD[1]', 'beta']
         self.assertEqual(result_tuple, variable_dict_to_list(variable_dict))

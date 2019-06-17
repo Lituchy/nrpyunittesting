@@ -11,14 +11,14 @@ from platform import python_implementation
 
 def is_first_time(mod_dict):
 
-    boolean_dict = dict()
+    boolean_list = []
 
     for mod in mod_dict:
 
         # Boolean stating whether or not the module has an entry with the proper name in trustedValuesDict
-        boolean_dict[mod] = ((mod + 'Globals') not in trusted_values_dict)
+        boolean_list.append((mod + 'Globals') not in trusted_values_dict)
 
     # if version_info[0] < 3 and python_implementation() != 'PyPy':
     #     boolean_list = boolean_list[::-1]
 
-    return boolean_dict
+    return boolean_list
