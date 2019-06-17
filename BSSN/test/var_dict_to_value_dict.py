@@ -6,8 +6,8 @@ from trusted_values_dict import trusted_values_dict
 from sympy import cse
 
 
-# Takes in a list [lst] and returns the list with each index evaluated
-# according to parameters (seed, precision) in trustedValues
+# Takes in a variable dictionary [var_dict] and returns the same dictionary with each expression evaluated
+# according to parameters (seed, precision) in trustedValues.
 # Throws an [AttributeError] if the variable list being passed in has no sympy symbols
 
 # Called by run_test
@@ -20,7 +20,7 @@ def var_dict_to_value_dict(var_dict):
     # Setting precision
     mp.dps = trusted_values_dict["precision"]
 
-    # List all the free symbols in the expressions in [lst].
+    # List all the free symbols in the expressions in [var_dict].
     free_symbols_list = list(sum(var_dict.values()).free_symbols)
 
     # Sort free symbols list based off the alphanumeric strings for each variable
@@ -31,6 +31,7 @@ def var_dict_to_value_dict(var_dict):
 
     # Creating dictionary entry for each variable and its pseudorandom value in [0,1) as determined by seed
     variable_dictionary = dict()
+
     for var in free_symbols_list:
         if str(var) == "M_PI":
             variable_dictionary[var] = mpf(pi)
@@ -63,7 +64,7 @@ def var_dict_to_value_dict(var_dict):
         for key in keys:
             reduce = reduce.subs(key, new_var_dict[key])
 
-        # Appending our result to value_list
+        # Adding our variable, value pair to our value_dict
         value_dict[var] = mpf(reduce)
 
     return value_dict

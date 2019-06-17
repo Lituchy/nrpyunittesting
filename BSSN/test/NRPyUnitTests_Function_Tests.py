@@ -1,8 +1,6 @@
 
 import unittest
 import logging
-from sys import version_info
-from platform import python_implementation
 
 # TODO: Change level based on desired amount of output.
 # ERROR -> Outputs minimal information -- only when there's an error
@@ -56,6 +54,16 @@ class TestFunctions(unittest.TestCase):
         with self.assertRaises(AssertionError):
             mod_dict = {'mod1': 'hello', 'mod2': 'world'}
             first_times = {'mod1': True}
+            create_trusted_globals_dict(mod_dict, first_times)
+
+        with self.assertRaises(AssertionError):
+            mod_dict = {'a': 1, 'b': 2, 'c': 3}
+            first_times = {'d': 4, 'e': 5, 'f': 6}
+            create_trusted_globals_dict(mod_dict, first_times)
+
+        with self.assertRaises(AssertionError):
+            mod_dict = {'a': 1, 'b': 2, 'c': 3}
+            first_times = {'d': 4, 'e': 5, 'f': 6}
             create_trusted_globals_dict(mod_dict, first_times)
 
         mod_dict = {'BrillLindquist': ['foo', 'bar']}
@@ -307,6 +315,7 @@ class TestFunctions(unittest.TestCase):
             var_dict_to_value_dict(var_dict)
 
         logging.info('\nAll var_dict_to_value_dict tests passed\n')
+
 
 # Necessary for unittest class to work properly
 if __name__ == '__main__':

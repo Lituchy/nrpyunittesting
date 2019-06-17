@@ -1,12 +1,38 @@
 from get_variable_dimension import get_variable_dimension
 
-# variable_dict_to_list takes in a variable dictionary [variable_dict] and returns a tuple
-# of lists; the first list [var_list] is a list of sympy expressions and the second
-# list [name_list] is the respective corresponding name for each expression in [var_list].
-# Example: var_list[0] -> r/(M+r)
-#          name_list[0] -> 'alphaSph'
+# expand_variable_dict takes in a variable dictionary [variable_dict] and returns a dictionary that represents
+# the expanded version of [variable_dict] according to the dimension of each tensor.
 
 # Called by run_test
+
+
+def expand_variable_dict(variable_dict):
+
+    result_dict = dict()
+
+    for var, expression_list in variable_dict.items():
+
+        # Getting the dimension and length of expression list
+        dim, length = get_variable_dimension(expression_list)
+
+        # If list is a scalar, easy computation with no necessary indexing
+        if dim == 0:
+            result_dict[var] = expression_list
+        # Otherwise, need to do more work
+        else:
+            # Initialize our counter of the correct dimension
+            counter = '0' * dim
+            # Call flatten on our expression list to get a flattened list
+            flattened_list = flatten(expression_list, [])
+
+            for elt in flattened_list:
+                # Append element to var list
+                result_dict[form_string(var, counter)] = elt
+                counter = increment_counter(counter, length)
+
+    return result_dict
+
+# Subfunctions:
 
 
 # iter_counter takes in a counter [counter] and a length [length] and returns the next number after counter
@@ -59,30 +85,4 @@ def flatten(l, fl):
     return fl
 
 
-def expand_variable_dict(variable_dict):
 
-    result_dict = dict()
-
-    for var, expression_list in variable_dict.items():
-
-        # Getting the dimension and length of expression list
-        dim, length = get_variable_dimension(expression_list)
-
-        # If list is a scalar, easy computation with no necessary indexing
-        if dim == 0:
-            result_dict[var] = expression_list
-        # Otherwise, need to do more work
-        else:
-            # Initialize our counter of the correct dimension
-            counter = '0' * dim
-            # Total number of variables is length ^ dim
-            total_number_vars = length ** dim
-            # Call flatten on our expression list to get a flattened list
-            flattened_list = flatten(expression_list, [])
-
-            for elt in flattened_list:
-                # Append element to var list
-                result_dict[form_string(var, counter)] = elt
-                counter = increment_counter(counter, length)
-
-    return result_dict
