@@ -1,4 +1,5 @@
 from get_variable_dimension import get_variable_dimension
+from sys import version_info
 
 # variable_dict_to_list takes in a variable dictionary [variable_dict] and returns a tuple
 # of lists; the first list [var_list] is a list of sympy expressions and the second
@@ -64,7 +65,12 @@ def variable_dict_to_list(variable_dict):
     var_list = []
     name_list = []
 
-    for var, expression_list in variable_dict.iteritems():
+    if version_info[0] < 3:
+        iterator = variable_dict.iteritems()
+    else:
+        iterator = variable_dict.items()
+
+    for var, expression_list in iterator:
 
         print('var: ' + str(var))
         print('exp: ' + str(expression_list))
