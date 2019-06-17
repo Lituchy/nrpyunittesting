@@ -64,7 +64,10 @@ def variable_dict_to_list(variable_dict):
     var_list = []
     name_list = []
 
-    for var, expression_list in variable_dict.items():
+    for var, expression_list in variable_dict.iteritems():
+
+        print('var: ' + str(var))
+        print('exp: ' + str(expression_list))
 
         # Getting the dimension and length of expression list
         dim, length = get_variable_dimension(expression_list)
