@@ -19,7 +19,7 @@ def create_trusted_globals_dict(mod_dict, first_times):
 
     trusted_dict = dict()
     
-    for mod, first_time in zip(mod_dict,first_times):
+    for (mod, val), first_time in zip(mod_dict.items(),first_times):
 
         if first_time:
             trusted_dict[mod] = dict()

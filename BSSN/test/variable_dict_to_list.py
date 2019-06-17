@@ -66,9 +66,6 @@ def variable_dict_to_list(variable_dict):
 
     for var, expression_list in variable_dict.items():
 
-        print('var: ' + str(var))
-        print('exp: ' + str(expression_list))
-
         # Getting the dimension and length of expression list
         dim, length = get_variable_dimension(expression_list)
 
