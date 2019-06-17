@@ -1,6 +1,8 @@
 
 import unittest
 import logging
+from sys import version_info
+from platform import python_implementation
 
 # TODO: Change level based on desired amount of output.
 # ERROR -> Outputs minimal information -- only when there's an error
@@ -296,7 +298,10 @@ class TestFunctions(unittest.TestCase):
         self.assertEqual(result_tuple, variable_dict_to_list(variable_dict))
 
         variable_dict = {'alphaD': [1, 2], 'beta': 3}
-        result_tuple = [1, 2, 3], ['alphaD[0]', 'alphaD[1]', 'beta']
+        if version_info[0] < 3 and python_implementation() != 'PyPy':
+            result_tuple = [3, 1, 2], ['beta', 'alphaD[0]', 'alphaD[1]']
+        else:
+            result_tuple = [1, 2, 3], ['alphaD[0]', 'alphaD[1]', 'beta']
         self.assertEqual(result_tuple, variable_dict_to_list(variable_dict))
 
         logging.info('\nAll variable_dict_to_list tests passed.\n')
