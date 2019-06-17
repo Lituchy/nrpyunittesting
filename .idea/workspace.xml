@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="84f9775a-ff87-4f96-b64b-74cc8f43cddb" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSSN/test/NRPyUnitTests_Function_Tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/BSSN/test/NRPyUnitTests_Function_Tests.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSSN/test/variable_dict_to_list.py" beforeDir="false" afterPath="$PROJECT_DIR$/BSSN/test/variable_dict_to_list.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSSN/test/is_first_time.py" beforeDir="false" afterPath="$PROJECT_DIR$/BSSN/test/is_first_time.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -38,11 +36,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BSSN/test/NRPyUnitTests_Function_Tests.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="301" column="70" selection-start-line="301" selection-start-column="70" selection-end-line="301" selection-end-column="70" />
+            <state relative-caret-position="225">
+              <caret line="298" lean-forward="true" selection-start-line="298" selection-end-line="298" />
               <folding>
                 <element signature="e#1#16#0" expanded="true" />
                 <element signature="e#542#839#0" />
@@ -67,11 +65,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/BSSN/test/is_first_time.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="20" column="64" lean-forward="true" selection-start-line="20" selection-start-column="27" selection-end-line="20" selection-end-column="64" />
+            <state relative-caret-position="360">
+              <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
               <folding>
                 <element signature="e#0#51#0" expanded="true" />
               </folding>
@@ -186,13 +184,13 @@
         <option value="$PROJECT_DIR$/BSSN/test/NRPyUnitTests_Globals_Tests.py" />
         <option value="$PROJECT_DIR$/BSSN/test/create_trusted_globals_dict.py" />
         <option value="$PROJECT_DIR$/BSSN/test/run_NRPy_UnitTests.sh" />
-        <option value="$PROJECT_DIR$/BSSN/test/is_first_time.py" />
         <option value="$PROJECT_DIR$/BSSN/test/variable_dict_to_list.py" />
         <option value="$PROJECT_DIR$/BSSN/test/NRPyUnitTests_Function_Tests.py" />
+        <option value="$PROJECT_DIR$/BSSN/test/is_first_time.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="1">
     <option name="x" value="36" />
     <option name="y" value="45" />
     <option name="width" value="1872" />
@@ -401,7 +399,8 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="36" y="45" width="1872" height="1004" extended-state="0" />
+    <frame x="36" y="45" width="1872" height="1004" extended-state="1" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.24945135" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -745,27 +744,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BSSN/test/variable_dict_to_list.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="25" column="59" lean-forward="true" selection-start-line="25" selection-start-column="59" selection-end-line="25" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BSSN/test/is_first_time.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="64" lean-forward="true" selection-start-line="20" selection-start-column="27" selection-end-line="20" selection-end-column="64" />
-          <folding>
-            <element signature="e#0#51#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/BSSN/test/NRPyUnitTests_Function_Tests.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="301" column="70" selection-start-line="301" selection-start-column="70" selection-end-line="301" selection-end-column="70" />
+        <state relative-caret-position="225">
+          <caret line="298" lean-forward="true" selection-start-line="298" selection-end-line="298" />
           <folding>
             <element signature="e#1#16#0" expanded="true" />
             <element signature="e#542#839#0" />
@@ -776,6 +758,23 @@
             <element signature="e#12401#13338#0" />
             <element signature="e#13382#14014#0" />
             <element signature="e#16060#16207#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BSSN/test/variable_dict_to_list.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="25" column="59" lean-forward="true" selection-start-line="25" selection-start-column="59" selection-end-line="25" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BSSN/test/is_first_time.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
+          <folding>
+            <element signature="e#0#51#0" expanded="true" />
           </folding>
         </state>
       </provider>
