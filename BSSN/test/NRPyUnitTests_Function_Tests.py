@@ -257,7 +257,7 @@ class TestFunctions(unittest.TestCase):
 
         large_mod_dict = {'BrillLindquist': 'Hello World', 'fake_module': 'Goodbye World'}
 
-        if version_info[0] < 3 and python_implementation() != 'PyPy':
+        if python_implementation() != 'PyPy' and (version_info[0] < 3 or version_info[1] < 6):
             self.assertEqual(is_first_time(large_mod_dict), [True, False])
         else:
             self.assertEqual(is_first_time(large_mod_dict), [False, True])
