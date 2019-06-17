@@ -24,6 +24,7 @@ def create_trusted_globals_dict(mod_dict, first_times):
         if first_time:
             trusted_dict[mod] = dict()
         else:
-            trusted_dict[mod] = trusted_values_dict[mod + 'Globals']
+            dict_string = mod + 'Globals'
+            trusted_dict[mod] = trusted_values_dict[dict_string]
 
     return trusted_dict

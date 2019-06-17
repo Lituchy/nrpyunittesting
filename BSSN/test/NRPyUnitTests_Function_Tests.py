@@ -73,8 +73,7 @@ class TestFunctions(unittest.TestCase):
 
         mod_dict = {'BrillLindquist': ['foo', 'bar'], 'mod': ['hello world']}
         first_times = [False, True]
-        self.assertEqual({'BrillLindquist': trusted_values_dict['BrillLindquistGlobals'], 'mod': dict()}
-                         , create_trusted_globals_dict(mod_dict, first_times))
+        self.assertEqual({'BrillLindquist': trusted_values_dict['BrillLindquistGlobals'], 'mod': dict()}, create_trusted_globals_dict(mod_dict, first_times))
 
         mod_dict = {'BrillLindquist': 1, 'ShiftedKerrSchild': 2}
         first_times = [False, False]
@@ -254,9 +253,9 @@ class TestFunctions(unittest.TestCase):
         self.assertEqual(is_first_time(mod_dict), [False])
         self.assertEqual(is_first_time(fake_mod_dict), [True])
 
-        mod_dict.update(fake_mod_dict)
+        large_mod_dict = {'BrillLindquist': 'Hello World', 'fake_module': 'Goodbye World'}
 
-        self.assertEqual(is_first_time(mod_dict), [False, True])
+        self.assertEqual(is_first_time(large_mod_dict), [False, True])
 
         mod_dict_wrong_capitalization = {'brillLindquist': 2}
 
