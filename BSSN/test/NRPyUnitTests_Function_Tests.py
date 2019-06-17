@@ -301,7 +301,9 @@ class TestFunctions(unittest.TestCase):
         variable_dict = {'alpha': 4, 'beta': 5}
         result_tuple = [4, 5], ['alpha', 'beta']
         if python_implementation() != 'PyPy' and version_info[1] < 6:
-            self.assertEqual(sorted(result_tuple), sorted(variable_dict_to_list(variable_dict)))
+            res = variable_dict_to_list(variable_dict)
+            self.assertEqual(sorted(result_tuple[0]), sorted(res[0]))
+            self.assertEqual(sorted(result_tuple[1]), sorted(res[1]))
         else:
             self.assertEqual(result_tuple, variable_dict_to_list(variable_dict))
 
