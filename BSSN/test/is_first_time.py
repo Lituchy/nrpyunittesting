@@ -13,7 +13,7 @@ def is_first_time(mod_dict):
 
     boolean_list = []
 
-    for mod, val in mod_dict.items():
+    for mod in mod_dict:
 
         # Boolean stating whether or not the module has an entry with the proper name in trustedValuesDict
         boolean_list.append((mod + 'Globals') not in trusted_values_dict)

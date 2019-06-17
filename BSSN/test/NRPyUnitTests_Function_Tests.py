@@ -257,7 +257,10 @@ class TestFunctions(unittest.TestCase):
 
         large_mod_dict = {'BrillLindquist': 'Hello World', 'fake_module': 'Goodbye World'}
 
-        self.assertEqual(is_first_time(large_mod_dict), [False, True])
+        if version_info[0] < 3 and python_implementation() != 'PyPy':
+            self.assertEqual(is_first_time(large_mod_dict), [True, False])
+        else:
+            self.assertEqual(is_first_time(large_mod_dict), [False, True])
 
         mod_dict_wrong_capitalization = {'brillLindquist': 2}
 
