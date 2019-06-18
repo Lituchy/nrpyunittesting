@@ -72,7 +72,7 @@ class TestFunctions(unittest.TestCase):
 
         mod_dict = {'BrillLindquist': ['foo', 'bar']}
         first_times = {'BrillLindquist': False}
-        self.assertEqual({'BrillLindquist': {'alphaCart': mpf('0.12248333157451517615309'), 'betaCartU[0]': mpf('0.0'), 'betaCartU[1]': mpf('0.0'), 'betaCartU[2]': mpf('0.0'), 'BCartU[0]': mpf('0.0'), 'BCartU[1]': mpf('0.0'), 'BCartU[2]': mpf('0.0'), 'gammaCartDD[0][0]': mpf('66.657039107915231916559'), 'gammaCartDD[0][1]': mpf('0.0'), 'gammaCartDD[0][2]': mpf('0.0'), 'gammaCartDD[1][0]': mpf('0.0'), 'gammaCartDD[1][1]': mpf('66.657039107915231916559'), 'gammaCartDD[1][2]': mpf('0.0'), 'gammaCartDD[2][0]': mpf('0.0'), 'gammaCartDD[2][1]': mpf('0.0'), 'gammaCartDD[2][2]': mpf('66.657039107915231916559'), 'KCartDD[0][0]': mpf('0.0'), 'KCartDD[0][1]': mpf('0.0'), 'KCartDD[0][2]': mpf('0.0'), 'KCartDD[1][0]': mpf('0.0'), 'KCartDD[1][1]': mpf('0.0'), 'KCartDD[1][2]': mpf('0.0'), 'KCartDD[2][0]': mpf('0.0'), 'KCartDD[2][1]': mpf('0.0'), 'KCartDD[2][2]': mpf('0.0')}}
+        self.assertEqual({'BrillLindquist': {'alphaCart': mpf('0.122483331574515176153136610247876'), 'betaCartU[0]': mpf('0.0'), 'betaCartU[1]': mpf('0.0'), 'betaCartU[2]': mpf('0.0'), 'BCartU[0]': mpf('0.0'), 'BCartU[1]': mpf('0.0'), 'BCartU[2]': mpf('0.0'), 'gammaCartDD[0][0]': mpf('66.6570391079152319165851690987334'), 'gammaCartDD[0][1]': mpf('0.0'), 'gammaCartDD[0][2]': mpf('0.0'), 'gammaCartDD[1][0]': mpf('0.0'), 'gammaCartDD[1][1]': mpf('66.6570391079152319165851690987334'), 'gammaCartDD[1][2]': mpf('0.0'), 'gammaCartDD[2][0]': mpf('0.0'), 'gammaCartDD[2][1]': mpf('0.0'), 'gammaCartDD[2][2]': mpf('66.6570391079152319165851690987334'), 'KCartDD[0][0]': mpf('0.0'), 'KCartDD[0][1]': mpf('0.0'), 'KCartDD[0][2]': mpf('0.0'), 'KCartDD[1][0]': mpf('0.0'), 'KCartDD[1][1]': mpf('0.0'), 'KCartDD[1][2]': mpf('0.0'), 'KCartDD[2][0]': mpf('0.0'), 'KCartDD[2][1]': mpf('0.0'), 'KCartDD[2][2]': mpf('0.0')}}
                          , create_trusted_globals_dict(mod_dict, first_times))
 
         mod_dict = {'BrillLindquist': ['foo', 'bar']}
@@ -313,6 +313,19 @@ class TestFunctions(unittest.TestCase):
         with self.assertRaises(AttributeError):
             var_dict = {'x': 0}
             var_dict_to_value_dict(var_dict)
+
+        var_dict = {'t1': x**2 + y**2, 't2': x**2/y, 't3': x**4, 't4':x**2 + x**2*y + x**2/y + x**2*z}
+        result_dict = {'t1': first_val**2 + second_val**2, 't2': first_val**2/second_val, 't3': first_val**4,
+                       't4': first_val**2 + first_val**2*second_val + first_val**2/second_val + first_val**2*third_val}
+        self.assertEqual(result_dict, var_dict_to_value_dict(var_dict))
+
+        from sympy import symbols
+
+        M_SQRT1_2, M_PI = symbols('M_SQRT1_2 M_PI')
+
+        var_dict = {'pi': M_PI, 'sqrt': M_SQRT1_2}
+        result_dict = {'pi': mpf('3.14159265358979323846264338327933'), 'sqrt': mpf('0.707106781186547524400844362104785')}
+        self.assertEqual(result_dict, var_dict_to_value_dict(var_dict))
 
         logging.info('\nAll var_dict_to_value_dict tests passed\n')
 
