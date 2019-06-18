@@ -158,6 +158,79 @@ class TestBSSNGlobals(unittest.TestCase):
         # TODO: Call run_test with arguments (self, mod_dict, locals())
         run_test(self, mod_dict, locals())
 
+    # Testing globals for reference_metric
+    def test_reference_metric_globals(self):
+        import NRPy_param_funcs as par
+
+        #basic_global_list = ['UnitVectors', 'ReU', 'ReDD', 'ghatDD', 'ghatUU', 'detgammahat', 'detgammahatdD', 'detgammahatdDD', 'ReUdD', 'ReUdDD', 'ReDDdD', 'ReDDdDD', 'ghatDDdD', 'ghatDDdDD', 'GammahatUDD', 'GammahatUDDdD']
+        basic_global_list = ['UnitVectors']
+
+        import reference_metric as rfm_spherical
+        par.set_parval_from_str("reference_metric::CoordSystem", "Spherical")
+        global_list = basic_global_list + ['xxmin', 'xxmax']
+        mod_dict = {'rfm_spherical': functions_and_globals(['reference_metric(False)'], global_list)}
+        run_test(self, mod_dict, locals())
+
+        import reference_metric as rfm_sinhspherical
+        par.set_parval_from_str("reference_metric::CoordSystem", "SinhSpherical")
+        global_list = basic_global_list
+        mod_dict = {'rfm_sinhspherical': functions_and_globals(['reference_metric(False)'], global_list)}
+        run_test(self, mod_dict, locals())
+
+        import reference_metric as rfm_sinhsphericalv2
+        par.set_parval_from_str("reference_metric::CoordSystem", "SinhSphericalv2")
+        global_list = basic_global_list
+        mod_dict = {'rfm_sinhsphericalv2': functions_and_globals(['reference_metric(False)'], global_list)}
+        run_test(self, mod_dict, locals())
+
+        import reference_metric as rfm_NobleSphericalThetaOptionOne
+        par.set_parval_from_str("reference_metric::CoordSystem", "NobleSphericalThetaOptionOne")
+        global_list = basic_global_list
+        mod_dict = {'rfm_NobleSphericalThetaOptionOne': functions_and_globals(['reference_metric(False)'], global_list)}
+        run_test(self, mod_dict, locals())
+
+        import reference_metric as rfm_NobleSphericalThetaOptionTwo
+        par.set_parval_from_str("reference_metric::CoordSystem", "NobleSphericalThetaOptionTwo")
+        global_list = basic_global_list
+        mod_dict = {'rfm_NobleSphericalThetaOptionTwo': functions_and_globals(['reference_metric(False)'], global_list)}
+        run_test(self, mod_dict, locals())
+
+        import reference_metric as rfm_Cylindrical
+        par.set_parval_from_str("reference_metric::CoordSystem", "Cylindrical")
+        global_list = basic_global_list
+        mod_dict = {'rfm_Cylindrical': functions_and_globals(['reference_metric(False)'], global_list)}
+        run_test(self, mod_dict, locals())
+
+        import reference_metric as rfm_SinhCylindrical
+        par.set_parval_from_str("reference_metric::CoordSystem", "SinhCylindrical")
+        global_list = basic_global_list
+        mod_dict = {'rfm_SinhCylindrical': functions_and_globals(['reference_metric(False)'], global_list)}
+        run_test(self, mod_dict, locals())
+
+        import reference_metric as rfm_SinhCylindricalv2
+        par.set_parval_from_str("reference_metric::CoordSystem", "SinhCylindricalv2")
+        global_list = basic_global_list
+        mod_dict = {'rfm_SinhCylindricalv2': functions_and_globals(['reference_metric(False)'], global_list)}
+        run_test(self, mod_dict, locals())
+
+        import reference_metric as rfm_SymTP
+        par.set_parval_from_str("reference_metric::CoordSystem", "SymTP")
+        global_list = basic_global_list
+        mod_dict = {'rfm_SymTP': functions_and_globals(['reference_metric(False)'], global_list)}
+        run_test(self, mod_dict, locals())
+
+        import reference_metric as rfm_SinhSymTP
+        par.set_parval_from_str("reference_metric::CoordSystem", "SinhSymTP")
+        global_list = basic_global_list
+        mod_dict = {'rfm_SinhSymTP': functions_and_globals(['reference_metric(False)'], global_list)}
+        run_test(self, mod_dict, locals())
+
+        import reference_metric as rfm_Cartesian
+        par.set_parval_from_str("reference_metric::CoordSystem", "Cartesian")
+        global_list = basic_global_list
+        mod_dict = {'rfm_Cartesian': functions_and_globals(['reference_metric(False)'], global_list)}
+        run_test(self, mod_dict, locals())
+
     # Testing globals for BSSN RHS
     def test_RHS_Globals(self):
         # TODO: Import modules to be tested
