@@ -324,7 +324,8 @@ class TestFunctions(unittest.TestCase):
         M_SQRT1_2, M_PI = symbols('M_SQRT1_2 M_PI')
 
         var_dict = {'pi': M_PI, 'sqrt': M_SQRT1_2}
-        result_dict = {'pi': mpf('3.14159265358979323846264338327933'), 'sqrt': mpf('0.707106781186547524400844362104785')}
+        result_dict = {'pi': mpf('3.14159265358979323846264338327933'),
+                       'sqrt': mpf('0.707106781186547524400844362104785')}
         self.assertEqual(result_dict, var_dict_to_value_dict(var_dict))
 
         logging.info('\nAll var_dict_to_value_dict tests passed\n')
