@@ -163,7 +163,7 @@ class TestBSSNGlobals(unittest.TestCase):
         # TODO: Import modules to be tested
         # Note: Even though it says the modules are unused, these imports are vital for run_test to work properly.
         # Their information gets passed into run_test through locals()
-        import BSSN.BSSN_RHSs_new as RHS
+        import BSSN.BSSN_RHSs as RHS
         import BSSN.BSSN_gauge_RHSs as gaugeRHS
 
         # TODO: Create lists of globals to calculate
