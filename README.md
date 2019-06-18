@@ -1,8 +1,5 @@
 # NRPy+, SENRv2, and the NRPy+ Jupyter Tutorial
-[![Build Status](https://travis-ci.org/Lituchy/nrpyunittesting.svg?branch=master)](https://travis-ci.com/Lituchy/nrpyunittesting)
-[![codecov](https://codecov.io/gh/Lituchy/nrpyunittesting/branch/master/graph/badge.svg)](https://codecov.io/gh/Lituchy/nrpyunittesting)
-
-
+[![Build Status](https://travis-ci.org/zachetienne/nrpytutorial.svg?branch=master)](https://travis-ci.org/zachetienne/nrpytutorial)
 
 This repository houses
 * [The newest version of NRPy+: Python-Based Code Generation for Numerical Relativity... and Beyond](https://arxiv.org/abs/1712.07658),
