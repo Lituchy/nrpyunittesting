@@ -14,5 +14,5 @@ echo $PYTHONEXEC version info:
 $PYTHONEXEC --version
 echo "########################################"
 
-$PYTHONEXEC BSSN/test/NRPyUnitTests_Function_Tests.py #&&
-# $PYTHONEXEC BSSN/test/NRPyUnitTests_Globals_Tests.py
+$PYTHONEXEC BSSN/test/NRPyUnitTests_Function_Tests.py &&
+$PYTHONEXEC BSSN/test/NRPyUnitTests_Globals_Tests.py
