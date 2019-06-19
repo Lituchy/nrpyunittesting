@@ -70,10 +70,12 @@ class TestFunctions(unittest.TestCase):
         first_times = {'BrillLindquist': True}
         self.assertEqual({'BrillLindquist': dict()}, create_trusted_globals_dict(mod_dict, first_times))
 
+        from calc_error import calc_error
+
         mod_dict = {'BrillLindquist': ['foo', 'bar']}
         first_times = {'BrillLindquist': False}
-        self.assertEqual({'BrillLindquist': {'alphaCart': mpf('0.122483331574515176153136610247876'), 'betaCartU[0]': mpf('0.0'), 'betaCartU[1]': mpf('0.0'), 'betaCartU[2]': mpf('0.0'), 'BCartU[0]': mpf('0.0'), 'BCartU[1]': mpf('0.0'), 'BCartU[2]': mpf('0.0'), 'gammaCartDD[0][0]': mpf('66.6570391079152319165851690987334'), 'gammaCartDD[0][1]': mpf('0.0'), 'gammaCartDD[0][2]': mpf('0.0'), 'gammaCartDD[1][0]': mpf('0.0'), 'gammaCartDD[1][1]': mpf('66.6570391079152319165851690987334'), 'gammaCartDD[1][2]': mpf('0.0'), 'gammaCartDD[2][0]': mpf('0.0'), 'gammaCartDD[2][1]': mpf('0.0'), 'gammaCartDD[2][2]': mpf('66.6570391079152319165851690987334'), 'KCartDD[0][0]': mpf('0.0'), 'KCartDD[0][1]': mpf('0.0'), 'KCartDD[0][2]': mpf('0.0'), 'KCartDD[1][0]': mpf('0.0'), 'KCartDD[1][1]': mpf('0.0'), 'KCartDD[1][2]': mpf('0.0'), 'KCartDD[2][0]': mpf('0.0'), 'KCartDD[2][1]': mpf('0.0'), 'KCartDD[2][2]': mpf('0.0')}}
-                         , create_trusted_globals_dict(mod_dict, first_times))
+        self.assertTrue(calc_error('BrillLindquist', {'alphaCart': mpf('0.122483331574515176153136610247876'), 'betaCartU[0]': mpf('0.0'), 'betaCartU[1]': mpf('0.0'), 'betaCartU[2]': mpf('0.0'), 'BCartU[0]': mpf('0.0'), 'BCartU[1]': mpf('0.0'), 'BCartU[2]': mpf('0.0'), 'gammaCartDD[0][0]': mpf('66.6570391079152319165851690987334'), 'gammaCartDD[0][1]': mpf('0.0'), 'gammaCartDD[0][2]': mpf('0.0'), 'gammaCartDD[1][0]': mpf('0.0'), 'gammaCartDD[1][1]': mpf('66.6570391079152319165851690987334'), 'gammaCartDD[1][2]': mpf('0.0'), 'gammaCartDD[2][0]': mpf('0.0'), 'gammaCartDD[2][1]': mpf('0.0'), 'gammaCartDD[2][2]': mpf('66.6570391079152319165851690987334'), 'KCartDD[0][0]': mpf('0.0'), 'KCartDD[0][1]': mpf('0.0'), 'KCartDD[0][2]': mpf('0.0'), 'KCartDD[1][0]': mpf('0.0'), 'KCartDD[1][1]': mpf('0.0'), 'KCartDD[1][2]': mpf('0.0'), 'KCartDD[2][0]': mpf('0.0'), 'KCartDD[2][1]': mpf('0.0'), 'KCartDD[2][2]': mpf('0.0')}
+                        , create_trusted_globals_dict(mod_dict, first_times)['BrillLindquist']))
 
         mod_dict = {'BrillLindquist': ['foo', 'bar']}
         first_times = {'BrillLindquist': False}
@@ -320,13 +322,16 @@ class TestFunctions(unittest.TestCase):
         self.assertEqual(result_dict, var_dict_to_value_dict(var_dict))
 
         from sympy import symbols
+        from mpmath import fabs
 
         M_SQRT1_2, M_PI = symbols('M_SQRT1_2 M_PI')
 
         var_dict = {'pi': M_PI, 'sqrt': M_SQRT1_2}
         result_dict = {'pi': mpf('3.14159265358979323846264338327933'),
                        'sqrt': mpf('0.707106781186547524400844362104785')}
-        self.assertEqual(result_dict, var_dict_to_value_dict(var_dict))
+        calculated_dict = var_dict_to_value_dict(var_dict)
+        for var in result_dict:
+            self.assertTrue(fabs(result_dict[var]-calculated_dict[var]) < 10**-15)
 
         logging.info('\nAll var_dict_to_value_dict tests passed\n')
 
