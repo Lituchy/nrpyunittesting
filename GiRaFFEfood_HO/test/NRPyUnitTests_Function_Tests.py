@@ -1,0 +1,56 @@
+# Necessary imports for unit testing framework
+import unittest
+import logging
+from run_test import run_test
+from functions_and_globals import functions_and_globals
+from RepeatedTimer import RepeatedTimer
+
+# TODO: Change level based on desired amount of output.
+# ERROR -> Outputs minimal information -- only when there's an error
+# INFO -> Outputs when starting and finishing a module, as well as everything in ERROR
+# DEBUG -> Displays all pairs of values being compared, as well as everything in INFO
+# NOTSET -> Displays symbolic dictionary for all modules, as well as everything in DEBUG
+logging.basicConfig(level=logging.INFO)
+
+
+# https://stackoverflow.com/questions/3393612/run-certain-code-every-n-seconds/13151299
+# Creates a threaded timer object that prints to the console every 5 minutes
+Timer = RepeatedTimer(300, logging.info, "\nPrinting every 5 minutes to prevent timeouts.\n")
+
+# See README.md for tutorial
+
+
+class TestGlobals(unittest.TestCase):
+
+    @classmethod
+    def tearDownClass(cls):
+        Timer.stop()
+
+    def test_first_globals(self):
+
+        # TODO: Import modules to be tested
+        # Note: Even though it says the modules are unused, these imports are vital for run_test to work properly.
+        # Their information gets passed into run_test through locals()
+
+        # import My_Modules.Module1 as M1
+
+        # TODO: Create lists of globals to calculate
+
+        # global_list = ['alpha', 'betaU', 'betaDDdD', 'x', 'y', 'z']
+
+        # TODO: Create Module dictionary based on imported modules, functions to initialize the modules, and globals
+        # Note: The name of the modules in mod_dict MUST have the same name as the imported module.
+        # Example: If you say 'import My_Modules.Module1 as M1', then mod_dict should have the entry 'M1'.
+
+        # mod_dict = {'M1': functions_and_globals(['module_initialize()'], global_list)}
+
+        # TODO: Call run_test with arguments (self, mod_dict, locals())
+        # run_test(self, mod_dict, locals())
+
+        # TODO: Remove this once you add your tests.
+        pass
+
+
+# Necessary for unittest class to work properly
+if __name__ == '__main__':
+    unittest.main()
