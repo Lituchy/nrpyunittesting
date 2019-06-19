@@ -75,7 +75,7 @@ def run_test(self, mod_dict, locs):
         # Printing the time it took to run list_to_value_list
         logging.debug(str(time()-t) + ' seconds to run list_to_value_list')
 
-        # If being run for the first time, print the code that must be copied into trustedValuesDict
+        # If being run for the first time, print the code that must be copied into trusted_values_dict
         if first_time:
             first_time_print(mod, value_dict)
 
@@ -99,4 +99,4 @@ def run_test(self, mod_dict, locs):
     # If it's the first time for at least one module
     if True in first_times:
         self.assertTrue(False, 'Automatically failing due to first time for at least one module. Please see above'
-                               'for the code to copy into your trustedValuesDict.')
+                               'for the code to copy into your trusted_values_dict.')

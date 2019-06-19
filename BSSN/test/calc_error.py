@@ -53,11 +53,11 @@ def calc_error(mod, calculated_dict, trusted_dict):
         if not good:
             logging.info('\n\nVariable ' + var + ' in module ' + str(mod) + ' failed. Please check values.\n\n' +
                          'If you are confident that the newly calculated values are correct, comment out the old '
-                         'trusted values for ' + "'" + mod + "Globals'" + ' in trustedValuesDict and copy the '
-                         'following code between the ##### into trustedValuesDict. Make sure to fill out the TODO '
+                         'trusted values for ' + "'" + mod + "Globals'" + ' in trusted_values_dict and copy the '
+                         'following code between the ##### into trusted_values_dict. Make sure to fill out the TODO '
                          'comment describing why the values had to be changed. Then re-run test script.\n' +
                          '#####\n\n# Generated on: ' + str(datetime.now()) + '\n# Reason for changing values: TODO' 
-                         "\ntrustedValuesDict['" + mod + "Globals'] = " + str(calculated_dict) + '\n\n#####')
+                         "\ntrusted_values_dict['" + mod + "Globals'] = " + str(calculated_dict) + '\n\n#####')
             return False
 
     return True
