@@ -268,6 +268,7 @@ class TestFunctions(unittest.TestCase):
         from mpmath import mpf, sqrt, mp
         from random import random, seed
         from trusted_values_dict import trusted_values_dict
+        from calc_error import calc_error
         from sympy.abc import x, y, z
 
         seed(trusted_values_dict['seed'])
@@ -281,57 +282,65 @@ class TestFunctions(unittest.TestCase):
         third_val = mpf(sqrt(random()))
 
         var_dict = {'x': x}
-        result_dict = {'x': first_val}
-        self.assertEqual(result_dict, var_dict_to_value_dict(var_dict))
+        trusted_dict = {'x': first_val}
+        calculated_dict = var_dict_to_value_dict(var_dict)
+        self.assertTrue(calc_error('mod', calculated_dict, trusted_dict, output=False))
 
         var_dict = {'y': y}
-        result_dict = {'y': first_val}
-        self.assertEqual(result_dict, var_dict_to_value_dict(var_dict))
+        trusted_dict = {'y': first_val}
+        calculated_dict = var_dict_to_value_dict(var_dict)
+        self.assertTrue(calc_error('mod', calculated_dict, trusted_dict, output=False))
 
         var_dict = {'x': x, 'y': y}
-        result_dict = {'x': first_val, 'y': second_val}
-        self.assertEqual(result_dict, var_dict_to_value_dict(var_dict))
+        trusted_dict = {'x': first_val, 'y': second_val}
+        calculated_dict = var_dict_to_value_dict(var_dict)
+        self.assertTrue(calc_error('mod', calculated_dict, trusted_dict, output=False))
 
         var_dict = {'y': y, 'x': x}
-        result_dict = {'y': second_val, 'x': first_val}
-        self.assertEqual(result_dict, var_dict_to_value_dict(var_dict))
+        trusted_dict = {'y': second_val, 'x': first_val}
+        calculated_dict = var_dict_to_value_dict(var_dict)
+        self.assertTrue(calc_error('mod', calculated_dict, trusted_dict, output=False))
 
         var_dict = {'x': x, 'y': y, 'z': z}
-        result_dict = {'x': first_val, 'y': second_val, 'z': third_val}
-        self.assertEqual(result_dict, var_dict_to_value_dict(var_dict))
+        trusted_dict = {'x': first_val, 'y': second_val, 'z': third_val}
+        calculated_dict = var_dict_to_value_dict(var_dict)
+        self.assertTrue(calc_error('mod', calculated_dict, trusted_dict, output=False))
 
         var_dict = {'x+y': x+y}
-        result_dict = {'x+y': first_val+second_val}
-        self.assertEqual(result_dict, var_dict_to_value_dict(var_dict))
+        trusted_dict = {'x+y': first_val+second_val}
+        calculated_dict = var_dict_to_value_dict(var_dict)
+        self.assertTrue(calc_error('mod', calculated_dict, trusted_dict, output=False))
 
         var_dict = {'x/y': x/y, 'long_expression': (x+y)**2/(x*y)}
-        result_dict = {'x/y': first_val/second_val, 'long_expression': (first_val+second_val)**2/(first_val*second_val)}
-        self.assertEqual(result_dict, var_dict_to_value_dict(var_dict))
+        trusted_dict = {'x/y': first_val/second_val, 'long_expression': (first_val+second_val)**2/(first_val*second_val)}
+        calculated_dict = var_dict_to_value_dict(var_dict)
+        self.assertTrue(calc_error('mod', calculated_dict, trusted_dict, output=False))
 
         var_dict = {'x-x': x-x}
-        result_dict = {'x-x': mpf(0.0)}
-        self.assertEqual(result_dict, var_dict_to_value_dict(var_dict))
+        trusted_dict = {'x-x': mpf(0.0)}
+        calculated_dict = var_dict_to_value_dict(var_dict)
+        self.assertTrue(calc_error('mod', calculated_dict, trusted_dict, output=False))
 
         with self.assertRaises(AttributeError):
             var_dict = {'x': 0}
-            var_dict_to_value_dict(var_dict)
+            calculated_dict = var_dict_to_value_dict(var_dict)
 
         var_dict = {'t1': x**2 + y**2, 't2': x**2/y, 't3': x**4, 't4':x**2 + x**2*y + x**2/y + x**2*z}
-        result_dict = {'t1': first_val**2 + second_val**2, 't2': first_val**2/second_val, 't3': first_val**4,
-                       't4': first_val**2 + first_val**2*second_val + first_val**2/second_val + first_val**2*third_val}
-        self.assertEqual(result_dict, var_dict_to_value_dict(var_dict))
+        trusted_dict = {'t1': first_val**2 + second_val**2, 't2': first_val**2/second_val, 't3': first_val**4,
+                        't4': first_val**2 + first_val**2*second_val + first_val**2/second_val + first_val**2*third_val}
+        calculated_dict = var_dict_to_value_dict(var_dict)
+        self.assertTrue(calc_error('mod', calculated_dict, trusted_dict, output=False))
 
         from sympy import symbols
-        from mpmath import fabs
 
         M_SQRT1_2, M_PI = symbols('M_SQRT1_2 M_PI')
 
         var_dict = {'pi': M_PI, 'sqrt': M_SQRT1_2}
-        result_dict = {'pi': mpf('3.14159265358979323846264338327933'),
-                       'sqrt': mpf('0.707106781186547524400844362104785')}
+        trusted_dict = {'pi': mpf('3.14159265358979323846264338327933'),
+                        'sqrt': mpf('0.707106781186547524400844362104785')}
         calculated_dict = var_dict_to_value_dict(var_dict)
-        for var in result_dict:
-            self.assertTrue(fabs(result_dict[var]-calculated_dict[var]) < 10**-15)
+        for var in trusted_dict:
+            self.assertTrue(calc_error('Constants', calculated_dict, trusted_dict, output=False))
 
         logging.info('\nAll var_dict_to_value_dict tests passed\n')
 
