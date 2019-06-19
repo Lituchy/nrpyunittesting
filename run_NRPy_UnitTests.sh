@@ -15,4 +15,9 @@ $PYTHONEXEC --version
 echo "########################################"
 
 $PYTHONEXEC UnitTesting/NRPyUnitTests_Function_Tests.py &&
-$PYTHONEXEC BSSN/tests/NRPyUnitTests_BSSN_Globals_Tests.py
+$PYTHONEXEC BSSN/tests/NRPyUnitTests_BSSN_Globals_Tests.py &&
+$PYTHONEXEC tests/NRPyUnitTests_Globals_Default.py &&
+$PYTHONEXEC FishboneMoncriefID/tests/NRPyUnitTests_Globals_Default.py &&
+$PYTHONEXEC GiRaFFE_HO/tests/NRPyUnitTests_Globals_Default.py #&&
+# $PYTHONEXEC GiRaFFEfood_HO/tests/NRPyUnitTests_Globals_Default.py
+

@@ -31,17 +31,19 @@ class TestGlobals(unittest.TestCase):
         # TODO: Import modules to be tested
         # Note: Even though it says the modules are unused, these imports are vital for run_test to work properly.
         # Their information gets passed into run_test through locals()
+        import GiRaFFEfood_HO.GiRaFFEfood_HO as GiRaFFEfood_HO
 
         # TODO: Create lists of globals to calculate
+        global_list = ['AD', 'ValenciavU']
 
         # TODO: Create Module dictionary based on imported modules, functions to initialize the modules, and globals
         # Note that the name of the modules in mod_dict MUST have the same name as the imported module.
         # Example: If you say 'import My_Modules.Module1 as M1', then mod_dict should have the entry 'M1' as a string.
+        mod_dict = {'GiRaFFEfood_HO': functions_and_globals(['GiRaFFEfood_HO()'],
+                                                            global_list)}
 
         # TODO: Call run_test with arguments (self, mod_dict, locals())
-
-        # TODO: Remove 'pass' once your test is written
-        pass
+        run_test(self, mod_dict, locals())
 
 
 # Necessary for unittest class to work properly

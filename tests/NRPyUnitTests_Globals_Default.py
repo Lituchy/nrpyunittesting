@@ -25,23 +25,36 @@ class TestGlobals(unittest.TestCase):
     def tearDownClass(cls):
         Timer.stop()
 
-    # Testing globals
-    def test_globals(self):
+    # Testing globals for reference_metric
+    def test_reference_metric_globals(self):
 
-        # TODO: Import modules to be tested
-        # Note: Even though it says the modules are unused, these imports are vital for run_test to work properly.
-        # Their information gets passed into run_test through locals()
+        import NRPy_param_funcs as par
 
-        # TODO: Create lists of globals to calculate
+        # Globals used by all coordinate systems
+        basic_global_list = ['UnitVectors', 'ReU', 'ReDD', 'ghatDD', 'ghatUU', 'detgammahat', 'detgammahatdD',
+                             'detgammahatdDD', 'ReUdD', 'ReUdDD', 'ReDDdD', 'ReDDdDD', 'ghatDDdD', 'ghatDDdDD',
+                             'GammahatUDD', 'GammahatUDDdD']
 
-        # TODO: Create Module dictionary based on imported modules, functions to initialize the modules, and globals
-        # Note that the name of the modules in mod_dict MUST have the same name as the imported module.
-        # Example: If you say 'import My_Modules.Module1 as M1', then mod_dict should have the entry 'M1' as a string.
+        # Dictionary of coordinate systems and their additional globals
+        coord_dict = {'Spherical': ['xxmin', 'xxmax'], 'SinhSpherical': [], 'SinhSphericalv2': [],
+                      'NobleSphericalThetaOptionOne': [], 'NobleSphericalThetaOptionTwo': [], 'Cylindrical': [],
+                      'SinhCylindrical': [], 'SinhCylindricalv2': [], 'SymTP': [], 'SinhSymTP': [], 'Cartesian': []}
 
-        # TODO: Call run_test with arguments (self, mod_dict, locals())
+        for coord, more_globals in coord_dict.items():
 
-        # TODO: Remove 'pass' once your test is written
-        pass
+            # Import module based on string
+            exec('import reference_metric as rfm_' + coord)
+
+            # Set reference metric
+            par.set_parval_from_str("reference_metric::CoordSystem", coord)
+
+            # Create mod_dict
+            global_list = more_globals + basic_global_list
+            mod_dict = {('rfm_' + coord): functions_and_globals(['reference_metric(False)'], global_list)}
+
+            # Run test and delete old entry
+            run_test(self, mod_dict, locals())
+            del locals()['rfm_' + coord]
 
 
 # Necessary for unittest class to work properly
