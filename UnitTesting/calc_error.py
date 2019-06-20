@@ -39,7 +39,7 @@ def calc_error(mod, calculated_dict, trusted_dict, output=True):
     del calculated_set, trusted_set
 
     # For each variable, print calculated and trusted values
-    for var in calculated_dict:
+    for var in sorted(calculated_dict):
         calculated_num = calculated_dict[var]
         trusted_num = trusted_dict[var]
 
