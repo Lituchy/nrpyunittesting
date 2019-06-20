@@ -36,11 +36,14 @@ class TestGlobals(unittest.TestCase):
                              'GammahatUDD', 'GammahatUDDdD']
 
         # Dictionary of coordinate systems and their additional globals
-        coord_dict = {'Spherical': ['xxmin', 'xxmax'], 'SinhSpherical': [], 'SinhSphericalv2': [],
-                      'NobleSphericalThetaOptionOne': [], 'NobleSphericalThetaOptionTwo': [], 'Cylindrical': [],
-                      'SinhCylindrical': [], 'SinhCylindricalv2': [], 'SymTP': [], 'SinhSymTP': [], 'Cartesian': []}
+        coord_dict = {'Spherical': ('True', ['xxmin', 'xxmax']), 'SinhSpherical': ('True', []),
+                      'SinhSphericalv2': ('True', []), 'NobleSphericalThetaOptionOne': ('False', []),
+                      'NobleSphericalThetaOptionTwo': ('False', []), 'Cylindrical': ('True', []),
+                      'SinhCylindrical': ('True', []), 'SinhCylindricalv2': ('True', []), 'SymTP': ('True', []),
+                      'SinhSymTP': ('True', []), 'Cartesian': ('True', [])}
 
-        for coord, more_globals in coord_dict.items():
+        # For each module and its respective boolean and additional globals
+        for coord, bool_global_tuple in coord_dict.items():
 
             # Import module based on string
             exec('import reference_metric as rfm_' + coord)
@@ -49,8 +52,9 @@ class TestGlobals(unittest.TestCase):
             par.set_parval_from_str("reference_metric::CoordSystem", coord)
 
             # Create mod_dict
-            global_list = more_globals + basic_global_list
-            mod_dict = {('rfm_' + coord): functions_and_globals(['reference_metric(False)'], global_list)}
+            global_list = bool_global_tuple[1] + basic_global_list
+            mod_dict = {('rfm_' + coord): functions_and_globals(['reference_metric(' + bool_global_tuple[0] + ')'],
+                                                                global_list)}
 
             # Run test and delete old entry
             run_test(self, mod_dict, locals())

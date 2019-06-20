@@ -25,26 +25,26 @@ class TestGlobals(unittest.TestCase):
     def tearDownClass(cls):
         Timer.stop()
 
+    def tearDown(self):
+        import grid as gri
+        gri.glb_gridfcs_list = []
+
     # Testing globals
     def test_globals(self):
 
         # TODO: Import modules to be tested
         # Note: Even though it says the modules are unused, these imports are vital for run_test to work properly.
         # Their information gets passed into run_test through locals()
-        # import GiRaFFE_HO.GiRaFFE_Higher_Order as GiRaFFE_HO
-        import GiRaFFE_HO.GiRaFFE_Higher_Order_v2 as GiRaFFE_HO_v2
+        import GiRaFFEfood_HO.GiRaFFEfood_HO as GiRaFFEfood_HO
 
-        # TODO: Create lists of globals to calculate (CURRENTLY BROKEN)
-        # global_list = ['uD', 'uU', 'gammaUU', 'gammadet', 'u0alpha', 'alpsqrtgam', 'Stilde_rhsD', 'AevolParen',
-        #                'PevolParenU', 'A_rhsD', 'psi6Phi_rhs']
-        global_list_v2 = ['gammaUU', 'gammadet', 'SevolParenUD', 'Stilde_rhsD', 'AevolParen', 'PevolParenU', 'A_rhsD',
-                       'psi6Phi_rhs']
+        # TODO: Create lists of globals to calculate
+        global_list = ['AD', 'ValenciavU']
 
         # TODO: Create Module dictionary based on imported modules, functions to initialize the modules, and globals
         # Note that the name of the modules in mod_dict MUST have the same name as the imported module.
         # Example: If you say 'import My_Modules.Module1 as M1', then mod_dict should have the entry 'M1' as a string.
-        mod_dict = {#'GiRaFFE_HO': functions_and_globals(['GiRaFFE_Higher_Order()'], global_list),
-                    'GiRaFFE_HO_v2': functions_and_globals(['GiRaFFE_Higher_Order_v2()'], global_list_v2)}
+        mod_dict = {'GiRaFFEfood_HO': functions_and_globals(['GiRaFFEfood_HO()'],
+                                                            global_list)}
 
         # TODO: Call run_test with arguments (self, mod_dict, locals())
         run_test(self, mod_dict, locals())
