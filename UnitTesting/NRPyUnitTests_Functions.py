@@ -30,7 +30,7 @@ class TestFunctions(unittest.TestCase):
             self.assertFalse(calc_error(mod, calculated_dict, trusted_dict))
         log.check(
             ('root', 'ERROR', '\n\tTestModule: Calculated dictionary and trusted dictionary have different variables.'),
-            ('root', 'ERROR', '\n\tCalculated Dictionary variables not in Trusted Dictionary: \n\t' + set_str(['a']))
+            ('root', 'ERROR', '\n\tCalculated Dictionary variables not in Trusted Dictionary: \n\t' + "['a']")
         )
 
         calculated_dict = {'a': 1, 'b': 2}
@@ -40,8 +40,7 @@ class TestFunctions(unittest.TestCase):
             self.assertFalse(calc_error(mod, calculated_dict, trusted_dict))
         log.check(
             ('root', 'ERROR', '\n\tTestModule: Calculated dictionary and trusted dictionary have different variables.'),
-            ('root', 'ERROR', '\n\tCalculated Dictionary variables not in Trusted Dictionary: \n\t' +
-             set_str(['a', 'b']))
+            ('root', 'ERROR', '\n\tCalculated Dictionary variables not in Trusted Dictionary: \n\t' + "['a', 'b']")
         )
 
         calculated_dict = {'a': 1}
@@ -51,8 +50,8 @@ class TestFunctions(unittest.TestCase):
             self.assertFalse(calc_error(mod, calculated_dict, trusted_dict))
         log.check(
             ('root', 'ERROR', '\n\tTestModule: Calculated dictionary and trusted dictionary have different variables.'),
-            ('root', 'ERROR', '\n\tCalculated Dictionary variables not in Trusted Dictionary: \n\t' + set_str(['a'])),
-            ('root', 'ERROR', '\n\tTrusted Dictionary variables not in Calculated Dictionary: \n\t' + set_str(['b']))
+            ('root', 'ERROR', '\n\tCalculated Dictionary variables not in Trusted Dictionary: \n\t' + "['a']"),
+            ('root', 'ERROR', '\n\tTrusted Dictionary variables not in Calculated Dictionary: \n\t' + "['b']")
         )
 
         calculated_dict = {'a': 2, 'b': 3}
@@ -62,9 +61,8 @@ class TestFunctions(unittest.TestCase):
             self.assertFalse(calc_error(mod, calculated_dict, trusted_dict))
         log.check(
             ('root', 'ERROR', '\n\tTestModule: Calculated dictionary and trusted dictionary have different variables.'),
-            ('root', 'ERROR', '\n\tCalculated Dictionary variables not in Trusted Dictionary: \n\t' +
-             set_str(['a', 'b'])),
-            ('root', 'ERROR', '\n\tTrusted Dictionary variables not in Calculated Dictionary: \n\t' + set_str(['c']))
+            ('root', 'ERROR', '\n\tCalculated Dictionary variables not in Trusted Dictionary: \n\t' + "['a', 'b']"),
+            ('root', 'ERROR', '\n\tTrusted Dictionary variables not in Calculated Dictionary: \n\t' + "['c']")
         )
 
         calculated_dict = {'a': 2, 'b':3}
@@ -74,8 +72,8 @@ class TestFunctions(unittest.TestCase):
             self.assertFalse(calc_error(mod, calculated_dict, trusted_dict))
         log.check(
             ('root', 'ERROR', '\n\tTestModule: Calculated dictionary and trusted dictionary have different variables.'),
-            ('root', 'ERROR', '\n\tCalculated Dictionary variables not in Trusted Dictionary: \n\t' + set_str(['b'])),
-            ('root', 'ERROR', '\n\tTrusted Dictionary variables not in Calculated Dictionary: \n\t' + set_str(['c']))
+            ('root', 'ERROR', '\n\tCalculated Dictionary variables not in Trusted Dictionary: \n\t' + "['b']"),
+            ('root', 'ERROR', '\n\tTrusted Dictionary variables not in Calculated Dictionary: \n\t' + "['c']")
         )
 
         calculated_dict = {'a': 1, 'b': 2}
@@ -85,10 +83,8 @@ class TestFunctions(unittest.TestCase):
             self.assertFalse(calc_error(mod, calculated_dict, trusted_dict))
         log.check(
             ('root', 'ERROR', '\n\tTestModule: Calculated dictionary and trusted dictionary have different variables.'),
-            ('root', 'ERROR', '\n\tCalculated Dictionary variables not in Trusted Dictionary: \n\t' +
-             set_str(['a', 'b'])),
-            ('root', 'ERROR', '\n\tTrusted Dictionary variables not in Calculated Dictionary: \n\t' +
-             set_str(['c', 'd']))
+            ('root', 'ERROR', '\n\tCalculated Dictionary variables not in Trusted Dictionary: \n\t' + "['a', 'b']"),
+            ('root', 'ERROR', '\n\tTrusted Dictionary variables not in Calculated Dictionary: \n\t' + "['c', 'd']")
         )
 
         logging.info('All calc_error tests passed.')
@@ -414,23 +410,23 @@ class TestFunctions(unittest.TestCase):
         logging.info('\nAll var_dict_to_value_dict tests passed\n')
 
 
-# Subfunction used in calc_error tests
-def set_str(var_list):
-    from sys import version_info
-
-    if version_info[0] == 2:
-        return_string = 'set(['
-        end_string = '])'
-    else:
-        return_string = '{'
-        end_string = '}'
-
-    for idx, var in enumerate(var_list):
-        return_string += "'" + var + "'"
-        if idx != len(var_list)-1:
-            return_string += ', '
-
-    return return_string + end_string
+# # Subfunction used in calc_error tests
+# def set_str(var_list):
+#     from sys import version_info
+#
+#     if version_info[0] == 2:
+#         return_string = 'set(['
+#         end_string = '])'
+#     else:
+#         return_string = '{'
+#         end_string = '}'
+#
+#     for idx, var in enumerate(var_list):
+#         return_string += "'" + var + "'"
+#         if idx != len(var_list)-1:
+#             return_string += ', '
+#
+#     return return_string + end_string
 
 
 # Necessary for unittest class to work properly

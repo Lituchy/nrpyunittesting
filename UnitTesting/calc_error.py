@@ -30,10 +30,10 @@ def calc_error(mod, calculated_dict, trusted_dict, output=True):
             trusted_minus_calculated = trusted_set - calculated_set
             if calculated_minus_trusted != set([]):
                 logging.error('\n\tCalculated Dictionary variables not in Trusted Dictionary: \n\t' +
-                              str(calculated_minus_trusted))
+                              str(sorted(calculated_minus_trusted)))
             if trusted_minus_calculated != set([]):
                 logging.error('\n\tTrusted Dictionary variables not in Calculated Dictionary: \n\t' +
-                              str(trusted_minus_calculated))
+                              str(sorted(trusted_minus_calculated)))
         return False
 
     del calculated_set, trusted_set
