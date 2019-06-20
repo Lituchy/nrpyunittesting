@@ -26,12 +26,69 @@ class TestFunctions(unittest.TestCase):
         calculated_dict = {'a': 1}
         trusted_dict = {}
 
-        with LogCapture() as l:
-            calc_error(mod, calculated_dict, trusted_dict)
-
-        l.check(
+        with LogCapture() as log:
+            self.assertFalse(calc_error(mod, calculated_dict, trusted_dict))
+        log.check(
             ('root', 'ERROR', '\n\tTestModule: Calculated dictionary and trusted dictionary have different variables.'),
-            ('root', 'ERROR', '\n\tCalculated Dictionary variables not in Trusted Dictionary: \n\t' + set_string("'a'"))
+            ('root', 'ERROR', '\n\tCalculated Dictionary variables not in Trusted Dictionary: \n\t' + set_str("'a'"))
+        )
+
+        calculated_dict = {'a': 1, 'b': 2}
+        trusted_dict = {}
+
+        with LogCapture() as log:
+            self.assertFalse(calc_error(mod, calculated_dict, trusted_dict))
+        log.check(
+            ('root', 'ERROR', '\n\tTestModule: Calculated dictionary and trusted dictionary have different variables.'),
+            ('root', 'ERROR', '\n\tCalculated Dictionary variables not in Trusted Dictionary: \n\t' +
+             set_str("'a', 'b'"))
+        )
+
+        calculated_dict = {'a': 1}
+        trusted_dict = {'b': 2}
+
+        with LogCapture() as log:
+            self.assertFalse(calc_error(mod, calculated_dict, trusted_dict))
+        log.check(
+            ('root', 'ERROR', '\n\tTestModule: Calculated dictionary and trusted dictionary have different variables.'),
+            ('root', 'ERROR', '\n\tCalculated Dictionary variables not in Trusted Dictionary: \n\t' + set_str("'a'")),
+            ('root', 'ERROR', '\n\tTrusted Dictionary variables not in Calculated Dictionary: \n\t' + set_str("'b'"))
+        )
+
+        calculated_dict = {'a': 2, 'b': 3}
+        trusted_dict = {'c': 1}
+
+        with LogCapture() as log:
+            self.assertFalse(calc_error(mod, calculated_dict, trusted_dict))
+        log.check(
+            ('root', 'ERROR', '\n\tTestModule: Calculated dictionary and trusted dictionary have different variables.'),
+            ('root', 'ERROR', '\n\tCalculated Dictionary variables not in Trusted Dictionary: \n\t' +
+             set_str("'a', 'b'")),
+            ('root', 'ERROR', '\n\tTrusted Dictionary variables not in Calculated Dictionary: \n\t' + set_str("'c'"))
+        )
+
+        calculated_dict = {'a': 2, 'b':3}
+        trusted_dict = {'a': 1, 'c': 4}
+
+        with LogCapture() as log:
+            self.assertFalse(calc_error(mod, calculated_dict, trusted_dict))
+        log.check(
+            ('root', 'ERROR', '\n\tTestModule: Calculated dictionary and trusted dictionary have different variables.'),
+            ('root', 'ERROR', '\n\tCalculated Dictionary variables not in Trusted Dictionary: \n\t' + set_str("'b'")),
+            ('root', 'ERROR', '\n\tTrusted Dictionary variables not in Calculated Dictionary: \n\t' + set_str("'c'"))
+        )
+
+        calculated_dict = {'a': 1, 'b': 2}
+        trusted_dict = {'c': 3, 'd': 4}
+
+        with LogCapture() as log:
+            self.assertFalse(calc_error(mod, calculated_dict, trusted_dict))
+        log.check(
+            ('root', 'ERROR', '\n\tTestModule: Calculated dictionary and trusted dictionary have different variables.'),
+            ('root', 'ERROR', '\n\tCalculated Dictionary variables not in Trusted Dictionary: \n\t' +
+             set_str("'a', 'b'")),
+            ('root', 'ERROR', '\n\tTrusted Dictionary variables not in Calculated Dictionary: \n\t' +
+             set_str("'c', 'd'"))
         )
 
         logging.info('All calc_error tests passed.')
@@ -275,7 +332,7 @@ class TestFunctions(unittest.TestCase):
         with self.assertRaises(AssertionError):
             run_test(self, mod_dict, locals())
 
-    def ftest_var_dict_to_value_dict(self):
+    def test_var_dict_to_value_dict(self):
         from UnitTesting.var_dict_to_value_dict import var_dict_to_value_dict
         from mpmath import mpf, sqrt, mp
         from random import random, seed
@@ -356,8 +413,9 @@ class TestFunctions(unittest.TestCase):
 
         logging.info('\nAll var_dict_to_value_dict tests passed\n')
 
+
 # Subfunction used in calc_error tests
-def set_string(string):
+def set_str(string):
     from sys import version_info
 
     if version_info[0] == 2:
