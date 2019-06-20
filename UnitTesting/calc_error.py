@@ -26,14 +26,14 @@ def calc_error(mod, calculated_dict, trusted_dict, output=True):
     if calculated_set != trusted_set:
         if output:
             logging.error('\n\t' + mod + ': Calculated dictionary and trusted dictionary have different variables.')
-            result_minus_trusted = calculated_set - trusted_set
-            trusted_minus_result = trusted_set - calculated_set
-            if result_minus_trusted != set([]):
+            calculated_minus_trusted = calculated_set - trusted_set
+            trusted_minus_calculated = trusted_set - calculated_set
+            if calculated_minus_trusted != set([]):
                 logging.error('\n\tCalculated Dictionary variables not in Trusted Dictionary: \n\t' +
-                              str(result_minus_trusted))
-            if trusted_minus_result != set([]):
+                              str(calculated_minus_trusted))
+            if trusted_minus_calculated != set([]):
                 logging.error('\n\tTrusted Dictionary variables not in Calculated Dictionary: \n\t' +
-                              str(trusted_minus_result))
+                              str(trusted_minus_calculated))
         return False
 
     del calculated_set, trusted_set
