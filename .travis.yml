@@ -19,6 +19,7 @@ python:
 # command to install dependencies
 install:
   - pip install sympy
+  - pip install testfixtures
 #  - pip install coverage
 #  - pip install codecov
 # We generally don't need to install matplotlib for the test.
