@@ -1,7 +1,7 @@
 import logging
 from UnitTesting.trusted_values_dict import trusted_values_dict
 from mpmath import log10,fabs
-from datetime import datetime
+from datetime import date
 
 # Takes in a module [mod], a calculated dictionary [calculated_dict], a trusted dictionary [trusted_dict], and
 # a symbolic dictionary [symbolic_dict] and computes the error for each result-trusted pair for each respective index.
@@ -43,25 +43,29 @@ def calc_error(mod, calculated_dict, trusted_dict, output=True):
         calculated_num = calculated_dict[var]
         trusted_num = trusted_dict[var]
 
+        # print('calc: ' + str(calculated_num))
+        # print('trst: ' + str(trusted_num))
+
         if output:
-            output_str = '\n' + mod + ': ' + var + ': Calculated: ' + str(calculated_num) + '\n' + mod + ': ' + var \
-                         + ': Trusted:    ' + str(trusted_num)
-            logging.debug(output_str + '\n')
+            logging.debug('\n' + mod + ': ' + var + ': Calculated: ' + str(calculated_num) + '\n' + mod + ': ' + var
+                          + ': Trusted:    ' + str(trusted_num) + '\n')
 
         if trusted_num == 0:
             log10_relative_error = log10(fabs(calculated_num))
         else:
             log10_relative_error = log10(fabs((trusted_num - calculated_num) / trusted_num))
+            # print(log10_relative_error)
         good = (log10_relative_error < (precision / -2))
         if not good:
             if output:
-                logging.info('\n\nVariable ' + var + ' in module ' + str(mod) + ' failed. Please check values.\n\n' +
-                             'If you are confident that the newly calculated values are correct, comment out the old '
-                             'trusted values for ' + "'" + mod + "Globals'" + ' in trusted_values_dict and copy the '
-                             'following code between the ##### into trusted_values_dict. Make sure to fill out the TODO'
-                             ' comment describing why the values had to be changed. Then re-run test script.\n' +
-                             '#####\n\n# Generated on: ' + str(datetime.now()) + '\n# Reason for changing values: TODO' 
-                             "\ntrusted_values_dict['" + mod + "Globals'] = " + str(calculated_dict) + '\n\n#####')
+                logging.info('\n\nVariable ' + "'" + var + "'" + ' in module ' + str(mod) + ' failed. Please check' +
+                             ' values.\n\n' + 'If you are confident that the newly calculated values are correct, ' +
+                             'comment out the old trusted values for ' + "'" + mod + "Globals'" +
+                             ' in trusted_values_dict and copy the following code between the ##### into ' +
+                             'trusted_values_dict. Make sure to fill out the TODO comment describing why the values' +
+                             ' had to be changed. Then re-run test script.\n' + '#####\n\n# Generated on: ' +
+                             str(date.today()) + '\n# Reason for changing values: TODO' + "\ntrusted_values_dict['" +
+                             mod + "Globals'] = " + str(calculated_dict) + '\n\n#####')
             return False
 
     return True
