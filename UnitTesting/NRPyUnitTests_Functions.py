@@ -415,27 +415,22 @@ class TestFunctions(unittest.TestCase):
 
 
 # Subfunction used in calc_error tests
-def set_str(vars):
+def set_str(var_list):
     from sys import version_info
-    from platform import python_implementation
 
-    if version_info[0] == 2 or python_implementation() == 'PyPy':
+    if version_info[0] == 2:
         return_string = 'set(['
-        for var in vars:
-            return_string += "'" + var + "'"
-            if var != vars[-1]:
-                return_string += ', '
-        return_string += '])'
+        end_string = '])'
     else:
-        vars = vars[::-1]
         return_string = '{'
-        for var in vars:
-            return_string += "'" + var + "'"
-            if var != vars[-1]:
-                return_string += ', '
-        return_string += '}'
+        end_string = '}'
 
-    return return_string
+    for idx, var in enumerate(var_list):
+        return_string += "'" + var + "'"
+        if idx != len(var_list)-1:
+            return_string += ', '
+
+    return return_string + end_string
 
 
 # Necessary for unittest class to work properly
