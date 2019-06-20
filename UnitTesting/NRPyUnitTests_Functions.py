@@ -31,7 +31,7 @@ class TestFunctions(unittest.TestCase):
 
         l.check(
             ('root', 'ERROR', '\n\tTestModule: Calculated dictionary and trusted dictionary have different variables.'),
-            ('root', 'ERROR', "\n\tCalculated Dictionary variables not in Trusted Dictionary: \n\tset(['a'])"),
+            ('root', 'ERROR', '\n\tCalculated Dictionary variables not in Trusted Dictionary: \n\t' + set_string("'a'"))
         )
 
         logging.info('All calc_error tests passed.')
@@ -355,6 +355,17 @@ class TestFunctions(unittest.TestCase):
             self.assertTrue(calc_error('Constants', calculated_dict, trusted_dict, output=False))
 
         logging.info('\nAll var_dict_to_value_dict tests passed\n')
+
+# Subfunction used in calc_error tests
+def set_string(string):
+    from sys import version_info
+
+    if version_info[0] == 2:
+        return_string = 'set([' + string + '])'
+    else:
+        return_string = '{' + string + '}'
+
+    return return_string
 
 
 # Necessary for unittest class to work properly
