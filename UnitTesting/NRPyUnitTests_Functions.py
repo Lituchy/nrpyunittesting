@@ -355,7 +355,7 @@ class TestFunctions(unittest.TestCase):
             calculated_dict = {'a': mpf('1.0')}
             trusted_dict = {}
 
-            with self.assertLogs('root', level='DEBUG') as logger:
+            with self.assertLogs(level='DEBUG') as logger:
                 self.assertFalse(calc_error(mod, calculated_dict, trusted_dict))
             self.assertEqual(logger.output,
                 ['ERROR:test:\n\tTestModule: Calculated dictionary and trusted dictionary have different variables.',
