@@ -615,7 +615,7 @@ class TestFunctions(unittest.TestCase):
                 [
                     'DEBUG:root:' + '\nTestModule: ' + 'a' + ': Calculated: ' + '0.0' +
                     '\nTestModule: ' + 'a' + ': Trusted:    ' + '0.0' + '\n',
-                    'DEBUG:root' + '\nTestModule: ' + 'b' + ': Calculated: ' + '1.0' +
+                    'DEBUG:root:' + '\nTestModule: ' + 'b' + ': Calculated: ' + '1.0' +
                     '\nTestModule: ' + 'b' + ': Trusted:    ' + '1.0' + '\n'
                 ]
             )
