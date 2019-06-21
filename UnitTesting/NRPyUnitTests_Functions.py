@@ -652,7 +652,7 @@ class TestFunctions(unittest.TestCase):
                     'INFO:root:' + '\n\nVariable ' + "'a'" + ' in module TestModule failed. Please check values.\n\n' +
                     'If you are confident that the newly calculated values are correct, comment out the old trusted ' +
                     'values for ' + "'TestModuleGlobals' in trusted_values_dict and copy the following code between" +
-                    'the ##### into trusted_values_dict. Make sure to fill out the TODO comment describing why the' +
+                    ' the ##### into trusted_values_dict. Make sure to fill out the TODO comment describing why the' +
                     ' values had to be changed. Then re-run test script.\n#####\n\n# Generated on: ' +
                     str(date.today()) + '\n# Reason for changing values: ' +
                     "TODO\ntrusted_values_dict['TestModuleGlobals'] = {" + "'a'" + ": mpf('" + '0.0' + "')" + ', ' +
@@ -674,7 +674,7 @@ class TestFunctions(unittest.TestCase):
                     'INFO:root:' + '\n\nVariable ' + "'b'" + ' in module TestModule failed. Please check values.\n\n' +
                     'If you are confident that the newly calculated values are correct, comment out the old trusted ' +
                     'values for ' + "'TestModuleGlobals' in trusted_values_dict and copy the following code between" +
-                    'the ##### into trusted_values_dict. Make sure to fill out the TODO comment describing why the' +
+                    ' the ##### into trusted_values_dict. Make sure to fill out the TODO comment describing why the' +
                     ' values had to be changed. Then re-run test script.\n#####\n\n# Generated on: ' +
                     str(date.today()) + '\n# Reason for changing values: ' +
                     "TODO\ntrusted_values_dict['TestModuleGlobals'] = {" + "'a'" + ": mpf('" + '0.0' + "')" + ', ' +
