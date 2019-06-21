@@ -684,7 +684,7 @@ class TestFunctions(unittest.TestCase):
 
             logging.info('\nAll calc_error tests passed.\n')
 
-    def ftest_create_trusted_globals_dict(self):
+    def test_create_trusted_globals_dict(self):
         from UnitTesting.create_trusted_globals_dict import create_trusted_globals_dict
         from mpmath import mpf
         from UnitTesting.trusted_values_dict import trusted_values_dict
@@ -759,7 +759,7 @@ class TestFunctions(unittest.TestCase):
 
         logging.info('\nAll create_trusted_globals_dict tests passed.\n')
 
-    def ftest_evaluate_globals(self):
+    def test_evaluate_globals(self):
         from UnitTesting.evaluate_globals import evaluate_globals
         from UnitTesting.functions_and_globals import functions_and_globals
         import NRPy_param_funcs as par
@@ -803,7 +803,7 @@ class TestFunctions(unittest.TestCase):
 
         logging.info('\nAll evaluate_globals tests passed.\n')
 
-    def ftest_expand_variable_dict(self):
+    def test_expand_variable_dict(self):
         from UnitTesting.expand_variable_dict import expand_variable_dict
 
         variable_dict = dict()
@@ -840,7 +840,7 @@ class TestFunctions(unittest.TestCase):
 
         logging.info('\nAll expand_variable_dict tests passed.\n')
 
-    def ftest_functions_and_globals(self):
+    def test_functions_and_globals(self):
         from UnitTesting.functions_and_globals import functions_and_globals
 
         basic_function_list = ['func1(), func2()']
@@ -872,7 +872,7 @@ class TestFunctions(unittest.TestCase):
 
         logging.info('\nAll functions_and_globals tests passed.\n')
 
-    def ftest_get_variable_dimension(self):
+    def test_get_variable_dimension(self):
         from UnitTesting.get_variable_dimension import get_variable_dimension
 
         rank0 = 4
@@ -895,7 +895,7 @@ class TestFunctions(unittest.TestCase):
 
         logging.info('\nAll get_variable_dimension tests passed.\n')
 
-    def ftest_is_first_time(self):
+    def test_is_first_time(self):
         from UnitTesting.is_first_time import is_first_time
 
         mod_dict = {'BrillLindquist': 'Hello World'}
@@ -916,14 +916,14 @@ class TestFunctions(unittest.TestCase):
 
         logging.info('\nAll is_first_time tests passed.\n')
 
-    def ftest_run_test(self):
+    def test_run_test(self):
         from UnitTesting.run_test import run_test
 
         mod_dict = {}
         with self.assertRaises(AssertionError):
             run_test(self, mod_dict, locals())
 
-    def ftest_var_dict_to_value_dict(self):
+    def test_var_dict_to_value_dict(self):
         from UnitTesting.var_dict_to_value_dict import var_dict_to_value_dict
         from mpmath import mpf, sqrt, mp
         from random import random, seed
