@@ -139,9 +139,105 @@ class TestFunctions(unittest.TestCase):
              '#####')
         )
 
+        calculated_dict = {'a': mpf('1.0')}
+        trusted_dict =    {'a': mpf('1.0')}
+
+        with LogCapture() as log:
+            self.assertTrue(calc_error(mod, calculated_dict, trusted_dict))
+        log.check(
+            ('root', 'DEBUG', '\nTestModule: ' + 'a' + ': Calculated: ' + '1.0' + '\nTestModule: ' + 'a' +
+             ': Trusted:    ' + '1.0' + '\n')
+        )
+
+        calculated_dict = {'a': mpf('0.0')}
+        trusted_dict =    {'a': mpf('0.0')}
+
+        with LogCapture() as log:
+            self.assertTrue(calc_error(mod, calculated_dict, trusted_dict))
+        log.check(
+            ('root', 'DEBUG', '\nTestModule: ' + 'a' + ': Calculated: ' + '0.0' + '\nTestModule: ' + 'a'
+             + ': Trusted:    ' + '0.0' + '\n')
+        )
+
+        calculated_dict = {'a': mpf('1.0')}
+        trusted_dict =    {'a': mpf('1.00000000000000010000000000000')}
+
+        with LogCapture() as log:
+            self.assertTrue(calc_error(mod, calculated_dict, trusted_dict))
+        log.check(
+            ('root', 'DEBUG', '\nTestModule: ' + 'a' + ': Calculated: ' + '1.0' + '\nTestModule: ' + 'a'
+             + ': Trusted:    ' + '1.0000000000000001' + '\n')
+        )
+
+        calculated_dict = {'a': mpf('0.0')}
+        trusted_dict =    {'a': mpf('0.0000000000000001')}
+
+        with LogCapture() as log:
+            self.assertTrue(calc_error(mod, calculated_dict, trusted_dict))
+        log.check(
+            ('root', 'DEBUG', '\nTestModule: ' + 'a' + ': Calculated: ' + '0.0' + '\nTestModule: ' + 'a'
+             + ': Trusted:    ' + '1.0e-16' + '\n')
+        )
+
+        calculated_dict = {'b': mpf('0.0')}
+        trusted_dict =    {'b': mpf('0.000000000000001')}
+
+        with LogCapture() as log:
+            self.assertFalse(calc_error(mod, calculated_dict, trusted_dict))
+        log.check(
+            ('root', 'DEBUG', '\nTestModule: ' + 'b' + ': Calculated: ' + '0.0' + '\nTestModule: ' + 'b'
+             + ': Trusted:    ' + '1.0e-15' + '\n'),
+            ('root', 'INFO', '\n\nVariable ' + "'b'" + ' in module TestModule failed. Please check values.\n\nIf you '
+             + 'are confident that the newly calculated values are correct, comment out the old trusted values for ' +
+             "'TestModuleGlobals' in trusted_values_dict and copy the following code between the ##### into " +
+             'trusted_values_dict. Make sure to fill out the TODO comment describing why the values had to be changed.'
+             + ' Then re-run test script.\n#####\n\n# Generated on: ' + str(date.today()) + '\n# Reason for changing' +
+             " values: TODO\ntrusted_values_dict['TestModuleGlobals'] = {" + "'b'" + ": mpf('" + '0.0' + "')}\n\n" +
+             '#####')
+        )
+
+        calculated_dict = {'a': mpf('0.0000000000000001')}
+        trusted_dict = {'a': mpf('0.0')}
+
+        with LogCapture() as log:
+            self.assertTrue(calc_error(mod, calculated_dict, trusted_dict))
+        log.check(
+            ('root', 'DEBUG', '\nTestModule: ' + 'a' + ': Calculated: ' + '1.0e-16' + '\nTestModule: ' + 'a'
+             + ': Trusted:    ' + '0.0' + '\n')
+        )
+
+        calculated_dict = {'alpha': mpf('0.000000000000001')}
+        trusted_dict = {'alpha': mpf('0.0')}
+
+        with LogCapture() as log:
+            self.assertFalse(calc_error(mod, calculated_dict, trusted_dict))
+        log.check(
+            ('root', 'DEBUG', '\nTestModule: ' + 'alpha' + ': Calculated: ' + '1.0e-15' + '\nTestModule: ' + 'alpha'
+             + ': Trusted:    ' + '0.0' + '\n'),
+            ('root',
+             'INFO', '\n\nVariable ' + "'alpha'" + ' in module TestModule failed. Please check values.\n\nIf you '
+             + 'are confident that the newly calculated values are correct, comment out the old trusted values for ' +
+             "'TestModuleGlobals' in trusted_values_dict and copy the following code between the ##### into " +
+             'trusted_values_dict. Make sure to fill out the TODO comment describing why the values had to be changed.'
+             + ' Then re-run test script.\n#####\n\n# Generated on: ' + str(date.today()) + '\n# Reason for changing' +
+             " values: TODO\ntrusted_values_dict['TestModuleGlobals'] = {" + "'alpha'" + ": mpf('" + '1.0e-15' +
+             "')}\n\n#####")
+        )
+
+        # calculated_dict = {'a': mpf('2.0')}
+        # trusted_dict =    {'a': mpf('1.')}
+        #
+        # with LogCapture() as log:
+        #     self.assertFalse(calc_error(mod, calculated_dict, trusted_dict))
+        # log.check(
+        #     ('root', 'DEBUG', '\nTestModule: ' + 'a' + ': Calculated: ' + '1.000000000000001' + '\nTestModule: ' + 'a'
+        #      + ': Trusted:    ' + '1.0' + '\n'),
+        # )
+
+
         logging.info('All calc_error tests passed.')
 
-    def test_create_trusted_globals_dict(self):
+    def ftest_create_trusted_globals_dict(self):
         from UnitTesting.create_trusted_globals_dict import create_trusted_globals_dict
         from mpmath import mpf
         from UnitTesting.trusted_values_dict import trusted_values_dict
@@ -216,7 +312,7 @@ class TestFunctions(unittest.TestCase):
 
         logging.info('\nAll create_trusted_globals_dict tests passed.\n')
 
-    def test_evaluate_globals(self):
+    def ftest_evaluate_globals(self):
         from UnitTesting.evaluate_globals import evaluate_globals
         from UnitTesting.functions_and_globals import functions_and_globals
         import NRPy_param_funcs as par
@@ -260,7 +356,7 @@ class TestFunctions(unittest.TestCase):
 
         logging.info('\nAll evaluate_globals tests passed.\n')
 
-    def test_expand_variable_dict(self):
+    def ftest_expand_variable_dict(self):
         from UnitTesting.expand_variable_dict import expand_variable_dict
 
         variable_dict = dict()
@@ -297,7 +393,7 @@ class TestFunctions(unittest.TestCase):
 
         logging.info('\nAll expand_variable_dict tests passed.\n')
 
-    def test_functions_and_globals(self):
+    def ftest_functions_and_globals(self):
         from UnitTesting.functions_and_globals import functions_and_globals
 
         basic_function_list = ['func1(), func2()']
@@ -329,7 +425,7 @@ class TestFunctions(unittest.TestCase):
 
         logging.info('\nAll functions_and_globals tests passed.\n')
 
-    def test_get_variable_dimension(self):
+    def ftest_get_variable_dimension(self):
         from UnitTesting.get_variable_dimension import get_variable_dimension
 
         rank0 = 4
@@ -352,7 +448,7 @@ class TestFunctions(unittest.TestCase):
 
         logging.info('\nAll get_variable_dimension tests passed.\n')
 
-    def test_is_first_time(self):
+    def ftest_is_first_time(self):
         from UnitTesting.is_first_time import is_first_time
 
         mod_dict = {'BrillLindquist': 'Hello World'}
@@ -373,14 +469,14 @@ class TestFunctions(unittest.TestCase):
 
         logging.info('\nAll is_first_time tests passed.\n')
 
-    def test_run_test(self):
+    def ftest_run_test(self):
         from UnitTesting.run_test import run_test
 
         mod_dict = {}
         with self.assertRaises(AssertionError):
             run_test(self, mod_dict, locals())
 
-    def test_var_dict_to_value_dict(self):
+    def ftest_var_dict_to_value_dict(self):
         from UnitTesting.var_dict_to_value_dict import var_dict_to_value_dict
         from mpmath import mpf, sqrt, mp
         from random import random, seed
@@ -460,25 +556,6 @@ class TestFunctions(unittest.TestCase):
             self.assertTrue(calc_error('Constants', calculated_dict, trusted_dict, output=False))
 
         logging.info('\nAll var_dict_to_value_dict tests passed\n')
-
-
-# # Subfunction used in calc_error tests
-# def set_str(var_list):
-#     from sys import version_info
-#
-#     if version_info[0] == 2:
-#         return_string = 'set(['
-#         end_string = '])'
-#     else:
-#         return_string = '{'
-#         end_string = '}'
-#
-#     for idx, var in enumerate(var_list):
-#         return_string += "'" + var + "'"
-#         if idx != len(var_list)-1:
-#             return_string += ', '
-#
-#     return return_string + end_string
 
 
 # Necessary for unittest class to work properly

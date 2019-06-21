@@ -52,9 +52,10 @@ def calc_error(mod, calculated_dict, trusted_dict, output=True):
 
         if trusted_num == 0:
             log10_relative_error = log10(fabs(calculated_num))
+        elif calculated_num == 0:
+            log10_relative_error = log10(fabs(trusted_num))
         else:
             log10_relative_error = log10(fabs((trusted_num - calculated_num) / trusted_num))
-            # print(log10_relative_error)
         good = (log10_relative_error < (precision / -2))
         if not good:
             if output:
