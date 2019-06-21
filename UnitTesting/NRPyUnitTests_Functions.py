@@ -13,6 +13,7 @@ logging.basicConfig(level=logging.INFO)
 
 class TestFunctions(unittest.TestCase):
 
+    # If Python version 2.x or 3.y, y < 4
     if version_info[0] == 2 or version_info[1] < 4:
         def test_calc_error(self):
             from UnitTesting.calc_error import calc_error
@@ -505,7 +506,7 @@ class TestFunctions(unittest.TestCase):
             self.assertEqual(logger.output,
                 [
                     'DEBUG:root:' + '\nTestModule: ' + 'a' + ': Calculated: ' + '0.0' + '\nTestModule: ' + 'a' +
-                    ': Trusted:    ' + '0.0000000000000001' + '\n'
+                    ': Trusted:    ' + '1.0e-16' + '\n'
                 ]
             )
 
