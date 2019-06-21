@@ -1,6 +1,6 @@
 import logging
 from UnitTesting.trusted_values_dict import trusted_values_dict
-from mpmath import log10,fabs
+from mpmath import log10,fabs, mp
 from datetime import date
 
 # Takes in a module [mod], a calculated dictionary [calculated_dict], a trusted dictionary [trusted_dict], and
@@ -17,6 +17,7 @@ def calc_error(mod, calculated_dict, trusted_dict, output=True):
 
     # Precision for the module based off the set precision in trusted_values_dict
     precision = trusted_values_dict['precision']
+    mp.dps = precision
 
     # Creating sets to easily compare the keys of resultDict and trustedDict
     calculated_set = set(calculated_dict)
@@ -43,9 +44,6 @@ def calc_error(mod, calculated_dict, trusted_dict, output=True):
         calculated_num = calculated_dict[var]
         trusted_num = trusted_dict[var]
 
-        # print('calc: ' + str(calculated_num))
-        # print('trst: ' + str(trusted_num))
-
         if output:
             logging.debug('\n' + mod + ': ' + var + ': Calculated: ' + str(calculated_num) + '\n' + mod + ': ' + var
                           + ': Trusted:    ' + str(trusted_num) + '\n')
@@ -56,6 +54,7 @@ def calc_error(mod, calculated_dict, trusted_dict, output=True):
             log10_relative_error = log10(fabs(trusted_num))
         else:
             log10_relative_error = log10(fabs((trusted_num - calculated_num) / trusted_num))
+
         good = (log10_relative_error < (precision / -2))
         if not good:
             if output:
@@ -66,7 +65,20 @@ def calc_error(mod, calculated_dict, trusted_dict, output=True):
                              'trusted_values_dict. Make sure to fill out the TODO comment describing why the values' +
                              ' had to be changed. Then re-run test script.\n' + '#####\n\n# Generated on: ' +
                              str(date.today()) + '\n# Reason for changing values: TODO' + "\ntrusted_values_dict['" +
-                             mod + "Globals'] = " + str(calculated_dict) + '\n\n#####')
+                             mod + "Globals'] = " + create_dict_string(calculated_dict) + '\n\n#####')
             return False
 
     return True
+
+
+# Subfunction to properly format dict to print
+def create_dict_string(calculated_dict):
+
+    return_string = '{'
+
+    for var, num in calculated_dict.items():
+        return_string += "'" + var + "': mpf('" + str(num) + "'), "
+
+    return_string = return_string[0:-2] + '}'
+
+    return return_string

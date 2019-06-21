@@ -8,6 +8,8 @@ from UnitTesting.var_dict_to_value_dict import var_dict_to_value_dict
 from UnitTesting.is_first_time import is_first_time
 from UnitTesting.create_trusted_globals_dict import create_trusted_globals_dict
 from time import time
+from mpmath import mp
+from UnitTesting.trusted_values_dict import trusted_values_dict
 
 
 # run_test takes in :
@@ -20,6 +22,8 @@ def run_test(self, mod_dict, locs):
 
     # Can't use empty module dictionary
     assert mod_dict != dict()
+
+    mp.dps = trusted_values_dict['precision']
 
     # Determining if this is the first time the code is run based of the existence of trusted values
     first_times = is_first_time(mod_dict)
