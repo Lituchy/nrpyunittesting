@@ -441,7 +441,7 @@ class TestFunctions(unittest.TestCase):
             trusted_dict = {'a': mpf('1.0')}
 
             with self.assertLogs(level='DEBUG') as logger:
-                self.assertFalse(calc_error(mod, calculated_dict, trusted_dict))
+                self.assertTrue(calc_error(mod, calculated_dict, trusted_dict))
             self.assertEqual(logger.output,
                 [
                  'DEBUG:root:' + '\nTestModule: ' + 'a' + ': Calculated: ' + '1.0' + '\nTestModule: ' + 'a' +
@@ -453,7 +453,7 @@ class TestFunctions(unittest.TestCase):
             trusted_dict = {'a': mpf('1.0'), 'b': mpf('2.0')}
 
             with self.assertLogs(level='DEBUG') as logger:
-                self.assertFalse(calc_error(mod, calculated_dict, trusted_dict))
+                self.assertTrue(calc_error(mod, calculated_dict, trusted_dict))
             self.assertEqual(logger.output,
                 [
                  'DEBUG:root:' + '\nTestModule: ' + 'a' + ': Calculated: ' + '1.0' + '\nTestModule: ' + 'a' +
