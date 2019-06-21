@@ -670,7 +670,7 @@ class TestFunctions(unittest.TestCase):
                     'DEBUG:root:' + '\nTestModule: ' + 'a' + ': Calculated: ' + '0.0' +
                     '\nTestModule: ' + 'a' + ': Trusted:    ' + '0.0' + '\n',
                     'DEBUG:root:' + '\nTestModule: ' + 'b' + ': Calculated: ' + '1.1' +
-                    '\nTestModule: ' + 'b' + ': Trusted:    ' + '1.0' + '\n'
+                    '\nTestModule: ' + 'b' + ': Trusted:    ' + '1.0' + '\n',
                     'INFO:root:' + '\n\nVariable ' + "'b'" + ' in module TestModule failed. Please check values.\n\n' +
                     'If you are confident that the newly calculated values are correct, comment out the old trusted ' +
                     'values for ' + "'TestModuleGlobals' in trusted_values_dict and copy the following code between" +
