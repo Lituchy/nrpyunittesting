@@ -25,7 +25,7 @@ install:
 # We generally don't need to install matplotlib for the test.
 #  - pip install -r requirements.txt
 # command to run tests
-script: ./run_NRPy_UnitTests.sh
+script: ./UnitTesting/run_NRPy_UnitTests.sh
 # After completion, push results to codecov
 #after_success:
 #  - codecov
