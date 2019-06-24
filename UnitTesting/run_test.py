@@ -15,12 +15,13 @@ from mpmath import mp
 # run_test takes in :
 # [self]- The unittest self object,
 # [mod_dict]- The user-supplied dictionary of modules
+# [trusted_values_dict]- The dictionary of trusted values
 # [locs]- The current local variables in the workspace. Should ALWAYS be locals()
 # It then runs a unittest, comparing calculated values with trusted values.
 # Throws an [AssertionError] if [mod_dict] is empty
 def run_test(self, mod_dict, trusted_values_dict, locs):
 
-    # Can't use empty module dictionary
+    # Can't use empty dictionaries
     assert mod_dict != dict()
 
     mp.dps = precision
