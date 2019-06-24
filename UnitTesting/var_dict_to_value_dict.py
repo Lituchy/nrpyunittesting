@@ -2,7 +2,6 @@
 # This is because we need SymPy to evaluate that expression, not mpmath.
 from mpmath import mp, mpf, sqrt, pi, mpc
 from random import seed, random
-from UnitTesting.trusted_values_dict import trusted_values_dict
 from sympy import cse, simplify
 
 
@@ -12,7 +11,7 @@ from sympy import cse, simplify
 
 # Called by run_test
 
-def var_dict_to_value_dict(var_dict):
+def var_dict_to_value_dict(var_dict, trusted_values_dict):
 
     if var_dict == dict():
         return dict()

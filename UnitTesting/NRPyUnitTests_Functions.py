@@ -13,29 +13,27 @@ logging.basicConfig(level=logging.INFO)
 
 class TestFunctions(unittest.TestCase):
 
-    # If Python version 2.x or 3.y, y < 4
-    if version_info[0] == 2 or version_info[1] < 4:
-        def test_calc_error(self):
+    def test_calc_error(self):
+        if version_info[0] == 2 or version_info[1] < 4:
             from UnitTesting.calc_error import calc_error
             from testfixtures import LogCapture
             from mpmath import mpf, mp
             from datetime import date
-            from UnitTesting.trusted_values_dict import trusted_values_dict
 
-            mp.dps = trusted_values_dict['precision']
+            mp.dps = 30
 
             mod = 'TestModule'
 
             calculated_dict = {}
             trusted_dict = {}
 
-            self.assertEqual(True, calc_error(mod, calculated_dict, trusted_dict))
+            self.assertEqual(True, calc_error(mod, calculated_dict, trusted_dict, 30))
 
             calculated_dict = {'a': mpf('1.0')}
             trusted_dict =    {}
 
             with LogCapture() as log:
-                self.assertFalse(calc_error(mod, calculated_dict, trusted_dict))
+                self.assertFalse(calc_error(mod, calculated_dict, trusted_dict, 30))
             log.check(
                 ('root', 'ERROR', '\n\tTestModule: Calculated dictionary and trusted dictionary have different variables.'),
                 ('root', 'ERROR', '\n\tCalculated Dictionary variables not in Trusted Dictionary: \n\t' + "['a']")
@@ -45,7 +43,7 @@ class TestFunctions(unittest.TestCase):
             trusted_dict =    {}
 
             with LogCapture() as log:
-                self.assertFalse(calc_error(mod, calculated_dict, trusted_dict))
+                self.assertFalse(calc_error(mod, calculated_dict, trusted_dict, 30))
             log.check(
                 ('root', 'ERROR', '\n\tTestModule: Calculated dictionary and trusted dictionary have different variables.'),
                 ('root', 'ERROR', '\n\tCalculated Dictionary variables not in Trusted Dictionary: \n\t' + "['a', 'b']")
@@ -55,7 +53,7 @@ class TestFunctions(unittest.TestCase):
             trusted_dict =    {'b': mpf('2.0')}
 
             with LogCapture() as log:
-                self.assertFalse(calc_error(mod, calculated_dict, trusted_dict))
+                self.assertFalse(calc_error(mod, calculated_dict, trusted_dict, 30))
             log.check(
                 ('root', 'ERROR', '\n\tTestModule: Calculated dictionary and trusted dictionary have different variables.'),
                 ('root', 'ERROR', '\n\tCalculated Dictionary variables not in Trusted Dictionary: \n\t' + "['a']"),
@@ -66,7 +64,7 @@ class TestFunctions(unittest.TestCase):
             trusted_dict =    {'c': mpf('1.0')}
 
             with LogCapture() as log:
-                self.assertFalse(calc_error(mod, calculated_dict, trusted_dict))
+                self.assertFalse(calc_error(mod, calculated_dict, trusted_dict, 30))
             log.check(
                 ('root', 'ERROR', '\n\tTestModule: Calculated dictionary and trusted dictionary have different variables.'),
                 ('root', 'ERROR', '\n\tCalculated Dictionary variables not in Trusted Dictionary: \n\t' + "['a', 'b']"),
@@ -77,7 +75,7 @@ class TestFunctions(unittest.TestCase):
             trusted_dict =    {'a': mpf('1.0'), 'c': mpf('4.0')}
 
             with LogCapture() as log:
-                self.assertFalse(calc_error(mod, calculated_dict, trusted_dict))
+                self.assertFalse(calc_error(mod, calculated_dict, trusted_dict, 30))
             log.check(
                 ('root', 'ERROR', '\n\tTestModule: Calculated dictionary and trusted dictionary have different variables.'),
                 ('root', 'ERROR', '\n\tCalculated Dictionary variables not in Trusted Dictionary: \n\t' + "['b']"),
@@ -88,7 +86,7 @@ class TestFunctions(unittest.TestCase):
             trusted_dict =    {'c': mpf('3.0'), 'd': mpf('4.0')}
 
             with LogCapture() as log:
-                self.assertFalse(calc_error(mod, calculated_dict, trusted_dict))
+                self.assertFalse(calc_error(mod, calculated_dict, trusted_dict, 30))
             log.check(
                 ('root', 'ERROR', '\n\tTestModule: Calculated dictionary and trusted dictionary have different variables.'),
                 ('root', 'ERROR', '\n\tCalculated Dictionary variables not in Trusted Dictionary: \n\t' + "['a', 'b']"),
@@ -99,7 +97,7 @@ class TestFunctions(unittest.TestCase):
             trusted_dict =    {'c': mpf('3.0')}
 
             with LogCapture() as log:
-                self.assertFalse(calc_error(mod, calculated_dict, trusted_dict))
+                self.assertFalse(calc_error(mod, calculated_dict, trusted_dict, 30))
             log.check(
                 ('root', 'ERROR', '\n\tTestModule: Calculated dictionary and trusted dictionary have different variables.'),
                 ('root', 'ERROR', '\n\tCalculated Dictionary variables not in Trusted Dictionary: \n\t' + "['a', 'b']"),
@@ -110,7 +108,7 @@ class TestFunctions(unittest.TestCase):
             trusted_dict =    {'a': mpf('1.0')}
 
             with LogCapture() as log:
-                self.assertTrue(calc_error(mod, calculated_dict, trusted_dict))
+                self.assertTrue(calc_error(mod, calculated_dict, trusted_dict, 30))
             log.check(
                 ('root', 'DEBUG', '\nTestModule: ' + 'a' + ': Calculated: ' + '1.0' + '\nTestModule: ' + 'a' +
                  ': Trusted:    ' + '1.0' + '\n')
@@ -120,7 +118,7 @@ class TestFunctions(unittest.TestCase):
             trusted_dict = {'a': mpf('1.0'), 'b': mpf('2.0')}
 
             with LogCapture() as log:
-                self.assertTrue(calc_error(mod, calculated_dict, trusted_dict))
+                self.assertTrue(calc_error(mod, calculated_dict, trusted_dict, 30))
             log.check(
                 ('root', 'DEBUG', '\nTestModule: ' + 'a' + ': Calculated: ' + '1.0' + '\nTestModule: ' + 'a' +
                  ': Trusted:    ' + '1.0' + '\n'),
@@ -132,7 +130,7 @@ class TestFunctions(unittest.TestCase):
             trusted_dict =    {'a': mpf('2.0')}
 
             with LogCapture() as log:
-                self.assertFalse(calc_error(mod, calculated_dict, trusted_dict))
+                self.assertFalse(calc_error(mod, calculated_dict, trusted_dict, 30))
             log.check(
                 ('root', 'DEBUG', '\nTestModule: ' + 'a' + ': Calculated: ' + '1.0' + '\nTestModule: ' + 'a' +
                  ': Trusted:    ' + '2.0' + '\n'),
@@ -149,7 +147,7 @@ class TestFunctions(unittest.TestCase):
             trusted_dict =    {'a': mpf('0.0')}
 
             with LogCapture() as log:
-                self.assertTrue(calc_error(mod, calculated_dict, trusted_dict))
+                self.assertTrue(calc_error(mod, calculated_dict, trusted_dict, 30))
             log.check(
                 ('root', 'DEBUG', '\nTestModule: ' + 'a' + ': Calculated: ' + '0.0' + '\nTestModule: ' + 'a'
                  + ': Trusted:    ' + '0.0' + '\n')
@@ -159,7 +157,7 @@ class TestFunctions(unittest.TestCase):
             trusted_dict =    {'a': mpf('1.00000000000000010000000000000')}
 
             with LogCapture() as log:
-                self.assertTrue(calc_error(mod, calculated_dict, trusted_dict))
+                self.assertTrue(calc_error(mod, calculated_dict, trusted_dict, 30))
             log.check(
                 ('root', 'DEBUG', '\nTestModule: ' + 'a' + ': Calculated: ' + '1.0' + '\nTestModule: ' + 'a'
                  + ': Trusted:    ' + '1.0000000000000001' + '\n')
@@ -169,7 +167,7 @@ class TestFunctions(unittest.TestCase):
             trusted_dict =    {'a': mpf('0.0000000000000001')}
 
             with LogCapture() as log:
-                self.assertTrue(calc_error(mod, calculated_dict, trusted_dict))
+                self.assertTrue(calc_error(mod, calculated_dict, trusted_dict, 30))
             log.check(
                 ('root', 'DEBUG', '\nTestModule: ' + 'a' + ': Calculated: ' + '0.0' + '\nTestModule: ' + 'a'
                  + ': Trusted:    ' + '1.0e-16' + '\n')
@@ -179,7 +177,7 @@ class TestFunctions(unittest.TestCase):
             trusted_dict =    {'b': mpf('0.000000000000001')}
 
             with LogCapture() as log:
-                self.assertFalse(calc_error(mod, calculated_dict, trusted_dict))
+                self.assertFalse(calc_error(mod, calculated_dict, trusted_dict, 30))
             log.check(
                 ('root', 'DEBUG', '\nTestModule: ' + 'b' + ': Calculated: ' + '0.0' + '\nTestModule: ' + 'b'
                  + ': Trusted:    ' + '1.0e-15' + '\n'),
@@ -196,7 +194,7 @@ class TestFunctions(unittest.TestCase):
             trusted_dict =    {'a': mpf('0.0')}
 
             with LogCapture() as log:
-                self.assertTrue(calc_error(mod, calculated_dict, trusted_dict))
+                self.assertTrue(calc_error(mod, calculated_dict, trusted_dict, 30))
             log.check(
                 ('root', 'DEBUG', '\nTestModule: ' + 'a' + ': Calculated: ' + '1.0e-16' + '\nTestModule: ' + 'a'
                  + ': Trusted:    ' + '0.0' + '\n')
@@ -206,7 +204,7 @@ class TestFunctions(unittest.TestCase):
             trusted_dict =    {'alpha': mpf('0.0')}
 
             with LogCapture() as log:
-                self.assertFalse(calc_error(mod, calculated_dict, trusted_dict))
+                self.assertFalse(calc_error(mod, calculated_dict, trusted_dict, 30))
             log.check(
                 ('root', 'DEBUG', '\nTestModule: ' + 'alpha' + ': Calculated: ' + '1.0e-15' + '\nTestModule: ' + 'alpha'
                  + ': Trusted:    ' + '0.0' + '\n'),
@@ -224,7 +222,7 @@ class TestFunctions(unittest.TestCase):
             trusted_dict =    {'f': mpf('123.012345678901234567890123456789')}
 
             with LogCapture() as log:
-                self.assertTrue(calc_error(mod, calculated_dict, trusted_dict))
+                self.assertTrue(calc_error(mod, calculated_dict, trusted_dict, 30))
             log.check(
                 ('root', 'DEBUG', '\nTestModule: ' + 'f' + ': Calculated: ' + '123.012345678901234567890123457' +
                  '\nTestModule: ' + 'f' + ': Trusted:    ' + '123.012345678901234567890123457' + '\n')
@@ -234,7 +232,7 @@ class TestFunctions(unittest.TestCase):
             trusted_dict =    {'f': mpf('123.012345678901234567890123457')}
 
             with LogCapture() as log:
-                self.assertFalse(calc_error(mod, calculated_dict, trusted_dict))
+                self.assertFalse(calc_error(mod, calculated_dict, trusted_dict, 30))
             log.check(
                 ('root', 'DEBUG', '\nTestModule: ' + 'f' + ': Calculated: ' + '123.012345678101234567890123457' +
                  '\nTestModule: ' + 'f' + ': Trusted:    ' + '123.012345678901234567890123457' + '\n'),
@@ -252,7 +250,7 @@ class TestFunctions(unittest.TestCase):
             trusted_dict =    {'f': mpf('123.012345678901234567890123457')}
 
             with LogCapture() as log:
-                self.assertTrue(calc_error(mod, calculated_dict, trusted_dict))
+                self.assertTrue(calc_error(mod, calculated_dict, trusted_dict, 30))
             log.check(
                 ('root', 'DEBUG', '\nTestModule: ' + 'f' + ': Calculated: ' + '123.012345678901234567890123456' +
                  '\nTestModule: ' + 'f' + ': Trusted:    ' + '123.012345678901234567890123457' + '\n'),
@@ -262,7 +260,7 @@ class TestFunctions(unittest.TestCase):
             trusted_dict =    {'a': mpf('0.0'), 'b': mpf('1.0')}
 
             with LogCapture() as log:
-                self.assertTrue(calc_error(mod, calculated_dict, trusted_dict))
+                self.assertTrue(calc_error(mod, calculated_dict, trusted_dict, 30))
             log.check(
                 ('root', 'DEBUG', '\nTestModule: ' + 'a' + ': Calculated: ' + '0.0' +
                  '\nTestModule: ' + 'a' + ': Trusted:    ' + '0.0' + '\n'),
@@ -274,7 +272,7 @@ class TestFunctions(unittest.TestCase):
             trusted_dict =    {'a': mpf('0.1'), 'b': mpf('1.0')}
 
             with LogCapture() as log:
-                self.assertFalse(calc_error(mod, calculated_dict, trusted_dict))
+                self.assertFalse(calc_error(mod, calculated_dict, trusted_dict, 30))
             log.check(
                 ('root', 'DEBUG', '\nTestModule: ' + 'a' + ': Calculated: ' + '0.0' +
                  '\nTestModule: ' + 'a' + ': Trusted:    ' + '0.1' + '\n'),
@@ -292,7 +290,7 @@ class TestFunctions(unittest.TestCase):
             trusted_dict =    {'a': mpf('0.1'), 'b': mpf('1.0')}
 
             with LogCapture() as log:
-                self.assertFalse(calc_error(mod, calculated_dict, trusted_dict))
+                self.assertFalse(calc_error(mod, calculated_dict, trusted_dict, 30))
             log.check(
                 ('root', 'DEBUG', '\nTestModule: ' + 'a' + ': Calculated: ' + '0.0' +
                  '\nTestModule: ' + 'a' + ': Trusted:    ' + '0.1' + '\n'),
@@ -310,7 +308,7 @@ class TestFunctions(unittest.TestCase):
             trusted_dict =    {'a': mpf('0.0'), 'b': mpf('1.0')}
 
             with LogCapture() as log:
-                self.assertFalse(calc_error(mod, calculated_dict, trusted_dict))
+                self.assertFalse(calc_error(mod, calculated_dict, trusted_dict, 30))
             log.check(
                 ('root', 'DEBUG', '\nTestModule: ' + 'a' + ': Calculated: ' + '0.0' +
                  '\nTestModule: ' + 'a' + ': Trusted:    ' + '0.0' + '\n'),
@@ -327,8 +325,9 @@ class TestFunctions(unittest.TestCase):
             )
 
             logging.info('\nAll calc_error tests passed.\n')
-    else:
-        def test_calc_error(self):
+
+        else:
+
             from UnitTesting.calc_error import calc_error
             from mpmath import mpf, mp
             from datetime import date
@@ -341,13 +340,13 @@ class TestFunctions(unittest.TestCase):
             calculated_dict = {}
             trusted_dict = {}
 
-            self.assertEqual(True, calc_error(mod, calculated_dict, trusted_dict))
+            self.assertEqual(True, calc_error(mod, calculated_dict, trusted_dict, 30))
 
             calculated_dict = {'a': mpf('1.0')}
             trusted_dict = {}
 
             with self.assertLogs(level='DEBUG') as logger:
-                self.assertFalse(calc_error(mod, calculated_dict, trusted_dict))
+                self.assertFalse(calc_error(mod, calculated_dict, trusted_dict, 30))
             self.assertEqual(logger.output,
                 ['ERROR:root:\n\tTestModule: Calculated dictionary and trusted dictionary have different variables.',
                  'ERROR:root:\n\tCalculated Dictionary variables not in Trusted Dictionary: \n\t' + "['a']"])
@@ -356,7 +355,7 @@ class TestFunctions(unittest.TestCase):
             trusted_dict = {}
 
             with self.assertLogs(level='DEBUG') as logger:
-                self.assertFalse(calc_error(mod, calculated_dict, trusted_dict))
+                self.assertFalse(calc_error(mod, calculated_dict, trusted_dict, 30))
             self.assertEqual(logger.output,
                 [
                  'ERROR:root:\n\tTestModule: Calculated dictionary and trusted dictionary have different variables.',
@@ -367,7 +366,7 @@ class TestFunctions(unittest.TestCase):
             trusted_dict = {'b': mpf('2.0')}
 
             with self.assertLogs(level='DEBUG') as logger:
-                self.assertFalse(calc_error(mod, calculated_dict, trusted_dict))
+                self.assertFalse(calc_error(mod, calculated_dict, trusted_dict, 30))
             self.assertEqual(logger.output,
                 [
                     'ERROR:root:\n\tTestModule: Calculated dictionary and trusted dictionary have different variables.',
@@ -380,7 +379,7 @@ class TestFunctions(unittest.TestCase):
             trusted_dict = {'c': mpf('1.0')}
 
             with self.assertLogs(level='DEBUG') as logger:
-                self.assertFalse(calc_error(mod, calculated_dict, trusted_dict))
+                self.assertFalse(calc_error(mod, calculated_dict, trusted_dict, 30))
             self.assertEqual(logger.output,
                 [
                     'ERROR:root:\n\tTestModule: Calculated dictionary and trusted dictionary have different variables.',
@@ -393,7 +392,7 @@ class TestFunctions(unittest.TestCase):
             trusted_dict = {'a': mpf('1.0'), 'c': mpf('4.0')}
 
             with self.assertLogs(level='DEBUG') as logger:
-                self.assertFalse(calc_error(mod, calculated_dict, trusted_dict))
+                self.assertFalse(calc_error(mod, calculated_dict, trusted_dict, 30))
             self.assertEqual(logger.output,
                 [
                     'ERROR:root:\n\tTestModule: Calculated dictionary and trusted dictionary have different variables.',
@@ -406,7 +405,7 @@ class TestFunctions(unittest.TestCase):
             trusted_dict = {'c': mpf('3.0'), 'd': mpf('4.0')}
 
             with self.assertLogs(level='DEBUG') as logger:
-                self.assertFalse(calc_error(mod, calculated_dict, trusted_dict))
+                self.assertFalse(calc_error(mod, calculated_dict, trusted_dict, 30))
             self.assertEqual(logger.output,
                 [
                     'ERROR:root:\n\tTestModule: Calculated dictionary and trusted dictionary have different variables.',
@@ -419,7 +418,7 @@ class TestFunctions(unittest.TestCase):
             trusted_dict = {'c': mpf('3.0')}
 
             with self.assertLogs(level='DEBUG') as logger:
-                self.assertFalse(calc_error(mod, calculated_dict, trusted_dict))
+                self.assertFalse(calc_error(mod, calculated_dict, trusted_dict, 30))
             self.assertEqual(logger.output,
                 [
                     'ERROR:root:\n\tTestModule: Calculated dictionary and trusted dictionary have different variables.',
@@ -432,7 +431,7 @@ class TestFunctions(unittest.TestCase):
             trusted_dict = {'a': mpf('1.0')}
 
             with self.assertLogs(level='DEBUG') as logger:
-                self.assertTrue(calc_error(mod, calculated_dict, trusted_dict))
+                self.assertTrue(calc_error(mod, calculated_dict, trusted_dict, 30))
             self.assertEqual(logger.output,
                 [
                  'DEBUG:root:' + '\nTestModule: ' + 'a' + ': Calculated: ' + '1.0' + '\nTestModule: ' + 'a' +
@@ -444,7 +443,7 @@ class TestFunctions(unittest.TestCase):
             trusted_dict = {'a': mpf('1.0'), 'b': mpf('2.0')}
 
             with self.assertLogs(level='DEBUG') as logger:
-                self.assertTrue(calc_error(mod, calculated_dict, trusted_dict))
+                self.assertTrue(calc_error(mod, calculated_dict, trusted_dict, 30))
             self.assertEqual(logger.output,
                 [
                  'DEBUG:root:' + '\nTestModule: ' + 'a' + ': Calculated: ' + '1.0' + '\nTestModule: ' + 'a' +
@@ -458,7 +457,7 @@ class TestFunctions(unittest.TestCase):
             trusted_dict = {'a': mpf('2.0')}
 
             with self.assertLogs(level='DEBUG') as logger:
-                self.assertFalse(calc_error(mod, calculated_dict, trusted_dict))
+                self.assertFalse(calc_error(mod, calculated_dict, trusted_dict, 30))
             self.assertEqual(logger.output,
                 [
                     'DEBUG:root:' + '\nTestModule: ' + 'a' + ': Calculated: ' + '1.0' + '\nTestModule: ' + 'a' +
@@ -478,7 +477,7 @@ class TestFunctions(unittest.TestCase):
             trusted_dict = {'a': mpf('0.0')}
 
             with self.assertLogs(level='DEBUG') as logger:
-                self.assertTrue(calc_error(mod, calculated_dict, trusted_dict))
+                self.assertTrue(calc_error(mod, calculated_dict, trusted_dict, 30))
             self.assertEqual(logger.output,
                 [
                     'DEBUG:root:' + '\nTestModule: ' + 'a' + ': Calculated: ' + '0.0' + '\nTestModule: ' + 'a' +
@@ -490,7 +489,7 @@ class TestFunctions(unittest.TestCase):
             trusted_dict = {'a': mpf('1.00000000000000010000000000000')}
 
             with self.assertLogs(level='DEBUG') as logger:
-                self.assertTrue(calc_error(mod, calculated_dict, trusted_dict))
+                self.assertTrue(calc_error(mod, calculated_dict, trusted_dict, 30))
             self.assertEqual(logger.output,
                 [
                     'DEBUG:root:' + '\nTestModule: ' + 'a' + ': Calculated: ' + '1.0' + '\nTestModule: ' + 'a' +
@@ -502,7 +501,7 @@ class TestFunctions(unittest.TestCase):
             trusted_dict = {'a': mpf('0.0000000000000001')}
 
             with self.assertLogs(level='DEBUG') as logger:
-                self.assertTrue(calc_error(mod, calculated_dict, trusted_dict))
+                self.assertTrue(calc_error(mod, calculated_dict, trusted_dict, 30))
             self.assertEqual(logger.output,
                 [
                     'DEBUG:root:' + '\nTestModule: ' + 'a' + ': Calculated: ' + '0.0' + '\nTestModule: ' + 'a' +
@@ -514,7 +513,7 @@ class TestFunctions(unittest.TestCase):
             trusted_dict = {'b': mpf('0.000000000000001')}
 
             with self.assertLogs(level='DEBUG') as logger:
-                self.assertFalse(calc_error(mod, calculated_dict, trusted_dict))
+                self.assertFalse(calc_error(mod, calculated_dict, trusted_dict, 30))
             self.assertEqual(logger.output,
                 [
                     'DEBUG:root:' + '\nTestModule: ' + 'b' + ': Calculated: ' + '0.0' + '\nTestModule: ' + 'b'
@@ -534,7 +533,7 @@ class TestFunctions(unittest.TestCase):
             trusted_dict = {'a': mpf('0.0')}
 
             with self.assertLogs(level='DEBUG') as logger:
-                self.assertTrue(calc_error(mod, calculated_dict, trusted_dict))
+                self.assertTrue(calc_error(mod, calculated_dict, trusted_dict, 30))
             self.assertEqual(logger.output,
                 [
                     'DEBUG:root:' + '\nTestModule: ' + 'a' + ': Calculated: ' + '1.0e-16' + '\nTestModule: ' + 'a'
@@ -546,7 +545,7 @@ class TestFunctions(unittest.TestCase):
             trusted_dict = {'alpha': mpf('0.0')}
 
             with self.assertLogs(level='DEBUG') as logger:
-                self.assertFalse(calc_error(mod, calculated_dict, trusted_dict))
+                self.assertFalse(calc_error(mod, calculated_dict, trusted_dict, 30))
             self.assertEqual(logger.output,
                 [
                     'DEBUG:root:' + '\nTestModule: ' + 'alpha' + ': Calculated: ' + '1.0e-15' + '\nTestModule: ' +
@@ -566,7 +565,7 @@ class TestFunctions(unittest.TestCase):
             trusted_dict = {'f': mpf('123.012345678901234567890123456789')}
 
             with self.assertLogs(level='DEBUG') as logger:
-                self.assertTrue(calc_error(mod, calculated_dict, trusted_dict))
+                self.assertTrue(calc_error(mod, calculated_dict, trusted_dict, 30))
             self.assertEqual(logger.output,
                 [
                     'DEBUG:root:' + '\nTestModule: ' + 'f' + ': Calculated: ' + '123.012345678901234567890123457' +
@@ -578,7 +577,7 @@ class TestFunctions(unittest.TestCase):
             trusted_dict = {'f': mpf('123.012345678901234567890123457')}
 
             with self.assertLogs(level='DEBUG') as logger:
-                self.assertFalse(calc_error(mod, calculated_dict, trusted_dict))
+                self.assertFalse(calc_error(mod, calculated_dict, trusted_dict, 30))
             self.assertEqual(logger.output,
                 [
                     'DEBUG:root:' + '\nTestModule: ' + 'f' + ': Calculated: ' + '123.012345678101234567890123457' +
@@ -598,7 +597,7 @@ class TestFunctions(unittest.TestCase):
             trusted_dict = {'f': mpf('123.012345678901234567890123457')}
 
             with self.assertLogs(level='DEBUG') as logger:
-                self.assertTrue(calc_error(mod, calculated_dict, trusted_dict))
+                self.assertTrue(calc_error(mod, calculated_dict, trusted_dict, 30))
             self.assertEqual(logger.output,
                 [
                     'DEBUG:root:' + '\nTestModule: ' + 'f' + ': Calculated: ' + '123.012345678901234567890123456' +
@@ -610,7 +609,7 @@ class TestFunctions(unittest.TestCase):
             trusted_dict = {'a': mpf('0.0'), 'b': mpf('1.0')}
 
             with self.assertLogs(level='DEBUG') as logger:
-                self.assertTrue(calc_error(mod, calculated_dict, trusted_dict))
+                self.assertTrue(calc_error(mod, calculated_dict, trusted_dict, 30))
             self.assertEqual(logger.output,
                 [
                     'DEBUG:root:' + '\nTestModule: ' + 'a' + ': Calculated: ' + '0.0' +
@@ -624,7 +623,7 @@ class TestFunctions(unittest.TestCase):
             trusted_dict = {'a': mpf('0.1'), 'b': mpf('1.0')}
 
             with self.assertLogs(level='DEBUG') as logger:
-                self.assertFalse(calc_error(mod, calculated_dict, trusted_dict))
+                self.assertFalse(calc_error(mod, calculated_dict, trusted_dict, 30))
             self.assertEqual(logger.output,
                 [
                     'DEBUG:root:' + '\nTestModule: ' + 'a' + ': Calculated: ' + '0.0' +
@@ -644,7 +643,7 @@ class TestFunctions(unittest.TestCase):
             trusted_dict = {'a': mpf('0.1'), 'b': mpf('1.0')}
 
             with self.assertLogs(level='DEBUG') as logger:
-                self.assertFalse(calc_error(mod, calculated_dict, trusted_dict))
+                self.assertFalse(calc_error(mod, calculated_dict, trusted_dict, 30))
             self.assertEqual(logger.output,
                 [
                     'DEBUG:root:' + '\nTestModule: ' + 'a' + ': Calculated: ' + '0.0' +
@@ -664,7 +663,7 @@ class TestFunctions(unittest.TestCase):
             trusted_dict = {'a': mpf('0.0'), 'b': mpf('1.0')}
 
             with self.assertLogs(level='DEBUG') as logger:
-                self.assertFalse(calc_error(mod, calculated_dict, trusted_dict))
+                self.assertFalse(calc_error(mod, calculated_dict, trusted_dict, 30))
             self.assertEqual(logger.output,
                 [
                     'DEBUG:root:' + '\nTestModule: ' + 'a' + ': Calculated: ' + '0.0' +
@@ -687,72 +686,85 @@ class TestFunctions(unittest.TestCase):
     def test_create_trusted_globals_dict(self):
         from UnitTesting.create_trusted_globals_dict import create_trusted_globals_dict
         from mpmath import mpf
-        from UnitTesting.trusted_values_dict import trusted_values_dict
 
-        mod_dict = dict()
-        first_times = dict()
-        self.assertEqual(dict(), create_trusted_globals_dict(mod_dict, first_times))
+        mod_dict = {}
+        trusted_values_dict = {}
+        first_times = {}
+        self.assertEqual(dict(), create_trusted_globals_dict(mod_dict, trusted_values_dict, first_times))
 
         mod_dict = {'mod': []}
+        trusted_values_dict = {}
         first_times = {'mod': True}
         self.assertEqual({'mod': dict()}, create_trusted_globals_dict(mod_dict, first_times))
 
         mod_dict = {'mod': ['hello', 'world']}
+        trusted_values_dict = {}
         first_times = {'mod': True}
         self.assertEqual({'mod': dict()}, create_trusted_globals_dict(mod_dict, first_times))
 
         with self.assertRaises(KeyError):
             mod_dict = {'mod': ['hello', 'world']}
+            trusted_values_dict = {}
             first_times = {'mod': False}
             create_trusted_globals_dict(mod_dict, first_times)
 
         with self.assertRaises(AssertionError):
             mod_dict = {'mod': []}
+            trusted_values_dict = {}
             first_times = {'mod': True, 'random': False}
             create_trusted_globals_dict(mod_dict, first_times)
 
         with self.assertRaises(AssertionError):
             mod_dict = {'mod1': 'hello', 'mod2': 'world'}
+            trusted_values_dict = {}
             first_times = {'mod1': True}
             create_trusted_globals_dict(mod_dict, first_times)
 
         with self.assertRaises(AssertionError):
             mod_dict = {'a': 1, 'b': 2, 'c': 3}
+            trusted_values_dict = {}
             first_times = {'d': 4, 'e': 5, 'f': 6}
             create_trusted_globals_dict(mod_dict, first_times)
 
         with self.assertRaises(AssertionError):
             mod_dict = {'a': 1, 'b': 2, 'c': 3}
+            trusted_values_dict = {}
             first_times = {'d': 4, 'e': 5, 'f': 6}
             create_trusted_globals_dict(mod_dict, first_times)
 
         mod_dict = {'BrillLindquist': ['foo', 'bar']}
+        trusted_values_dict = {}
         first_times = {'BrillLindquist': True}
         self.assertEqual({'BrillLindquist': dict()}, create_trusted_globals_dict(mod_dict, first_times))
 
         from UnitTesting.calc_error import calc_error
 
         mod_dict = {'BrillLindquist': ['foo', 'bar']}
+        trusted_values_dict = {}
         first_times = {'BrillLindquist': False}
         self.assertTrue(calc_error('BrillLindquist', {'alphaCart': mpf('0.122483331574515176153136610247876'), 'betaCartU[0]': mpf('0.0'), 'betaCartU[1]': mpf('0.0'), 'betaCartU[2]': mpf('0.0'), 'BCartU[0]': mpf('0.0'), 'BCartU[1]': mpf('0.0'), 'BCartU[2]': mpf('0.0'), 'gammaCartDD[0][0]': mpf('66.6570391079152319165851690987334'), 'gammaCartDD[0][1]': mpf('0.0'), 'gammaCartDD[0][2]': mpf('0.0'), 'gammaCartDD[1][0]': mpf('0.0'), 'gammaCartDD[1][1]': mpf('66.6570391079152319165851690987334'), 'gammaCartDD[1][2]': mpf('0.0'), 'gammaCartDD[2][0]': mpf('0.0'), 'gammaCartDD[2][1]': mpf('0.0'), 'gammaCartDD[2][2]': mpf('66.6570391079152319165851690987334'), 'KCartDD[0][0]': mpf('0.0'), 'KCartDD[0][1]': mpf('0.0'), 'KCartDD[0][2]': mpf('0.0'), 'KCartDD[1][0]': mpf('0.0'), 'KCartDD[1][1]': mpf('0.0'), 'KCartDD[1][2]': mpf('0.0'), 'KCartDD[2][0]': mpf('0.0'), 'KCartDD[2][1]': mpf('0.0'), 'KCartDD[2][2]': mpf('0.0')}
                         , create_trusted_globals_dict(mod_dict, first_times)['BrillLindquist']))
 
         mod_dict = {'BrillLindquist': ['foo', 'bar']}
+        trusted_values_dict = {}
         first_times = {'BrillLindquist': False}
         self.assertEqual({'BrillLindquist': trusted_values_dict['BrillLindquistGlobals']}
                          , create_trusted_globals_dict(mod_dict, first_times))
 
         mod_dict = {'BrillLindquist': ['foo', 'bar'], 'mod': ['hello world']}
+        trusted_values_dict = {}
         first_times = {'BrillLindquist': False, 'mod': True}
         self.assertEqual({'BrillLindquist': trusted_values_dict['BrillLindquistGlobals'], 'mod': dict()}, create_trusted_globals_dict(mod_dict, first_times))
 
         mod_dict = {'BrillLindquist': 1, 'ShiftedKerrSchild': 2}
+        trusted_values_dict = {}
         first_times = {'BrillLindquist': False, 'ShiftedKerrSchild': False}
         self.assertEqual({'BrillLindquist': trusted_values_dict['BrillLindquistGlobals']
                          , 'ShiftedKerrSchild': trusted_values_dict['ShiftedKerrSchildGlobals']}
                          , create_trusted_globals_dict(mod_dict, first_times))
 
         mod_dict = {'mod1': 1, 'mod2': 2, 'mod3': 3}
+        trusted_values_dict = {}
         first_times = {'mod1': True, 'mod2': True, 'mod3': True}
         self.assertEqual({'mod1': dict(), 'mod2': dict(), 'mod3': dict()},
                          create_trusted_globals_dict(mod_dict, first_times))
@@ -927,7 +939,6 @@ class TestFunctions(unittest.TestCase):
         from UnitTesting.var_dict_to_value_dict import var_dict_to_value_dict
         from mpmath import mpf, sqrt, mp
         from random import random, seed
-        from UnitTesting.trusted_values_dict import trusted_values_dict
         from UnitTesting.calc_error import calc_error
         from sympy.abc import x, y, z
 
@@ -944,42 +955,42 @@ class TestFunctions(unittest.TestCase):
         var_dict = {'x': x}
         trusted_dict = {'x': first_val}
         calculated_dict = var_dict_to_value_dict(var_dict)
-        self.assertTrue(calc_error('mod', calculated_dict, trusted_dict, output=False))
+        self.assertTrue(calc_error('mod', calculated_dict, trusted_dict, 30, output=False))
 
         var_dict = {'y': y}
         trusted_dict = {'y': first_val}
         calculated_dict = var_dict_to_value_dict(var_dict)
-        self.assertTrue(calc_error('mod', calculated_dict, trusted_dict, output=False))
+        self.assertTrue(calc_error('mod', calculated_dict, trusted_dict, 30, output=False))
 
         var_dict = {'x': x, 'y': y}
         trusted_dict = {'x': first_val, 'y': second_val}
         calculated_dict = var_dict_to_value_dict(var_dict)
-        self.assertTrue(calc_error('mod', calculated_dict, trusted_dict, output=False))
+        self.assertTrue(calc_error('mod', calculated_dict, trusted_dict, 30, output=False))
 
         var_dict = {'y': y, 'x': x}
         trusted_dict = {'y': second_val, 'x': first_val}
         calculated_dict = var_dict_to_value_dict(var_dict)
-        self.assertTrue(calc_error('mod', calculated_dict, trusted_dict, output=False))
+        self.assertTrue(calc_error('mod', calculated_dict, trusted_dict, 30, output=False))
 
         var_dict = {'x': x, 'y': y, 'z': z}
         trusted_dict = {'x': first_val, 'y': second_val, 'z': third_val}
         calculated_dict = var_dict_to_value_dict(var_dict)
-        self.assertTrue(calc_error('mod', calculated_dict, trusted_dict, output=False))
+        self.assertTrue(calc_error('mod', calculated_dict, trusted_dict, 30, output=False))
 
         var_dict = {'x+y': x+y}
         trusted_dict = {'x+y': first_val+second_val}
         calculated_dict = var_dict_to_value_dict(var_dict)
-        self.assertTrue(calc_error('mod', calculated_dict, trusted_dict, output=False))
+        self.assertTrue(calc_error('mod', calculated_dict, trusted_dict, 30, output=False))
 
         var_dict = {'x/y': x/y, 'long_expression': (x+y)**2/(x*y)}
         trusted_dict = {'x/y': first_val/second_val, 'long_expression': (first_val+second_val)**2/(first_val*second_val)}
         calculated_dict = var_dict_to_value_dict(var_dict)
-        self.assertTrue(calc_error('mod', calculated_dict, trusted_dict, output=False))
+        self.assertTrue(calc_error('mod', calculated_dict, trusted_dict, 30, output=False))
 
         var_dict = {'x-x': x-x}
         trusted_dict = {'x-x': mpf(0.0)}
         calculated_dict = var_dict_to_value_dict(var_dict)
-        self.assertTrue(calc_error('mod', calculated_dict, trusted_dict, output=False))
+        self.assertTrue(calc_error('mod', calculated_dict, trusted_dict, 30, output=False))
 
         with self.assertRaises(AttributeError):
             var_dict = {'x': 0}
@@ -989,7 +1000,7 @@ class TestFunctions(unittest.TestCase):
         trusted_dict = {'t1': first_val**2 + second_val**2, 't2': first_val**2/second_val, 't3': first_val**4,
                         't4': first_val**2 + first_val**2*second_val + first_val**2/second_val + first_val**2*third_val}
         calculated_dict = var_dict_to_value_dict(var_dict)
-        self.assertTrue(calc_error('mod', calculated_dict, trusted_dict, output=False))
+        self.assertTrue(calc_error('mod', calculated_dict, trusted_dict, 30, output=False))
 
         from sympy import symbols
 
@@ -1000,7 +1011,7 @@ class TestFunctions(unittest.TestCase):
                         'sqrt': mpf('0.707106781186547524400844362104785')}
         calculated_dict = var_dict_to_value_dict(var_dict)
         for var in trusted_dict:
-            self.assertTrue(calc_error('Constants', calculated_dict, trusted_dict, output=False))
+            self.assertTrue(calc_error('Constants', calculated_dict, trusted_dict, 30, output=False))
 
         logging.info('\nAll var_dict_to_value_dict tests passed\n')
 

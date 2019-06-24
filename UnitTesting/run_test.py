@@ -9,7 +9,6 @@ from UnitTesting.is_first_time import is_first_time
 from UnitTesting.create_trusted_globals_dict import create_trusted_globals_dict
 from time import time
 from mpmath import mp
-from UnitTesting.trusted_values_dict import trusted_values_dict
 
 
 # run_test takes in :
@@ -18,7 +17,7 @@ from UnitTesting.trusted_values_dict import trusted_values_dict
 # [locs]- The current local variables in the workspace. Should ALWAYS be locals()
 # It then runs a unittest, comparing calculated values with trusted values.
 # Throws an [AssertionError] if [mod_dict] is empty
-def run_test(self, mod_dict, locs):
+def run_test(self, mod_dict, trusted_values_dict, locs):
 
     # Can't use empty module dictionary
     assert mod_dict != dict()
@@ -26,10 +25,10 @@ def run_test(self, mod_dict, locs):
     mp.dps = trusted_values_dict['precision']
 
     # Determining if this is the first time the code is run based of the existence of trusted values
-    first_times = is_first_time(mod_dict)
+    first_times = is_first_time(mod_dict, trusted_values_dict)
 
     # Creating trusted dictionary based off names of modules in ModDict
-    trusted_dict = create_trusted_globals_dict(mod_dict, first_times)
+    trusted_dict = create_trusted_globals_dict(mod_dict, trusted_values_dict, first_times)
 
     # Timing how long evaluate_globals takes
     t = time()
@@ -74,7 +73,7 @@ def run_test(self, mod_dict, locs):
         t = time()
 
         # Calculating numerical list for module
-        value_dict = var_dict_to_value_dict(new_dict)
+        value_dict = var_dict_to_value_dict(new_dict, trusted_values_dict)
 
         # Printing the time it took to run list_to_value_list
         logging.debug(str(time()-t) + ' seconds to run list_to_value_list')
@@ -87,7 +86,7 @@ def run_test(self, mod_dict, locs):
         else:
 
             # Calculates the error between mod_dict and trusted_dict[mod] for the current module
-            values_identical = calc_error(mod, value_dict, trusted_dict[mod])
+            values_identical = calc_error(mod, value_dict, trusted_dict[mod], trusted_values_dict['precision'])
 
             # If at least one value differs, print exit message and fail the unittest
             if not values_identical:

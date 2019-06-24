@@ -1,10 +1,9 @@
 from datetime import datetime
 
-
 # Takes in a module [mod] and a module dictionary [mod_dict], and prints the code that needs to be copied
 # into trustedValuesDict.
-
 # Called by run_test
+
 
 def first_time_print(mod, value_dict):
     print('\nModule: ' + mod)

@@ -1,5 +1,4 @@
 import logging
-from UnitTesting.trusted_values_dict import trusted_values_dict
 from mpmath import log10,fabs, mp
 from datetime import date
 
@@ -13,10 +12,9 @@ from datetime import date
 # Called by run_test
 
 
-def calc_error(mod, calculated_dict, trusted_dict, output=True):
+def calc_error(mod, calculated_dict, trusted_dict, precision, output=True):
 
     # Precision for the module based off the set precision in trusted_values_dict
-    precision = trusted_values_dict['precision']
     mp.dps = precision
 
     # Creating sets to easily compare the keys of resultDict and trustedDict
