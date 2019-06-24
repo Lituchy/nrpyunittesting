@@ -2,10 +2,10 @@ import logging
 from mpmath import log10,fabs, mp
 from datetime import date
 
-# Takes in a module [mod], a calculated dictionary [calculated_dict], a trusted dictionary [trusted_dict], and
-# a symbolic dictionary [symbolic_dict] and computes the error for each result-trusted pair for each respective index.
-# Logs debug statements for each pair of values if the logging level is <= DEBUG
-# and logs a failure message if logging level is <= ERROR.
+# Takes in a module [mod], a calculated dictionary [calculated_dict], a trusted dictionary [trusted_dict], a precision
+# value, [precision], and a symbolic dictionary [symbolic_dict] and computes the error for each result-trusted pair
+# for each respective index according to [precision]. Logs debug statements for each pair of values if the logging
+# level is <= DEBUG and logs a failure message if logging level is <= ERROR.
 # Returns a boolean [good] that represents if any two value pairs didn't differ
 # by more than (precision/2) decimal places.
 

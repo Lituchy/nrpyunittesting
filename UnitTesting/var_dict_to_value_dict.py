@@ -5,19 +5,19 @@ from random import seed, random
 from sympy import cse, simplify
 
 
-# Takes in a variable dictionary [var_dict] and returns the same dictionary with each expression evaluated
-# according to parameters (seed, precision) in trustedValues.
+# Takes in a variable dictionary [var_dict] a precision value [precision] and a seed value [seed_value], and returns
+# a dictionary with each expression in [var_dict] evaluated according to parameters (seed, precision).
 # Throws an [AttributeError] if the variable list being passed in has no sympy symbols
 
 # Called by run_test
 
-def var_dict_to_value_dict(var_dict, trusted_values_dict):
+def var_dict_to_value_dict(var_dict, precision, seed_value):
 
     if var_dict == dict():
         return dict()
 
     # Setting precision
-    mp.dps = trusted_values_dict["precision"]
+    mp.dps = precision
 
     # List all the free symbols in the expressions in [var_dict].
     free_symbols_list = list(sum(var_dict.values()).free_symbols)
@@ -26,7 +26,7 @@ def var_dict_to_value_dict(var_dict, trusted_values_dict):
     free_symbols_list.sort(key=lambda v: str(v))
 
     # Set the random seed according to seed in trustedValuesDict:
-    seed(trusted_values_dict["seed"])
+    seed(seed_value)
 
     # Creating dictionary entry for each variable and its pseudorandom value in [0,1) as determined by seed
     variable_dictionary = dict()
@@ -66,6 +66,7 @@ def var_dict_to_value_dict(var_dict, trusted_values_dict):
         # Adding our variable, value pair to our value_dict
         try:
             value_dict[var] = mpf(reduce)
+        # If value is a complex number, store it as a mpc
         except TypeError:
             reduce = simplify(reduce)
             value_dict[var] = mpc(reduce)

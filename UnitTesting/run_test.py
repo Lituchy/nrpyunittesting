@@ -73,7 +73,7 @@ def run_test(self, mod_dict, trusted_values_dict, locs):
         t = time()
 
         # Calculating numerical list for module
-        value_dict = var_dict_to_value_dict(new_dict, trusted_values_dict)
+        value_dict = var_dict_to_value_dict(new_dict, trusted_values_dict['precision'], trusted_values_dict['seed'])
 
         # Printing the time it took to run list_to_value_list
         logging.debug(str(time()-t) + ' seconds to run list_to_value_list')
