@@ -7,7 +7,7 @@ from UnitTesting.expand_variable_dict import expand_variable_dict
 from UnitTesting.var_dict_to_value_dict import var_dict_to_value_dict
 from UnitTesting.is_first_time import is_first_time
 from UnitTesting.create_trusted_globals_dict import create_trusted_globals_dict
-from standard_constants import precision
+from UnitTesting.standard_constants import precision
 from time import time
 from mpmath import mp
 

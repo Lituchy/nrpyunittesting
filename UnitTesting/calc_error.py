@@ -1,7 +1,7 @@
 import logging
 from mpmath import log10,fabs, mp
 from datetime import date
-from standard_constants import precision
+from UnitTesting.standard_constants import precision
 
 # Takes in a module [mod], a calculated dictionary [calculated_dict], a trusted dictionary [trusted_dict], a precision
 # value, [precision], and a symbolic dictionary [symbolic_dict] and computes the error for each result-trusted pair

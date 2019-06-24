@@ -3,7 +3,7 @@
 from mpmath import mp, mpf, sqrt, pi, mpc
 from random import seed, random
 from sympy import cse, simplify
-import standard_constants
+import UnitTesting.standard_constants as standard_constants
 
 
 # Takes in a variable dictionary [var_dict] a precision value [precision] and a seed value [seed_value], and returns
