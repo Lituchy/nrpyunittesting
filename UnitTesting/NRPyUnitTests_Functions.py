@@ -955,42 +955,42 @@ class TestFunctions(unittest.TestCase):
         var_dict = {'x': x}
         trusted_dict = {'x': first_val}
         calculated_dict = var_dict_to_value_dict(var_dict)
-        self.assertTrue(calc_error('mod', calculated_dict, trusted_dict, 30, output=False))
+        self.assertTrue(calc_error('mod', calculated_dict, trusted_dict,  output=False))
 
         var_dict = {'y': y}
         trusted_dict = {'y': first_val}
         calculated_dict = var_dict_to_value_dict(var_dict)
-        self.assertTrue(calc_error('mod', calculated_dict, trusted_dict, 30, output=False))
+        self.assertTrue(calc_error('mod', calculated_dict, trusted_dict, output=False))
 
         var_dict = {'x': x, 'y': y}
         trusted_dict = {'x': first_val, 'y': second_val}
         calculated_dict = var_dict_to_value_dict(var_dict)
-        self.assertTrue(calc_error('mod', calculated_dict, trusted_dict, 30, output=False))
+        self.assertTrue(calc_error('mod', calculated_dict, trusted_dict, output=False))
 
         var_dict = {'y': y, 'x': x}
         trusted_dict = {'y': second_val, 'x': first_val}
         calculated_dict = var_dict_to_value_dict(var_dict)
-        self.assertTrue(calc_error('mod', calculated_dict, trusted_dict, 30, output=False))
+        self.assertTrue(calc_error('mod', calculated_dict, trusted_dict, output=False))
 
         var_dict = {'x': x, 'y': y, 'z': z}
         trusted_dict = {'x': first_val, 'y': second_val, 'z': third_val}
         calculated_dict = var_dict_to_value_dict(var_dict)
-        self.assertTrue(calc_error('mod', calculated_dict, trusted_dict, 30, output=False))
+        self.assertTrue(calc_error('mod', calculated_dict, trusted_dict, output=False))
 
         var_dict = {'x+y': x+y}
         trusted_dict = {'x+y': first_val+second_val}
         calculated_dict = var_dict_to_value_dict(var_dict)
-        self.assertTrue(calc_error('mod', calculated_dict, trusted_dict, 30, output=False))
+        self.assertTrue(calc_error('mod', calculated_dict, trusted_dict, output=False))
 
         var_dict = {'x/y': x/y, 'long_expression': (x+y)**2/(x*y)}
         trusted_dict = {'x/y': first_val/second_val, 'long_expression': (first_val+second_val)**2/(first_val*second_val)}
         calculated_dict = var_dict_to_value_dict(var_dict)
-        self.assertTrue(calc_error('mod', calculated_dict, trusted_dict, 30, output=False))
+        self.assertTrue(calc_error('mod', calculated_dict, trusted_dict, output=False))
 
         var_dict = {'x-x': x-x}
         trusted_dict = {'x-x': mpf(0.0)}
         calculated_dict = var_dict_to_value_dict(var_dict)
-        self.assertTrue(calc_error('mod', calculated_dict, trusted_dict, 30, output=False))
+        self.assertTrue(calc_error('mod', calculated_dict, trusted_dict, output=False))
 
         with self.assertRaises(AttributeError):
             var_dict = {'x': 0}
@@ -1000,7 +1000,7 @@ class TestFunctions(unittest.TestCase):
         trusted_dict = {'t1': first_val**2 + second_val**2, 't2': first_val**2/second_val, 't3': first_val**4,
                         't4': first_val**2 + first_val**2*second_val + first_val**2/second_val + first_val**2*third_val}
         calculated_dict = var_dict_to_value_dict(var_dict)
-        self.assertTrue(calc_error('mod', calculated_dict, trusted_dict, 30, output=False))
+        self.assertTrue(calc_error('mod', calculated_dict, trusted_dict, output=False))
 
         from sympy import symbols
 
@@ -1011,7 +1011,7 @@ class TestFunctions(unittest.TestCase):
                         'sqrt': mpf('0.707106781186547524400844362104785')}
         calculated_dict = var_dict_to_value_dict(var_dict)
         for var in trusted_dict:
-            self.assertTrue(calc_error('Constants', calculated_dict, trusted_dict, 30, output=False))
+            self.assertTrue(calc_error('Constants', calculated_dict, trusted_dict, output=False))
 
         logging.info('\nAll var_dict_to_value_dict tests passed\n')
 

@@ -7,6 +7,7 @@ from UnitTesting.expand_variable_dict import expand_variable_dict
 from UnitTesting.var_dict_to_value_dict import var_dict_to_value_dict
 from UnitTesting.is_first_time import is_first_time
 from UnitTesting.create_trusted_globals_dict import create_trusted_globals_dict
+from standard_constants import precision
 from time import time
 from mpmath import mp
 
@@ -22,7 +23,7 @@ def run_test(self, mod_dict, trusted_values_dict, locs):
     # Can't use empty module dictionary
     assert mod_dict != dict()
 
-    mp.dps = trusted_values_dict['precision']
+    mp.dps = precision
 
     # Determining if this is the first time the code is run based of the existence of trusted values
     first_times = is_first_time(mod_dict, trusted_values_dict)
@@ -73,7 +74,7 @@ def run_test(self, mod_dict, trusted_values_dict, locs):
         t = time()
 
         # Calculating numerical list for module
-        value_dict = var_dict_to_value_dict(new_dict, trusted_values_dict['precision'], trusted_values_dict['seed'])
+        value_dict = var_dict_to_value_dict(new_dict)
 
         # Printing the time it took to run list_to_value_list
         logging.debug(str(time()-t) + ' seconds to run list_to_value_list')
@@ -86,7 +87,7 @@ def run_test(self, mod_dict, trusted_values_dict, locs):
         else:
 
             # Calculates the error between mod_dict and trusted_dict[mod] for the current module
-            values_identical = calc_error(mod, value_dict, trusted_dict[mod], trusted_values_dict['precision'])
+            values_identical = calc_error(mod, value_dict, trusted_dict[mod])
 
             # If at least one value differs, print exit message and fail the unittest
             if not values_identical:

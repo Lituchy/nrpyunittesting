@@ -1,14 +1,12 @@
 from mpmath import mpf,mp
+from UnitTesting.standard_constants import precision
 
 # Dictionary of trusted values to be used throughout files.
 # Standard precision and seed values are precision: 30, seed: 1234.
 # Note that changing these may drastically change the calculated values.
-trusted_values_dict = {
-    "precision": 30,
-    "seed": 1234
-}
 
-mp.dps = trusted_values_dict["precision"]
+mp.dps = precision
+trusted_values_dict = dict()
 
 # Generated on: 2019-06-22
 # Reason for changing values: Brendan Drachler found a bug in IDValencia3velocityU[0].

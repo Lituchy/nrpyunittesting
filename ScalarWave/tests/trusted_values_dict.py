@@ -1,14 +1,12 @@
 from mpmath import mpf,mp
+from UnitTesting.standard_constants import precision
 
 # Dictionary of trusted values to be used throughout files.
 # Standard precision and seed values are precision: 30, seed: 1234.
 # Note that changing these may drastically change the calculated values.
-trusted_values_dict = {
-    "precision": 30,
-    "seed": 1234
-}
 
-mp.dps = trusted_values_dict["precision"]
+mp.dps = precision
+trusted_values_dict = dict()
 
 # Generated on: 2019-06-19 15:55:32.335570
 trusted_values_dict['InitialData_PlaneWaveGlobals'] = {'uu_ID': mpf('2.18311491393033683821392419836456'), 'vv_ID': mpf('-0.952771904111410843220904372551045')}

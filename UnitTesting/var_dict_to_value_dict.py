@@ -3,6 +3,7 @@
 from mpmath import mp, mpf, sqrt, pi, mpc
 from random import seed, random
 from sympy import cse, simplify
+import standard_constants
 
 
 # Takes in a variable dictionary [var_dict] a precision value [precision] and a seed value [seed_value], and returns
@@ -11,13 +12,13 @@ from sympy import cse, simplify
 
 # Called by run_test
 
-def var_dict_to_value_dict(var_dict, precision, seed_value):
+def var_dict_to_value_dict(var_dict):
 
     if var_dict == dict():
         return dict()
 
     # Setting precision
-    mp.dps = precision
+    mp.dps = standard_constants.precision
 
     # List all the free symbols in the expressions in [var_dict].
     free_symbols_list = list(sum(var_dict.values()).free_symbols)
@@ -26,7 +27,7 @@ def var_dict_to_value_dict(var_dict, precision, seed_value):
     free_symbols_list.sort(key=lambda v: str(v))
 
     # Set the random seed according to seed in trustedValuesDict:
-    seed(seed_value)
+    seed(standard_constants.seed)
 
     # Creating dictionary entry for each variable and its pseudorandom value in [0,1) as determined by seed
     variable_dictionary = dict()
