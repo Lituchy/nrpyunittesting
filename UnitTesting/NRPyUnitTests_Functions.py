@@ -332,9 +332,9 @@ class TestFunctions(unittest.TestCase):
             from UnitTesting.calc_error import calc_error
             from mpmath import mpf, mp
             from datetime import date
-            from UnitTesting.trusted_values_dict import trusted_values_dict
+            from UnitTesting.standard_constants import precision
 
-            mp.dps = trusted_values_dict['precision']
+            mp.dps = precision
 
             mod = 'TestModule'
 
