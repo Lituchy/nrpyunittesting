@@ -5,7 +5,6 @@ language: python
 
 os:
   - linux
-  -
 python:
     # According to https://github.com/tornadoweb/tornado/blob/master/.travis.yml:
     #  3.5.2 is interesting because it's the version in ubuntu 16.04, and due to python's
@@ -27,7 +26,9 @@ matrix:
   include:
     - os: osx
       language: sh
-      install: pip3 install sympy
+      install:
+      - pip3 install mpmath
+      - pip3 install sympy
 
 install:
   - pip install sympy
