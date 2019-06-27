@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export PYTHONPATH=$PYTHONPATH:`pwd`
+export PYTHONPATH=`pwd`:`pwd`/UnitTesting
 
 
 PYTHONEXEC=$1
