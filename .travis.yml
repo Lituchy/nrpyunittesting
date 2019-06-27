@@ -1,6 +1,10 @@
 # from https://docs.travis-ci.com/user/languages/python/
 dist: xenial # needed for Python 3.7+: https://docs.travis-ci.com/user/reference/xenial/#python-support
 language: python
+os:
+  - linux
+  - osx
+  - windows
 python:
     # According to https://github.com/tornadoweb/tornado/blob/master/.travis.yml:
     #  3.5.2 is interesting because it's the version in ubuntu 16.04, and due to python's
