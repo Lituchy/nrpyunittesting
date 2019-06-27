@@ -75,7 +75,7 @@ def create_dict_string(calculated_dict):
 
     return_string = '{'
 
-    for var, num in calculated_dict.items():
+    for var, num in sorted(calculated_dict.items()):
         return_string += "'" + var + "': mpf('" + str(num) + "'), "
 
     return_string = return_string[0:-2] + '}'
