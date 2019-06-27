@@ -6,8 +6,12 @@ matrix:
     - name: "Python 3.7.3 on Windows"
       os: windows           # Windows 10.0.17134 N/A Build 17134
       language: sh          # 'language: python' is an error on Travis CI Windows
-      before_install: choco install python
-      install: pip install --upgrade pip mpmath sympy testfixtures
+      before_install:
+        - choco install python3
+        - env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
+        - python -m pip install --upgrade pip wheel
+      install:
+        - pip install -r mpmath sympy testfixtures
       env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
       env: PYTHONPATH=.:./UnitTesting/:$PYTHONPATH
       script: ./UnitTesting/run_NRPy_UnitTests.sh python
