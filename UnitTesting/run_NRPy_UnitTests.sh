@@ -2,11 +2,7 @@
 
 export PYTHONPATH=$PYTHONPATH:`pwd`
 
-PYTHONEXEC=python
-if [ -x "$(command -v pypy)" ]; then
-    # pypy is NOT installed
-    PYTHONEXEC=pypy
-fi
+PYTHONEXEC=$1
 
 echo "########################################"
 echo Using $PYTHONEXEC as Python interpreter.
