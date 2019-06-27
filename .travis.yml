@@ -10,43 +10,43 @@ matrix:
       python: 3.7
       before_script: pip install mpmath sympy testfixtures
 
-    - os: linux
-      dist: xenial
-      python: 2.7
-      before_script: pip install testfixtures
+    ### - os: linux
+    ###   dist: xenial
+    ###   python: 2.7
+    ###   before_script: pip install testfixtures
 
-    - os: linux
-      dist: xenial
-      python: 3.4
+    ### - os: linux
+    ###   dist: xenial
+    ###   python: 3.4
 
-    # According to https://github.com/tornadoweb/tornado/blob/master/.travis.yml:
-    #  3.5.2 is interesting because it's the version in ubuntu 16.04, and due to python's
-    # "provisional feature" rules there are significant differences between patch
-    # versions for asyncio and typing.
-    - os: linux
-      dist: xenial
-      python: 3.5.2
+    ### # According to https://github.com/tornadoweb/tornado/blob/master/.travis.yml:
+    ### #  3.5.2 is interesting because it's the version in ubuntu 16.04, and due to python's
+    ### # "provisional feature" rules there are significant differences between patch
+    ### # versions for asyncio and typing.
+    ### - os: linux
+    ###   dist: xenial
+    ###   python: 3.5.2
 
-    - os: linux
-      dist: xenial
-      python: 3.7
+    ### - os: linux
+    ###   dist: xenial
+    ###   python: 3.7
 
-    - os: linux
-      dist: xenial
-      python: 3.8-dev
+    ### - os: linux
+    ###   dist: xenial
+    ###   python: 3.8-dev
 
-    - os: linux
-      dist: xenial
-      python: nightly
+    ### - os: linux
+    ###   dist: xenial
+    ###   python: nightly
 
-    - os: linux
-      dist: xenial
-      python: pypy2.7-6.0
+    ### - os: linux
+    ###   dist: xenial
+    ###   python: pypy2.7-6.0
 
-    - os: linux
-      dist: xenial
-      python: pypy3.5-6.0
+    ### - os: linux
+    ###   dist: xenial
+    ###   python: pypy3.5-6.0
 
-    - os: linux
-      dist: xenial
-      python: pypy3.5-6.0
+    ### - os: linux
+    ###   dist: xenial
+    ###   python: pypy3.5-6.0
