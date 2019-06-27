@@ -5,11 +5,22 @@ script: ./UnitTesting/run_NRPy_UnitTests.sh
 matrix:
   include:
     - os: linux
+      dist: xenial
       python: 2.7
       before_script: pip install testfixtures
 
     - os: linux
+      dist: xenial
+      python: 3.4
+
+    - os: linux
+      dist: xenial
       python: 3.5.2
 
     - os: linux
+      dist: xenial
       python: 3.7
+
+    - os: linux
+      dist: xenial
+      python: 3.8-dev
