@@ -67,5 +67,5 @@ matrix:
       python: pypy3.5-6.0
 
     - os: linux
-      dist: xenial
+      dist: trusty
       python: pypy3.5-6.0
