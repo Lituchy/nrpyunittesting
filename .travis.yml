@@ -8,24 +8,23 @@ matrix:
       language: sh          # 'language: python' is an error on Travis CI Windows
       before_install: choco install python
       env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
-      before_script: pip3 install mpmath sympy testfixtures
+      before_script: pip install mpmath sympy testfixtures
       env: PYTHONPATH=.:./UnitTesting/:$PYTHONPATH
       script: ./UnitTesting/run_NRPy_UnitTests.sh python
 
-    - os: osx
-      language: sh
-#      osx_image: xcode9.2
-      python: 3.7
-      before_script: pip3 install mpmath sympy testfixtures
-      script: ./UnitTesting/run_NRPy_UnitTests.sh python3
+###     - os: osx
+###       language: sh
+### #      osx_image: xcode9.2
+###       python: 3.7
+###       before_script: pip3 install mpmath sympy testfixtures
+###       script: ./UnitTesting/run_NRPy_UnitTests.sh python3
 
-    # https://docs.travis-ci.com/user/languages/python/
-    - os: osx
-      osx_image: xcode10.2  # Python 3.7.2 running on macOS 10.14.3
-      language: shell       # 'language: python' is an error on Travis CI macOS
-      before_script: pip3 install mpmath sympy testfixtures
-      script: ./UnitTesting/run_NRPy_UnitTests.sh python3
-
+###     # https://docs.travis-ci.com/user/languages/python/
+###     - os: osx
+###       osx_image: xcode10.2  # Python 3.7.2 running on macOS 10.14.3
+###       language: shell       # 'language: python' is an error on Travis CI macOS
+###       before_script: pip3 install mpmath sympy testfixtures
+###       script: ./UnitTesting/run_NRPy_UnitTests.sh python3
       
     ### - os: linux
     ###   dist: xenial

@@ -2,9 +2,11 @@
 
 export PYTHONPATH=$PYTHONPATH:`pwd`
 
+
 PYTHONEXEC=$1
 
 echo "########################################"
+echo $PYTHONPATH
 echo Using $PYTHONEXEC as Python interpreter.
 echo $PYTHONEXEC version info:
 $PYTHONEXEC --version
