@@ -4,10 +4,9 @@ script: ./UnitTesting/run_NRPy_UnitTests.sh
 
 matrix:
   include:
-#    - os: linux
-#      python: 2.7
-#      before_script: pip install testfixtures
-#      script: ./UnitTesting/run_NRPy_UnitTests.sh
+    - os: linux
+      python: 2.7
+      before_script: pip install testfixtures
 
     - os: linux
       python: 3.5.2
