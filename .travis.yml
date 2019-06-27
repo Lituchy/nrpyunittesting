@@ -8,6 +8,7 @@ matrix:
       language: sh
 #      osx_image: xcode9.2
       python: 3.7
+      before_script: pip install mpmath sympy
 
     - os: linux
       dist: xenial
