@@ -13,14 +13,14 @@ python:
     # versions for asyncio and typing.
 #  - "2.7"  # Oldest Python supported by Travis-xenial
   - "3.4"  # Oldest Python 3.x supported by Travis-xenial, as of Jun 2019
-  - "3.5.2"
-  - "3.6"  # Second-oldest Python 3.x supported
-  - "3.7"  # Latest Python, as of Jun 2019.
-  - "3.8-dev" # development Python
-  - "nightly" # bleeding-edge development Python
+#  - "3.5.2"
+#  - "3.6"  # Second-oldest Python 3.x supported
+#  - "3.7"  # Latest Python, as of Jun 2019.
+#  - "3.8-dev" # development Python
+#  - "nightly" # bleeding-edge development Python
   # PyPy versions
 #  - "pypy2.7-6.0"
-  - "pypy3.5-6.0"
+#  - "pypy3.5-6.0"
 # command to install dependencies
 
 matrix:
