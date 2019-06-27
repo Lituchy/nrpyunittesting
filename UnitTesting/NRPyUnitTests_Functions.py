@@ -1,4 +1,3 @@
-
 import unittest
 import logging
 from sys import version_info
@@ -14,6 +13,8 @@ logging.basicConfig(level=logging.INFO)
 class TestFunctions(unittest.TestCase):
 
     def test_calc_error(self):
+
+        print(version_info)
         if version_info[0] == 2 or version_info[1] < 4:
             from UnitTesting.calc_error import calc_error
             from testfixtures import LogCapture
