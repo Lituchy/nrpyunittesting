@@ -32,7 +32,7 @@ class TestGlobals(unittest.TestCase):
         # TODO: Import modules to be tested
         # Note: Even though it says the modules are unused, these imports are vital for run_test to work properly.
         # Their information gets passed into run_test through locals()
-        import u0_smallb_Poynting__Cartesian as u0
+        import u0_smallb_Poynting__Cartesian.u0_smallb_Poynting__Cartesian as u0
 
         # TODO: Create lists of globals to calculate
         global_list = ['g4DD', 'computeu0_Cfunction', 'u0', 'uD', 'uBcontraction', 'uU', 'smallb4U', 'g4UU',
