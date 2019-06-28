@@ -4,6 +4,7 @@ import logging
 from UnitTesting.run_test import run_test
 from UnitTesting.functions_and_globals import functions_and_globals
 from UnitTesting.RepeatedTimer import RepeatedTimer
+from trusted_values_dict import trusted_values_dict
 
 # TODO: Change level based on desired amount of output.
 # ERROR -> Outputs minimal information -- only when there's an error
@@ -31,17 +32,18 @@ class TestGlobals(unittest.TestCase):
         # TODO: Import modules to be tested
         # Note: Even though it says the modules are unused, these imports are vital for run_test to work properly.
         # Their information gets passed into run_test through locals()
+        import TOV.TOV_ADM_T4UUmunu as TOV_ADM_T4UUmunu
 
         # TODO: Create lists of globals to calculate
+        global_list = ['Sph_r_th_ph', 'r', 'th', 'ph', 'gammaSphDD', 'KSphDD', 'alphaSph', 'betaSphU', 'BSphU', 'T4UU']
 
         # TODO: Create Module dictionary based on imported modules, functions to initialize the modules, and globals
         # Note that the name of the modules in mod_dict MUST have the same name as the imported module.
         # Example: If you say 'import My_Modules.Module1 as M1', then mod_dict should have the entry 'M1' as a string.
+        mod_dict = {'TOV_ADM_T4UUmunu': functions_and_globals(['TOV_ADM_T4UUmunu(True)'], global_list)}
 
         # TODO: Call run_test with arguments (self, mod_dict, locals())
-
-        # TODO: Remove 'pass' once your test is written
-        pass
+        run_test(self, mod_dict, trusted_values_dict, locals())
 
 
 # Necessary for unittest class to work properly
