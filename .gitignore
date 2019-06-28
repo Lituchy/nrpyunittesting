@@ -4,3 +4,4 @@ htmlcov/
 .idea/
 KevinTesting/
 old.travis.yml
+.ipynb_checkpoints/

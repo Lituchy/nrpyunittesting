@@ -98,13 +98,13 @@ DIM = par.parval_from_str("grid::DIM")
 mu_AW,M_PI = par.Cparameters("REAL",thismodule,["mu_AW","M_PI"]) # The wave speed and pi in C
 
 def GiRaFFEfood_HO_1D_tests():
-    gammamu = (1-mu_AW**2)**(-1/2)
+    gammamu = 1/sp.sqrt(1-mu_AW**2)
 
     # We'll use reference_metric.py to define x and y
     x = rfm.xxCart[0]
     y = rfm.xxCart[1]
 
-    g_AW = sp.cos(5*M_PI*gammamu)/M_PI
+    g_AW = sp.cos(5*M_PI*gammamu*x)/M_PI
 
 
     # Now, we can define the vector potential. We will create three copies of this variable, because the potential is uniquely defined in three zones. Data for $x \leq -0.1/\gamma_\mu$ shall be referred to as "left", data for $-0.1/\gamma_\mu \leq x \leq 0.1/\gamma_\mu$ as "center", and data for $x \geq 0.1/\gamma_\mu$ as "right".
@@ -117,7 +117,7 @@ def GiRaFFEfood_HO_1D_tests():
     # \end{align}
 
 
-    AD = ixp.register_gridfunctions_for_single_rank1("AUX","AD")
+    AD = ixp.register_gridfunctions_for_single_rank1("EVOL","AD")
     global AleftD,AcenterD,ArightD
     AleftD = ixp.zerorank1()
 
@@ -164,7 +164,7 @@ def GiRaFFEfood_HO_1D_tests():
 
 
     xprime = gammamu*x
-    f_AW = 1 + sp.sin(5*M_PI*xprime)
+    f_AW = 1.0 + sp.sin(5.0*M_PI*xprime)
 
 
     # We will now set the magnetic field in the wave frame:
@@ -288,17 +288,17 @@ def GiRaFFEfood_HO_1D_tests():
     for i in range(DIM):
         for j in range(DIM):
             for k in range(DIM):
-                ValenciavleftU[i] = LeviCivitaSymbolDDD[i][j][k] * EleftU[j] * BleftU[k] / Bleft2
+                ValenciavleftU[i] += LeviCivitaSymbolDDD[i][j][k] * EleftU[j] * BleftU[k] / Bleft2
 
     ValenciavcenterU = ixp.zerorank1()
     for i in range(DIM):
         for j in range(DIM):
             for k in range(DIM):
-                ValenciavcenterU[i] = LeviCivitaSymbolDDD[i][j][k] * EcenterU[j] * BcenterU[k] / Bcenter2
+                ValenciavcenterU[i] += LeviCivitaSymbolDDD[i][j][k] * EcenterU[j] * BcenterU[k] / Bcenter2
 
     ValenciavrightU = ixp.zerorank1()
     for i in range(DIM):
         for j in range(DIM):
             for k in range(DIM):
-                ValenciavrightU[i] = LeviCivitaSymbolDDD[i][j][k] * ErightU[j] * BrightU[k] / Bright2
+                ValenciavrightU[i] += LeviCivitaSymbolDDD[i][j][k] * ErightU[j] * BrightU[k] / Bright2
 

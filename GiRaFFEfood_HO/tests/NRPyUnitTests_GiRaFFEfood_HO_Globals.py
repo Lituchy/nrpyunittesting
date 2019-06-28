@@ -44,8 +44,44 @@ class TestGlobals(unittest.TestCase):
         # TODO: Create Module dictionary based on imported modules, functions to initialize the modules, and globals
         # Note that the name of the modules in mod_dict MUST have the same name as the imported module.
         # Example: If you say 'import My_Modules.Module1 as M1', then mod_dict should have the entry 'M1' as a string.
-        mod_dict = {'GiRaFFEfood_HO': functions_and_globals(['GiRaFFEfood_HO()'],
-                                                            global_list)}
+        mod_dict = {'GiRaFFEfood_HO': functions_and_globals(['GiRaFFEfood_HO()'], global_list)}
+
+        # TODO: Call run_test with arguments (self, mod_dict, locals())
+        run_test(self, mod_dict, trusted_values_dict, locals())
+
+    # Testing globals
+    def test_rotator_globals(self):
+        # TODO: Import modules to be tested
+        # Note: Even though it says the modules are unused, these imports are vital for run_test to work properly.
+        # Their information gets passed into run_test through locals()
+        import GiRaFFEfood_HO.GiRaFFEfood_HO_Aligned_Rotator as GiRaFFEfood_HO_Aligned_Rotator
+
+        # TODO: Create lists of globals to calculate
+        global_list = ['AD', 'ValenciavU']
+
+        # TODO: Create Module dictionary based on imported modules, functions to initialize the modules, and globals
+        # Note that the name of the modules in mod_dict MUST have the same name as the imported module.
+        # Example: If you say 'import My_Modules.Module1 as M1', then mod_dict should have the entry 'M1' as a string.
+        mod_dict = {'GiRaFFEfood_HO_Aligned_Rotator': functions_and_globals(['GiRaFFEfood_HO_Aligned_Rotator()'],
+                                                                            global_list)}
+
+        # TODO: Call run_test with arguments (self, mod_dict, locals())
+        run_test(self, mod_dict, trusted_values_dict, locals())
+
+    # Testing globals
+    def test_1D_globals(self):
+        # TODO: Import modules to be tested
+        # Note: Even though it says the modules are unused, these imports are vital for run_test to work properly.
+        # Their information gets passed into run_test through locals()
+        import GiRaFFEfood_HO.GiRaFFEfood_HO_1D_tests as GiRaFFEfood_HO_1D_tests
+
+        # TODO: Create lists of globals to calculate
+        global_list = ['AleftD', 'AcenterD', 'ArightD', 'ValenciavleftU', 'ValenciavcenterU', 'ValenciavrightU']
+
+        # TODO: Create Module dictionary based on imported modules, functions to initialize the modules, and globals
+        # Note that the name of the modules in mod_dict MUST have the same name as the imported module.
+        # Example: If you say 'import My_Modules.Module1 as M1', then mod_dict should have the entry 'M1' as a string.
+        mod_dict = {'GiRaFFEfood_HO_1D_tests': functions_and_globals(['GiRaFFEfood_HO_1D_tests()'], global_list)}
 
         # TODO: Call run_test with arguments (self, mod_dict, locals())
         run_test(self, mod_dict, trusted_values_dict, locals())

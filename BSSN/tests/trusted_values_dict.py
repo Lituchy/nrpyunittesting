@@ -1,9 +1,5 @@
-from mpmath import mpf,mp
+from mpmath import mpf, mp, mpc
 from UnitTesting.standard_constants import precision
-
-# Dictionary of trusted values to be used throughout files.
-# Standard precision and seed values are precision: 30, seed: 1234.
-# Note that changing these may drastically change the calculated values.
 
 mp.dps = precision
 trusted_values_dict = dict()
