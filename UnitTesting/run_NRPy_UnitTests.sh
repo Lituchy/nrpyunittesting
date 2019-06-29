@@ -2,6 +2,12 @@
 
 export PYTHONPATH=`pwd`:`pwd`/UnitTesting
 
+if [ -z "$1" ]
+then
+    echo "ERROR: Was expecting parameter."
+    echo " Usage: ./run_NRPy_UnitTests.sh [Python interpreter; e.g., python]"
+    exit
+fi
 
 PYTHONEXEC=$1
 
@@ -12,9 +18,9 @@ echo $PYTHONEXEC version info:
 $PYTHONEXEC --version
 echo "########################################"
 
+$PYTHONEXEC tests/NRPyUnitTests_Reference_Metric_Globals.py &&
 $PYTHONEXEC UnitTesting/NRPyUnitTests_Functions.py &&
 $PYTHONEXEC BSSN/tests/NRPyUnitTests_BSSN_Globals.py &&
-$PYTHONEXEC tests/NRPyUnitTests_Reference_Metric_Globals.py &&
 $PYTHONEXEC FishboneMoncriefID/tests/NRPyUnitTests_FishboneMoncriefID_Globals.py &&
 $PYTHONEXEC GiRaFFE_HO/tests/NRPyUnitTests_GiRaFFE_HO_Globals.py &&
 $PYTHONEXEC GiRaFFEfood_HO/tests/NRPyUnitTests_GiRaFFEfood_HO_Globals.py &&

@@ -34,7 +34,8 @@ class TestGlobals(unittest.TestCase):
         # Globals used by all coordinate systems
         basic_global_list = ['UnitVectors', 'ReU', 'ReDD', 'ghatDD', 'ghatUU', 'detgammahat', 'detgammahatdD',
                              'detgammahatdDD', 'ReUdD', 'ReUdDD', 'ReDDdD', 'ReDDdDD', 'ghatDDdD', 'ghatDDdDD',
-                             'GammahatUDD', 'GammahatUDDdD']
+                             'GammahatUDD', 'GammahatUDDdD',
+                             'Cart_to_xx','xxCart','xxSph','scalefactor_orthog']
 
         # Dictionary of coordinate systems and their additional globals
         coord_dict = {'Spherical': ('True', ['xxmin', 'xxmax']), 'SinhSpherical': ('True', []),
