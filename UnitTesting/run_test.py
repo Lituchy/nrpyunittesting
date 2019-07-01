@@ -4,7 +4,7 @@ from UnitTesting.calc_error import calc_error
 from UnitTesting.first_time_print import first_time_print
 from UnitTesting.evaluate_globals import evaluate_globals
 from UnitTesting.expand_variable_dict import expand_variable_dict
-from UnitTesting.var_dict_to_value_dict import var_dict_to_value_dict
+from UnitTesting.simplify_and_evaluate_sympy_expressions import simplify_and_evaluate_sympy_expressions
 from UnitTesting.is_first_time import is_first_time
 from UnitTesting.create_trusted_globals_dict import create_trusted_globals_dict
 from UnitTesting.standard_constants import precision
@@ -75,7 +75,7 @@ def run_test(self, mod_dict, trusted_values_dict, locs):
         t = time()
 
         # Calculating numerical list for module
-        value_dict = var_dict_to_value_dict(new_dict, first_time)
+        value_dict = simplify_and_evaluate_sympy_expressions(new_dict, first_time)
 
         # Printing the time it took to run list_to_value_list
         logging.debug(str(time()-t) + ' seconds to run list_to_value_list')

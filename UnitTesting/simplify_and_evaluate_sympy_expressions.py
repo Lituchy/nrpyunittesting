@@ -12,7 +12,7 @@ import UnitTesting.standard_constants as standard_constants
 
 # Called by run_test
 
-def var_dict_to_value_dict(var_dict, first_time):
+def simplify_and_evaluate_sympy_expressions(var_dict, first_time):
 
     if var_dict == dict():
         return dict()

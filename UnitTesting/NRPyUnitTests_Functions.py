@@ -938,7 +938,7 @@ class TestFunctions(unittest.TestCase):
             run_test(self, mod_dict, trusted_values_dict, locals())
 
     def test_var_dict_to_value_dict(self):
-        from UnitTesting.var_dict_to_value_dict import var_dict_to_value_dict
+        from UnitTesting.simplify_and_evaluate_sympy_expressions import var_dict_to_value_dict
         from mpmath import mpf, sqrt, mp
         from random import random, seed
         from UnitTesting.calc_error import calc_error
