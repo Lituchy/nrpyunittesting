@@ -6,7 +6,7 @@ from sympy import cse, simplify
 import UnitTesting.standard_constants as standard_constants
 
 
-# Takes in a variable dictionary [var_dict] a precision value [precision] and a seed value [seed_value], and returns
+# Takes in a variable dictionary [var_dict]  and returns
 # a dictionary with each expression in [var_dict] evaluated according to parameters (seed, precision).
 # Throws an [AttributeError] if the variable list being passed in has no sympy symbols
 
@@ -46,14 +46,17 @@ def var_dict_to_value_dict(var_dict, first_time):
             variable_dictionary[var] = sqrt(mpf(random()))
 
     value_dict = dict()
+    simplified_expression_dict = dict()
     # Evaluating each expression using the values in variable_dictionary
     for var, expression in var_dict.items():
-        # Copying variable_dictionary into a new variable dictionary
-        new_var_dict = dict(variable_dictionary)
 
         # Using sympy's cse algorithm to optimize our value substitution
         replaced, reduced = cse(expression, order='none')
         reduced = reduced[0]
+        simplified_expression_dict[var] = replaced, reduced
+
+        # Copying variable_dictionary into a new variable dictionary
+        new_var_dict = dict(variable_dictionary)
 
         # Replacing old expressions with new expressions and putting result in new variable dictionary
         for new, old in replaced:
@@ -76,13 +79,44 @@ def var_dict_to_value_dict(var_dict, first_time):
 
     if first_time:
         for var, val in value_dict.items():
-            if fabs(val) < 100 * 10 ** (-precision):
-                print('\nvar: ' + var)
-                print('val: ' + str(val))
-                expression = var_dict[var]
-                print('exp: ' + str(expression))
-                # print("Found |result| (" + str(fabs(val)) + ") close to zero. Checking if indeed it should be zero.")
-                mp.dps = 2 * precision
+            if val != mpf('0.0') and fabs(val) < 100 * 10 ** (-precision):
+                print("Found |result| (" + str(fabs(val)) + ") close to zero. Checking if indeed it should be zero.")
+                result = recalculate_value(variable_dictionary, simplified_expression_dict[var][0],
+                                           simplified_expression_dict[var][1], 2 * precision)
+                if fabs(result) < 100 * 10 ** (-2 * precision):
+                    print("After re-evaluating with twice the digits of precision, |result| dropped to " + str(
+                        result) + ". Setting value to zero")
+                    value_dict[var] = mpf('0.0')
 
     return value_dict
 
+
+def recalculate_value(variable_dictionary, replaced, reduced, precision):
+
+    mp.dps = precision
+
+    # Copying variable_dictionary into a new variable dictionary
+    new_var_dict = dict(variable_dictionary)
+
+    # Replacing old expressions with new expressions and putting result in new variable dictionary
+    for new, old in replaced:
+        keys = old.free_symbols
+        for key in keys:
+            old = old.subs(key, new_var_dict[key])
+        new_var_dict[new] = old
+
+    # Evaluating expression after cse optimization
+    keys = reduced.free_symbols
+    for key in keys:
+        reduced = reduced.subs(key, new_var_dict[key])
+
+    # Adding our variable, value pair to our value_dict
+    try:
+        res = mpf(reduced)
+    # If value is a complex number, store it as a mpc
+    except TypeError:
+        res = mpc(simplify(reduced))
+
+    mp.dps = standard_constants.precision
+
+    return res
