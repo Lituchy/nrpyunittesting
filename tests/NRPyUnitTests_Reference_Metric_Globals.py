@@ -43,6 +43,8 @@ class TestGlobals(unittest.TestCase):
                       'SinhCylindrical': ('True', []), 'SinhCylindricalv2': ('True', []), 'SymTP': ('True', []),
                       'SinhSymTP': ('True', []), 'Cartesian': ('True', [])}
 
+        coord_dict = {'NobleSphericalThetaOptionOne': ('False', [])}
+
         # For each module and its respective boolean and additional globals
         for coord, bool_global_tuple in coord_dict.items():
 
