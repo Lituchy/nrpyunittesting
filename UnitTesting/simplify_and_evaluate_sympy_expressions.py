@@ -21,7 +21,6 @@ def simplify_and_evaluate_sympy_expressions(var_dict, first_time):
     # Setting precision
     mp.dps = precision
 
-
     # TODO: update by not taking sums and handling cases without sympy expressions (use StaticTrumpet as example - should be all 0's)
     # TODO: append to a list and then use superfast_uniq
     free_symbols_set = set()
