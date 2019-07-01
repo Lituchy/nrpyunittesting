@@ -3,12 +3,12 @@
 from mpmath import mp, mpf, sqrt, pi, mpc, fabs
 from random import seed, random
 from sympy import cse, simplify
+from outputC import superfast_uniq
 import UnitTesting.standard_constants as standard_constants
 
 
 # Takes in a variable dictionary [var_dict]  and returns
 # a dictionary with each expression in [var_dict] evaluated according to parameters (seed, precision).
-# Throws an [AttributeError] if the variable list being passed in has no sympy symbols
 
 # Called by run_test
 
@@ -22,8 +22,16 @@ def simplify_and_evaluate_sympy_expressions(var_dict, first_time):
     # Setting precision
     mp.dps = precision
 
+
+    # TODO: update by not taking sums and handling cases without sympy expressions (use StaticTrumpet as example - should be all 0's)
+    # TODO: append to a list and then use superfast_uniq
+    free_symbols_set = set()
+    for val in var_dict.values():
+        # print('val: ' + str(val))
+        free_symbols_set = free_symbols_set | val.free_symbols
+
     # List all the free symbols in the expressions in [var_dict].
-    free_symbols_list = list(sum(var_dict.values()).free_symbols)
+    free_symbols_list = list(free_symbols_set)
 
     # Sort free symbols list based off the alphanumeric strings for each variable
     free_symbols_list.sort(key=lambda v: str(v))

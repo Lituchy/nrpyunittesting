@@ -44,6 +44,9 @@ class TestGlobals(unittest.TestCase):
                       'SinhCylindrical': ('True', []), 'SinhCylindricalv2': ('True', []), 'SymTP': ('True', []),
                       'SinhSymTP': ('True', []), 'Cartesian': ('True', [])}
 
+        globs = dict(globals())
+        locs = dict(locals())
+
         # For each module and its respective boolean and additional globals
         for coord, bool_global_tuple in coord_dict.items():
 
@@ -60,7 +63,6 @@ class TestGlobals(unittest.TestCase):
 
             # Run test and delete old entry
             run_test(self, mod_dict, trusted_values_dict, locals())
-            del locals()['rfm_' + coord]
 
 
 # Necessary for unittest class to work properly
