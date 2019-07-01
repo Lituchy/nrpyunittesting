@@ -3,7 +3,6 @@
 from mpmath import mp, mpf, sqrt, pi, mpc, fabs
 from random import seed, random
 from sympy import cse, simplify
-from outputC import superfast_uniq
 import UnitTesting.standard_constants as standard_constants
 
 

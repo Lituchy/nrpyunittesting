@@ -4,7 +4,7 @@ import logging
 from UnitTesting.run_test import run_test
 from UnitTesting.functions_and_globals import functions_and_globals
 from UnitTesting.RepeatedTimer import RepeatedTimer
-from trusted_values_dict import trusted_values_dict
+import trusted_values_dict
 
 # TODO: Change level based on desired amount of output.
 # ERROR -> Outputs minimal information -- only when there's an error
@@ -45,7 +45,8 @@ class TestGlobals(unittest.TestCase):
                       'SinhSymTP': ('True', []), 'Cartesian': ('True', [])}
 
         globs = dict(globals())
-        locs = dict(locals())
+
+        # coord_dict = {'Spherical': ('True', ['xxmin', 'xxmax'])}
 
         # For each module and its respective boolean and additional globals
         for coord, bool_global_tuple in coord_dict.items():
@@ -62,7 +63,11 @@ class TestGlobals(unittest.TestCase):
                                                                 global_list)}
 
             # Run test and delete old entry
-            run_test(self, mod_dict, trusted_values_dict, locals())
+            run_test(self, mod_dict, trusted_values_dict.trusted_values_dict, locals())
+
+            for key in globals():
+                if key not in globs:
+                    del globals()[key]
 
 
 # Necessary for unittest class to work properly
