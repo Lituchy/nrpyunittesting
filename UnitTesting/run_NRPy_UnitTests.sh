@@ -2,6 +2,12 @@
 
 export PYTHONPATH=`pwd`:`pwd`/UnitTesting
 
+if [ -z "$1" ]
+then
+    echo "ERROR: Was expecting parameter."
+    echo " Usage: ./run_NRPy_UnitTests.sh [Python interpreter; e.g., python]"
+    exit
+fi
 
 PYTHONEXEC=$1
 
