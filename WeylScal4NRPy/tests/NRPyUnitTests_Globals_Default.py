@@ -4,6 +4,7 @@ import logging
 from UnitTesting.run_test import run_test
 from UnitTesting.functions_and_globals import functions_and_globals
 from UnitTesting.RepeatedTimer import RepeatedTimer
+from UnitTesting.setup_class import setup_class
 
 # TODO: Change level based on desired amount of output.
 # ERROR -> Outputs minimal information -- only when there's an error
@@ -20,20 +21,12 @@ Timer = RepeatedTimer(300, logging.info, "\nPrinting every 5 minutes to prevent 
 
 # Python unittest class
 class TestGlobals(unittest.TestCase):
-
     @classmethod
     def setUpClass(cls):
         # Creating trusted_values_dict.py if it doesn't exist
         import os
         path = os.path.basename(os.path.dirname(os.path.abspath(__file__)))
-        try:
-            open(path + '/trusted_values_dict.py', 'r')
-        except IOError:
-            logging.info('trusted_values_dict.py does not exist. Creating it...\n')
-            f = open(path + '/trusted_values_dict.py', 'w+')
-            f.write('from mpmath import mpf,mp,mpc\nfrom UnitTesting.standard_constants import precision\n\n'
-                    'mp.dps = precision\ntrusted_values_dict = dict()\n\n# Paste your trusted values here!\n')
-            logging.error('Automatically failing...please rerun code now that trusted_values_dict.py has been created.')
+        setup_class(path)
 
     @classmethod
     def tearDownClass(cls):

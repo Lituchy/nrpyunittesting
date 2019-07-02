@@ -4,7 +4,7 @@ import logging
 from UnitTesting.run_test import run_test
 from UnitTesting.functions_and_globals import functions_and_globals
 from UnitTesting.RepeatedTimer import RepeatedTimer
-from trusted_values_dict import trusted_values_dict
+from UnitTesting.setup_class import setup_class
 
 # TODO: Change level based on desired amount of output.
 # ERROR -> Outputs minimal information -- only when there's an error
@@ -27,14 +27,7 @@ class TestBSSNGlobals(unittest.TestCase):
         # Creating trusted_values_dict.py if it doesn't exist
         import os
         path = os.path.basename(os.path.dirname(os.path.abspath(__file__)))
-        try:
-            open(path + '/trusted_values_dict.py', 'r')
-        except IOError:
-            logging.info('trusted_values_dict.py does not exist. Creating it...\n')
-            f = open(path + '/trusted_values_dict.py', 'w+')
-            f.write('from mpmath import mpf,mp,mpc\nfrom UnitTesting.standard_constants import precision\n\n'
-                    'mp.dps = precision\ntrusted_values_dict = dict()\n\n# Paste your trusted values here!\n')
-            logging.error('Automatically failing...please rerun code now that trusted_values_dict.py has been created.')
+        setup_class(path)
 
     @classmethod
     def tearDownClass(cls):
@@ -42,6 +35,8 @@ class TestBSSNGlobals(unittest.TestCase):
 
     # Testing globals for ADM in terms of BSSN module
     def test_ADM_Globals(self):
+        import trusted_values_dict
+
         # TODO: Import modules to be tested
         # Note: Even though it says the modules are unused, these imports are vital for run_test to work properly.
         # Their information gets passed into run_test through locals()
@@ -59,10 +54,12 @@ class TestBSSNGlobals(unittest.TestCase):
         }
 
         # TODO: Call run_test with arguments (self, mod_dict, locals())
-        run_test(self, mod_dict, trusted_values_dict, locals())
+        run_test(self, mod_dict, trusted_values_dict.trusted_values_dict, locals())
 
     # Testing globals for BSSN constraints
     def test_Constraints_Globals(self):
+        import trusted_values_dict
+
         # TODO: Import modules to be tested
         # Note: Even though it says the modules are unused, these imports are vital for run_test to work properly.
         # Their information gets passed into run_test through locals()
@@ -79,10 +76,12 @@ class TestBSSNGlobals(unittest.TestCase):
         }
 
         # TODO: Call run_test with arguments (self, mod_dict, locals())
-        run_test(self, mod_dict, trusted_values_dict, locals())
+        run_test(self, mod_dict, trusted_values_dict.trusted_values_dict, locals())
 
     # Testing globals for BSSN exact modules
     def test_Exact_Globals(self):
+        import trusted_values_dict
+
         # TODO: Import modules to be tested
         # Note: Even though it says the modules are unused, these imports are vital for run_test to work properly.
         # Their information gets passed into run_test through locals()
@@ -110,10 +109,12 @@ class TestBSSNGlobals(unittest.TestCase):
         }
 
         # TODO: Call run_test with arguments (self, mod_dict, locals())
-        run_test(self, mod_dict, trusted_values_dict, locals())
+        run_test(self, mod_dict, trusted_values_dict.trusted_values_dict, locals())
 
     # Testing globals for BSSN Psi4 Globals
     def test_Psi4_Globals(self):
+        import trusted_values_dict
+
         # TODO: Import modules to be tested
         # Note: Even though it says the modules are unused, these imports are vital for run_test to work properly.
         # Their information gets passed into run_test through locals()
@@ -134,10 +135,12 @@ class TestBSSNGlobals(unittest.TestCase):
         }
 
         # TODO: Call run_test with arguments (self, mod_dict, locals())
-        run_test(self, mod_dict, trusted_values_dict, locals())
+        run_test(self, mod_dict, trusted_values_dict.trusted_values_dict, locals())
 
     # Testing globals for BSSN quantities
     def test_Quantities_Globals(self):
+        import trusted_values_dict
+
         # TODO: Import modules to be tested
         # Note: Even though it says the modules are unused, these imports are vital for run_test to work properly.
         # Their information gets passed into run_test through locals()
@@ -167,10 +170,12 @@ class TestBSSNGlobals(unittest.TestCase):
         }
 
         # TODO: Call run_test with arguments (self, mod_dict, locals())
-        run_test(self, mod_dict, trusted_values_dict, locals())
+        run_test(self, mod_dict, trusted_values_dict.trusted_values_dict, locals())
 
     # Testing globals for BSSN RHS
     def test_RHS_Globals(self):
+        import trusted_values_dict
+
         # TODO: Import modules to be tested
         # Note: Even though it says the modules are unused, these imports are vital for run_test to work properly.
         # Their information gets passed into run_test through locals()
@@ -191,10 +196,12 @@ class TestBSSNGlobals(unittest.TestCase):
         }
 
         # TODO: Call run_test with arguments (self, mod_dict, locals())
-        run_test(self, mod_dict, trusted_values_dict, locals())
+        run_test(self, mod_dict, trusted_values_dict.trusted_values_dict, locals())
 
     # Testing globals for BSSN T4UUmunu_vars
     def test_T4UU_Globals(self):
+        import trusted_values_dict
+
         # TODO: Import modules to be tested
         # Note: Even though it says the modules are unused, these imports are vital for run_test to work properly.
         # Their information gets passed into run_test through locals()
@@ -212,7 +219,7 @@ class TestBSSNGlobals(unittest.TestCase):
         }
 
         # TODO: Call run_test with arguments (self, mod_dict, locals())
-        run_test(self, mod_dict, trusted_values_dict, locals())
+        run_test(self, mod_dict, trusted_values_dict.trusted_values_dict, locals())
 
 
 # Necessary for unittest class to work properly

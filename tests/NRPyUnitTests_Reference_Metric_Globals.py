@@ -4,7 +4,7 @@ import logging
 from UnitTesting.run_test import run_test
 from UnitTesting.functions_and_globals import functions_and_globals
 from UnitTesting.RepeatedTimer import RepeatedTimer
-import trusted_values_dict
+from UnitTesting.setup_class import setup_class
 
 # TODO: Change level based on desired amount of output.
 # ERROR -> Outputs minimal information -- only when there's an error
@@ -27,14 +27,7 @@ class TestGlobals(unittest.TestCase):
         # Creating trusted_values_dict.py if it doesn't exist
         import os
         path = os.path.basename(os.path.dirname(os.path.abspath(__file__)))
-        try:
-            open(path + '/trusted_values_dict.py', 'r')
-        except IOError:
-            logging.info('trusted_values_dict.py does not exist. Creating it...\n')
-            f = open(path + '/trusted_values_dict.py', 'w+')
-            f.write('from mpmath import mpf,mp,mpc\nfrom UnitTesting.standard_constants import precision\n\n'
-                    'mp.dps = precision\ntrusted_values_dict = dict()\n\n# Paste your trusted values here!\n')
-            logging.error('Automatically failing...please rerun code now that trusted_values_dict.py has been created.')
+        setup_class(path)
 
     @classmethod
     def tearDownClass(cls):
@@ -43,6 +36,7 @@ class TestGlobals(unittest.TestCase):
     # Testing globals for reference_metric
     def test_reference_metric_globals(self):
 
+        import trusted_values_dict
         import NRPy_param_funcs as par
 
         # Globals used by all coordinate systems
