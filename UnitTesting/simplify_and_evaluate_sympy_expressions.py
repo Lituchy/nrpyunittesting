@@ -2,7 +2,7 @@
 # This is because we need SymPy to evaluate that expression, not mpmath.
 from mpmath import mp, mpf, sqrt, pi, mpc, fabs
 from random import seed, random
-from sympy import cse, simplify, N
+from sympy import cse, N
 import UnitTesting.standard_constants as standard_constants
 import logging
 
@@ -43,6 +43,8 @@ def simplify_and_evaluate_sympy_expressions(var_dict, first_time):
         else:
             seed(var)
             variable_dictionary[var] = sqrt(mpf(random()))
+
+    print(variable_dictionary)
 
     value_dict = dict()
     simplified_expression_dict = dict()
