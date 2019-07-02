@@ -1,6 +1,7 @@
 #!/bin/bash
 
 export PYTHONPATH=`pwd`:`pwd`/UnitTesting
+export PYTHONHASHSEED=0
 
 if [ -z "$1" ]
 then
@@ -17,6 +18,7 @@ echo Using $PYTHONEXEC as Python interpreter.
 echo $PYTHONEXEC version info:
 $PYTHONEXEC --version
 echo "########################################"
+
 
 ### $PYTHONEXEC UnitTesting/NRPyUnitTests_Functions.py &&
 
