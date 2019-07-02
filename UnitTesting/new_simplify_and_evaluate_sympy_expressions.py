@@ -28,6 +28,10 @@ def new_simplify_and_evaluate_sympy_expressions(var_dict, first_time):
     # Evaluating each expression using the values in variable_dictionary
     for variable_name, expression in var_dict.items():
 
+        if variable_name[0:10] == 'Cart_to_xx':
+            print('\nvar: ' + variable_name)
+            print('exp: ' + str(expression))
+
         seed(standard_constants.seed)
 
         free_symbols_list = list(expression.free_symbols)
@@ -72,6 +76,9 @@ def new_simplify_and_evaluate_sympy_expressions(var_dict, first_time):
         # If value is a complex number, store it as a mpc
         except TypeError:
             value_dict[variable_name] = mpc(N(reduced))
+
+        if variable_name[0:10] == 'Cart_to_xx':
+            print('val: ' + str(value_dict[variable_name]))
 
     if first_time:
         for var, val in value_dict.items():

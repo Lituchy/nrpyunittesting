@@ -8,13 +8,16 @@ def setup_class(path):
     path = find_path(path)
 
     try:
-        open(path + '/trusted_values_dict.py', 'r')
+        fr = open(path + '/trusted_values_dict.py', 'r')
+        fr.close()
     except IOError:
         logging.info('trusted_values_dict.py does not exist. Creating it...\n')
-        f = open(path + '/trusted_values_dict.py', 'w+')
-        f.write('from mpmath import mpf, mp, mpc\nfrom UnitTesting.standard_constants import precision\n\n'
+        fw = open(path + '/trusted_values_dict.py', 'w+')
+        fw.write('from mpmath import mpf, mp, mpc\nfrom UnitTesting.standard_constants import precision\n\n'
                 'mp.dps = precision\ntrusted_values_dict = dict()\n\n# Paste your trusted values here!\n')
-        f.close()
+        fw.close()
+    else:
+        fr.close()
 
 
 def find_path(path):
