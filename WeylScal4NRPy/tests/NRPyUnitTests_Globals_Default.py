@@ -25,7 +25,7 @@ class TestGlobals(unittest.TestCase):
     def setUpClass(cls):
         # Creating trusted_values_dict.py if it doesn't exist
         import os
-        path = os.path.basename(os.path.dirname(os.path.abspath(__file__)))
+        path = os.path.abspath(__file__)
         setup_class(path)
 
     @classmethod
