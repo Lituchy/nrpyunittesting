@@ -1,6 +1,7 @@
 # Creating trusted_values_dict.py if it doesn't exist
 
 import logging
+import platform
 
 
 def setup_class(path):
@@ -21,5 +22,7 @@ def setup_class(path):
 # Subfunction that returns the string we want
 def find_path(path):
     for idx, char in enumerate(reversed(path)):
-        if char == '/':
+        if char == '/' and platform.system() != 'Windows':
             return path[0:(len(path) - idx)] + '/'
+        elif char == '\\' and platform.system() == 'Windows':
+            return path[0:(len(path) - idx)] + '\\'
