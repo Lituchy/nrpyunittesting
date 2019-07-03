@@ -51,6 +51,9 @@ def simplify_and_evaluate_sympy_expressions(var_dict, first_time):
             seed(hashlib.md5(str(var).encode()).hexdigest())
             variable_dictionary[var] = sqrt(mpf(random()))
 
+    seed(4)
+    print
+    print(random())
     print
     print(variable_dictionary)
 
