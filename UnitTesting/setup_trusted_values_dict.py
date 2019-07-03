@@ -8,6 +8,8 @@ def setup_class(path):
 
     path = find_path(path)
 
+    print(path)
+
     try:
         fr = open(path + 'trusted_values_dict.py', 'r')
         fr.close()
@@ -22,7 +24,5 @@ def setup_class(path):
 # Subfunction that returns the string we want
 def find_path(path):
     for idx, char in enumerate(reversed(path)):
-        if char == '/' and platform.system() != 'Windows':
-            return path[0:(len(path) - idx)] + '/'
-        elif char == '\\' and platform.system() == 'Windows':
-            return path[0:(len(path) - idx)] + '\\'
+        if (char == '/' and platform.system() != 'Windows') or (char == '\\' and platform.system() == 'Windows'):
+            return path[0:(len(path) - idx)]

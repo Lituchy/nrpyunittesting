@@ -27,6 +27,7 @@ class TestGlobals(unittest.TestCase):
         # Creating trusted_values_dict.py if it doesn't exist
         import os
         path = os.path.abspath(__file__)
+        print(path)
         setup_class(path)
 
     @classmethod
@@ -52,7 +53,7 @@ class TestGlobals(unittest.TestCase):
         # Example: If you say 'import My_Modules.Module1 as M1', then mod_dict should have the entry 'M1' as a string.
         mod_dict = {'u0sbPoyn': functions_and_globals(['compute_u0_smallb_Poynting__Cartesian()'], global_list)}
 
-        # TODO: Call run_test with arguments (self, mod_dict, locals())
+        # TODO: Call run_test with arguments (self, mod_dict, trusted_values_dict, locals())
         run_test(self, mod_dict, trusted_values_dict.trusted_values_dict, locals())
 
 
