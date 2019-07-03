@@ -5,6 +5,7 @@ from random import seed, random
 from sympy import cse, N
 import UnitTesting.standard_constants as standard_constants
 import logging
+import hashlib
 
 
 # Takes in a variable dictionary [var_dict]  and returns
@@ -41,7 +42,10 @@ def simplify_and_evaluate_sympy_expressions(var_dict, first_time):
             variable_dictionary[var] = mpf(1/sqrt(2))
         # All other free variables are set to random numbers
         else:
-            seed(str(var))
+            # Assumes the default UTF-8
+            # hash_object =
+            # print(hash_object.hexdigest())
+            seed(hashlib.md5(str(var).encode()).hexdigest())
             variable_dictionary[var] = sqrt(mpf(random()))
 
     print(variable_dictionary)
