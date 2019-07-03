@@ -33,6 +33,8 @@ def simplify_and_evaluate_sympy_expressions(var_dict, first_time):
     # Creating dictionary entry for each variable and its pseudorandom value in [0,1) as determined by seed
     variable_dictionary = dict()
 
+    print
+
     for var in free_symbols_list:
         # Make sure M_PI is set to its correct value, pi, to the desired number of significant digits"
         if str(var) == "M_PI":
@@ -45,9 +47,11 @@ def simplify_and_evaluate_sympy_expressions(var_dict, first_time):
             # Assumes the default UTF-8
             # hash_object =
             # print(hash_object.hexdigest())
+            print(str(var) + ':\t' + hashlib.md5(str(var).encode()).hexdigest())
             seed(hashlib.md5(str(var).encode()).hexdigest())
             variable_dictionary[var] = sqrt(mpf(random()))
 
+    print
     print(variable_dictionary)
 
     value_dict = dict()

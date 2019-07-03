@@ -52,6 +52,8 @@ class TestGlobals(unittest.TestCase):
                       'SinhCylindrical': ('True', []), 'SinhCylindricalv2': ('True', []), 'SymTP': ('True', []),
                       'SinhSymTP': ('True', []), 'Cartesian': ('True', [])}
 
+        coord_dict = {'Spherical': ('True', ['xxmin', 'xxmax'])}
+
         globs = dict(globals())
 
         # coord_dict = {'Spherical': ('True', ['xxmin', 'xxmax'])}
