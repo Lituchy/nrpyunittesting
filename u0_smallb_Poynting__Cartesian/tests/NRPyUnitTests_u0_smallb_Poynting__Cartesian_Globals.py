@@ -39,8 +39,6 @@ class TestGlobals(unittest.TestCase):
 
         import trusted_values_dict
 
-        print(find_path(path))
-
         # TODO: Import modules to be tested
         # Note: Even though it says the modules are unused, these imports are vital for run_test to work properly.
         # Their information gets passed into run_test through locals()
