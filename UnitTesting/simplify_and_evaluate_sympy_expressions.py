@@ -1,7 +1,7 @@
 # WARNING: Importing more than the bare minimum with mpmath will result in errors on eval() below.
 # This is because we need SymPy to evaluate that expression, not mpmath.
 from mpmath import mp, mpf, sqrt, pi, mpc, fabs
-from random import seed, random
+import random
 from sympy import cse, N
 import UnitTesting.standard_constants as standard_constants
 import logging
@@ -44,16 +44,10 @@ def simplify_and_evaluate_sympy_expressions(var_dict, first_time):
             variable_dictionary[var] = mpf(1/sqrt(2))
         # All other free variables are set to random numbers
         else:
-            # Assumes the default UTF-8
-            # hash_object =
-            # print(hash_object.hexdigest())
             print(str(var) + ':\t' + hashlib.md5(str(var).encode()).hexdigest())
-            seed(int(hashlib.md5(str(var).encode()).hexdigest(), 16))
-            variable_dictionary[var] = sqrt(mpf(random()))
+            random.seed(int(hashlib.md5(str(var).encode()).hexdigest(), 16))
+            variable_dictionary[var] = mpf(random.random())
 
-    seed(4)
-    print
-    print(random())
     print
     print(variable_dictionary)
 
@@ -140,15 +134,3 @@ def recalculate_value(variable_dictionary, replaced, reduced, precision):
     mp.dps = standard_constants.precision
 
     return res
-
-
-def unique_hash(self):
-    if not self:
-        return 0  # empty
-    value = ord(self[0]) << 7
-    for char in self:
-        value = (1000003 * value) ^ ord(char)
-    value = value ^ len(self)
-    if value == -1:
-        value = -2
-    return value
