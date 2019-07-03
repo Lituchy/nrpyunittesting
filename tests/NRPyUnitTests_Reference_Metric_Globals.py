@@ -26,6 +26,7 @@ class TestGlobals(unittest.TestCase):
     def setUpClass(cls):
         # Creating trusted_values_dict.py if it doesn't exist
         import os
+        global path
         path = os.path.abspath(__file__)
         setup_class(path)
 
@@ -52,9 +53,9 @@ class TestGlobals(unittest.TestCase):
                       'SinhCylindrical': ('True', []), 'SinhCylindricalv2': ('True', []), 'SymTP': ('True', []),
                       'SinhSymTP': ('True', []), 'Cartesian': ('True', [])}
 
-        globs = dict(globals())
+        #coord_dict = {'Spherical': ('True', ['xxmin', 'xxmax']), 'SinhCylindricalv2': ('True', [])}
 
-        # coord_dict = {'Spherical': ('True', ['xxmin', 'xxmax'])}
+        import sys
 
         # For each module and its respective boolean and additional globals
         for coord, bool_global_tuple in coord_dict.items():
@@ -71,11 +72,18 @@ class TestGlobals(unittest.TestCase):
                                                                 global_list)}
 
             # Run test and delete old entry
-            run_test(self, mod_dict, trusted_values_dict.trusted_values_dict, locals())
+            run_test(self, mod_dict, trusted_values_dict.trusted_values_dict, path, locals())
 
-            for key in globals():
-                if key not in globs:
-                    del globals()[key]
+            if sys.version_info[0] == 2:
+                reload(locals()['rfm_' + coord])
+            elif sys.version_info[1] <= 3:
+                import imp
+                imp.reload(locals()['rfm_' + coord])
+            else:
+                import importlib
+                importlib.reload(locals()['rfm_' + coord])
+
+
 
 
 # Necessary for unittest class to work properly

@@ -26,6 +26,7 @@ class TestGlobals(unittest.TestCase):
     def setUpClass(cls):
         # Creating trusted_values_dict.py if it doesn't exist
         import os
+        global path
         path = os.path.abspath(__file__)
         setup_class(path)
 
@@ -56,7 +57,7 @@ class TestGlobals(unittest.TestCase):
         mod_dict = {'GiRaFFEfood_HO': functions_and_globals(['GiRaFFEfood_HO()'], global_list)}
 
         # TODO: Call run_test with arguments (self, mod_dict, locals())
-        run_test(self, mod_dict, trusted_values_dict.trusted_values_dict, locals())
+        run_test(self, mod_dict, trusted_values_dict.trusted_values_dict, path, locals())
 
     # Testing globals
     def test_rotator_globals(self):
@@ -78,7 +79,7 @@ class TestGlobals(unittest.TestCase):
                                                                             global_list)}
 
         # TODO: Call run_test with arguments (self, mod_dict, locals())
-        run_test(self, mod_dict, trusted_values_dict.trusted_values_dict, locals())
+        run_test(self, mod_dict, trusted_values_dict.trusted_values_dict, path, locals())
 
     # Testing globals
     def test_1D_globals(self):
@@ -99,7 +100,7 @@ class TestGlobals(unittest.TestCase):
         mod_dict = {'GiRaFFEfood_HO_1D_tests': functions_and_globals(['GiRaFFEfood_HO_1D_tests()'], global_list)}
 
         # TODO: Call run_test with arguments (self, mod_dict, locals())
-        run_test(self, mod_dict, trusted_values_dict.trusted_values_dict, locals())
+        run_test(self, mod_dict, trusted_values_dict.trusted_values_dict, path, locals())
 
 
 # Necessary for unittest class to work properly

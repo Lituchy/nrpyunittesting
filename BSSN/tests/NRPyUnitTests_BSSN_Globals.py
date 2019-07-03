@@ -26,6 +26,7 @@ class TestBSSNGlobals(unittest.TestCase):
     def setUpClass(cls):
         # Creating trusted_values_dict.py if it doesn't exist
         import os
+        global path
         path = os.path.abspath(__file__)
         setup_class(path)
 
@@ -54,7 +55,7 @@ class TestBSSNGlobals(unittest.TestCase):
         }
 
         # TODO: Call run_test with arguments (self, mod_dict, locals())
-        run_test(self, mod_dict, trusted_values_dict.trusted_values_dict, locals())
+        run_test(self, mod_dict, trusted_values_dict.trusted_values_dict, path, locals())
 
     # Testing globals for BSSN constraints
     def test_Constraints_Globals(self):
@@ -76,7 +77,7 @@ class TestBSSNGlobals(unittest.TestCase):
         }
 
         # TODO: Call run_test with arguments (self, mod_dict, locals())
-        run_test(self, mod_dict, trusted_values_dict.trusted_values_dict, locals())
+        run_test(self, mod_dict, trusted_values_dict.trusted_values_dict, path, locals())
 
     # Testing globals for BSSN exact modules
     def test_Exact_Globals(self):
@@ -109,7 +110,7 @@ class TestBSSNGlobals(unittest.TestCase):
         }
 
         # TODO: Call run_test with arguments (self, mod_dict, locals())
-        run_test(self, mod_dict, trusted_values_dict.trusted_values_dict, locals())
+        run_test(self, mod_dict, trusted_values_dict.trusted_values_dict, path, locals())
 
     # Testing globals for BSSN Psi4 Globals
     def test_Psi4_Globals(self):
@@ -135,7 +136,7 @@ class TestBSSNGlobals(unittest.TestCase):
         }
 
         # TODO: Call run_test with arguments (self, mod_dict, locals())
-        run_test(self, mod_dict, trusted_values_dict.trusted_values_dict, locals())
+        run_test(self, mod_dict, trusted_values_dict.trusted_values_dict, path, locals())
 
     # Testing globals for BSSN quantities
     def test_Quantities_Globals(self):
@@ -170,7 +171,7 @@ class TestBSSNGlobals(unittest.TestCase):
         }
 
         # TODO: Call run_test with arguments (self, mod_dict, locals())
-        run_test(self, mod_dict, trusted_values_dict.trusted_values_dict, locals())
+        run_test(self, mod_dict, trusted_values_dict.trusted_values_dict, path, locals())
 
     # Testing globals for BSSN RHS
     def test_RHS_Globals(self):
@@ -196,7 +197,7 @@ class TestBSSNGlobals(unittest.TestCase):
         }
 
         # TODO: Call run_test with arguments (self, mod_dict, locals())
-        run_test(self, mod_dict, trusted_values_dict.trusted_values_dict, locals())
+        run_test(self, mod_dict, trusted_values_dict.trusted_values_dict, path, locals())
 
     # Testing globals for BSSN T4UUmunu_vars
     def test_T4UU_Globals(self):
@@ -219,7 +220,7 @@ class TestBSSNGlobals(unittest.TestCase):
         }
 
         # TODO: Call run_test with arguments (self, mod_dict, locals())
-        run_test(self, mod_dict, trusted_values_dict.trusted_values_dict, locals())
+        run_test(self, mod_dict, trusted_values_dict.trusted_values_dict, path, locals())
 
 
 # Necessary for unittest class to work properly

@@ -3,12 +3,12 @@ from mpmath import log10,fabs, mp
 from datetime import date
 from UnitTesting.standard_constants import precision
 
-# Takes in a module [mod], a calculated dictionary [calculated_dict], a trusted dictionary [trusted_dict], a precision
-# value, [precision], and a symbolic dictionary [symbolic_dict] and computes the error for each result-trusted pair
-# for each respective index according to [precision]. Logs debug statements for each pair of values if the logging
-# level is <= DEBUG and logs a failure message if logging level is <= ERROR.
-# Returns a boolean [good] that represents if any two value pairs didn't differ
-# by more than (precision/2) decimal places.
+# Takes in a module [mod], a calculated dictionary [calculated_dict], and a trusted dictionary [trusted_dict],
+# and computes the error for each result-trusted pair for each respective index.
+# Logs debug statements for each pair of values if the logging level is <= DEBUG and logs a failure message if
+# logging level is <= ERROR.
+# Returns a boolean [good] that represents if any two value pairs didn't differ by more than
+# [standard_constants.precision/2] decimal places
 
 # Called by run_test
 

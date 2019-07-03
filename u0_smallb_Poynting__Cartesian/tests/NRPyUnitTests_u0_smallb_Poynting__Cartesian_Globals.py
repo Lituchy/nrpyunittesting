@@ -4,7 +4,7 @@ import logging
 from UnitTesting.run_test import run_test
 from UnitTesting.functions_and_globals import functions_and_globals
 from UnitTesting.RepeatedTimer import RepeatedTimer
-from UnitTesting.setup_trusted_values_dict import setup_class
+from UnitTesting.setup_trusted_values_dict import setup_class, find_path
 
 # TODO: Change level based on desired amount of output.
 # ERROR -> Outputs minimal information -- only when there's an error
@@ -26,8 +26,8 @@ class TestGlobals(unittest.TestCase):
     def setUpClass(cls):
         # Creating trusted_values_dict.py if it doesn't exist
         import os
+        global path
         path = os.path.abspath(__file__)
-        print(path)
         setup_class(path)
 
     @classmethod
@@ -38,6 +38,8 @@ class TestGlobals(unittest.TestCase):
     def test_globals(self):
 
         import trusted_values_dict
+
+        print(find_path(path))
 
         # TODO: Import modules to be tested
         # Note: Even though it says the modules are unused, these imports are vital for run_test to work properly.
@@ -54,7 +56,7 @@ class TestGlobals(unittest.TestCase):
         mod_dict = {'u0sbPoyn': functions_and_globals(['compute_u0_smallb_Poynting__Cartesian()'], global_list)}
 
         # TODO: Call run_test with arguments (self, mod_dict, trusted_values_dict, locals())
-        run_test(self, mod_dict, trusted_values_dict.trusted_values_dict, locals())
+        run_test(self, mod_dict, trusted_values_dict.trusted_values_dict, path, locals())
 
 
 # Necessary for unittest class to work properly

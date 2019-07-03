@@ -8,8 +8,6 @@ def setup_class(path):
 
     path = find_path(path)
 
-    print(path)
-
     try:
         fr = open(path + 'trusted_values_dict.py', 'r')
         fr.close()
@@ -17,7 +15,7 @@ def setup_class(path):
         logging.info('trusted_values_dict.py does not exist. Creating it...\n')
         fw = open(path + 'trusted_values_dict.py', 'w+')
         fw.write('from mpmath import mpf, mp, mpc\nfrom UnitTesting.standard_constants import precision\n\n'
-                 'mp.dps = precision\ntrusted_values_dict = dict()\n\n# Paste your trusted values here!\n')
+                 'mp.dps = precision\ntrusted_values_dict = dict()\n')
         fw.close()
 
 

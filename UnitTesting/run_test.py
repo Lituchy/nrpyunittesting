@@ -19,7 +19,7 @@ from mpmath import mp
 # [locs]- The current local variables in the workspace. Should ALWAYS be locals()
 # It then runs a unittest, comparing calculated values with trusted values.
 # Throws an [AssertionError] if [mod_dict] is empty
-def run_test(self, mod_dict, trusted_values_dict, locs):
+def run_test(self, mod_dict, trusted_values_dict, path, locs):
 
     # Can't use empty dictionaries
     assert mod_dict != dict()
@@ -82,7 +82,7 @@ def run_test(self, mod_dict, trusted_values_dict, locs):
 
         # If being run for the first time, print the code that must be copied into trusted_values_dict
         if first_time:
-            first_time_print(mod, value_dict)
+            first_time_print(mod, value_dict, path)
 
         # Otherwise, compare calculated values to trusted values
         else:
@@ -102,6 +102,6 @@ def run_test(self, mod_dict, trusted_values_dict, locs):
             self.assertTrue(values_identical)
 
     # If it's the first time for at least one module
-    if True in first_times:
+    if True in first_times.values():
         self.assertTrue(False, 'Automatically failing due to first time for at least one module. Please see above'
                                'for the code to copy into your trusted_values_dict.')
