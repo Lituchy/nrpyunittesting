@@ -33,8 +33,6 @@ def simplify_and_evaluate_sympy_expressions(var_dict, first_time):
     # Creating dictionary entry for each variable and its pseudorandom value in [0,1) as determined by seed
     variable_dictionary = dict()
 
-    print
-
     for var in free_symbols_list:
         # Make sure M_PI is set to its correct value, pi, to the desired number of significant digits"
         if str(var) == "M_PI":
@@ -44,12 +42,8 @@ def simplify_and_evaluate_sympy_expressions(var_dict, first_time):
             variable_dictionary[var] = mpf(1/sqrt(2))
         # All other free variables are set to random numbers
         else:
-            print(str(var) + ':\t' + hashlib.md5(str(var).encode()).hexdigest())
             random.seed(int(hashlib.md5(str(var).encode()).hexdigest(), 16))
             variable_dictionary[var] = mpf(random.random())
-
-    print
-    print(variable_dictionary)
 
     value_dict = dict()
     simplified_expression_dict = dict()
@@ -105,6 +99,7 @@ def simplify_and_evaluate_sympy_expressions(var_dict, first_time):
     return value_dict
 
 
+# Subfunction that recalculates value for variable with given precision
 def recalculate_value(variable_dictionary, replaced, reduced, precision):
 
     mp.dps = precision
