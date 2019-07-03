@@ -26,6 +26,7 @@ class TestGlobals(unittest.TestCase):
     def setUpClass(cls):
         # Creating trusted_values_dict.py if it doesn't exist
         import os
+        global path
         path = os.path.abspath(__file__)
         setup_class(path)
 
@@ -57,7 +58,7 @@ class TestGlobals(unittest.TestCase):
         mod_dict = {'MaxwellCartesian_Evol': functions_and_globals(['MaxwellCartesian_Evol()'], evol_global_list)}
 
         # TODO: Call run_test with arguments (self, mod_dict, locals())
-        run_test(self, mod_dict, trusted_values_dict.trusted_values_dict, locals())
+        run_test(self, mod_dict, trusted_values_dict.trusted_values_dict, path, locals())
 
     def test_id_globals(self):
 
@@ -78,7 +79,7 @@ class TestGlobals(unittest.TestCase):
         mod_dict = {'MaxwellCartesian_ID': functions_and_globals(['MaxwellCartesian_ID()'], id_global_list)}
 
         # TODO: Call run_test with arguments (self, mod_dict, locals())
-        run_test(self, mod_dict, trusted_values_dict.trusted_values_dict, locals())
+        run_test(self, mod_dict, trusted_values_dict.trusted_values_dict, path, locals())
 
 
 # Necessary for unittest class to work properly

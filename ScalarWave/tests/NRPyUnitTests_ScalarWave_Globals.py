@@ -26,6 +26,7 @@ class TestGlobals(unittest.TestCase):
     def setUpClass(cls):
         # Creating trusted_values_dict.py if it doesn't exist
         import os
+        global path
         path = os.path.abspath(__file__)
         setup_class(path)
 
@@ -52,7 +53,7 @@ class TestGlobals(unittest.TestCase):
         mod_dict = {'InitialData_PlaneWave': functions_and_globals(['InitialData_PlaneWave()'], global_list)}
 
         # TODO: Call run_test with arguments (self, mod_dict, locals())
-        run_test(self, mod_dict, trusted_values_dict.trusted_values_dict, locals())
+        run_test(self, mod_dict, trusted_values_dict.trusted_values_dict, path, locals())
 
     # Testing globals
     def test_globals_2(self):
@@ -73,7 +74,7 @@ class TestGlobals(unittest.TestCase):
         mod_dict = {'ScalarWave_RHSs': functions_and_globals(['ScalarWave_RHSs()'], global_list)}
 
         # TODO: Call run_test with arguments (self, mod_dict, locals())
-        run_test(self, mod_dict, trusted_values_dict.trusted_values_dict, locals())
+        run_test(self, mod_dict, trusted_values_dict.trusted_values_dict, path, locals())
 
 
 # Necessary for unittest class to work properly

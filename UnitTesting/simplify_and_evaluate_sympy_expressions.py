@@ -8,55 +8,59 @@ import logging
 import hashlib
 
 
-# Takes in a variable dictionary [var_dict]  and returns
-# a dictionary with each expression in [var_dict] evaluated according to parameters (seed, precision).
+# Takes in a variable dictionary [var_dict] and a boolean [first_time], and returns
+# a dictionary with each expression in [var_dict] evaluated to a numerical expression by assigning each sympy variable
+# to a random number. If [first_time] is True, near-zero values are checked if they indeed should be zero.
 
 # Called by run_test
 
 def simplify_and_evaluate_sympy_expressions(var_dict, first_time):
 
+    # If an empty variable dict is passed, return an empty dictionary
     if var_dict == dict():
         return dict()
 
-    precision = standard_constants.precision
-
     # Setting precision
+    precision = standard_constants.precision
     mp.dps = precision
 
+    # Creating free_symbols_set, which stores all free symbols from all expressions.
     free_symbols_set = set()
     for val in var_dict.values():
         free_symbols_set = free_symbols_set | val.free_symbols
 
-    # List all the free symbols in the expressions in [var_dict].
-    free_symbols_list = list(free_symbols_set)
-
-    # Creating dictionary entry for each variable and its pseudorandom value in [0,1) as determined by seed
+    # Initializing variable_dictionary
     variable_dictionary = dict()
 
-    for var in free_symbols_list:
-        # Make sure M_PI is set to its correct value, pi, to the desired number of significant digits"
+    # Setting each variable in free_symbols_set to a random number in [0, 1) according to the hashed string
+    # representation of each variable.
+    for var in free_symbols_set:
+        # Make sure M_PI is set to its correct value, pi
         if str(var) == "M_PI":
             variable_dictionary[var] = mpf(pi)
-        # Then make sure M_SQRT1_2 is set to its correct value, 1/sqrt(2), to the desired number of significant digits:
+        # Then make sure M_SQRT1_2 is set to its correct value, 1/sqrt(2)
         elif str(var) == "M_SQRT1_2":
             variable_dictionary[var] = mpf(1/sqrt(2))
         # All other free variables are set to random numbers
         else:
+            # Take the variable [var], turn it into a string, encode the string, hash the string using the md5
+            # algorithm, turn the hash into a hex number, turn the hex number into an int, set the random seed to
+            # that int. This ensures each variable gets a unique but consistent value.
             random.seed(int(hashlib.md5(str(var).encode()).hexdigest(), 16))
+            # Store the random value in variable_dictionary as a mpf
             variable_dictionary[var] = mpf(random.random())
 
+    # Initialize value_dict and simplified_expression_dict
     value_dict = dict()
     simplified_expression_dict = dict()
-    # Evaluating each expression using the values in variable_dictionary
-    for var, expression in var_dict.items():
 
-        if var[0:10] == 'Cart_to_xx':
-            print('\nvar: ' + var)
-            print('exp: ' + str(expression))
+    # Evaluating each expression using the values in var_dict
+    for var, expression in var_dict.items():
 
         # Using sympy's cse algorithm to optimize our value substitution
         replaced, reduced = cse(expression, order='none')
         reduced = reduced[0]
+        # Store the replaced, reduced result from cse into simplified_expression_dict
         simplified_expression_dict[var] = replaced, reduced
 
         # Copying variable_dictionary into a new variable dictionary
@@ -77,13 +81,11 @@ def simplify_and_evaluate_sympy_expressions(var_dict, first_time):
         # Adding our variable, value pair to our value_dict
         try:
             value_dict[var] = mpf(reduced)
-        # If value is a complex number, store it as a mpc
+        # If value is a complex number, store it as a numerical mpc
         except TypeError:
             value_dict[var] = mpc(N(reduced))
 
-        if var[0:10] == 'Cart_to_xx':
-            print('val: ' + str(value_dict[var]))
-
+    # If [first_time] is True, double check all near-zero values to see if they should be zero.
     if first_time:
         for var, val in value_dict.items():
             if val != mpf('0.0') and fabs(val) < 100 * 10 ** (-precision):
