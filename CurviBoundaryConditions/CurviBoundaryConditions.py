@@ -6,6 +6,7 @@ import loop as lp
 import indexedexp as ixp
 import finite_difference as fin
 import reference_metric as rfm
+import sys
 
 def Set_up_CurviBoundaryConditions():
     # Step 2.A.2. Output gridfunction #define aliases to file:
@@ -83,6 +84,10 @@ def Set_up_CurviBoundaryConditions():
     xx0_inbounds, xx1_inbounds, xx2_inbounds = sp.symbols("xx0_inbounds xx1_inbounds xx2_inbounds", real=True)
     for i in range(3):
         for j in range(3):
+            if isinstance(rfm.UnitVectors[i][j], int):
+                print("Error: rfm.UnitVectors["+str(i)+"]["+str(j)+"] is an integer.")
+                print("       Please set all integer elements of rfm.UnitVectors[][] using sp.sympify([integer]).")
+                sys.exit(1)
             UnitVectors_inner[i][j] = rfm.UnitVectors[i][j].subs(rfm.xx[0], xx0_inbounds).subs(rfm.xx[1],
                                                                                                xx1_inbounds).subs(
                 rfm.xx[2], xx2_inbounds)
@@ -131,6 +136,11 @@ def Set_up_CurviBoundaryConditions():
     print("Wrote to file \"CurviBoundaryConditions/xxminmax.h\"")
 
     # Generic coordinate NRPy+ file output, Part 3: output the conversion from Cartesian (x,y,z) to interior/OB (x0,x1,x2)
+    if rfm.Cart_to_xx[0] == 0 or rfm.Cart_to_xx[1] == 0 or rfm.Cart_to_xx[2] == 0:
+        print("ERROR: rfm.Cart_to_xx[], which maps Cartesian -> xx, has not been set for")
+        print("       reference_metric::CoordSystem = "+par.parval_from_str("reference_metric::CoordSystem"))
+        print("       Boundary conditions in curvilinear coordinates REQUIRE this be set.")
+        sys.exit(1)
     outputC([rfm.Cart_to_xx[0], rfm.Cart_to_xx[1], rfm.Cart_to_xx[2]],
             ["Cart_to_xx0_inbounds", "Cart_to_xx1_inbounds", "Cart_to_xx2_inbounds"],
             "CurviBoundaryConditions/Cart_to_xx.h")
