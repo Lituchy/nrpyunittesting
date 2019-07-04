@@ -1,5 +1,5 @@
 # NRPy+, SENRv2, and the NRPy+ Jupyter Tutorial
-[![Build Status](https://travis-ci.org/zachetienne/nrpytutorial.svg?branch=master)](https://travis-ci.org/zachetienne/nrpytutorial)
+[![Build Status](https://travis-ci.org/Lituchy/nrpyunittesting.svg?branch=master)](https://travis-ci.org/Lituchy/nrpyunittesting/)
 [![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/zachetienne/nrpytutorial/master?filepath=NRPyPlus_Tutorial.ipynb)
 
 This repository houses
