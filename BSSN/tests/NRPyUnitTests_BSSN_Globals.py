@@ -13,7 +13,6 @@ from UnitTesting.setup_trusted_values_dict import setup_class
 # NOTSET -> Displays symbolic dictionary for all modules, as well as everything in DEBUG
 logging.basicConfig(level=logging.INFO)
 
-
 # https://stackoverflow.com/questions/3393612/run-certain-code-every-n-seconds/13151299
 # Creates a threaded timer object that prints to the console every 5 minutes
 Timer = RepeatedTimer(300, logging.info, "\nPrinting every 5 minutes to prevent timeouts.\n")

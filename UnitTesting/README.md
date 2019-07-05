@@ -3,26 +3,27 @@
 ### Motivation:
 
 What is the purpose of unit testing, and why should you do it? To begin thinking about that, consider what subtleties 
-can occur with your code that are almost unnoticeable to the eye, but wind up giving you a very incorrect result. You
+can occur within your code that are almost unnoticeable to the eye, but wind up giving you a very incorrect result. You
 could make a small optimization, and observe that nothing changes about your result. However, maybe the optimization 
 you made only works on Python 3 and not Python 2, or it changes a value by some tiny amount -- too small to be obviously
-noticeable, but enough to make a difference.
+noticeable, but enough to make a difference in succeeding calculations.
 
 This is where unit testing comes in. By initially calculating values for the globals of your modules in a **trusted**
 version of your code and storing those values in a dictionary, you can then easily check if something stopped working
 by comparing your newly calculated values to the ones you've stored. On the frontend, there are four modules 
 essential to get your unit tests up and running: `trusted_values_dict`, `functions_and_globals`, `run_test`, and your 
-testing module (which we'll simply reference as `Your_Test_File`). The usage of each of these modules is outlined in 
-the  **Interactive Modules** section. There is also some important prerequisite knowledge that may be helpful to grasp
-before beginning your testing. There are many functions at play in the backend as well, all of which will 
-be described in detail below in the **Functions** section. Mastery of these functions may not be essential to get your 
-tests up-and-running, but some basic understanding of these modules with undoubtedly streamline the testing process and 
-how to potentially create your own, different types of tests.
+testing module (which will simply be referred to as `NRPyUnitTests_File`). The usage of each of these modules is 
+outlined in the  [Interactive](#Interactive Modules:) section. There is also some important prerequisite knowledge 
+that may be helpful to grasp before beginning your testing. There are many functions at play in the backend as well, 
+all of which will be described in detail below in the [Functions](#Functions:) section. Mastery of these functions may 
+not be essential to get your tests up-and-running, but some basic understanding of these modules with undoubtedly 
+streamline the testing process and potentially creating your own, different types of tests.
 
 An important caveat is that the unit testing does not test the **correctness** of your code or your variables. The 
-unit tests function as a protective measure to ensure that nothing was broken; it gets its values by running _your_ 
-code, so if something starts out incorrect, it will be stored as incorrect in the system. There are measures against 
-this, but it relies on the user's knowledge of what versions of their code are correct.
+unit tests function as a protective measure to ensure that nothing was broken in different versions of your code; 
+it gets its values by running _your_ code, so if something starts out incorrect, it will be stored as incorrect in the 
+system. There are measures against this negative result, but it relies on the user's knowledge of what versions of 
+their code are correct.
 
 ### Important Prerequisite Knowledge:
 
@@ -55,8 +56,16 @@ logging.basicConfig(level=logging.INFO)
 
 The level can be changed by simply changing `INFO` to any of `ERROR`, `INFO`, etc. 
 
-#### Your_Test_File.py:
-TODO
+#### NRPyUnitTests_File.py:
+`NRPyUnitTests_File` acts as the means of calling the required functions to test your modules. It is the medium by which
+the user communicates with the testing functionality by use of the `unittest` module as well as many functions we have 
+created. Proper formatting of this file is essential to be able to unit test properly, and this responsibility is 
+unfortunately passed onto the user -- there's no way to know beforehand what globals of what modules the user would like
+to test, and therefore it's something that must be user-supplied. However, there is a skeleton of all the basic 
+information that we here at NRPy believe must be in __every__ unit test, so it acts as a good starting point. 
+Additionally there is a comprehensive example of how a user would test a specific module; these resources are likely the
+best places to start looking at creating your `NRPyUnitTests_File`.
+
 
 ### Interactive Modules:
 
@@ -98,7 +107,7 @@ the following:
 `mod_dict`, which is the user-created module dictionary containing the modules they're testing, the necessary functions 
 to run for each module, and the globals to evaluate and compare for each module
 
-`trusted_values_dict`, which is the dictionary of trusted values as definied in the `trusted_values_dict` file in your
+`trusted_values_dict`, which is the dictionary of trusted values as defined in the `trusted_values_dict` file in your
 module
  
 `locs` (almost always a simple call to the built-in function `locals`), which allows the current local variables to be 
