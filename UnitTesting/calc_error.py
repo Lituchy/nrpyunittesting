@@ -60,13 +60,13 @@ def calc_error(mod, calculated_dict, trusted_dict, output=True):
 
     if output and bad_var_list != []:
         logging.error('\n\nVariable(s) ' + str(bad_var_list) + ' in module ' + str(mod) +
-                     ' failed. Please check values.\n\n' + 'If you are confident that the newly calculated values' +
-                     ' are correct, comment out the old trusted values for ' + "'" + mod + "Globals'" +
-                     ' in trusted_values_dict and copy the following code between the ##### into ' +
-                     'trusted_values_dict. Make sure to fill out the TODO comment describing why the values' +
-                     ' had to be changed. Then re-run test script.\n' + '#####\n\n# Generated on: ' +
-                     str(date.today()) + '\n# Reason for changing values: TODO' + "\ntrusted_values_dict['" +
-                     mod + "Globals'] = " + create_dict_string(calculated_dict) + '\n\n#####')
+                      ' failed. Please check values.\n\n' + 'If you are confident that the newly calculated values' +
+                      ' are correct, comment out the old trusted values for ' + "'" + mod + "Globals'" +
+                      ' in trusted_values_dict and copy the following code between the ##### into ' +
+                      'trusted_values_dict. Make sure to fill out the TODO comment describing why the values' +
+                      ' had to be changed. Then re-run test script.\n' + '#####\n\n# Generated on: ' +
+                      str(date.today()) + '\n# Reason for changing values: TODO' + "\ntrusted_values_dict['" +
+                      mod + "Globals'] = " + create_dict_string(calculated_dict) + '\n\n#####')
 
     return bad_var_list == []
 

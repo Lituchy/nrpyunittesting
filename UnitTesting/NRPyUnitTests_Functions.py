@@ -994,6 +994,9 @@ class TestFunctions(unittest.TestCase):
 
         logging.info('\nAll expand_variable_dict tests passed.\n')
 
+    def ftest_first_time_print(self):
+        print('hi')
+
     def test_functions_and_globals(self):
         from UnitTesting.functions_and_globals import functions_and_globals
 
@@ -1079,6 +1082,10 @@ class TestFunctions(unittest.TestCase):
         trusted_values_dict = {}
         with self.assertRaises(AssertionError):
             run_test(self, mod_dict, trusted_values_dict, '', locals())
+
+    def ftest_setup_trusted_values_dict(self):
+        from UnitTesting.setup_trusted_values_dict import setup_class
+        print('hello')
 
     def test_simplify_and_evaluate_sympy_expressions(self):
         from UnitTesting.simplify_and_evaluate_sympy_expressions import simplify_and_evaluate_sympy_expressions

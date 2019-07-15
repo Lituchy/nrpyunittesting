@@ -16,7 +16,7 @@ def setup_class(path):
     try:
         fr = open(directory + 'trusted_values_dict.py', 'r')
         fr.close()
-    # If [trusted_values_dict.py] does not exist in [directory], create it with proper string formatting.
+    # If [trusted_values_dict.py] does not exist in [directory], create it with default contents.
     except IOError:
         logging.info('trusted_values_dict.py does not exist. Creating it...\n')
         fw = open(directory + 'trusted_values_dict.py', 'w+')
@@ -26,7 +26,7 @@ def setup_class(path):
     # Otherwise, do nothing -- no need to recreate file that already exists.
 
 
-# Subfunction that returns the full path to the directory that [path] is in.
+# Sub-function that returns the full path to the directory that [path] is in.
 # Typical input for [path] is os.path.abspath(__file__)
 def find_path(path):
     # Parse the string [path] in reverse
