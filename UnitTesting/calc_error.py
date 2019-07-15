@@ -36,7 +36,7 @@ def calc_error(mod, calculated_dict, trusted_dict, output=True):
                               str(sorted(trusted_minus_calculated)))
         return False
 
-    del calculated_set, trusted_set
+    bad_var_list = []
 
     # For each variable, print calculated and trusted values
     for var in sorted(calculated_dict):
@@ -56,21 +56,22 @@ def calc_error(mod, calculated_dict, trusted_dict, output=True):
 
         good = (log10_relative_error < (precision / -2))
         if not good:
-            if output:
-                logging.info('\n\nVariable ' + "'" + var + "'" + ' in module ' + str(mod) + ' failed. Please check' +
-                             ' values.\n\n' + 'If you are confident that the newly calculated values are correct, ' +
-                             'comment out the old trusted values for ' + "'" + mod + "Globals'" +
-                             ' in trusted_values_dict and copy the following code between the ##### into ' +
-                             'trusted_values_dict. Make sure to fill out the TODO comment describing why the values' +
-                             ' had to be changed. Then re-run test script.\n' + '#####\n\n# Generated on: ' +
-                             str(date.today()) + '\n# Reason for changing values: TODO' + "\ntrusted_values_dict['" +
-                             mod + "Globals'] = " + create_dict_string(calculated_dict) + '\n\n#####')
-            return False
+            bad_var_list.append(var)
 
-    return True
+    if output and bad_var_list != []:
+        logging.error('\n\nVariable(s) ' + str(bad_var_list) + ' in module ' + str(mod) +
+                     ' failed. Please check values.\n\n' + 'If you are confident that the newly calculated values' +
+                     ' are correct, comment out the old trusted values for ' + "'" + mod + "Globals'" +
+                     ' in trusted_values_dict and copy the following code between the ##### into ' +
+                     'trusted_values_dict. Make sure to fill out the TODO comment describing why the values' +
+                     ' had to be changed. Then re-run test script.\n' + '#####\n\n# Generated on: ' +
+                     str(date.today()) + '\n# Reason for changing values: TODO' + "\ntrusted_values_dict['" +
+                     mod + "Globals'] = " + create_dict_string(calculated_dict) + '\n\n#####')
+
+    return bad_var_list == []
 
 
-# Subfunction to properly format dict to print
+# Sub-function to properly format dict to print
 def create_dict_string(calculated_dict):
 
     return_string = '{'

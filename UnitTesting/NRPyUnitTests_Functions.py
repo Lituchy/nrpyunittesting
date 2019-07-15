@@ -135,7 +135,7 @@ class TestFunctions(unittest.TestCase):
             log.check(
                 ('root', 'DEBUG', '\nTestModule: ' + 'a' + ': Calculated: ' + '1.0' + '\nTestModule: ' + 'a' +
                  ': Trusted:    ' + '2.0' + '\n'),
-                ('root', 'INFO', '\n\nVariable ' + "'a'" + ' in module TestModule failed. Please check values.\n\nIf you '
+                ('root', 'ERROR', '\n\nVariable(s) ' + "['a']" + ' in module TestModule failed. Please check values.\n\nIf you '
                  + 'are confident that the newly calculated values are correct, comment out the old trusted values for ' +
                  "'TestModuleGlobals' in trusted_values_dict and copy the following code between the ##### into " +
                  'trusted_values_dict. Make sure to fill out the TODO comment describing why the values had to be changed.'
@@ -182,7 +182,7 @@ class TestFunctions(unittest.TestCase):
             log.check(
                 ('root', 'DEBUG', '\nTestModule: ' + 'b' + ': Calculated: ' + '0.0' + '\nTestModule: ' + 'b'
                  + ': Trusted:    ' + '1.0e-15' + '\n'),
-                ('root', 'INFO', '\n\nVariable ' + "'b'" + ' in module TestModule failed. Please check values.\n\nIf you '
+                ('root', 'ERROR', '\n\nVariable(s) ' + "['b']" + ' in module TestModule failed. Please check values.\n\nIf you '
                  + 'are confident that the newly calculated values are correct, comment out the old trusted values for ' +
                  "'TestModuleGlobals' in trusted_values_dict and copy the following code between the ##### into " +
                  'trusted_values_dict. Make sure to fill out the TODO comment describing why the values had to be changed.'
@@ -210,7 +210,7 @@ class TestFunctions(unittest.TestCase):
                 ('root', 'DEBUG', '\nTestModule: ' + 'alpha' + ': Calculated: ' + '1.0e-15' + '\nTestModule: ' + 'alpha'
                  + ': Trusted:    ' + '0.0' + '\n'),
                 ('root',
-                 'INFO', '\n\nVariable ' + "'alpha'" + ' in module TestModule failed. Please check values.\n\nIf you '
+                 'ERROR', '\n\nVariable(s) ' + "['alpha']" + ' in module TestModule failed. Please check values.\n\nIf you '
                  + 'are confident that the newly calculated values are correct, comment out the old trusted values for ' +
                  "'TestModuleGlobals' in trusted_values_dict and copy the following code between the ##### into " +
                  'trusted_values_dict. Make sure to fill out the TODO comment describing why the values had to be changed.'
@@ -238,7 +238,7 @@ class TestFunctions(unittest.TestCase):
                 ('root', 'DEBUG', '\nTestModule: ' + 'f' + ': Calculated: ' + '123.012345678101234567890123457' +
                  '\nTestModule: ' + 'f' + ': Trusted:    ' + '123.012345678901234567890123457' + '\n'),
                 ('root',
-                 'INFO', '\n\nVariable ' + "'f'" + ' in module TestModule failed. Please check values.\n\nIf you '
+                 'ERROR', '\n\nVariable(s) ' + "['f']" + ' in module TestModule failed. Please check values.\n\nIf you '
                  + 'are confident that the newly calculated values are correct, comment out the old trusted values for ' +
                  "'TestModuleGlobals' in trusted_values_dict and copy the following code between the ##### into " +
                  'trusted_values_dict. Make sure to fill out the TODO comment describing why the values had to be changed.'
@@ -277,8 +277,10 @@ class TestFunctions(unittest.TestCase):
             log.check(
                 ('root', 'DEBUG', '\nTestModule: ' + 'a' + ': Calculated: ' + '0.0' +
                  '\nTestModule: ' + 'a' + ': Trusted:    ' + '0.1' + '\n'),
+                ('root', 'DEBUG', '\nTestModule: ' + 'b' + ': Calculated: ' + '1.0' +
+                 '\nTestModule: ' + 'b' + ': Trusted:    ' + '1.0' + '\n'),
                 ('root',
-                 'INFO', '\n\nVariable ' + "'a'" + ' in module TestModule failed. Please check values.\n\nIf you '
+                 'ERROR', '\n\nVariable(s) ' + "['a']" + ' in module TestModule failed. Please check values.\n\nIf you '
                  + 'are confident that the newly calculated values are correct, comment out the old trusted values for ' +
                  "'TestModuleGlobals' in trusted_values_dict and copy the following code between the ##### into " +
                  'trusted_values_dict. Make sure to fill out the TODO comment describing why the values had to be changed.'
@@ -295,8 +297,10 @@ class TestFunctions(unittest.TestCase):
             log.check(
                 ('root', 'DEBUG', '\nTestModule: ' + 'a' + ': Calculated: ' + '0.0' +
                  '\nTestModule: ' + 'a' + ': Trusted:    ' + '0.1' + '\n'),
+                ('root', 'DEBUG', '\nTestModule: ' + 'b' + ': Calculated: ' + '1.1' +
+                 '\nTestModule: ' + 'b' + ': Trusted:    ' + '1.0' + '\n'),
                 ('root',
-                 'INFO', '\n\nVariable ' + "'a'" + ' in module TestModule failed. Please check values.\n\nIf you '
+                 'ERROR', '\n\nVariable(s) ' + "['a', 'b']" + ' in module TestModule failed. Please check values.\n\nIf you '
                  + 'are confident that the newly calculated values are correct, comment out the old trusted values for ' +
                  "'TestModuleGlobals' in trusted_values_dict and copy the following code between the ##### into " +
                  'trusted_values_dict. Make sure to fill out the TODO comment describing why the values had to be changed.'
@@ -316,13 +320,79 @@ class TestFunctions(unittest.TestCase):
                 ('root', 'DEBUG', '\nTestModule: ' + 'b' + ': Calculated: ' + '1.1' +
                  '\nTestModule: ' + 'b' + ': Trusted:    ' + '1.0' + '\n'),
                 ('root',
-                 'INFO', '\n\nVariable ' + "'b'" + ' in module TestModule failed. Please check values.\n\nIf you '
+                 'ERROR', '\n\nVariable(s) ' + "['b']" + ' in module TestModule failed. Please check values.\n\nIf you '
                  + 'are confident that the newly calculated values are correct, comment out the old trusted values for ' +
                  "'TestModuleGlobals' in trusted_values_dict and copy the following code between the ##### into " +
                  'trusted_values_dict. Make sure to fill out the TODO comment describing why the values had to be changed.'
                  + ' Then re-run test script.\n#####\n\n# Generated on: ' + str(date.today()) + '\n# Reason for changing' +
                  " values: TODO\ntrusted_values_dict['TestModuleGlobals'] = {" + "'a'" + ": mpf('" + '0.0' + "')" + ', ' +
                  "'b'" + ": mpf('1.1')" + "}\n\n#####")
+            )
+
+            calculated_dict = {'a': mpf('0.0'), 'b': mpf('1.0'), 'c': mpf('2.0')}
+            trusted_dict = {'a': mpf('0.2'), 'b': mpf('1.2'), 'c': mpf('2.2')}
+
+            with LogCapture() as log:
+                self.assertFalse(calc_error(mod, calculated_dict, trusted_dict))
+            log.check(
+                ('root', 'DEBUG', '\nTestModule: ' + 'a' + ': Calculated: ' + '0.0' +
+                 '\nTestModule: ' + 'a' + ': Trusted:    ' + '0.2' + '\n'),
+                ('root', 'DEBUG', '\nTestModule: ' + 'b' + ': Calculated: ' + '1.0' +
+                 '\nTestModule: ' + 'b' + ': Trusted:    ' + '1.2' + '\n'),
+                ('root', 'DEBUG', '\nTestModule: ' + 'c' + ': Calculated: ' + '2.0' +
+                 '\nTestModule: ' + 'c' + ': Trusted:    ' + '2.2' + '\n'),
+                ('root',
+                 'ERROR', '\n\nVariable(s) ' + "['a', 'b', 'c']" + ' in module TestModule failed. Please check values.\n\nIf you '
+                 + 'are confident that the newly calculated values are correct, comment out the old trusted values for ' +
+                 "'TestModuleGlobals' in trusted_values_dict and copy the following code between the ##### into " +
+                 'trusted_values_dict. Make sure to fill out the TODO comment describing why the values had to be changed.'
+                 + ' Then re-run test script.\n#####\n\n# Generated on: ' + str(date.today()) + '\n# Reason for changing' +
+                 " values: TODO\ntrusted_values_dict['TestModuleGlobals'] = {" + "'a'" + ": mpf('" + '0.0' + "')" + ', ' +
+                 "'b'" + ": mpf('1.0')" + ", " + "'c'" + ": mpf('" + '2.0' + "')" "}\n\n#####")
+            )
+
+            calculated_dict = {'a': mpf('0.0'), 'b': mpf('1.0'), 'c': mpf('2.0')}
+            trusted_dict = {'a': mpf('0.2'), 'b': mpf('1.0'), 'c': mpf('2.2')}
+
+            with LogCapture() as log:
+                self.assertFalse(calc_error(mod, calculated_dict, trusted_dict))
+            log.check(
+                ('root', 'DEBUG', '\nTestModule: ' + 'a' + ': Calculated: ' + '0.0' +
+                 '\nTestModule: ' + 'a' + ': Trusted:    ' + '0.2' + '\n'),
+                ('root', 'DEBUG', '\nTestModule: ' + 'b' + ': Calculated: ' + '1.0' +
+                 '\nTestModule: ' + 'b' + ': Trusted:    ' + '1.0' + '\n'),
+                ('root', 'DEBUG', '\nTestModule: ' + 'c' + ': Calculated: ' + '2.0' +
+                 '\nTestModule: ' + 'c' + ': Trusted:    ' + '2.2' + '\n'),
+                ('root',
+                 'ERROR', '\n\nVariable(s) ' + "['a', 'c']" + ' in module TestModule failed. Please check values.\n\nIf you '
+                 + 'are confident that the newly calculated values are correct, comment out the old trusted values for ' +
+                 "'TestModuleGlobals' in trusted_values_dict and copy the following code between the ##### into " +
+                 'trusted_values_dict. Make sure to fill out the TODO comment describing why the values had to be changed.'
+                 + ' Then re-run test script.\n#####\n\n# Generated on: ' + str(date.today()) + '\n# Reason for changing' +
+                 " values: TODO\ntrusted_values_dict['TestModuleGlobals'] = {" + "'a'" + ": mpf('" + '0.0' + "')" + ', ' +
+                 "'b'" + ": mpf('1.0')" + ", " + "'c'" + ": mpf('" + '2.0' + "')" "}\n\n#####")
+            )
+
+            calculated_dict = {'c': mpf('2.0'), 'a': mpf('0.0'), 'b': mpf('1.0')}
+            trusted_dict = {'c': mpf('2.2'), 'a': mpf('0.2'), 'b': mpf('1.0')}
+
+            with LogCapture() as log:
+                self.assertFalse(calc_error(mod, calculated_dict, trusted_dict))
+            log.check(
+                ('root', 'DEBUG', '\nTestModule: ' + 'a' + ': Calculated: ' + '0.0' +
+                 '\nTestModule: ' + 'a' + ': Trusted:    ' + '0.2' + '\n'),
+                ('root', 'DEBUG', '\nTestModule: ' + 'b' + ': Calculated: ' + '1.0' +
+                 '\nTestModule: ' + 'b' + ': Trusted:    ' + '1.0' + '\n'),
+                ('root', 'DEBUG', '\nTestModule: ' + 'c' + ': Calculated: ' + '2.0' +
+                 '\nTestModule: ' + 'c' + ': Trusted:    ' + '2.2' + '\n'),
+                ('root',
+                 'ERROR', '\n\nVariable(s) ' + "['a', 'c']" + ' in module TestModule failed. Please check values.\n\nIf you '
+                 + 'are confident that the newly calculated values are correct, comment out the old trusted values for ' +
+                 "'TestModuleGlobals' in trusted_values_dict and copy the following code between the ##### into " +
+                 'trusted_values_dict. Make sure to fill out the TODO comment describing why the values had to be changed.'
+                 + ' Then re-run test script.\n#####\n\n# Generated on: ' + str(date.today()) + '\n# Reason for changing' +
+                 " values: TODO\ntrusted_values_dict['TestModuleGlobals'] = {" + "'a'" + ": mpf('" + '0.0' + "')" + ', ' +
+                 "'b'" + ": mpf('1.0')" + ", " + "'c'" + ": mpf('" + '2.0' + "')" "}\n\n#####")
             )
 
             logging.info('\nAll calc_error tests passed.\n')
@@ -463,8 +533,8 @@ class TestFunctions(unittest.TestCase):
                 [
                     'DEBUG:root:' + '\nTestModule: ' + 'a' + ': Calculated: ' + '1.0' + '\nTestModule: ' + 'a' +
                     ': Trusted:    ' + '2.0' + '\n',
-                    'INFO:root:' +
-                    '\n\nVariable ' + "'a'" + ' in module TestModule failed. Please check values.\n\nIf you are ' +
+                    'ERROR:root:' +
+                    '\n\nVariable(s) ' + "['a']" + ' in module TestModule failed. Please check values.\n\nIf you are ' +
                     'confident that the newly calculated values are correct, comment out the old trusted values for ' +
                     "'TestModuleGlobals' in trusted_values_dict and copy the following code between the ##### into " +
                     'trusted_values_dict. Make sure to fill out the TODO comment describing why the values had to be ' +
@@ -519,7 +589,7 @@ class TestFunctions(unittest.TestCase):
                 [
                     'DEBUG:root:' + '\nTestModule: ' + 'b' + ': Calculated: ' + '0.0' + '\nTestModule: ' + 'b'
                     + ': Trusted:    ' + '1.0e-15' + '\n',
-                    'INFO:root:' + '\n\nVariable ' + "'b'" + ' in module TestModule failed. Please check values.\n\nIf'
+                    'ERROR:root:' + '\n\nVariable(s) ' + "['b']" + ' in module TestModule failed. Please check values.\n\nIf'
                     + ' you are confident that the newly calculated values are correct, comment out the old trusted ' +
                     'values for ' + "'TestModuleGlobals' in trusted_values_dict and copy the following code between " +
                     "the ##### into " + 'trusted_values_dict. Make sure to fill out the TODO comment describing why ' +
@@ -551,7 +621,7 @@ class TestFunctions(unittest.TestCase):
                 [
                     'DEBUG:root:' + '\nTestModule: ' + 'alpha' + ': Calculated: ' + '1.0e-15' + '\nTestModule: ' +
                     'alpha' + ': Trusted:    ' + '0.0' + '\n',
-                    'INFO:root:' + '\n\nVariable ' + "'alpha'" + ' in module TestModule failed. Please check values.' +
+                    'ERROR:root:' + '\n\nVariable(s) ' + "['alpha']" + ' in module TestModule failed. Please check values.' +
                     '\n\nIf you are confident that the newly calculated values are correct, comment out the old ' +
                     'trusted values for ' + "'TestModuleGlobals' in trusted_values_dict and copy the following code" +
                     " between the ##### into " + 'trusted_values_dict. Make sure to fill out the TODO comment' +
@@ -583,7 +653,7 @@ class TestFunctions(unittest.TestCase):
                 [
                     'DEBUG:root:' + '\nTestModule: ' + 'f' + ': Calculated: ' + '123.012345678101234567890123457' +
                     '\nTestModule: ' + 'f' + ': Trusted:    ' + '123.012345678901234567890123457' + '\n',
-                    'INFO:root:' + '\n\nVariable ' + "'f'" + ' in module TestModule failed. Please check values.\n\n' +
+                    'ERROR:root:' + '\n\nVariable(s) ' + "['f']" + ' in module TestModule failed. Please check values.\n\n' +
                     'If you are confident that the newly calculated values are correct, comment out the old trusted ' +
                     'values for ' + "'TestModuleGlobals' in trusted_values_dict and copy the following code between" +
                     ' the ##### into trusted_values_dict. Make sure to fill out the TODO comment describing why the ' +
@@ -629,7 +699,9 @@ class TestFunctions(unittest.TestCase):
                 [
                     'DEBUG:root:' + '\nTestModule: ' + 'a' + ': Calculated: ' + '0.0' +
                     '\nTestModule: ' + 'a' + ': Trusted:    ' + '0.1' + '\n',
-                    'INFO:root:' + '\n\nVariable ' + "'a'" + ' in module TestModule failed. Please check values.\n\n' +
+                    'DEBUG:root:' + '\nTestModule: ' + 'b' + ': Calculated: ' + '1.0' +
+                    '\nTestModule: ' + 'b' + ': Trusted:    ' + '1.0' + '\n',
+                    'ERROR:root:' + '\n\nVariable(s) ' + "['a']" + ' in module TestModule failed. Please check values.\n\n' +
                     'If you are confident that the newly calculated values are correct, comment out the old trusted ' +
                     'values for ' + "'TestModuleGlobals' in trusted_values_dict and copy the following code between" +
                     ' the ##### into trusted_values_dict. Make sure to fill out the TODO comment describing why the' +
@@ -649,7 +721,9 @@ class TestFunctions(unittest.TestCase):
                 [
                     'DEBUG:root:' + '\nTestModule: ' + 'a' + ': Calculated: ' + '0.0' +
                     '\nTestModule: ' + 'a' + ': Trusted:    ' + '0.1' + '\n',
-                    'INFO:root:' + '\n\nVariable ' + "'a'" + ' in module TestModule failed. Please check values.\n\n' +
+                    'DEBUG:root:' + '\nTestModule: ' + 'b' + ': Calculated: ' + '1.1' +
+                    '\nTestModule: ' + 'b' + ': Trusted:    ' + '1.0' + '\n',
+                    'ERROR:root:' + '\n\nVariable(s) ' + "['a', 'b']" + ' in module TestModule failed. Please check values.\n\n' +
                     'If you are confident that the newly calculated values are correct, comment out the old trusted ' +
                     'values for ' + "'TestModuleGlobals' in trusted_values_dict and copy the following code between" +
                     ' the ##### into trusted_values_dict. Make sure to fill out the TODO comment describing why the' +
@@ -671,7 +745,7 @@ class TestFunctions(unittest.TestCase):
                     '\nTestModule: ' + 'a' + ': Trusted:    ' + '0.0' + '\n',
                     'DEBUG:root:' + '\nTestModule: ' + 'b' + ': Calculated: ' + '1.1' +
                     '\nTestModule: ' + 'b' + ': Trusted:    ' + '1.0' + '\n',
-                    'INFO:root:' + '\n\nVariable ' + "'b'" + ' in module TestModule failed. Please check values.\n\n' +
+                    'ERROR:root:' + '\n\nVariable(s) ' + "['b']" + ' in module TestModule failed. Please check values.\n\n' +
                     'If you are confident that the newly calculated values are correct, comment out the old trusted ' +
                     'values for ' + "'TestModuleGlobals' in trusted_values_dict and copy the following code between" +
                     ' the ##### into trusted_values_dict. Make sure to fill out the TODO comment describing why the' +
@@ -679,6 +753,75 @@ class TestFunctions(unittest.TestCase):
                     str(date.today()) + '\n# Reason for changing values: ' +
                     "TODO\ntrusted_values_dict['TestModuleGlobals'] = {" + "'a'" + ": mpf('" + '0.0' + "')" + ', ' +
                     "'b'" + ": mpf('1.1')" + "}\n\n#####"
+                ]
+            )
+
+            calculated_dict = {'a': mpf('0.0'), 'b': mpf('1.0'), 'c': mpf('2.0')}
+            trusted_dict = {'a': mpf('0.2'), 'b': mpf('1.2'), 'c': mpf('2.2')}
+
+            with self.assertLogs(level='DEBUG') as logger:
+                self.assertFalse(calc_error(mod, calculated_dict, trusted_dict))
+            self.assertEqual(logger.output,
+                [
+                    'DEBUG:root:' + '\nTestModule: ' + 'a' + ': Calculated: ' + '0.0' +
+                    '\nTestModule: ' + 'a' + ': Trusted:    ' + '0.2' + '\n',
+                    'DEBUG:root:' + '\nTestModule: ' + 'b' + ': Calculated: ' + '1.0' +
+                    '\nTestModule: ' + 'b' + ': Trusted:    ' + '1.2' + '\n',
+                    'DEBUG:root:' + '\nTestModule: ' + 'c' + ': Calculated: ' + '2.0' +
+                    '\nTestModule: ' + 'c' + ': Trusted:    ' + '2.2' + '\n',
+                    'ERROR:root:' + '\n\nVariable(s) ' + "['a', 'b', 'c']" + ' in module TestModule failed. Please check values.\n\nIf you '
+                    + 'are confident that the newly calculated values are correct, comment out the old trusted values for ' +
+                    "'TestModuleGlobals' in trusted_values_dict and copy the following code between the ##### into " +
+                    'trusted_values_dict. Make sure to fill out the TODO comment describing why the values had to be changed.'
+                    + ' Then re-run test script.\n#####\n\n# Generated on: ' + str(date.today()) + '\n# Reason for changing' +
+                    " values: TODO\ntrusted_values_dict['TestModuleGlobals'] = {" + "'a'" + ": mpf('" + '0.0' + "')" + ', ' +
+                    "'b'" + ": mpf('1.0')" + ", " + "'c'" + ": mpf('" + '2.0' + "')" "}\n\n#####"
+                ]
+            )
+
+            calculated_dict = {'a': mpf('0.0'), 'b': mpf('1.0'), 'c': mpf('2.0')}
+            trusted_dict = {'a': mpf('0.2'), 'b': mpf('1.0'), 'c': mpf('2.2')}
+
+            with self.assertLogs(level='DEBUG') as logger:
+                self.assertFalse(calc_error(mod, calculated_dict, trusted_dict))
+            self.assertEqual(logger.output,
+                [
+                    'DEBUG:root:' + '\nTestModule: ' + 'a' + ': Calculated: ' + '0.0' +
+                    '\nTestModule: ' + 'a' + ': Trusted:    ' + '0.2' + '\n',
+                    'DEBUG:root:' + '\nTestModule: ' + 'b' + ': Calculated: ' + '1.0' +
+                    '\nTestModule: ' + 'b' + ': Trusted:    ' + '1.0' + '\n',
+                    'DEBUG:root:' + '\nTestModule: ' + 'c' + ': Calculated: ' + '2.0' +
+                    '\nTestModule: ' + 'c' + ': Trusted:    ' + '2.2' + '\n',
+                    'ERROR:root:' + '\n\nVariable(s) ' + "['a', 'c']" + ' in module TestModule failed. Please check values.\n\nIf you '
+                    + 'are confident that the newly calculated values are correct, comment out the old trusted values for ' +
+                    "'TestModuleGlobals' in trusted_values_dict and copy the following code between the ##### into " +
+                    'trusted_values_dict. Make sure to fill out the TODO comment describing why the values had to be changed.'
+                    + ' Then re-run test script.\n#####\n\n# Generated on: ' + str(date.today()) + '\n# Reason for changing' +
+                    " values: TODO\ntrusted_values_dict['TestModuleGlobals'] = {" + "'a'" + ": mpf('" + '0.0' + "')" + ', ' +
+                    "'b'" + ": mpf('1.0')" + ", " + "'c'" + ": mpf('" + '2.0' + "')" "}\n\n#####"
+                ]
+            )
+
+            calculated_dict = {'c': mpf('2.0'), 'a': mpf('0.0'), 'b': mpf('1.0')}
+            trusted_dict = {'c': mpf('2.2'), 'a': mpf('0.2'), 'b': mpf('1.0')}
+
+            with self.assertLogs(level='DEBUG') as logger:
+                self.assertFalse(calc_error(mod, calculated_dict, trusted_dict))
+            self.assertEqual(logger.output,
+                [
+                    'DEBUG:root:' + '\nTestModule: ' + 'a' + ': Calculated: ' + '0.0' +
+                    '\nTestModule: ' + 'a' + ': Trusted:    ' + '0.2' + '\n',
+                    'DEBUG:root:' + '\nTestModule: ' + 'b' + ': Calculated: ' + '1.0' +
+                    '\nTestModule: ' + 'b' + ': Trusted:    ' + '1.0' + '\n',
+                    'DEBUG:root:' + '\nTestModule: ' + 'c' + ': Calculated: ' + '2.0' +
+                    '\nTestModule: ' + 'c' + ': Trusted:    ' + '2.2' + '\n',
+                    'ERROR:root:' + '\n\nVariable(s) ' + "['a', 'c']" + ' in module TestModule failed. Please check values.\n\nIf you '
+                    + 'are confident that the newly calculated values are correct, comment out the old trusted values for ' +
+                    "'TestModuleGlobals' in trusted_values_dict and copy the following code between the ##### into " +
+                    'trusted_values_dict. Make sure to fill out the TODO comment describing why the values had to be changed.'
+                    + ' Then re-run test script.\n#####\n\n# Generated on: ' + str(date.today()) + '\n# Reason for changing' +
+                    " values: TODO\ntrusted_values_dict['TestModuleGlobals'] = {" + "'a'" + ": mpf('" + '0.0' + "')" + ', ' +
+                    "'b'" + ": mpf('1.0')" + ", " + "'c'" + ": mpf('" + '2.0' + "')" "}\n\n#####"
                 ]
             )
 
@@ -691,17 +834,17 @@ class TestFunctions(unittest.TestCase):
         mod_dict = {}
         trusted_values_dict = {}
         first_times = {}
-        self.assertEqual(dict(), create_trusted_globals_dict(mod_dict, trusted_values_dict, first_times))
+        self.assertEqual({}, create_trusted_globals_dict(mod_dict, trusted_values_dict, first_times))
 
         mod_dict = {'mod': []}
         trusted_values_dict = {}
         first_times = {'mod': True}
-        self.assertEqual({'mod': dict()}, create_trusted_globals_dict(mod_dict, trusted_values_dict, first_times))
+        self.assertEqual({'mod': {}}, create_trusted_globals_dict(mod_dict, trusted_values_dict, first_times))
 
         mod_dict = {'mod': ['hello', 'world']}
         trusted_values_dict = {}
         first_times = {'mod': True}
-        self.assertEqual({'mod': dict()}, create_trusted_globals_dict(mod_dict, trusted_values_dict, first_times))
+        self.assertEqual({'mod': {}}, create_trusted_globals_dict(mod_dict, trusted_values_dict, first_times))
 
         with self.assertRaises(KeyError):
             mod_dict = {'mod': ['hello', 'world']}
@@ -744,7 +887,7 @@ class TestFunctions(unittest.TestCase):
 
         mod_dict = {'BrillLindquist': ['foo', 'bar']}
         first_times = {'BrillLindquist': False}
-        self.assertTrue(calc_error('BrillLindquist', {'alphaCart': mpf('0.122483331574515176153136610247876'), 'betaCartU[0]': mpf('0.0'), 'betaCartU[1]': mpf('0.0'), 'betaCartU[2]': mpf('0.0'), 'BCartU[0]': mpf('0.0'), 'BCartU[1]': mpf('0.0'), 'BCartU[2]': mpf('0.0'), 'gammaCartDD[0][0]': mpf('66.6570391079152319165851690987334'), 'gammaCartDD[0][1]': mpf('0.0'), 'gammaCartDD[0][2]': mpf('0.0'), 'gammaCartDD[1][0]': mpf('0.0'), 'gammaCartDD[1][1]': mpf('66.6570391079152319165851690987334'), 'gammaCartDD[1][2]': mpf('0.0'), 'gammaCartDD[2][0]': mpf('0.0'), 'gammaCartDD[2][1]': mpf('0.0'), 'gammaCartDD[2][2]': mpf('66.6570391079152319165851690987334'), 'KCartDD[0][0]': mpf('0.0'), 'KCartDD[0][1]': mpf('0.0'), 'KCartDD[0][2]': mpf('0.0'), 'KCartDD[1][0]': mpf('0.0'), 'KCartDD[1][1]': mpf('0.0'), 'KCartDD[1][2]': mpf('0.0'), 'KCartDD[2][0]': mpf('0.0'), 'KCartDD[2][1]': mpf('0.0'), 'KCartDD[2][2]': mpf('0.0')}
+        self.assertTrue(calc_error('BrillLindquist', trusted_values_dict['BrillLindquistGlobals']
                         , create_trusted_globals_dict(mod_dict, trusted_values_dict, first_times)['BrillLindquist']))
 
         mod_dict = {'BrillLindquist': ['foo', 'bar']}
@@ -935,88 +1078,67 @@ class TestFunctions(unittest.TestCase):
         mod_dict = {}
         trusted_values_dict = {}
         with self.assertRaises(AssertionError):
-            run_test(self, mod_dict, trusted_values_dict, locals())
+            run_test(self, mod_dict, trusted_values_dict, '', locals())
 
-    def test_var_dict_to_value_dict(self):
-        from UnitTesting.simplify_and_evaluate_sympy_expressions import var_dict_to_value_dict
-        from mpmath import mpf, sqrt, mp
-        from random import random, seed
-        from UnitTesting.calc_error import calc_error
-        from sympy.abc import x, y, z
+    def test_simplify_and_evaluate_sympy_expressions(self):
+        from UnitTesting.simplify_and_evaluate_sympy_expressions import simplify_and_evaluate_sympy_expressions
+        from mpmath import mpf, mp, pi, sqrt
+        import random
         import UnitTesting.standard_constants as sc
+        from sympy import symbols
+        import hashlib
+        from UnitTesting.calc_error import calc_error
 
-        seed(sc.seed)
         mp.dps = sc.precision
 
-        var_dict = dict()
-        self.assertEqual(dict(), var_dict_to_value_dict(var_dict))
+        var_dict = {}
+        self.assertEqual({}, simplify_and_evaluate_sympy_expressions(var_dict))
+        self.assertEqual({}, simplify_and_evaluate_sympy_expressions(var_dict, True))
 
-        first_val = mpf(sqrt(random()))
-        second_val = mpf(sqrt(random()))
-        third_val = mpf(sqrt(random()))
+        M_PI, M_SQRT1_2 = symbols('M_PI M_SQRT1_2')
 
-        var_dict = {'x': x}
-        trusted_dict = {'x': first_val}
-        calculated_dict = var_dict_to_value_dict(var_dict)
-        self.assertTrue(calc_error('mod', calculated_dict, trusted_dict,  output=False))
+        var_dict = {'a': M_PI}
+        trusted_dict = {'a': mpf(pi)}
+        self.assertTrue(calc_error('mod', simplify_and_evaluate_sympy_expressions(var_dict), trusted_dict, False))
 
-        var_dict = {'y': y}
-        trusted_dict = {'y': first_val}
-        calculated_dict = var_dict_to_value_dict(var_dict)
-        self.assertTrue(calc_error('mod', calculated_dict, trusted_dict, output=False))
+        var_dict = {'b': M_SQRT1_2}
+        trusted_dict = {'b': mpf(1/sqrt(2))}
+        self.assertTrue(calc_error('mod', simplify_and_evaluate_sympy_expressions(var_dict), trusted_dict, False))
 
-        var_dict = {'x': x, 'y': y}
-        trusted_dict = {'x': first_val, 'y': second_val}
-        calculated_dict = var_dict_to_value_dict(var_dict)
-        self.assertTrue(calc_error('mod', calculated_dict, trusted_dict, output=False))
+        var_dict = {'alpha': M_PI+M_SQRT1_2}
+        trusted_dict = {'alpha': mpf(pi)+mpf(1/sqrt(2))}
+        self.assertTrue(calc_error('mod', simplify_and_evaluate_sympy_expressions(var_dict), trusted_dict, False))
 
-        var_dict = {'y': y, 'x': x}
-        trusted_dict = {'y': second_val, 'x': first_val}
-        calculated_dict = var_dict_to_value_dict(var_dict)
-        self.assertTrue(calc_error('mod', calculated_dict, trusted_dict, output=False))
+        x, y, z = symbols('x y z')
 
-        var_dict = {'x': x, 'y': y, 'z': z}
-        trusted_dict = {'x': first_val, 'y': second_val, 'z': third_val}
-        calculated_dict = var_dict_to_value_dict(var_dict)
-        self.assertTrue(calc_error('mod', calculated_dict, trusted_dict, output=False))
+        symbs = {x: 0, y: 0, z: 0}
 
-        var_dict = {'x+y': x+y}
-        trusted_dict = {'x+y': first_val+second_val}
-        calculated_dict = var_dict_to_value_dict(var_dict)
-        self.assertTrue(calc_error('mod', calculated_dict, trusted_dict, output=False))
+        for symb in symbs:
+            random.seed(int(hashlib.md5(str(symb).encode()).hexdigest(), 16))
+            symbs[symb] = mpf(random.random())
 
-        var_dict = {'x/y': x/y, 'long_expression': (x+y)**2/(x*y)}
-        trusted_dict = {'x/y': first_val/second_val, 'long_expression': (first_val+second_val)**2/(first_val*second_val)}
-        calculated_dict = var_dict_to_value_dict(var_dict)
-        self.assertTrue(calc_error('mod', calculated_dict, trusted_dict, output=False))
+        var_dict = {'a': x}
+        trusted_dict = {'a': symbs[x]}
+        self.assertTrue(calc_error('mod', simplify_and_evaluate_sympy_expressions(var_dict), trusted_dict, False))
 
-        var_dict = {'x-x': x-x}
-        trusted_dict = {'x-x': mpf(0.0)}
-        calculated_dict = var_dict_to_value_dict(var_dict)
-        self.assertTrue(calc_error('mod', calculated_dict, trusted_dict, output=False))
+        var_dict = {'b': x+y}
+        trusted_dict = {'b': symbs[x] + symbs[y]}
+        self.assertTrue(calc_error('mod', simplify_and_evaluate_sympy_expressions(var_dict), trusted_dict, False))
 
-        with self.assertRaises(AttributeError):
-            var_dict = {'x': 0}
-            calculated_dict = var_dict_to_value_dict(var_dict)
+        var_dict = {'a': x, 'b': y, 'c': z}
+        trusted_dict = {'a': symbs[x], 'b': symbs[y], 'c': symbs[z]}
+        self.assertTrue(calc_error('mod', simplify_and_evaluate_sympy_expressions(var_dict), trusted_dict, False))
 
-        var_dict = {'t1': x**2 + y**2, 't2': x**2/y, 't3': x**4, 't4':x**2 + x**2*y + x**2/y + x**2*z}
-        trusted_dict = {'t1': first_val**2 + second_val**2, 't2': first_val**2/second_val, 't3': first_val**4,
-                        't4': first_val**2 + first_val**2*second_val + first_val**2/second_val + first_val**2*third_val}
-        calculated_dict = var_dict_to_value_dict(var_dict)
-        self.assertTrue(calc_error('mod', calculated_dict, trusted_dict, output=False))
+        var_dict = {'a': x**2, 'b': (x+y)/z}
+        trusted_dict = {'a': symbs[x]**2, 'b': (symbs[x]+symbs[y])/symbs[z]}
+        self.assertTrue(calc_error('mod', simplify_and_evaluate_sympy_expressions(var_dict), trusted_dict, False))
 
-        from sympy import symbols
+        var_dict = {'a': x**2 + 1, 'b': (x**2)**2, 'c': x**2 + y**2, 'd': 1-x**2, 'e': x**2*z}
+        trusted_dict = {'a': symbs[x]**2 + 1, 'b': symbs[x]**4, 'c': symbs[x]**2 + symbs[y]**2,
+                        'd': 1-symbs[x]**2, 'e': symbs[x]**2*symbs[z]}
+        self.assertTrue(calc_error('mod', simplify_and_evaluate_sympy_expressions(var_dict), trusted_dict, False))
 
-        M_SQRT1_2, M_PI = symbols('M_SQRT1_2 M_PI')
-
-        var_dict = {'pi': M_PI, 'sqrt': M_SQRT1_2}
-        trusted_dict = {'pi': mpf('3.14159265358979323846264338327933'),
-                        'sqrt': mpf('0.707106781186547524400844362104785')}
-        calculated_dict = var_dict_to_value_dict(var_dict)
-        for var in trusted_dict:
-            self.assertTrue(calc_error('Constants', calculated_dict, trusted_dict, output=False))
-
-        logging.info('\nAll var_dict_to_value_dict tests passed\n')
+        logging.info('\nAll simplify_and_evaluate_sympy_expressions tests passed\n')
 
 
 # Necessary for unittest class to work properly

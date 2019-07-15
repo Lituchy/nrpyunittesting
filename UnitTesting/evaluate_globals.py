@@ -1,6 +1,5 @@
-
-# Takes in a module dictionary [mod_dict] and locals [old_locals] and returns a dictionary [result_dict] containing
-# the symbolic expressions for each global specified in mod_dict
+# [evaluate_globals] takes in a module dictionary [mod_dict] and locals [old_locals] and returns a dictionary
+# [result_dict] containing the symbolic expressions for each global specified in mod_dict
 
 # Requires: Modules can't have the same name. Two globals for a given module can't have the same name.
 #           Functions must be able to be called on their respective module. Globals must 

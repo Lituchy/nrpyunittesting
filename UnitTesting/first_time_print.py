@@ -2,7 +2,8 @@ from datetime import date
 from setup_trusted_values_dict import find_path
 
 # Takes in a module [mod] and a module dictionary [mod_dict], and prints the code that needs to be copied
-# into trustedValuesDict.
+# into [trusted_values_dict] to the console, as well as to the file [trusted_values_dict] in [path].
+
 # Called by run_test
 
 

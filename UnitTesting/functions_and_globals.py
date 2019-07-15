@@ -1,4 +1,3 @@
-
 # functions_and_globals takes a list of functions [function_list] and a list of globals [global_list] and returns a
 # dictionary with keys 'function_list' and 'global_list', and respective values [function_list] and [global_list].
 # Mainly used for creating value of module dictionary.

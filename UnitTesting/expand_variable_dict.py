@@ -1,7 +1,9 @@
 from UnitTesting.get_variable_dimension import get_variable_dimension
 
-# expand_variable_dict takes in a variable dictionary [variable_dict] and returns a dictionary that represents
-# the expanded version of [variable_dict] according to the dimension of each tensor.
+# [expand_variable_dict] takes in a variable dictionary [variable_dict] and returns a dictionary that represents
+# the expanded version of [variable_dict] according to the dimension of each variable in [variable_dict].
+# Example: expand_variable_dict( { 'alpha': 0, 'betaU': [1, 3, 2] } ) --> { 'alpha': 0, 'betaU[0]': 1, 'betaU[1]': 3,
+#                                                                           'betaU[2]': 2 }
 
 # Called by run_test
 
@@ -32,7 +34,7 @@ def expand_variable_dict(variable_dict):
 
     return result_dict
 
-# Subfunctions:
+# Sub-functions:
 
 
 # iter_counter takes in a counter [counter] and a length [length] and returns the next number after counter

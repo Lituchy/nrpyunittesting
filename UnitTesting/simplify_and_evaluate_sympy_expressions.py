@@ -13,7 +13,7 @@ import hashlib
 # Called by run_test
 
 
-def simplify_and_evaluate_sympy_expressions(var_dict, first_time):
+def simplify_and_evaluate_sympy_expressions(var_dict, first_time=False):
 
     # If an empty variable dict is passed, return an empty dictionary
     if var_dict == dict():
@@ -96,7 +96,7 @@ def simplify_and_evaluate_sympy_expressions(var_dict, first_time):
                 result = recalculate_value(variable_dictionary, simplified_expression_dict[var][0],
                                            simplified_expression_dict[var][1], 2 * precision)
                 # If the new result dropped in value, we know it should actually be zero. Otherwise, do nothing.
-                if fabs(result) < 100 * 10 ** (-(4/3) * precision):
+                if fabs(result) < 10 ** (-(4/3) * precision):
                     logging.info("After re-evaluating with twice the digits of precision, |result| dropped to " +
                                  str(result) + ". Setting value to zero")
                     value_dict[var] = mpf('0.0')
