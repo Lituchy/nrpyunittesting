@@ -16,6 +16,7 @@ from mpmath import mp
 # [self]- The unittest self object,
 # [mod_dict]- The user-supplied dictionary of modules
 # [trusted_values_dict]- The dictionary of trusted values
+# [path]- The path to the directory where the test file is being run. Should usually be 'os.path.abspath(__file__)'
 # [locs]- The current local variables in the workspace. Should ALWAYS be locals()
 # It then runs a unittest, comparing calculated values with trusted values.
 # Throws an [AssertionError] if [mod_dict] is empty
@@ -103,5 +104,5 @@ def run_test(self, mod_dict, trusted_values_dict, path, locs):
 
     # If it's the first time for at least one module
     if True in first_times.values():
-        self.assertTrue(False, 'Automatically failing due to first time for at least one module. Please see above'
+        self.assertTrue(False, 'Automatically failing due to first time for at least one module. Please see above '
                                'for the code to copy into your trusted_values_dict.')

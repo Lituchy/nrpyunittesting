@@ -9,11 +9,26 @@ from setup_trusted_values_dict import find_path
 
 
 def first_time_print(mod, value_dict, path):
-    print('\nModule: ' + mod + '\nPlease copy the following code between the ##### and paste it into your' +
+    print('\nModule: ' + mod + '\nPlease copy the following code between the ##### and paste it into your ' +
           'trusted_values_dict.py file:\n' + "#####\n\n# Generated on: " + str(date.today()) +
-          "\ntrusted_values_dict['" + mod + "Globals'] = " + str(value_dict) + "\n\n#####")
+          "\ntrusted_values_dict['" + mod + "Globals'] = " + create_dict_string(value_dict) + "\n\n#####")
 
-    fw = open(find_path(path) + 'trusted_values_dict.py', 'a')
-    fw.write("\n# Generated on: " + str(date.today()) + "\ntrusted_values_dict['" + mod + "Globals'] = "
-             + str(value_dict) + '\n')
-    fw.close()
+    # fw = open(find_path(path) + 'trusted_values_dict.py', 'a')
+    # fw.write("\n# Generated on: " + str(date.today()) + "\ntrusted_values_dict['" + mod + "Globals'] = "
+    #          + str(value_dict) + '\n')
+    # fw.close()
+
+# Sub-function to properly format dict to print
+def create_dict_string(calculated_dict):
+
+    return_string = '{'
+
+    for var, num in sorted(calculated_dict.items()):
+        return_string += "'" + var + "': mpf('" + str(num) + "'), "
+
+    return_string = return_string[0:-2] + '}'
+
+    if return_string == '}':
+        return_string = '{}'
+
+    return return_string

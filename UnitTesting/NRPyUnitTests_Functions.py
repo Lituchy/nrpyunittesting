@@ -12,7 +12,7 @@ logging.basicConfig(level=logging.INFO)
 
 class TestFunctions(unittest.TestCase):
 
-    def test_calc_error(self):
+    def ftest_calc_error(self):
 
         if version_info[0] == 2 or version_info[1] < 4:
             from UnitTesting.calc_error import calc_error
@@ -827,7 +827,7 @@ class TestFunctions(unittest.TestCase):
 
             logging.info('\nAll calc_error tests passed.\n')
 
-    def test_create_trusted_globals_dict(self):
+    def ftest_create_trusted_globals_dict(self):
         from UnitTesting.create_trusted_globals_dict import create_trusted_globals_dict
         from mpmath import mpf
 
@@ -913,7 +913,7 @@ class TestFunctions(unittest.TestCase):
 
         logging.info('\nAll create_trusted_globals_dict tests passed.\n')
 
-    def test_evaluate_globals(self):
+    def ftest_evaluate_globals(self):
         from UnitTesting.evaluate_globals import evaluate_globals
         from UnitTesting.functions_and_globals import functions_and_globals
         import NRPy_param_funcs as par
@@ -957,7 +957,7 @@ class TestFunctions(unittest.TestCase):
 
         logging.info('\nAll evaluate_globals tests passed.\n')
 
-    def test_expand_variable_dict(self):
+    def ftest_expand_variable_dict(self):
         from UnitTesting.expand_variable_dict import expand_variable_dict
 
         variable_dict = dict()
@@ -994,10 +994,61 @@ class TestFunctions(unittest.TestCase):
 
         logging.info('\nAll expand_variable_dict tests passed.\n')
 
-    def ftest_first_time_print(self):
-        print('hi')
+    def test_first_time_print(self):
+        from UnitTesting.first_time_print import first_time_print
+        from datetime import date
+        from UnitTesting.standard_constants import precision
+        import os
+        import sys
+        from mpmath import mpf, mp
 
-    def test_functions_and_globals(self):
+        mp.dps = precision
+
+        path = os.path.abspath(__file__)
+
+        mod = 'TestModule'
+        value_dict = {}
+
+        captured_output = create_StringIO()
+        first_time_print(mod, value_dict, path)
+        self.assertEqual('\nModule: TestModule\nPlease copy the following code between the ##### and paste it into' +
+                         ' your trusted_values_dict.py file:\n#####\n\n# Generated on: ' + str(date.today()) +
+                         "\ntrusted_values_dict['TestModuleGlobals'] = {}\n\n#####\n", captured_output.getvalue())
+
+        mod = 'TestModule2'
+        value_dict = {'alpha': 0, 'beta': 1, 'gamma': 3}
+
+        captured_output = create_StringIO()
+        first_time_print(mod, value_dict, path)
+        self.assertEqual('\nModule: TestModule2\nPlease copy the following code between the ##### and paste it into' +
+                         ' your trusted_values_dict.py file:\n#####\n\n# Generated on: ' + str(date.today()) +
+                         "\ntrusted_values_dict['TestModule2Globals'] = {'alpha': mpf('0'), 'beta': mpf('1'), "
+                         "'gamma': mpf('3')}\n\n#####\n", captured_output.getvalue())
+
+        mod = 'TestModule3'
+        value_dict = {'beta': 0, 'gamma': 1, 'alpha': 3}
+
+        captured_output = create_StringIO()
+        first_time_print(mod, value_dict, path)
+        self.assertEqual('\nModule: TestModule3\nPlease copy the following code between the ##### and paste it into' +
+                         ' your trusted_values_dict.py file:\n#####\n\n# Generated on: ' + str(date.today()) +
+                         "\ntrusted_values_dict['TestModule3Globals'] = {'alpha': mpf('3'), 'beta': mpf('0'), "
+                         "'gamma': mpf('1')}\n\n#####\n", captured_output.getvalue())
+
+        mod = 'TestModule4'
+        value_dict = {'x': mpf('0.0'), 'y': mpf('1.23456789012345678912345')}
+
+        captured_output = create_StringIO()
+        first_time_print(mod, value_dict, path)
+        self.assertEqual('\nModule: TestModule4\nPlease copy the following code between the ##### and paste it into' +
+                         ' your trusted_values_dict.py file:\n#####\n\n# Generated on: ' + str(date.today()) +
+                         "\ntrusted_values_dict['TestModule4Globals'] = {'x': mpf('0.0'), "
+                         "'y': mpf('1.23456789012345678912345')}\n\n#####\n", captured_output.getvalue())
+
+        sys.stdout = sys.__stdout__
+        logging.info('\nAll first_time_print tests passed.\n')
+
+    def ftest_functions_and_globals(self):
         from UnitTesting.functions_and_globals import functions_and_globals
 
         basic_function_list = ['func1(), func2()']
@@ -1029,7 +1080,7 @@ class TestFunctions(unittest.TestCase):
 
         logging.info('\nAll functions_and_globals tests passed.\n')
 
-    def test_get_variable_dimension(self):
+    def ftest_get_variable_dimension(self):
         from UnitTesting.get_variable_dimension import get_variable_dimension
 
         rank0 = 4
@@ -1052,7 +1103,7 @@ class TestFunctions(unittest.TestCase):
 
         logging.info('\nAll get_variable_dimension tests passed.\n')
 
-    def test_is_first_time(self):
+    def ftest_is_first_time(self):
         from UnitTesting.is_first_time import is_first_time
         from BSSN.tests.trusted_values_dict import trusted_values_dict
 
@@ -1083,11 +1134,14 @@ class TestFunctions(unittest.TestCase):
         with self.assertRaises(AssertionError):
             run_test(self, mod_dict, trusted_values_dict, '', locals())
 
-    def ftest_setup_trusted_values_dict(self):
-        from UnitTesting.setup_trusted_values_dict import setup_class
-        print('hello')
+        logging.info('\nAll run_test tests passed.\n')
 
-    def test_simplify_and_evaluate_sympy_expressions(self):
+    def test_setup_trusted_values_dict(self):
+        from UnitTesting.setup_trusted_values_dict import setup_class
+
+        logging.info('\nAll setup_trusted_values_dict tests passed.\n')
+
+    def ftest_simplify_and_evaluate_sympy_expressions(self):
         from UnitTesting.simplify_and_evaluate_sympy_expressions import simplify_and_evaluate_sympy_expressions
         from mpmath import mpf, mp, pi, sqrt
         import random
@@ -1146,6 +1200,21 @@ class TestFunctions(unittest.TestCase):
         self.assertTrue(calc_error('mod', simplify_and_evaluate_sympy_expressions(var_dict), trusted_dict, False))
 
         logging.info('\nAll simplify_and_evaluate_sympy_expressions tests passed\n')
+
+
+# Sub-function for test_first_time_print
+def create_StringIO():
+    import sys
+
+    if version_info[0] == 2:
+        import StringIO
+        captured_output = StringIO.StringIO()
+    else:
+        import io
+        captured_output = io.StringIO()
+
+    sys.stdout = captured_output
+    return captured_output
 
 
 # Necessary for unittest class to work properly
