@@ -1,5 +1,6 @@
 from datetime import date
-from setup_trusted_values_dict import find_path
+from UnitTesting.setup_trusted_values_dict import find_path
+from UnitTesting.create_dict_string import create_dict_string
 
 # [first_time_print] takes in a module [mod], a value dictionary [value_dict], and a path [path], and prints to the
 # console the properly formatted trusted_values_dict entry based on [mod] and [value_dict]. Additionally, it appends
@@ -18,18 +19,3 @@ def first_time_print(mod, value_dict, path):
     #          + str(value_dict) + '\n')
     # fw.close()
 
-
-# Sub-function to properly format dict to print
-def create_dict_string(calculated_dict):
-
-    return_string = '{'
-
-    for var, num in sorted(calculated_dict.items(), key=lambda s: s[0].lower()):
-        return_string += "'" + var + "': mpf('" + str(num) + "'), "
-
-    return_string = return_string[0:-2] + '}'
-
-    if return_string == '}':
-        return_string = '{}'
-
-    return return_string

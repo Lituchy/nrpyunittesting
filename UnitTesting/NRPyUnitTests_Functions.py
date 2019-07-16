@@ -12,7 +12,7 @@ logging.basicConfig(level=logging.INFO)
 
 class TestFunctions(unittest.TestCase):
 
-    def ftest_calc_error(self):
+    def test_calc_error(self):
 
         if version_info[0] == 2 or version_info[1] < 4:
             from UnitTesting.calc_error import calc_error
@@ -827,7 +827,37 @@ class TestFunctions(unittest.TestCase):
 
             logging.info('\nAll calc_error tests passed.\n')
 
-    def ftest_create_trusted_globals_dict(self):
+    def test_create_dict_string(self):
+        from UnitTesting.create_dict_string import create_dict_string
+        from mpmath import mpf, mpc
+
+        calculated_dict = {}
+        self.assertEqual("{}", create_dict_string(calculated_dict))
+
+        calculated_dict = {'a': 0}
+        self.assertEqual("{'a': 0}", create_dict_string(calculated_dict))
+
+        calculated_dict = {'b': mpf('1.0')}
+        self.assertEqual("{'b': mpf('1.0')}", create_dict_string(calculated_dict))
+
+        calculated_dict = {'c': mpc(real='1.0', imag='2.0')}
+        self.assertEqual("{'c': mpc(real='1.0', imag='2.0')}", create_dict_string(calculated_dict))
+
+        calculated_dict = {'alpha': 4, 'beta': mpf('0.2'), 'gamma': mpc(real='3.14', imag='6.28')}
+        self.assertEqual("{'alpha': 4, 'beta': mpf('0.2'), 'gamma': mpc(real='3.14', imag='6.28')}",
+                         create_dict_string(calculated_dict))
+
+        calculated_dict = {'beta': mpf('0.2'), 'gamma': mpc(real='3.14', imag='6.28'), 'alpha': 4}
+        self.assertEqual("{'alpha': 4, 'beta': mpf('0.2'), 'gamma': mpc(real='3.14', imag='6.28')}",
+                         create_dict_string(calculated_dict))
+
+        calculated_dict = {'AZ': mpf('2.4287654'), 'ab': mpc(real='0.0', imag='123.1234123412341234')}
+        self.assertEqual("{'ab': mpc(real='0.0', imag='123.1234123412341234'), 'AZ': mpf('2.4287654')}",
+                         create_dict_string(calculated_dict))
+
+        logging.info('\nAll create_dict_string tests passed.\n')
+
+    def test_create_trusted_globals_dict(self):
         from UnitTesting.create_trusted_globals_dict import create_trusted_globals_dict
         from mpmath import mpf
 
@@ -913,7 +943,7 @@ class TestFunctions(unittest.TestCase):
 
         logging.info('\nAll create_trusted_globals_dict tests passed.\n')
 
-    def ftest_evaluate_globals(self):
+    def test_evaluate_globals(self):
         from UnitTesting.evaluate_globals import evaluate_globals
         from UnitTesting.functions_and_globals import functions_and_globals
         import NRPy_param_funcs as par
@@ -957,7 +987,7 @@ class TestFunctions(unittest.TestCase):
 
         logging.info('\nAll evaluate_globals tests passed.\n')
 
-    def ftest_expand_variable_dict(self):
+    def test_expand_variable_dict(self):
         from UnitTesting.expand_variable_dict import expand_variable_dict
 
         variable_dict = dict()
@@ -1022,8 +1052,8 @@ class TestFunctions(unittest.TestCase):
         first_time_print(mod, value_dict, path)
         self.assertEqual('\nModule: TestModule2\nPlease copy the following code between the ##### and paste it into' +
                          ' your trusted_values_dict.py file:\n#####\n\n# Generated on: ' + str(date.today()) +
-                         "\ntrusted_values_dict['TestModule2Globals'] = {'alpha': mpf('0'), 'beta': mpf('1'), "
-                         "'gamma': mpf('3')}\n\n#####\n", captured_output.getvalue())
+                         "\ntrusted_values_dict['TestModule2Globals'] = {'alpha': 0, 'beta': 1, 'gamma': 3}\n\n#####\n",
+                         captured_output.getvalue())
 
         mod = 'TestModule3'
         value_dict = {'beta': 0, 'gamma': 1, 'alpha': 3}
@@ -1032,8 +1062,8 @@ class TestFunctions(unittest.TestCase):
         first_time_print(mod, value_dict, path)
         self.assertEqual('\nModule: TestModule3\nPlease copy the following code between the ##### and paste it into' +
                          ' your trusted_values_dict.py file:\n#####\n\n# Generated on: ' + str(date.today()) +
-                         "\ntrusted_values_dict['TestModule3Globals'] = {'alpha': mpf('3'), 'beta': mpf('0'), "
-                         "'gamma': mpf('1')}\n\n#####\n", captured_output.getvalue())
+                         "\ntrusted_values_dict['TestModule3Globals'] = {'alpha': 3, 'beta': 0, 'gamma': 1}\n\n#####\n",
+                         captured_output.getvalue())
 
         mod = 'TestModule4'
         value_dict = {'x': mpf('0.0'), 'y': mpf('1.23456789012345678912345')}
@@ -1058,7 +1088,7 @@ class TestFunctions(unittest.TestCase):
         sys.stdout = sys.__stdout__
         logging.info('\nAll first_time_print tests passed.\n')
 
-    def ftest_functions_and_globals(self):
+    def test_functions_and_globals(self):
         from UnitTesting.functions_and_globals import functions_and_globals
 
         basic_function_list = ['func1(), func2()']
@@ -1090,7 +1120,7 @@ class TestFunctions(unittest.TestCase):
 
         logging.info('\nAll functions_and_globals tests passed.\n')
 
-    def ftest_get_variable_dimension(self):
+    def test_get_variable_dimension(self):
         from UnitTesting.get_variable_dimension import get_variable_dimension
 
         rank0 = 4
@@ -1113,7 +1143,7 @@ class TestFunctions(unittest.TestCase):
 
         logging.info('\nAll get_variable_dimension tests passed.\n')
 
-    def ftest_is_first_time(self):
+    def test_is_first_time(self):
         from UnitTesting.is_first_time import is_first_time
         from BSSN.tests.trusted_values_dict import trusted_values_dict
 
@@ -1151,7 +1181,7 @@ class TestFunctions(unittest.TestCase):
 
         logging.info('\nAll setup_trusted_values_dict tests passed.\n')
 
-    def ftest_simplify_and_evaluate_sympy_expressions(self):
+    def test_simplify_and_evaluate_sympy_expressions(self):
         from UnitTesting.simplify_and_evaluate_sympy_expressions import simplify_and_evaluate_sympy_expressions
         from mpmath import mpf, mp, pi, sqrt
         import random

@@ -2,7 +2,7 @@ import logging
 from mpmath import log10,fabs, mp
 from datetime import date
 from UnitTesting.standard_constants import precision
-from UnitTesting.first_time_print import create_dict_string
+from UnitTesting.create_dict_string import create_dict_string
 
 # Takes in a module [mod], a calculated dictionary [calculated_dict], and a trusted dictionary [trusted_dict],
 # and computes the error for each result-trusted pair for each respective index.
