@@ -1182,22 +1182,28 @@ class TestFunctions(unittest.TestCase):
 
         # Tests the setup_trusted_values_dict and the file-writing portion of first_time_print
         from UnitTesting.setup_trusted_values_dict import setup_class
-        import os
         import sys
+        import os
 
-        path = os.path.abspath(__file__)
-        print(path)
-        print(sys.path[0])
+        path = sys.path[0]
+
+        self.assertFalse(os.path.exists(path + '/trusted_values_dict.py'))
+
         setup_class(path)
 
         try:
-            fr = open('.trusted_values_dict.py', 'r')
+            fr = open(path + '/trusted_values_dict.py', 'r')
+            self.assertEqual(fr.read(), 'from mpmath import mpf, mp, mpc\nfrom UnitTesting.standard_constants import '
+                                        'precision\n\nmp.dps = precision\ntrusted_values_dict = {}\n')
+            fr.close()
+            os.remove(path + '/trusted_values_dict.py')
         except IOError:
-            print('error')
+            self.assertFalse(True, msg='trusted_values_dict.py not created in correct location.')
+
+
 
 
         logging.info('\nAll setup_trusted_values_dict tests passed.\n')
-
 
         logging.info('\nAll file-writing first_time_print tests passed.\n')
 
