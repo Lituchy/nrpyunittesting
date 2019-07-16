@@ -21,12 +21,13 @@ Timer = RepeatedTimer(300, logging.info, "\nPrinting every 5 minutes to prevent 
 
 # Python unittest class
 class TestGlobals(unittest.TestCase):
+
     @classmethod
     def setUpClass(cls):
         # Creating trusted_values_dict.py if it doesn't exist
-        import os
+        import sys
         global path
-        path = os.path.abspath(__file__)
+        path = sys.path[0]
         setup_class(path)
 
     @classmethod
