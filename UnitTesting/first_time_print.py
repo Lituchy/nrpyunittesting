@@ -18,12 +18,13 @@ def first_time_print(mod, value_dict, path):
     #          + str(value_dict) + '\n')
     # fw.close()
 
+
 # Sub-function to properly format dict to print
 def create_dict_string(calculated_dict):
 
     return_string = '{'
 
-    for var, num in sorted(calculated_dict.items()):
+    for var, num in sorted(calculated_dict.items(), key=lambda s: s[0].lower()):
         return_string += "'" + var + "': mpf('" + str(num) + "'), "
 
     return_string = return_string[0:-2] + '}'

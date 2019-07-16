@@ -1045,6 +1045,16 @@ class TestFunctions(unittest.TestCase):
                          "\ntrusted_values_dict['TestModule4Globals'] = {'x': mpf('0.0'), "
                          "'y': mpf('1.23456789012345678912345')}\n\n#####\n", captured_output.getvalue())
 
+        mod = 'TestModule5'
+        value_dict = {'AZ': mpf('0.0'), 'ab': mpf('1.0')}
+
+        captured_output = create_StringIO()
+        first_time_print(mod, value_dict, path)
+        self.assertEqual('\nModule: TestModule5\nPlease copy the following code between the ##### and paste it into' +
+                         ' your trusted_values_dict.py file:\n#####\n\n# Generated on: ' + str(date.today()) +
+                         "\ntrusted_values_dict['TestModule5Globals'] = {'ab': mpf('1.0'), "
+                         "'AZ': mpf('0.0')}\n\n#####\n", captured_output.getvalue())
+
         sys.stdout = sys.__stdout__
         logging.info('\nAll first_time_print tests passed.\n')
 

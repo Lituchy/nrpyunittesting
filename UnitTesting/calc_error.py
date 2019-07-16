@@ -2,6 +2,7 @@ import logging
 from mpmath import log10,fabs, mp
 from datetime import date
 from UnitTesting.standard_constants import precision
+from UnitTesting.first_time_print import create_dict_string
 
 # Takes in a module [mod], a calculated dictionary [calculated_dict], and a trusted dictionary [trusted_dict],
 # and computes the error for each result-trusted pair for each respective index.
@@ -69,16 +70,3 @@ def calc_error(mod, calculated_dict, trusted_dict, output=True):
                       mod + "Globals'] = " + create_dict_string(calculated_dict) + '\n\n#####')
 
     return bad_var_list == []
-
-
-# Sub-function to properly format dict to print
-def create_dict_string(calculated_dict):
-
-    return_string = '{'
-
-    for var, num in sorted(calculated_dict.items()):
-        return_string += "'" + var + "': mpf('" + str(num) + "'), "
-
-    return_string = return_string[0:-2] + '}'
-
-    return return_string
