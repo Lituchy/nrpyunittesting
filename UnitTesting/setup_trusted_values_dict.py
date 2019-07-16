@@ -10,16 +10,16 @@ import platform
 def setup_class(path):
 
     # Get the directory that the file [path] is in.
-    directory = find_path(path)
+    #directory = find_path(path)
 
     # Try opening [trusted_values_dict.py] in [directory].
     try:
-        fr = open(directory + 'trusted_values_dict.py', 'r')
+        fr = open(path + '/trusted_values_dict.py', 'r')
         fr.close()
     # If [trusted_values_dict.py] does not exist in [directory], create it with default contents.
     except IOError:
         logging.info('trusted_values_dict.py does not exist. Creating it...\n')
-        fw = open(directory + 'trusted_values_dict.py', 'w+')
+        fw = open(path + '/trusted_values_dict.py', 'w+')
         fw.write('from mpmath import mpf, mp, mpc\nfrom UnitTesting.standard_constants import precision\n\n'
                  'mp.dps = precision\ntrusted_values_dict = dict()\n')
         fw.close()
