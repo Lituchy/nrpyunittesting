@@ -4,7 +4,7 @@ import logging
 from UnitTesting.run_test import run_test
 from UnitTesting.functions_and_globals import functions_and_globals
 from UnitTesting.RepeatedTimer import RepeatedTimer
-from UnitTesting.setup_trusted_values_dict import setup_class
+from UnitTesting.setup_trusted_values_dict import setup_trusted_values_dict
 import sys
 
 # TODO: Change level based on desired amount of output.
