@@ -35,7 +35,7 @@ class TestGlobals(unittest.TestCase):
         Timer.stop()
 
     # Testing globals for reference_metric
-    def test_reference_metric_globals(self):
+    def ftest_reference_metric_globals(self):
 
         import trusted_values_dict
         import NRPy_param_funcs as par
@@ -43,8 +43,7 @@ class TestGlobals(unittest.TestCase):
         # Globals used by all coordinate systems
         basic_global_list = ['UnitVectors', 'ReU', 'ReDD', 'ghatDD', 'ghatUU', 'detgammahat', 'detgammahatdD',
                              'detgammahatdDD', 'ReUdD', 'ReUdDD', 'ReDDdD', 'ReDDdDD', 'ghatDDdD', 'ghatDDdDD',
-                             'GammahatUDD', 'GammahatUDDdD',
-                             'Cart_to_xx','xxCart','xxSph','scalefactor_orthog']
+                             'GammahatUDD', 'GammahatUDDdD', 'Cart_to_xx','xxCart','xxSph','scalefactor_orthog']
 
         # Dictionary of coordinate systems and their additional globals
         coord_dict = {'Spherical': ('True', ['xxmin', 'xxmax']), 'SinhSpherical': ('True', []),
@@ -76,16 +75,177 @@ class TestGlobals(unittest.TestCase):
 
             if sys.version_info[0] == 2:
                 reload(locals()['rfm_' + coord])
-                print('reload 0')
             elif sys.version_info[1] <= 3:
                 import imp
                 imp.reload(locals()['rfm_' + coord])
-                print('reload 1')
             else:
                 import importlib
                 importlib.reload(locals()['rfm_' + coord])
-                print('reload 2')
 
+    def test_Spherical(self):
+
+        import trusted_values_dict
+        import NRPy_param_funcs as par
+        import reference_metric as rfm_Spherical
+        par.set_parval_from_str("reference_metric::CoordSystem", 'Spherical')
+
+        global_list = ['xxmin', 'xxmax', 'UnitVectors', 'ReU', 'ReDD', 'ghatDD', 'ghatUU', 'detgammahat',
+                       'detgammahatdD', 'detgammahatdDD', 'ReUdD', 'ReUdDD', 'ReDDdD', 'ReDDdDD', 'ghatDDdD',
+                       'ghatDDdDD', 'GammahatUDD', 'GammahatUDDdD', 'Cart_to_xx','xxCart','xxSph','scalefactor_orthog']
+
+        mod_dict = {'rfm_Spherical': functions_and_globals(['reference_metric(True)'], global_list)}
+
+        run_test(self, mod_dict, trusted_values_dict.trusted_values_dict, path, locals())
+
+    def test_SinhSpherical(self):
+
+        import trusted_values_dict
+        import NRPy_param_funcs as par
+        import reference_metric as rfm_SinhSpherical
+        par.set_parval_from_str("reference_metric::CoordSystem", 'SinhSpherical')
+
+        global_list = ['xxmin', 'xxmax', 'UnitVectors', 'ReU', 'ReDD', 'ghatDD', 'ghatUU', 'detgammahat',
+                       'detgammahatdD', 'detgammahatdDD', 'ReUdD', 'ReUdDD', 'ReDDdD', 'ReDDdDD', 'ghatDDdD',
+                       'ghatDDdDD', 'GammahatUDD', 'GammahatUDDdD', 'Cart_to_xx','xxCart','xxSph','scalefactor_orthog']
+
+        mod_dict = {'rfm_SinhSpherical': functions_and_globals(['reference_metric(True)'], global_list)}
+
+        run_test(self, mod_dict, trusted_values_dict.trusted_values_dict, path, locals())
+
+    def test_SinhSphericalv2(self):
+
+        import trusted_values_dict
+        import NRPy_param_funcs as par
+        import reference_metric as rfm_SinhSphericalv2
+        par.set_parval_from_str("reference_metric::CoordSystem", 'SinhSphericalv2')
+
+        global_list = ['xxmin', 'xxmax', 'UnitVectors', 'ReU', 'ReDD', 'ghatDD', 'ghatUU', 'detgammahat',
+                       'detgammahatdD', 'detgammahatdDD', 'ReUdD', 'ReUdDD', 'ReDDdD', 'ReDDdDD', 'ghatDDdD',
+                       'ghatDDdDD', 'GammahatUDD', 'GammahatUDDdD', 'Cart_to_xx','xxCart','xxSph','scalefactor_orthog']
+
+        mod_dict = {'rfm_SinhSphericalv2': functions_and_globals(['reference_metric(True)'], global_list)}
+
+        run_test(self, mod_dict, trusted_values_dict.trusted_values_dict, path, locals())
+
+    def test_NobleSphericalThetaOptionOne(self):
+
+        import trusted_values_dict
+        import NRPy_param_funcs as par
+        import reference_metric as rfm_NobleSphericalThetaOptionOne
+        par.set_parval_from_str("reference_metric::CoordSystem", 'NobleSphericalThetaOptionOne')
+
+        global_list = ['UnitVectors', 'ReU', 'ReDD', 'ghatDD', 'ghatUU', 'detgammahat',
+                       'detgammahatdD', 'detgammahatdDD', 'ReUdD', 'ReUdDD', 'ReDDdD', 'ReDDdDD', 'ghatDDdD',
+                       'ghatDDdDD', 'GammahatUDD', 'GammahatUDDdD','xxCart','xxSph','scalefactor_orthog']
+
+        mod_dict = {'rfm_NobleSphericalThetaOptionOne': functions_and_globals(['reference_metric(False)'], global_list)}
+
+        run_test(self, mod_dict, trusted_values_dict.trusted_values_dict, path, locals())
+
+    def test_NobleSphericalThetaOptionTwo(self):
+
+        import trusted_values_dict
+        import NRPy_param_funcs as par
+        import reference_metric as rfm_NobleSphericalThetaOptionTwo
+        par.set_parval_from_str("reference_metric::CoordSystem", 'NobleSphericalThetaOptionTwo')
+
+        global_list = ['UnitVectors', 'ReU', 'ReDD', 'ghatDD', 'ghatUU', 'detgammahat',
+                       'detgammahatdD', 'detgammahatdDD', 'ReUdD', 'ReUdDD', 'ReDDdD', 'ReDDdDD', 'ghatDDdD',
+                       'ghatDDdDD', 'GammahatUDD', 'GammahatUDDdD','xxCart','xxSph','scalefactor_orthog']
+
+        mod_dict = {'rfm_NobleSphericalThetaOptionTwo': functions_and_globals(['reference_metric(False)'], global_list)}
+
+        run_test(self, mod_dict, trusted_values_dict.trusted_values_dict, path, locals())
+
+    def test_Cylindrical(self):
+
+        import trusted_values_dict
+        import NRPy_param_funcs as par
+        import reference_metric as rfm_Cylindrical
+        par.set_parval_from_str("reference_metric::CoordSystem", 'Cylindrical')
+
+        global_list = ['xxmin', 'xxmax', 'UnitVectors', 'ReU', 'ReDD', 'ghatDD', 'ghatUU', 'detgammahat',
+                       'detgammahatdD', 'detgammahatdDD', 'ReUdD', 'ReUdDD', 'ReDDdD', 'ReDDdDD', 'ghatDDdD',
+                       'ghatDDdDD', 'GammahatUDD', 'GammahatUDDdD', 'Cart_to_xx','xxCart','xxSph','scalefactor_orthog']
+
+        mod_dict = {'rfm_Cylindrical': functions_and_globals(['reference_metric(True)'], global_list)}
+
+        run_test(self, mod_dict, trusted_values_dict.trusted_values_dict, path, locals())
+
+    def test_SinhCylindrical(self):
+
+        import trusted_values_dict
+        import NRPy_param_funcs as par
+        import reference_metric as rfm_SinhCylindrical
+        par.set_parval_from_str("reference_metric::CoordSystem", 'SinhCylindrical')
+
+        global_list = ['xxmin', 'xxmax', 'UnitVectors', 'ReU', 'ReDD', 'ghatDD', 'ghatUU', 'detgammahat',
+                       'detgammahatdD', 'detgammahatdDD', 'ReUdD', 'ReUdDD', 'ReDDdD', 'ReDDdDD', 'ghatDDdD',
+                       'ghatDDdDD', 'GammahatUDD', 'GammahatUDDdD', 'Cart_to_xx','xxCart','xxSph','scalefactor_orthog']
+
+        mod_dict = {'rfm_SinhCylindrical': functions_and_globals(['reference_metric(True)'], global_list)}
+
+        run_test(self, mod_dict, trusted_values_dict.trusted_values_dict, path, locals())
+
+    def test_SinhCylindricalv2(self):
+
+        import trusted_values_dict
+        import NRPy_param_funcs as par
+        import reference_metric as rfm_SinhCylindricalv2
+        par.set_parval_from_str("reference_metric::CoordSystem", 'SinhCylindricalv2')
+
+        global_list = ['xxmin', 'xxmax', 'UnitVectors', 'ReU', 'ReDD', 'ghatDD', 'ghatUU', 'detgammahat',
+                       'detgammahatdD', 'detgammahatdDD', 'ReUdD', 'ReUdDD', 'ReDDdD', 'ReDDdDD', 'ghatDDdD',
+                       'ghatDDdDD', 'GammahatUDD', 'GammahatUDDdD', 'Cart_to_xx','xxCart','xxSph','scalefactor_orthog']
+
+        mod_dict = {'rfm_SinhCylindricalv2': functions_and_globals(['reference_metric(True)'], global_list)}
+
+        run_test(self, mod_dict, trusted_values_dict.trusted_values_dict, path, locals())
+
+    def test_SymTP(self):
+
+        import trusted_values_dict
+        import NRPy_param_funcs as par
+        import reference_metric as rfm_SymTP
+        par.set_parval_from_str("reference_metric::CoordSystem", 'SymTP')
+
+        global_list = ['xxmin', 'xxmax', 'UnitVectors', 'ReU', 'ReDD', 'ghatDD', 'ghatUU', 'detgammahat',
+                       'detgammahatdD', 'detgammahatdDD', 'ReUdD', 'ReUdDD', 'ReDDdD', 'ReDDdDD', 'ghatDDdD',
+                       'ghatDDdDD', 'GammahatUDD', 'GammahatUDDdD', 'Cart_to_xx','xxCart','xxSph','scalefactor_orthog']
+
+        mod_dict = {'rfm_SymTP': functions_and_globals(['reference_metric(True)'], global_list)}
+
+        run_test(self, mod_dict, trusted_values_dict.trusted_values_dict, path, locals())
+
+    def test_SinhSymTP(self):
+
+        import trusted_values_dict
+        import NRPy_param_funcs as par
+        import reference_metric as rfm_SinhSymTP
+        par.set_parval_from_str("reference_metric::CoordSystem", 'SinhSymTP')
+
+        global_list = ['xxmin', 'xxmax', 'UnitVectors', 'ReU', 'ReDD', 'ghatDD', 'ghatUU', 'detgammahat',
+                       'detgammahatdD', 'detgammahatdDD', 'ReUdD', 'ReUdDD', 'ReDDdD', 'ReDDdDD', 'ghatDDdD',
+                       'ghatDDdDD', 'GammahatUDD', 'GammahatUDDdD', 'Cart_to_xx','xxCart','xxSph','scalefactor_orthog']
+
+        mod_dict = {'rfm_SinhSymTP': functions_and_globals(['reference_metric(True)'], global_list)}
+
+        run_test(self, mod_dict, trusted_values_dict.trusted_values_dict, path, locals())
+
+    def test_Cartesian(self):
+
+        import trusted_values_dict
+        import NRPy_param_funcs as par
+        import reference_metric as rfm_Cartesian
+        par.set_parval_from_str("reference_metric::CoordSystem", 'Cartesian')
+
+        global_list = ['UnitVectors', 'ReU', 'ReDD', 'ghatDD', 'ghatUU', 'detgammahat',
+                       'detgammahatdD', 'detgammahatdDD', 'ReUdD', 'ReUdDD', 'ReDDdD', 'ReDDdDD', 'ghatDDdD',
+                       'ghatDDdDD', 'GammahatUDD', 'GammahatUDDdD', 'Cart_to_xx','xxCart','xxSph','scalefactor_orthog']
+
+        mod_dict = {'rfm_Cartesian': functions_and_globals(['reference_metric(True)'], global_list)}
+
+        run_test(self, mod_dict, trusted_values_dict.trusted_values_dict, path, locals())
 
 
 # Necessary for unittest class to work properly
