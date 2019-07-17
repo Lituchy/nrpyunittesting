@@ -76,13 +76,15 @@ class TestGlobals(unittest.TestCase):
 
             if sys.version_info[0] == 2:
                 reload(locals()['rfm_' + coord])
+                print('reload 0')
             elif sys.version_info[1] <= 3:
                 import imp
                 imp.reload(locals()['rfm_' + coord])
+                print('reload 1')
             else:
                 import importlib
                 importlib.reload(locals()['rfm_' + coord])
-
+                print('reload 2')
 
 
 
