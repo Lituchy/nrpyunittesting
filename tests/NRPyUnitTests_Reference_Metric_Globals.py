@@ -34,6 +34,22 @@ class TestGlobals(unittest.TestCase):
     def tearDownClass(cls):
         Timer.stop()
 
+    def tearDown(self):
+        import sys
+        import reference_metric
+        #import NRPy_param_funcs as par
+        if sys.version_info[0] == 2:
+            reload(reference_metric)
+            print('v2')
+        elif sys.version_info[1] <= 3:
+            import imp
+            imp.reload(reference_metric)
+            print('v3.3')
+        else:
+            import importlib
+            importlib.reload(reference_metric)
+            print('v3.4+')
+
     # Testing globals for reference_metric
     def ftest_reference_metric_globals(self):
 
