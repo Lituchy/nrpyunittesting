@@ -29,7 +29,7 @@ $PYTHONEXEC GiRaFFEfood_HO/tests/NRPyUnitTests_GiRaFFEfood_HO_Globals.py &&
 $PYTHONEXEC Maxwell/tests/NRPyUnitTests_Maxwell_Globals.py &&
 $PYTHONEXEC ScalarWave/tests/NRPyUnitTests_ScalarWave_Globals.py &&
 $PYTHONEXEC ScalarWaveCurvilinear/tests/NRPyUnitTests_ScalarWaveCurvilinear_Globals.py &&
-#$PYTHONEXEC u0_smallb_Poynting__Cartesian/tests/NRPyUnitTests_u0_smallb_Poynting__Cartesian_Globals.py #&&
+$PYTHONEXEC u0_smallb_Poynting__Cartesian/tests/NRPyUnitTests_u0_smallb_Poynting__Cartesian_Globals.py &&
 $PYTHONEXEC WeylScal4NRPy/tests/NRPyUnitTests_Globals_Default.py
 
 #$PYTHONEXEC TOV/tests/NRPyUnitTests_TOV_ADM_T4UUmunu_Globals.py

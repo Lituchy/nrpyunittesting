@@ -41,45 +41,27 @@ class TestGlobals(unittest.TestCase):
     # Testing globals
     def test_evol_globals(self):
 
-        import trusted_values_dict
+        module = 'Maxwell.MaxwellCartesian_Evol'
 
-        # TODO: Import modules to be tested
-        # Note: Even though it says the modules are unused, these imports are vital for run_test to work properly.
-        # Their information gets passed into run_test through locals()
-        import Maxwell.MaxwellCartesian_Evol as MaxwellCartesian_Evol
+        module_name = 'MaxwellCartesian_Evol'
 
-        # TODO: Create lists of globals to calculate
+        global_list = ['ArhsD', 'ErhsD', 'psi_rhs', 'Gamma_rhs', 'Cviola']
 
-        evol_global_list = ['ArhsD', 'ErhsD', 'psi_rhs', 'Gamma_rhs', 'Cviola']
+        function_list = ['MaxwellCartesian_Evol()']
 
-        # TODO: Create Module dictionary based on imported modules, functions to initialize the modules, and globals
-        # Note that the name of the modules in mod_dict MUST have the same name as the imported module.
-        # Example: If you say 'import My_Modules.Module1 as M1', then mod_dict should have the entry 'M1' as a string.
-        mod_dict = {'MaxwellCartesian_Evol': functions_and_globals(['MaxwellCartesian_Evol()'], evol_global_list)}
-
-        # TODO: Call run_test with arguments (self, mod_dict, locals())
-        run_test(self, mod_dict, trusted_values_dict.trusted_values_dict, path, locals())
+        run_test(self, path, module, module_name, global_list, function_list)
 
     def test_id_globals(self):
 
-        import trusted_values_dict
+        module = 'Maxwell.MaxwellCartesian_ID'
 
-        # TODO: Import modules to be tested
-        # Note: Even though it says the modules are unused, these imports are vital for run_test to work properly.
-        # Their information gets passed into run_test through locals()
-        import Maxwell.MaxwellCartesian_ID as MaxwellCartesian_ID
+        module_name = 'MaxwellCartesian_ID'
 
-        # TODO: Create lists of globals to calculate
+        global_list = ['AidD', 'EidD', 'psi_ID', 'Gamma_ID']
 
-        id_global_list = ['AidD', 'EidD', 'psi_ID', 'Gamma_ID']
+        function_list = ['MaxwellCartesian_ID()']
 
-        # TODO: Create Module dictionary based on imported modules, functions to initialize the modules, and globals
-        # Note that the name of the modules in mod_dict MUST have the same name as the imported module.
-        # Example: If you say 'import My_Modules.Module1 as M1', then mod_dict should have the entry 'M1' as a string.
-        mod_dict = {'MaxwellCartesian_ID': functions_and_globals(['MaxwellCartesian_ID()'], id_global_list)}
-
-        # TODO: Call run_test with arguments (self, mod_dict, locals())
-        run_test(self, mod_dict, trusted_values_dict.trusted_values_dict, path, locals())
+        run_test(self, path, module, module_name, global_list, function_list)
 
 
 # Necessary for unittest class to work properly

@@ -2,7 +2,6 @@
 import unittest
 import logging
 from UnitTesting.run_test import run_test
-from UnitTesting.functions_and_globals import functions_and_globals
 from UnitTesting.RepeatedTimer import RepeatedTimer
 from UnitTesting.setup_trusted_values_dict import setup_trusted_values_dict
 
@@ -35,191 +34,157 @@ class TestBSSNGlobals(unittest.TestCase):
 
     # Testing globals for ADM in terms of BSSN module
     def test_ADM_Globals(self):
-        import trusted_values_dict
 
-        # TODO: Import modules to be tested
-        # Note: Even though it says the modules are unused, these imports are vital for run_test to work properly.
-        # Their information gets passed into run_test through locals()
-        import BSSN.ADM_in_terms_of_BSSN as ADM_in_terms_of_BSSN
+        module = 'BSSN.ADM_in_terms_of_BSSN'
 
-        # TODO: Create lists of globals to calculate
-        ADM_in_terms_of_BSSN_global_list = ['gammaDD', 'gammaDDdD', 'gammaDDdDD', 'gammaUU', 'detgamma',
-                                      'GammaUDD', 'KDD', 'KDDdD']
+        module_name = 'ADM_in_terms_of_BSSN'
 
-        # TODO: Create Module dictionary based on imported modules, functions to initialize the modules, and globals
-        # Note that the name of the modules in mod_dict MUST have the same name as the imported module.
-        # Example: If you say 'import My_Modules.Module1 as M1', then mod_dict should have the entry 'M1' as a string.
-        mod_dict = {
-            'ADM_in_terms_of_BSSN': functions_and_globals(['ADM_in_terms_of_BSSN()'], ADM_in_terms_of_BSSN_global_list)
-        }
+        global_list = ['gammaDD', 'gammaDDdD', 'gammaDDdDD', 'gammaUU', 'detgamma', 'GammaUDD', 'KDD', 'KDDdD']
 
-        # TODO: Call run_test with arguments (self, mod_dict, locals())
-        run_test(self, mod_dict, trusted_values_dict.trusted_values_dict, path, locals())
+        function_list = ['ADM_in_terms_of_BSSN()']
+
+        run_test(self, path, module, module_name, global_list, function_list)
 
     # Testing globals for BSSN constraints
     def test_Constraints_Globals(self):
-        import trusted_values_dict
 
-        # TODO: Import modules to be tested
-        # Note: Even though it says the modules are unused, these imports are vital for run_test to work properly.
-        # Their information gets passed into run_test through locals()
-        import BSSN.BSSN_constraints as BSSN_constraints
+        module = 'BSSN.BSSN_constraints'
 
-        # TODO: Create lists of globals to calculate
-        constraints_global_list = ['H', 'MU']
+        module_name = 'BSSN_constraints'
 
-        # TODO: Create Module dictionary based on imported modules, functions to initialize the modules, and globals
-        # Note that the name of the modules in mod_dict MUST have the same name as the imported module.
-        # Example: If you say 'import MyModules.Module1 as M1', then mod_dict should have the entry 'M1' as a string.
-        mod_dict = {
-            'BSSN_constraints': functions_and_globals(['BSSN_constraints()'], constraints_global_list)
-        }
+        global_list = ['H', 'MU']
 
-        # TODO: Call run_test with arguments (self, mod_dict, locals())
-        run_test(self, mod_dict, trusted_values_dict.trusted_values_dict, path, locals())
+        function_list = ['BSSN_constraints()']
+
+        run_test(self, path, module, module_name, global_list, function_list)
 
     # Testing globals for BSSN exact modules
-    def test_Exact_Globals(self):
-        import trusted_values_dict
+    def test_BrillLindquist_Globals(self):
 
-        # TODO: Import modules to be tested
-        # Note: Even though it says the modules are unused, these imports are vital for run_test to work properly.
-        # Their information gets passed into run_test through locals()
-        import BSSN.BrillLindquist as BrillLindquist
-        import BSSN.ShiftedKerrSchild as ShiftedKerrSchild
-        import BSSN.StaticTrumpet as StaticTrumpet
-        import BSSN.UIUCBlackHole as UIUCBlackHole
+        module = 'BSSN.BrillLindquist'
 
-        # TODO: Create lists of globals to calculate
-        cart_global_list = ['alphaCart', 'betaCartU', 'BCartU', 'gammaCartDD', 'KCartDD']
-        sph_global_list = ['alphaSph', 'betaSphU', 'BSphU', 'gammaSphDD', 'KSphDD']
+        module_name = 'BrillLindquist'
 
-        # TODO: Create Module dictionary based on imported modules, functions to initialize the modules, and globals
-        # IMPORTANT: The name of the modules in mod_dict MUST have the same name as the imported module.
-        # Example: If you say 'import MyModules.Module1 as M1', then mod_dict should have the entry 'M1',not 'Module1'.
-        mod_dict = {
-            'BrillLindquist': functions_and_globals(['BrillLindquist(ComputeADMGlobalsOnly = True)'], cart_global_list),
+        global_list = ['alphaCart', 'betaCartU', 'BCartU', 'gammaCartDD', 'KCartDD']
 
-            'ShiftedKerrSchild': functions_and_globals(['ShiftedKerrSchild(ComputeADMGlobalsOnly = True)'],
-                                                     sph_global_list),
+        function_list = ['BrillLindquist(ComputeADMGlobalsOnly = True)']
 
-            'StaticTrumpet': functions_and_globals(['StaticTrumpet(ComputeADMGlobalsOnly = True)'], sph_global_list),
+        run_test(self, path, module, module_name, global_list, function_list)
 
-            'UIUCBlackHole': functions_and_globals(['UIUCBlackHole(ComputeADMGlobalsOnly = True)'], sph_global_list)
-        }
+    def test_UIUCBlackHole_Globals(self):
 
-        # TODO: Call run_test with arguments (self, mod_dict, locals())
-        run_test(self, mod_dict, trusted_values_dict.trusted_values_dict, path, locals())
+        module = 'BSSN.UIUCBlackHole'
+
+        module_name = 'UIUCBlackHole'
+
+        global_list = ['alphaSph', 'betaSphU', 'BSphU', 'gammaSphDD', 'KSphDD']
+
+        function_list = ['UIUCBlackHole(ComputeADMGlobalsOnly = True)']
+
+        run_test(self, path, module, module_name, global_list, function_list)
+
+    def test_StaticTrumpet_Globals(self):
+        module = 'BSSN.StaticTrumpet'
+
+        module_name = 'StaticTrumpet'
+
+        global_list = ['alphaSph', 'betaSphU', 'BSphU', 'gammaSphDD', 'KSphDD']
+
+        function_list = ['StaticTrumpet(ComputeADMGlobalsOnly = True)']
+
+        run_test(self, path, module, module_name, global_list, function_list)
+
+    def test_ShiftedKerrSchild_Globals(self):
+        module = 'BSSN.ShiftedKerrSchild'
+
+        module_name = 'ShiftedKerrSchild'
+
+        global_list = ['alphaSph', 'betaSphU', 'BSphU', 'gammaSphDD', 'KSphDD']
+
+        function_list = ['ShiftedKerrSchild(ComputeADMGlobalsOnly = True)']
+
+        run_test(self, path, module, module_name, global_list, function_list)
 
     # Testing globals for BSSN Psi4 Globals
     def test_Psi4_Globals(self):
-        import trusted_values_dict
 
-        # TODO: Import modules to be tested
-        # Note: Even though it says the modules are unused, these imports are vital for run_test to work properly.
-        # Their information gets passed into run_test through locals()
-        import BSSN.Psi4 as Psi4
-        import BSSN.Psi4_tetrads as Psi4Tetrads
+        module = 'BSSN.Psi4'
 
-        # TODO: Create lists of globals to calculate
-        psi4_global_list = ['psi4_re_pt', 'psi4_im_pt']
-        psi4_tetrads_global_list = ['l4U', 'n4U', 'mre4U', 'mim4U']
+        module_name = 'Psi4'
 
-        # TODO: Create Module dictionary based on imported modules, functions to initialize the modules, and globals
-        # Note that the name of the modules in mod_dict MUST have the same name as the imported module.
-        # Example: If you say 'import MyModules.Module1 as M1', then mod_dict should have the entry 'M1' as a string.
-        mod_dict = {
-            'Psi4': functions_and_globals(['Psi4(specify_tetrad=False)'], psi4_global_list),
+        global_list = ['psi4_re_pt', 'psi4_im_pt']
 
-            'Psi4Tetrads': functions_and_globals(['Psi4_tetrads()'], psi4_tetrads_global_list)
-        }
+        function_list = ['Psi4(specify_tetrad=False)']
 
-        # TODO: Call run_test with arguments (self, mod_dict, locals())
-        run_test(self, mod_dict, trusted_values_dict.trusted_values_dict, path, locals())
+        run_test(self, path, module, module_name, global_list, function_list)
+
+    def test_Psi4Tetrads_globals(self):
+
+        module = 'BSSN.Psi4_tetrads'
+
+        module_name = 'Psi4_tetrads'
+
+        global_list = ['l4U', 'n4U', 'mre4U', 'mim4U']
+
+        function_list = ['Psi4_tetrads()']
+
+        run_test(self, path, module, module_name, global_list, function_list)
 
     # Testing globals for BSSN quantities
     def test_Quantities_Globals(self):
-        import trusted_values_dict
 
-        # TODO: Import modules to be tested
-        # Note: Even though it says the modules are unused, these imports are vital for run_test to work properly.
-        # Their information gets passed into run_test through locals()
-        import BSSN.BSSN_quantities as BSSN_quantities
+        module = 'BSSN.BSSN_quantities'
 
-        # TODO: Modules that need to be imported to pre-initialize module and their function calls
-        import reference_metric as rfm
-        rfm.reference_metric()
+        module_name = 'BSSN_quantities'
 
-        # TODO: Create lists of globals to calculate
-        quantities_function_list = ['declare_BSSN_gridfunctions_if_not_declared_already()', 'BSSN_basic_tensors()',
+        global_list = ['hDD', 'aDD', 'lambdaU', 'vetU', 'betU', 'trK', 'cf', 'alpha', 'gammabarDD', 'AbarDD',
+                       'LambdabarU', 'betaU', 'BU', 'gammabarUU', 'gammabarDD_dD', 'gammabarDD_dupD',
+                       'gammabarDD_dDD', 'GammabarUDD', 'detgammabar', 'detgammabar_dD', 'detgammabar_dDD',
+                       'AbarUU', 'AbarUD', 'trAbar', 'AbarDD_dD', 'AbarDD_dupD', 'RbarDD', 'DGammaUDD',
+                       'gammabarDD_dHatD', 'DGammaU', 'betaU_dD', 'betaU_dupD', 'betaU_dDD', 'phi_dD',
+                       'phi_dupD', 'phi_dDD', 'exp_m4phi', 'phi_dBarD', 'phi_dBarDD']
+
+        function_list = ['declare_BSSN_gridfunctions_if_not_declared_already()', 'BSSN_basic_tensors()',
                  'gammabar__inverse_and_derivs()', 'detgammabar_and_derivs()', 'AbarUU_AbarUD_trAbar_AbarDD_dD()',
                  'RicciBar__gammabarDD_dHatD__DGammaUDD__DGammaU()', 'betaU_derivs()', 'phi_and_derivs()']
 
-        quantities_global_list = ['hDD', 'aDD', 'lambdaU', 'vetU', 'betU', 'trK', 'cf', 'alpha', 'gammabarDD', 'AbarDD',
-                                'LambdabarU', 'betaU', 'BU', 'gammabarUU', 'gammabarDD_dD', 'gammabarDD_dupD',
-                                'gammabarDD_dDD', 'GammabarUDD', 'detgammabar', 'detgammabar_dD', 'detgammabar_dDD',
-                                'AbarUU', 'AbarUD', 'trAbar', 'AbarDD_dD', 'AbarDD_dupD', 'RbarDD', 'DGammaUDD',
-                                'gammabarDD_dHatD', 'DGammaU', 'betaU_dD', 'betaU_dupD', 'betaU_dDD', 'phi_dD',
-                                'phi_dupD', 'phi_dDD', 'exp_m4phi', 'phi_dBarD', 'phi_dBarDD']
+        run_test(self, path, module, module_name, global_list, function_list)
 
-        # TODO: Create Module dictionary based on imported modules, functions to initialize the modules, and globals
-        # Note that the name of the modules in mod_dict MUST have the same name as the imported module.
-        # Example: If you say 'import MyModules.Module1 as M1', then mod_dict should have the entry 'M1' as a string.
-        mod_dict = {
-            'BSSN_quantities': functions_and_globals(quantities_function_list, quantities_global_list)
-        }
-
-        # TODO: Call run_test with arguments (self, mod_dict, locals())
-        run_test(self, mod_dict, trusted_values_dict.trusted_values_dict, path, locals())
-
-    # Testing globals for BSSN RHS
     def test_RHS_Globals(self):
-        import trusted_values_dict
 
-        # TODO: Import modules to be tested
-        # Note: Even though it says the modules are unused, these imports are vital for run_test to work properly.
-        # Their information gets passed into run_test through locals()
-        import BSSN.BSSN_RHSs as RHS
-        import BSSN.BSSN_gauge_RHSs as gaugeRHS
+        module = 'BSSN.BSSN_RHSs'
 
-        # TODO: Create lists of globals to calculate
-        RHS_global_list = ['cf_rhs', 'trK_rhs', 'lambda_rhsU', 'a_rhsDD', 'h_rhsDD']
-        gauge_RHS_global_list = ['alpha_rhs', 'bet_rhsU', 'vet_rhsU']
+        module_name = 'BSSN_RHSs'
 
-        # TODO: Create Module dictionary based on imported modules, functions to initialize the modules, and globals
-        # Note that the name of the modules in mod_dict MUST have the same name as the imported module.
-        # Example: If you say 'import MyModules.Module1 as M1', then mod_dict should have the entry 'M1' as a string.
-        mod_dict = {
-            'RHS': functions_and_globals(['BSSN_RHSs()'], RHS_global_list),
+        global_list = ['cf_rhs', 'trK_rhs', 'lambda_rhsU', 'a_rhsDD', 'h_rhsDD']
 
-            'gaugeRHS': functions_and_globals(['BSSN_gauge_RHSs()'], gauge_RHS_global_list),
-        }
+        function_list = ['BSSN_RHSs()']
 
-        # TODO: Call run_test with arguments (self, mod_dict, locals())
-        run_test(self, mod_dict, trusted_values_dict.trusted_values_dict, path, locals())
+        run_test(self, path, module, module_name, global_list, function_list)
 
-    # Testing globals for BSSN T4UUmunu_vars
+    def test_gauge_RHSs_Globals(self):
+
+        module = 'BSSN.BSSN_gauge_RHSs'
+
+        module_name = 'gauge_RHSs'
+
+        global_list = ['alpha_rhs', 'bet_rhsU', 'vet_rhsU']
+
+        function_list = ['BSSN_gauge_RHSs()']
+
+        run_test(self, path, module, module_name, global_list, function_list)
+
     def test_T4UU_Globals(self):
-        import trusted_values_dict
 
-        # TODO: Import modules to be tested
-        # Note: Even though it says the modules are unused, these imports are vital for run_test to work properly.
-        # Their information gets passed into run_test through locals()
-        import BSSN.BSSN_T4UUmunu_vars as BSSN_T4UUmunu_vars
+        module = 'BSSN.BSSN_T4UUmunu_vars'
 
-        # TODO: Create lists of globals to calculate
-        T4UU_global_list = ['rho', 'S', 'sD', 'sDD']
+        module_name = 'T4UUmunu_vars'
 
-        # TODO: Create Module dictionary based on imported modules, functions to initialize the modules, and globals
-        # Note that the name of the modules in mod_dict MUST have the same name as the imported module.
-        # Example: If you say 'import MyModules.Module1 as M1', then mod_dict should have the entry 'M1' as a string.
-        mod_dict = {
-            'BSSN_T4UUmunu_vars': functions_and_globals(['define_BSSN_T4UUmunu_rescaled_source_terms()'],
-                                                        T4UU_global_list)
-        }
+        global_list = ['rho', 'S', 'sD', 'sDD']
 
-        # TODO: Call run_test with arguments (self, mod_dict, locals())
-        run_test(self, mod_dict, trusted_values_dict.trusted_values_dict, path, locals())
+        function_list = ['define_BSSN_T4UUmunu_rescaled_source_terms()']
+
+        run_test(self, path, module, module_name, global_list, function_list)
 
 
 # Necessary for unittest class to work properly

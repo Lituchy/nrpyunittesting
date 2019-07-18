@@ -2,7 +2,6 @@
 import unittest
 import logging
 from UnitTesting.run_test import run_test
-from UnitTesting.functions_and_globals import functions_and_globals
 from UnitTesting.RepeatedTimer import RepeatedTimer
 from UnitTesting.setup_trusted_values_dict import setup_trusted_values_dict
 
@@ -37,23 +36,15 @@ class TestGlobals(unittest.TestCase):
     # Testing globals
     def test_globals(self):
 
-        import trusted_values_dict
+        module = 'FishboneMoncriefID.FishboneMoncriefID'
 
-        # TODO: Import modules to be tested
-        # Note: Even though it says the modules are unused, these imports are vital for run_test to work properly.
-        # Their information gets passed into run_test through locals()
-        import FishboneMoncriefID.FishboneMoncriefID as FishBoneMoncriefID
+        module_name = 'FishBoneMoncriefID'
 
-        # TODO: Create lists of globals to calculate
         global_list = ['hm1', 'rho_initial', 'IDalpha', 'IDgammaDD', 'IDKDD', 'IDbetaU', 'IDValencia3velocityU']
 
-        # TODO: Create Module dictionary based on imported modules, functions to initialize the modules, and globals
-        # Note that the name of the modules in mod_dict MUST have the same name as the imported module.
-        # Example: If you say 'import My_Modules.Module1 as M1', then mod_dict should have the entry 'M1' as a string.
-        mod_dict = {'FishBoneMoncriefID': functions_and_globals(['FishboneMoncriefID()'], global_list)}
+        function_list = ['FishboneMoncriefID()']
 
-        # TODO: Call run_test with arguments (self, mod_dict, locals())
-        run_test(self, mod_dict, trusted_values_dict.trusted_values_dict, path, locals())
+        run_test(self, path, module, module_name, global_list, function_list)
 
 
 # Necessary for unittest class to work properly

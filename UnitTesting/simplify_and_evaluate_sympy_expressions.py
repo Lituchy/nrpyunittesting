@@ -13,10 +13,10 @@ import hashlib
 # Called by run_test
 
 
-def simplify_and_evaluate_sympy_expressions(var_dict, first_time=False):
+def simplify_and_evaluate_sympy_expressions(expanded_var_dict, first_time=False):
 
     # If an empty variable dict is passed, return an empty dictionary
-    if var_dict == dict():
+    if expanded_var_dict == dict():
         return dict()
 
     # Setting precision
@@ -25,7 +25,7 @@ def simplify_and_evaluate_sympy_expressions(var_dict, first_time=False):
 
     # Creating free_symbols_set, which stores all free symbols from all expressions.
     free_symbols_set = set()
-    for val in var_dict.values():
+    for val in expanded_var_dict.values():
         free_symbols_set = free_symbols_set | val.free_symbols
 
     # Initializing variable_dictionary
@@ -54,7 +54,7 @@ def simplify_and_evaluate_sympy_expressions(var_dict, first_time=False):
     simplified_expression_dict = dict()
 
     # Evaluating each expression using the values in var_dict
-    for var, expression in var_dict.items():
+    for var, expression in expanded_var_dict.items():
 
         # Using sympy's cse algorithm to optimize our value substitution
         replaced, reduced = cse(expression, order='none')

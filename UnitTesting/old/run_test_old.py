@@ -8,11 +8,8 @@ from UnitTesting.simplify_and_evaluate_sympy_expressions import simplify_and_eva
 from UnitTesting.is_first_time import is_first_time
 from UnitTesting.create_trusted_globals_dict import create_trusted_globals_dict
 from UnitTesting.standard_constants import precision
-from UnitTesting.functions_and_globals import functions_and_globals
 from time import time
 from mpmath import mp
-from importlib import import_module
-import sys
 
 
 # run_test takes in :
@@ -23,24 +20,12 @@ import sys
 # [locs]- The current local variables in the workspace. Should ALWAYS be locals()
 # It then runs a unittest, comparing calculated values with trusted values.
 # Throws an [AssertionError] if [mod_dict] is empty
-def run_test_new(self, path, module, module_name, global_list, function_list):
+def run_test(self, mod_dict, trusted_values_dict, path, locs):
 
-    # Assuring correct type for all arguments
-    self.assertTrue(type(path) == str, "'path' argument of run_test has incorrect type -- should be str.")
-    self.assertTrue(type(module) == str, "'module' argument of run_test has incorrect type -- should be str.")
-    self.assertTrue(type(module_name) == str, "'module_name' argument of run_test has incorrect type -- should be str.")
-    self.assertTrue(type(global_list) == list,
-                    "'global_list' argument of run_test has incorrect type -- should be list.")
-    self.assertTrue(type(function_list) == list,
-                    "'function_list' argument of run_test has incorrect type -- should be list.")
+    # Can't use empty dictionaries
+    assert mod_dict != dict()
 
     mp.dps = precision
-
-    mod_dict = {module_name: functions_and_globals(function_list, global_list)}
-
-    sys.path.append(path)
-
-    trusted_values_dict = import_module('trusted_values_dict').trusted_values_dict
 
     # Determining if this is the first time the code is run based of the existence of trusted values
     first_times = is_first_time(mod_dict, trusted_values_dict)

@@ -12,19 +12,9 @@
 # Called by run_test
 
 
-def create_trusted_globals_dict(mod_dict, trusted_values_dict, first_times):
+def create_trusted_globals_dict(module_name, trusted_values_dict, first_time):
 
-    assert set(mod_dict.keys()) == set(first_times.keys())
-
-    trusted_dict = dict()
-
-    for mod in mod_dict:
-
-        first_time = first_times[mod]
-
-        if first_time:
-            trusted_dict[mod] = dict()
-        else:
-            trusted_dict[mod] = trusted_values_dict[mod + 'Globals']
-
-    return trusted_dict
+    if first_time:
+        return {}
+    else:
+        return trusted_values_dict[module_name + 'Globals']

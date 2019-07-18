@@ -12,28 +12,21 @@
 # Called by run_test
 
 
-def evaluate_globals(mod_dict, old_locals):
+def evaluate_globals(module_name, global_list, function_list, module):
 
-    result_dict = dict()
-    
-    for mod,func_glob_dict in mod_dict.items():
+    # Initializing string of execution
+    stringexec = ''
 
-        # Initializing string of execution
-        stringexec = ''
+    # Calling all functions and assigning all globals
+    for function in function_list:
+        stringexec += module_name + '.' + function + '\n'
+    for glob in global_list:
+        stringexec += glob + '=' + module_name + '.' + glob + '\n'
 
-        # Calling all functions and assigning all globals
-        for function in func_glob_dict['function_list']:
-            stringexec += mod + '.' + function + '\n'
-        for glob in func_glob_dict['global_list']:
-            stringexec += glob + '=' + mod + '.' + glob + '\n'
+    # Initializing location
+    var_dict = {}
 
-        # Initializing location 
-        loc = {}
+    # Executing string of execution with current globals and storing resulting globals in loc
+    exec(stringexec, {module_name: module}, var_dict)
 
-        # Executing string of execution with current globals and storing resulting globals in loc
-        exec(stringexec, old_locals, loc)
-        
-        # Storing the module-variable pair [mod],[loc] into the dictionary [resultDict]
-        result_dict[mod] = loc
-        
-    return result_dict
+    return var_dict
