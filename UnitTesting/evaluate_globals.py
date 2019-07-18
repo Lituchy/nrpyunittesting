@@ -12,21 +12,21 @@
 # Called by run_test
 
 
-def evaluate_globals(module_name, global_list, function_list, module):
+def evaluate_globals(module, module_name, global_list, function_list):
 
     # Initializing string of execution
-    stringexec = ''
+    string_exec = ''
 
     # Calling all functions and assigning all globals
     for function in function_list:
-        stringexec += module_name + '.' + function + '\n'
+        string_exec += module_name + '.' + function + '\n'
     for glob in global_list:
-        stringexec += glob + '=' + module_name + '.' + glob + '\n'
+        string_exec += glob + '=' + module_name + '.' + glob + '\n'
 
     # Initializing location
     var_dict = {}
 
     # Executing string of execution with current globals and storing resulting globals in loc
-    exec(stringexec, {module_name: module}, var_dict)
+    exec(string_exec, {module_name: module}, var_dict)
 
     return var_dict

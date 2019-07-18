@@ -47,7 +47,7 @@ def run_test(self, path, module, module_name, global_list, function_list):
         self.assertTrue(False, "Argument 'module' in run_test does not exist as a module. Check path input.")
 
     # Creating dictionary of expressions for all modules in ModDict
-    var_dict = evaluate_globals(module_name, global_list, function_list, module)
+    var_dict = evaluate_globals(module, module_name, global_list, function_list)
 
     if not first_time:
         logging.info('Currently working on module ' + module_name + '...')
