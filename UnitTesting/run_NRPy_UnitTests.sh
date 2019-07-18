@@ -21,7 +21,8 @@ echo "########################################"
 
 #$PYTHONEXEC tests/NRPyUnitTests_Reference_Metric_Globals.py #&&
 
-$PYTHONEXEC UnitTesting/NRPyUnitTests_Functions.py &&
+#$PYTHONEXEC UnitTesting/NRPyUnitTests_Functions.py &&
+
 $PYTHONEXEC BSSN/tests/NRPyUnitTests_BSSN_Globals.py &&
 $PYTHONEXEC FishboneMoncriefID/tests/NRPyUnitTests_FishboneMoncriefID_Globals.py &&
 $PYTHONEXEC GiRaFFE_HO/tests/NRPyUnitTests_GiRaFFE_HO_Globals.py &&
