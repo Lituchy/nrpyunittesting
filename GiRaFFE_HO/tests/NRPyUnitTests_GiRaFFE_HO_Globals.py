@@ -33,9 +33,11 @@ class TestGlobals(unittest.TestCase):
     def tearDownClass(cls):
         Timer.stop()
 
-    def tearDown(self):
+    def setUp(self):
         import grid as gri
-        gri.glb_gridfcs_list = []
+        from UnitTesting.reload_module import reload_module
+        #gri.glb_gridfcs_list = []
+        reload_module(gri)
 
     # Testing globals
     def test_globals(self):

@@ -35,6 +35,11 @@ class TestGlobals(unittest.TestCase):
     def tearDownClass(cls):
         Timer.stop()
 
+    def setUp(self):
+        import reference_metric as rfm
+        from UnitTesting.reload_module import reload_module
+        reload_module(rfm)
+
     # Testing globals for reference_metric
     def ftest_reference_metric_globals(self):
 
@@ -97,10 +102,9 @@ class TestGlobals(unittest.TestCase):
 
         function_list = ['reference_metric(True)']
 
-        run_test(self, path, module, module_name, global_list, function_list,
-                 additional_string_exec='import NRPy_param_funcs as par\npar.set_parval_from_str("reference_metric::CoordSystem", "Spherical")')
+        run_test(self, path, module, module_name, global_list, function_list)
 
-    def ftest_SinhSpherical(self):
+    def test_SinhSpherical(self):
 
         par.set_parval_from_str("reference_metric::CoordSystem", 'SinhSpherical')
 
