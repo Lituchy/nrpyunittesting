@@ -36,6 +36,7 @@ class TestGlobals(unittest.TestCase):
         Timer.stop()
 
     def setUp(self):
+        # Deleting all attributes of reference_metric before running test
         import reference_metric as rfm
         from UnitTesting.reload_module import reload_module
         reload_module(rfm)
@@ -93,7 +94,7 @@ class TestGlobals(unittest.TestCase):
                 import importlib
                 importlib.reload(locals()['rfm_' + coord])
 
-    def ftest_Spherical(self):
+    def test_Spherical(self):
 
         #par.set_parval_from_str("reference_metric::CoordSystem", 'Spherical')
 
@@ -125,7 +126,7 @@ class TestGlobals(unittest.TestCase):
 
         run_test(self, path, module, module_name, global_list, function_list)
 
-    def ftest_SinhSphericalv2(self):
+    def test_SinhSphericalv2(self):
 
         par.set_parval_from_str("reference_metric::CoordSystem", 'SinhSphericalv2')
 
@@ -141,7 +142,7 @@ class TestGlobals(unittest.TestCase):
 
         run_test(self, path, module, module_name, global_list, function_list)
 
-    def ftest_NobleSphericalThetaOptionOne(self):
+    def test_NobleSphericalThetaOptionOne(self):
 
         par.set_parval_from_str("reference_metric::CoordSystem", 'NobleSphericalThetaOptionOne')
 
@@ -157,7 +158,7 @@ class TestGlobals(unittest.TestCase):
 
         run_test(self, path, module, module_name, global_list, function_list)
 
-    def ftest_NobleSphericalThetaOptionTwo(self):
+    def test_NobleSphericalThetaOptionTwo(self):
 
         par.set_parval_from_str("reference_metric::CoordSystem", 'NobleSphericalThetaOptionTwo')
 
@@ -173,7 +174,7 @@ class TestGlobals(unittest.TestCase):
 
         run_test(self, path, module, module_name, global_list, function_list)
 
-    def ftest_Cylindrical(self):
+    def test_Cylindrical(self):
 
         par.set_parval_from_str("reference_metric::CoordSystem", 'Cylindrical')
 
@@ -189,7 +190,7 @@ class TestGlobals(unittest.TestCase):
 
         run_test(self, path, module, module_name, global_list, function_list)
 
-    def ftest_SinhCylindrical(self):
+    def test_SinhCylindrical(self):
 
         par.set_parval_from_str("reference_metric::CoordSystem", 'SinhCylindrical')
 
@@ -205,7 +206,7 @@ class TestGlobals(unittest.TestCase):
 
         run_test(self, path, module, module_name, global_list, function_list)
 
-    def ftest_SinhCylindricalv2(self):
+    def test_SinhCylindricalv2(self):
 
         par.set_parval_from_str("reference_metric::CoordSystem", 'SinhCylindricalv2')
 
@@ -221,7 +222,7 @@ class TestGlobals(unittest.TestCase):
 
         run_test(self, path, module, module_name, global_list, function_list)
 
-    def ftest_SymTP(self):
+    def test_SymTP(self):
 
         par.set_parval_from_str("reference_metric::CoordSystem", 'SymTP')
 
@@ -237,7 +238,7 @@ class TestGlobals(unittest.TestCase):
 
         run_test(self, path, module, module_name, global_list, function_list)
 
-    def ftest_SinhSymTP(self):
+    def test_SinhSymTP(self):
 
         par.set_parval_from_str("reference_metric::CoordSystem", 'SinhSymTP')
 
@@ -253,7 +254,7 @@ class TestGlobals(unittest.TestCase):
 
         run_test(self, path, module, module_name, global_list, function_list)
 
-    def ftest_Cartesian(self):
+    def test_Cartesian(self):
 
         par.set_parval_from_str("reference_metric::CoordSystem", 'Cartesian')
 
