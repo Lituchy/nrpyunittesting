@@ -10,3 +10,5 @@ def reload_module(module):
     else:
         import importlib
         importlib.reload(module)
+
+    return module
