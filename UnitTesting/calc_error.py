@@ -55,7 +55,7 @@ def calc_error(mod, calculated_dict, trusted_dict, output=True):
         else:
             log10_relative_error = log10(fabs((trusted_num - calculated_num) / trusted_num))
 
-        good = (log10_relative_error < (precision / -2))
+        good = (log10_relative_error < (precision / -2.0))
         if not good:
             bad_var_list.append(var)
 
