@@ -105,7 +105,7 @@ def simplify_and_evaluate_sympy_expressions(expanded_var_dict, first_time=False)
     return value_dict
 
 
-# Subfunction that recalculates value for variable with given precision
+# Sub-function that recalculates value for variable with given precision
 def recalculate_value(variable_dictionary, replaced, reduced, precision):
 
     mp.dps = precision
