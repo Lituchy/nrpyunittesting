@@ -85,21 +85,22 @@ def simplify_and_evaluate_sympy_expressions(expanded_var_dict, first_time=False)
             value_dict[var] = mpc(N(reduced))
 
     # If [first_time] is True, double check all near-zero values to see if they should be zero.
-    if first_time:
-        for var, val in value_dict.items():
-            # If val is within [(2/3) * precision] decimal places of zero
-            if val != mpf('0.0') and fabs(val) < 10 ** ((-2.0/3)*precision):
-                # Output that near-zero result was found
+    for var, val in value_dict.items():
+        # If val is within [(2/3) * precision] decimal places of zero
+        if val != mpf('0.0') and fabs(val) < 10 ** ((-2.0/3)*precision):
+            # Output that near-zero result was found
+            if first_time:
                 logging.info("Found |result| (" + str(fabs(val)) +
                              ") close to zero. Checking if indeed it should be zero.")
-                # Recalculate result with double the precision
-                result = recalculate_value(variable_dictionary, simplified_expression_dict[var][0],
-                                           simplified_expression_dict[var][1], 2 * precision)
-                # If the new result dropped in value, we know it should actually be zero. Otherwise, do nothing.
-                if fabs(result) < 10 ** (-(4.0/3) * precision):
+            # Recalculate result with double the precision
+            result = recalculate_value(variable_dictionary, simplified_expression_dict[var][0],
+                                       simplified_expression_dict[var][1], 2 * precision)
+            # If the new result dropped in value, we know it should actually be zero. Otherwise, do nothing.
+            if fabs(result) < 10 ** (-(4.0/3) * precision):
+                if first_time:
                     logging.info("After re-evaluating with twice the digits of precision, |result| dropped to " +
                                  str(result) + ". Setting value to zero")
-                    value_dict[var] = mpf('0.0')
+                value_dict[var] = mpf('0.0')
 
     return value_dict
 
