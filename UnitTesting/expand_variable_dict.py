@@ -10,8 +10,10 @@ from UnitTesting.get_variable_dimension import get_variable_dimension
 
 def expand_variable_dict(variable_dict):
 
+    # Initialize the result dictionary
     result_dict = dict()
 
+    # Iterate through all elements of variable_dict
     for var, expression_list in variable_dict.items():
 
         # Getting the dimension and length of expression list
@@ -27,8 +29,8 @@ def expand_variable_dict(variable_dict):
             # Call flatten on our expression list to get a flattened list
             flattened_list = flatten(expression_list, [])
 
+            # Append next element to var list and increment counter
             for elt in flattened_list:
-                # Append element to var list
                 result_dict[form_string(var, counter)] = elt
                 counter = increment_counter(counter, length)
 

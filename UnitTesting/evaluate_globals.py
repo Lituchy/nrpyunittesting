@@ -1,13 +1,7 @@
-# [evaluate_globals] takes in a module dictionary [mod_dict] and locals [old_locals] and returns a dictionary
-# [result_dict] containing the symbolic expressions for each global specified in mod_dict
-
-# Requires: Modules can't have the same name. Two globals for a given module can't have the same name.
-#           Functions must be able to be called on their respective module. Globals must 
-#           be defined in their respective modules.
-# Returns: Returns [resultDict], which is a dictionary whose keys are the modules that were passed 
-#          through modDict and the values are dictionaries containing the values for the specified globals
-# Note: Must pass in locals() as second argument to insure that all imports that have been done are accessible
-#       by the evaluateGlobals module
+# [evaluate_globals] takes in a module [module], a module name [module_name], a list of globals [global_list], and a
+# list of functions [function_list]. It uses executes code that imports [module] as [module_name], calls all the
+# functions in [function_list] on [module_name], gets the expressions for each global in [global_list], and stores the
+# globals in a dictionary [var_dict].
 
 # Called by run_test
 

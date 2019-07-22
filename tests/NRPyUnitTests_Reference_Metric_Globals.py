@@ -2,7 +2,6 @@
 import unittest
 import logging
 from UnitTesting.run_test import run_test
-from UnitTesting.functions_and_globals import functions_and_globals
 from UnitTesting.RepeatedTimer import RepeatedTimer
 from UnitTesting.setup_trusted_values_dict import setup_trusted_values_dict
 import sys
@@ -44,55 +43,6 @@ class TestGlobals(unittest.TestCase):
             if attr[0:2] != '__':
                 delattr(rfm, attr)
         reload_module(rfm)
-
-
-    # Testing globals for reference_metric
-    def ftest_reference_metric_globals(self):
-
-        import trusted_values_dict
-        import NRPy_param_funcs as par
-
-        # Globals used by all coordinate systems
-        basic_global_list = ['UnitVectors', 'ReU', 'ReDD', 'ghatDD', 'ghatUU', 'detgammahat', 'detgammahatdD',
-                             'detgammahatdDD', 'ReUdD', 'ReUdDD', 'ReDDdD', 'ReDDdDD', 'ghatDDdD', 'ghatDDdDD',
-                             'GammahatUDD', 'GammahatUDDdD', 'Cart_to_xx','xxCart','xxSph','scalefactor_orthog']
-
-        # Dictionary of coordinate systems and their additional globals
-        coord_dict = {'Spherical': ('True', ['xxmin', 'xxmax']), 'SinhSpherical': ('True', []),
-                      'SinhSphericalv2': ('True', []), 'NobleSphericalThetaOptionOne': ('False', []),
-                      'NobleSphericalThetaOptionTwo': ('False', []), 'Cylindrical': ('True', []),
-                      'SinhCylindrical': ('True', []), 'SinhCylindricalv2': ('True', []), 'SymTP': ('True', []),
-                      'SinhSymTP': ('True', []), 'Cartesian': ('True', [])}
-
-        #coord_dict = {'Spherical': ('True', ['xxmin', 'xxmax']), 'SinhCylindricalv2': ('True', [])}
-
-        import sys
-
-        # For each module and its respective boolean and additional globals
-        for coord, bool_global_tuple in coord_dict.items():
-
-            # Import module based on string
-            exec('import reference_metric as rfm_' + coord)
-
-            # Set reference metric
-            par.set_parval_from_str("reference_metric::CoordSystem", coord)
-
-            # Create mod_dict
-            global_list = bool_global_tuple[1] + basic_global_list
-            mod_dict = {('rfm_' + coord): functions_and_globals(['reference_metric(' + bool_global_tuple[0] + ')'],
-                                                                global_list)}
-
-            # Run test and delete old entry
-            run_test(self, mod_dict, trusted_values_dict.trusted_values_dict, path, locals())
-
-            if sys.version_info[0] == 2:
-                reload(locals()['rfm_' + coord])
-            elif sys.version_info[1] <= 3:
-                import imp
-                imp.reload(locals()['rfm_' + coord])
-            else:
-                import importlib
-                importlib.reload(locals()['rfm_' + coord])
 
     def test_Spherical(self):
 

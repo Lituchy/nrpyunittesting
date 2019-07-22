@@ -7,7 +7,7 @@
 # Assumes that the tensor being passed in is consistent in dimension, i.e. the 0'th index of the list has the same
 # dimension as any other index of the list.
 
-# Called by module_dict_to_list
+# Called by expand_variable_dict
 
 
 def get_variable_dimension(tensor):

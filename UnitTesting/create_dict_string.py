@@ -1,14 +1,13 @@
+from mpmath import mp, mpf, mpc
+from UnitTesting.standard_constants import precision
 
 # [create_dict_string] takes in a value dictionary [value_dict] and returns a string representation of that dictionary
 # that can be easily printed to the console or to a file.
 
-# Called by first_time_print and calc_error
+# Called by calc_error, first_time_print
 
 
 def create_dict_string(value_dict):
-
-    from mpmath import mp, mpf, mpc
-    from UnitTesting.standard_constants import precision
 
     # Setting proper precision
     mp.dps = precision

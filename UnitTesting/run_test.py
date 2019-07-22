@@ -1,10 +1,11 @@
 from UnitTesting.calc_error import calc_error
-from UnitTesting.first_time_print import first_time_print
+from UnitTesting.create_trusted_globals_dict import create_trusted_globals_dict
 from UnitTesting.evaluate_globals import evaluate_globals
 from UnitTesting.expand_variable_dict import expand_variable_dict
+from UnitTesting.first_time_print import first_time_print
 from UnitTesting.simplify_and_evaluate_sympy_expressions import simplify_and_evaluate_sympy_expressions
-from UnitTesting.create_trusted_globals_dict import create_trusted_globals_dict
 from UnitTesting.standard_constants import precision
+
 from mpmath import mp
 from importlib import import_module
 import sys
@@ -13,15 +14,17 @@ import logging
 
 # run_test takes in :
 # [self]- The unittest self object,
-# [mod_dict]- The user-supplied dictionary of modules
-# [trusted_values_dict]- The dictionary of trusted values
-# [path]- The path to the directory where the test file is being run. Should usually be 'os.path.abspath(__file__)'
-# [locs]- The current local variables in the workspace. Should ALWAYS be locals()
+# [path]- The path to the unit tests being run
+# [module]- The module being tested
+# [module_name]- The name of the module being tested
+# [global_list]- A list of globals
 # It then runs a unittest, comparing calculated values with trusted values.
 # Throws an [AssertionError] if [mod_dict] is empty
 def run_test(self, path, module, module_name, global_list, function_list):
 
-    # Assuring correct type for all arguments
+    logging.info('Currently working on module ' + module_name + '...')
+
+    # Asserting that all arguments have the correct type
     self.assertTrue(type(path) == str, "'path' argument of run_test has incorrect type -- should be str.")
     self.assertTrue(type(module) == str, "'module' argument of run_test has incorrect type -- should be str.")
     self.assertTrue(type(module_name) == str, "'module_name' argument of run_test has incorrect type -- should be str.")
@@ -30,17 +33,22 @@ def run_test(self, path, module, module_name, global_list, function_list):
     self.assertTrue(type(function_list) == list,
                     "'function_list' argument of run_test has incorrect type -- should be list.")
 
+    # Setting the precision
     mp.dps = precision
 
+    # Append [path] to [sys.path] in order to ensure that [import_module] functions correctly
     sys.path.append(path)
 
+    # Getting [trusted_values_dict] by importing it from [path/trusted_values_dict.py]
     trusted_values_dict = import_module('trusted_values_dict').trusted_values_dict
 
+    # Setting boolean [first_time] based off existence of entry in trusted_values_dict
     first_time = (module_name + 'Globals') not in trusted_values_dict
 
     # Creating trusted dictionary based off names of modules in ModDict
     trusted_dict = create_trusted_globals_dict(module_name, trusted_values_dict, first_time)
 
+    # Try to import [module], giving an error message if it's in the wrong format
     try:
         module = import_module(module)
     except ImportError:
@@ -48,9 +56,6 @@ def run_test(self, path, module, module_name, global_list, function_list):
 
     # Creating dictionary of expressions for all modules in ModDict
     var_dict = evaluate_globals(module, module_name, global_list, function_list)
-
-    if not first_time:
-        logging.info('Currently working on module ' + module_name + '...')
 
     # Generating variable list and name list for module
     expanded_var_dict = expand_variable_dict(var_dict)
@@ -71,15 +76,14 @@ def run_test(self, path, module, module_name, global_list, function_list):
         # If at least one value differs, print exit message and fail the unittest
         if not values_identical:
             self.assertTrue(values_identical,
-                            'Variable above has different calculated and trusted values. Follow '
-                            'above instructions.')
+                            'Variable(s) above have different calculated and trusted values. Follow '
+                            'instructions above.')
 
         # If every value is the same, completed module.
-        else:
-            logging.info('Completed module ' + module_name + ' with no errors.\n')
+        logging.info('Completed module ' + module_name + ' with no errors.\n')
         self.assertTrue(values_identical)
 
     # If it's the first time for at least one module
     if first_time:
-        self.assertTrue(False, 'Automatically failing due to first time for at least one module. Please see above '
-                               'for the code to copy into your trusted_values_dict.')
+        self.assertTrue(False, 'Automatically failing due to it being the first time for at least one module. '
+                               'Please see above for the code to copy into your trusted_values_dict.')

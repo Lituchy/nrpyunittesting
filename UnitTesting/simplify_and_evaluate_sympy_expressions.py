@@ -7,9 +7,11 @@ import UnitTesting.standard_constants as standard_constants
 import logging
 import hashlib
 
-# Takes in a variable dictionary [var_dict] and a boolean [first_time], and returns
-# a dictionary with each expression in [var_dict] evaluated to a numerical expression by assigning each sympy variable
-# to a random number. If [first_time] is True, near-zero values are checked if they indeed should be zero.
+# Takes in a variable dictionary [expanded_var_dict] and a boolean [first_time], and returns
+# a dictionary with each expression in [expanded_var_dict] evaluated to a numerical expression by assigning each
+# sympy variable to a deterministic pseudorandom number.
+# If [first_time] is True, near-zero values are checked if they indeed should be zero.
+
 # Called by run_test
 
 

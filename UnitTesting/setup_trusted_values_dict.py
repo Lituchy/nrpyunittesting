@@ -1,9 +1,11 @@
 import logging
 
 
-# [setup_class] takes in a string representing a path [path], and creates the file [trusted_values_dict.py] in the
-# directory of the file specified in [path]. If [trusted_values_dict.py] already exists within this directory,
+# [setup_trusted_values_dict] takes in a path [path], and creates the file [trusted_values_dict.py] in the
+# directory specified in [path]. If [trusted_values_dict.py] already exists within this directory,
 # nothing happens.
+
+# Called by NRPyUnitTests_(Anything)_Globals
 
 def setup_trusted_values_dict(path):
 
