@@ -19,7 +19,7 @@ $PYTHONEXEC --version
 echo "########################################"
 
 
-#$PYTHONEXEC tests/NRPyUnitTests_Reference_Metric_Globals.py #&&
+$PYTHONEXEC tests/NRPyUnitTests_Reference_Metric_Globals.py #&&
 
 #$PYTHONEXEC UnitTesting/NRPyUnitTests_Functions.py &&
 
