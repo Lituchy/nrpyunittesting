@@ -6,6 +6,12 @@ import sys
 
 def reload_module(mod):
 
+    from types import ModuleType
+
+    if not isinstance(mod, ModuleType) or 'reload_module' in str(mod) or '(built-in)' in str(mod):
+        # print('Unable to reload.\n')
+        return
+
     # Loop through all attributes of [mod], deleting those who don't begin with '__'
     for attr in dir(mod):
         if attr[0:2] != '__':
@@ -22,3 +28,5 @@ def reload_module(mod):
     else:
         import importlib
         importlib.reload(mod)
+
+    # print('Successfully reloaded.\n')

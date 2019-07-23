@@ -5,6 +5,7 @@
 
 # Called by run_test
 
+from UnitTesting.reload_module import reload_module
 
 def evaluate_globals(module, module_name, global_list, function_list):
 
@@ -22,5 +23,8 @@ def evaluate_globals(module, module_name, global_list, function_list):
 
     # Executing string of execution with current globals and storing resulting globals in loc
     exec(string_exec, {module_name: module}, var_dict)
+
+    # for mod in dir():
+    #     reload_module(locals()[mod])
 
     return var_dict

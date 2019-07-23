@@ -36,7 +36,6 @@ class TestGlobals(unittest.TestCase):
     def setUp(self):
         import grid as gri
         from UnitTesting.reload_module import reload_module
-        #gri.glb_gridfcs_list = []
         reload_module(gri)
 
     # Testing globals
@@ -52,6 +51,7 @@ class TestGlobals(unittest.TestCase):
         function_list = ['GiRaFFE_Higher_Order()']
 
         run_test(self, path, module, module_name, global_list, function_list)
+
 
     def test_globals_v2(self):
 

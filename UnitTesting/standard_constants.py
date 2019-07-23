@@ -2,3 +2,8 @@
 # Typical value for precision is 30
 
 precision = 30
+
+
+def standard_constants():
+    global temp
+    temp = 42
