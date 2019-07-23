@@ -42,7 +42,7 @@ class TestGlobals(unittest.TestCase):
 
     def test_Spherical(self):
 
-        #par.set_parval_from_str("reference_metric::CoordSystem", 'Spherical')
+        par.set_parval_from_str("reference_metric::CoordSystem", 'Spherical')
 
         module = 'reference_metric'
 
