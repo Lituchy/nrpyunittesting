@@ -13,7 +13,7 @@ def setup_trusted_values_dict(path):
     try:
         fr = open(path + '/trusted_values_dict.py', 'r')
         fr.close()
-    # If [trusted_values_dict.py] does not exist in [directory], create it with default contents.
+    # If [trusted_values_dict.py] does not exist in [directory], create it with default content.
     except IOError:
         logging.info('trusted_values_dict.py does not exist. Creating it...\n')
         fw = open(path + '/trusted_values_dict.py', 'w+')

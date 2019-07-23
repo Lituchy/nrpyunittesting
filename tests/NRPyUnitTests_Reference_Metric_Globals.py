@@ -39,10 +39,6 @@ class TestGlobals(unittest.TestCase):
         import reference_metric as rfm
         from UnitTesting.reload_module import reload_module
         reload_module(rfm)
-        for attr in dir(rfm):
-            if attr[0:2] != '__':
-                delattr(rfm, attr)
-        reload_module(rfm)
 
     def test_Spherical(self):
 
