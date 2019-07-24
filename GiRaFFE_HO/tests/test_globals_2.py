@@ -4,6 +4,7 @@ import logging
 from UnitTesting.run_test import run_test
 from UnitTesting.RepeatedTimer import RepeatedTimer
 from UnitTesting.setup_trusted_values_dict import setup_trusted_values_dict
+from UnitTesting.kevin_test import kevin_test
 
 # TODO: Change level based on desired amount of output.
 # ERROR -> Outputs minimal information -- only when there's an error
@@ -31,24 +32,6 @@ class TestGlobals(unittest.TestCase):
     @classmethod
     def tearDownClass(cls):
         Timer.stop()
-
-    def setUp(self):
-        import grid as gri
-        gri.glb_gridfcs_list = []
-        #pass
-
-    def test_globals(self):
-
-        self.module = 'GiRaFFE_HO.GiRaFFE_Higher_Order'
-
-        self.module_name = 'GiRaFFE_HO'
-
-        self.global_list = ['uD', 'uU', 'gammaUU', 'gammadet', 'u0alpha', 'alpsqrtgam', 'Stilde_rhsD', 'AevolParen',
-                            'PevolParenU', 'A_rhsD', 'psi6Phi_rhs']
-
-        self.function_list = ['GiRaFFE_Higher_Order()']
-
-        run_test(self)
 
     def test_globals_v2(self):
 

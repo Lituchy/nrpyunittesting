@@ -20,7 +20,13 @@ import logging
 # [global_list]- A list of globals
 # It then runs a unittest, comparing calculated values with trusted values.
 # Throws an [AssertionError] if [mod_dict] is empty
-def run_test(self, path, module, module_name, global_list, function_list):
+def run_test(self):
+
+    path = self.path
+    module = self.module
+    module_name = self.module_name
+    global_list = self.global_list
+    function_list = self.function_list
 
     logging.info('Currently working on module ' + module_name + '...')
 

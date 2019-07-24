@@ -24,9 +24,8 @@ class TestBSSNGlobals(unittest.TestCase):
     def setUpClass(cls):
         # Creating trusted_values_dict.py if it doesn't exist
         import sys
-        global path
-        path = sys.path[0]
-        setup_trusted_values_dict(path)
+        cls.path = sys.path[0]
+        setup_trusted_values_dict(cls.path)
 
     @classmethod
     def tearDownClass(cls):
@@ -35,156 +34,156 @@ class TestBSSNGlobals(unittest.TestCase):
     # Testing globals for ADM in terms of BSSN module
     def test_ADM_Globals(self):
 
-        module = 'BSSN.ADM_in_terms_of_BSSN'
+        self.module = 'BSSN.ADM_in_terms_of_BSSN'
 
-        module_name = 'ADM_in_terms_of_BSSN'
+        self.module_name = 'ADM_in_terms_of_BSSN'
 
-        global_list = ['gammaDD', 'gammaDDdD', 'gammaDDdDD', 'gammaUU', 'detgamma', 'GammaUDD', 'KDD', 'KDDdD']
+        self.global_list = ['gammaDD', 'gammaDDdD', 'gammaDDdDD', 'gammaUU', 'detgamma', 'GammaUDD', 'KDD', 'KDDdD']
 
-        function_list = ['ADM_in_terms_of_BSSN()']
+        self.function_list = ['ADM_in_terms_of_BSSN()']
 
-        run_test(self, path, module, module_name, global_list, function_list)
+        run_test(self)
 
     # Testing globals for BSSN constraints
     def test_Constraints_Globals(self):
 
-        module = 'BSSN.BSSN_constraints'
+        self.module = 'BSSN.BSSN_constraints'
 
-        module_name = 'BSSN_constraints'
+        self.module_name = 'BSSN_constraints'
 
-        global_list = ['H', 'MU']
+        self.global_list = ['H', 'MU']
 
-        function_list = ['BSSN_constraints()']
+        self.function_list = ['BSSN_constraints()']
 
-        run_test(self, path, module, module_name, global_list, function_list)
+        run_test(self)
 
     # Testing globals for BSSN exact modules
     def test_BrillLindquist_Globals(self):
 
-        module = 'BSSN.BrillLindquist'
+        self.module = 'BSSN.BrillLindquist'
 
-        module_name = 'BrillLindquist'
+        self.module_name = 'BrillLindquist'
 
-        global_list = ['alphaCart', 'betaCartU', 'BCartU', 'gammaCartDD', 'KCartDD']
+        self.global_list = ['alphaCart', 'betaCartU', 'BCartU', 'gammaCartDD', 'KCartDD']
 
-        function_list = ['BrillLindquist(ComputeADMGlobalsOnly = True)']
+        self.function_list = ['BrillLindquist(ComputeADMGlobalsOnly = True)']
 
-        run_test(self, path, module, module_name, global_list, function_list)
+        run_test(self)
 
     def test_UIUCBlackHole_Globals(self):
 
-        module = 'BSSN.UIUCBlackHole'
+        self.module = 'BSSN.UIUCBlackHole'
 
-        module_name = 'UIUCBlackHole'
+        self.module_name = 'UIUCBlackHole'
 
-        global_list = ['alphaSph', 'betaSphU', 'BSphU', 'gammaSphDD', 'KSphDD']
+        self.global_list = ['alphaSph', 'betaSphU', 'BSphU', 'gammaSphDD', 'KSphDD']
 
-        function_list = ['UIUCBlackHole(ComputeADMGlobalsOnly = True)']
+        self.function_list = ['UIUCBlackHole(ComputeADMGlobalsOnly = True)']
 
-        run_test(self, path, module, module_name, global_list, function_list)
+        run_test(self)
 
     def test_StaticTrumpet_Globals(self):
-        module = 'BSSN.StaticTrumpet'
+        self.module = 'BSSN.StaticTrumpet'
 
-        module_name = 'StaticTrumpet'
+        self.module_name = 'StaticTrumpet'
 
-        global_list = ['alphaSph', 'betaSphU', 'BSphU', 'gammaSphDD', 'KSphDD']
+        self.global_list = ['alphaSph', 'betaSphU', 'BSphU', 'gammaSphDD', 'KSphDD']
 
-        function_list = ['StaticTrumpet(ComputeADMGlobalsOnly = True)']
+        self.function_list = ['StaticTrumpet(ComputeADMGlobalsOnly = True)']
 
-        run_test(self, path, module, module_name, global_list, function_list)
+        run_test(self)
 
     def test_ShiftedKerrSchild_Globals(self):
-        module = 'BSSN.ShiftedKerrSchild'
+        self.module = 'BSSN.ShiftedKerrSchild'
 
-        module_name = 'ShiftedKerrSchild'
+        self.module_name = 'ShiftedKerrSchild'
 
-        global_list = ['alphaSph', 'betaSphU', 'BSphU', 'gammaSphDD', 'KSphDD']
+        self.global_list = ['alphaSph', 'betaSphU', 'BSphU', 'gammaSphDD', 'KSphDD']
 
-        function_list = ['ShiftedKerrSchild(ComputeADMGlobalsOnly = True)']
+        self.function_list = ['ShiftedKerrSchild(ComputeADMGlobalsOnly = True)']
 
-        run_test(self, path, module, module_name, global_list, function_list)
+        run_test(self)
 
     # Testing globals for BSSN Psi4 Globals
     def test_Psi4_Globals(self):
 
-        module = 'BSSN.Psi4'
+        self.module = 'BSSN.Psi4'
 
-        module_name = 'Psi4'
+        self.module_name = 'Psi4'
 
-        global_list = ['psi4_re_pt', 'psi4_im_pt']
+        self.global_list = ['psi4_re_pt', 'psi4_im_pt']
 
-        function_list = ['Psi4(specify_tetrad=False)']
+        self.function_list = ['Psi4(specify_tetrad=False)']
 
-        run_test(self, path, module, module_name, global_list, function_list)
+        run_test(self)
 
     def test_Psi4Tetrads_globals(self):
 
-        module = 'BSSN.Psi4_tetrads'
+        self.module = 'BSSN.Psi4_tetrads'
 
-        module_name = 'Psi4_tetrads'
+        self.module_name = 'Psi4_tetrads'
 
-        global_list = ['l4U', 'n4U', 'mre4U', 'mim4U']
+        self.global_list = ['l4U', 'n4U', 'mre4U', 'mim4U']
 
-        function_list = ['Psi4_tetrads()']
+        self.function_list = ['Psi4_tetrads()']
 
-        run_test(self, path, module, module_name, global_list, function_list)
+        run_test(self)
 
     # Testing globals for BSSN quantities
     def test_Quantities_Globals(self):
 
-        module = 'BSSN.BSSN_quantities'
+        self.module = 'BSSN.BSSN_quantities'
 
-        module_name = 'BSSN_quantities'
+        self.module_name = 'BSSN_quantities'
 
-        global_list = ['hDD', 'aDD', 'lambdaU', 'vetU', 'betU', 'trK', 'cf', 'alpha', 'gammabarDD', 'AbarDD',
+        self.global_list = ['hDD', 'aDD', 'lambdaU', 'vetU', 'betU', 'trK', 'cf', 'alpha', 'gammabarDD', 'AbarDD',
                        'LambdabarU', 'betaU', 'BU', 'gammabarUU', 'gammabarDD_dD', 'gammabarDD_dupD',
                        'gammabarDD_dDD', 'GammabarUDD', 'detgammabar', 'detgammabar_dD', 'detgammabar_dDD',
                        'AbarUU', 'AbarUD', 'trAbar', 'AbarDD_dD', 'AbarDD_dupD', 'RbarDD', 'DGammaUDD',
                        'gammabarDD_dHatD', 'DGammaU', 'betaU_dD', 'betaU_dupD', 'betaU_dDD', 'phi_dD',
                        'phi_dupD', 'phi_dDD', 'exp_m4phi', 'phi_dBarD', 'phi_dBarDD']
 
-        function_list = ['declare_BSSN_gridfunctions_if_not_declared_already()', 'BSSN_basic_tensors()',
+        self.function_list = ['declare_BSSN_gridfunctions_if_not_declared_already()', 'BSSN_basic_tensors()',
                  'gammabar__inverse_and_derivs()', 'detgammabar_and_derivs()', 'AbarUU_AbarUD_trAbar_AbarDD_dD()',
                  'RicciBar__gammabarDD_dHatD__DGammaUDD__DGammaU()', 'betaU_derivs()', 'phi_and_derivs()']
 
-        run_test(self, path, module, module_name, global_list, function_list)
+        run_test(self)
 
     def test_RHS_Globals(self):
 
-        module = 'BSSN.BSSN_RHSs'
+        self.module = 'BSSN.BSSN_RHSs'
 
-        module_name = 'BSSN_RHSs'
+        self.module_name = 'BSSN_RHSs'
 
-        global_list = ['cf_rhs', 'trK_rhs', 'lambda_rhsU', 'a_rhsDD', 'h_rhsDD']
+        self.global_list = ['cf_rhs', 'trK_rhs', 'lambda_rhsU', 'a_rhsDD', 'h_rhsDD']
 
-        function_list = ['BSSN_RHSs()']
+        self.function_list = ['BSSN_RHSs()']
 
-        run_test(self, path, module, module_name, global_list, function_list)
+        run_test(self)
 
     def test_gauge_RHSs_Globals(self):
 
-        module = 'BSSN.BSSN_gauge_RHSs'
+        self.module = 'BSSN.BSSN_gauge_RHSs'
 
-        module_name = 'gauge_RHSs'
+        self.module_name = 'gauge_RHSs'
 
-        global_list = ['alpha_rhs', 'bet_rhsU', 'vet_rhsU']
+        self.global_list = ['alpha_rhs', 'bet_rhsU', 'vet_rhsU']
 
-        function_list = ['BSSN_gauge_RHSs()']
+        self.function_list = ['BSSN_gauge_RHSs()']
 
-        run_test(self, path, module, module_name, global_list, function_list)
+        run_test(self)
 
     def test_T4UU_Globals(self):
 
-        module = 'BSSN.BSSN_T4UUmunu_vars'
+        self.module = 'BSSN.BSSN_T4UUmunu_vars'
 
-        module_name = 'T4UUmunu_vars'
+        self.module_name = 'T4UUmunu_vars'
 
-        global_list = ['rho', 'S', 'sD', 'sDD']
+        self.global_list = ['rho', 'S', 'sD', 'sDD']
 
-        function_list = ['define_BSSN_T4UUmunu_rescaled_source_terms()']
+        self.function_list = ['define_BSSN_T4UUmunu_rescaled_source_terms()']
 
-        run_test(self, path, module, module_name, global_list, function_list)
+        run_test(self)
 
 
 # Necessary for unittest class to work properly

@@ -26,9 +26,8 @@ class TestGlobals(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         # Creating trusted_values_dict.py if it doesn't exist
-        global path
-        path = sys.path[0]
-        setup_trusted_values_dict(path)
+        cls.path = sys.path[0]
+        setup_trusted_values_dict(cls.path)
 
     @classmethod
     def tearDownClass(cls):
@@ -37,184 +36,184 @@ class TestGlobals(unittest.TestCase):
     def setUp(self):
         # Deleting all attributes of reference_metric before running test
         import reference_metric as rfm
-        from UnitTesting.reload_module import reload_module
-        reload_module(rfm)
+        # from UnitTesting.reload_module import reload_module
+        # reload_module(rfm)
 
     def test_Spherical(self):
 
         par.set_parval_from_str("reference_metric::CoordSystem", 'Spherical')
 
-        module = 'reference_metric'
+        self.module = 'reference_metric'
 
-        module_name = 'rfm_Spherical'
+        self.module_name = 'rfm_Spherical'
 
-        global_list = ['xxmin', 'xxmax', 'UnitVectors', 'ReU', 'ReDD', 'ghatDD', 'ghatUU', 'detgammahat',
+        self.global_list = ['xxmin', 'xxmax', 'UnitVectors', 'ReU', 'ReDD', 'ghatDD', 'ghatUU', 'detgammahat',
                        'detgammahatdD', 'detgammahatdDD', 'ReUdD', 'ReUdDD', 'ReDDdD', 'ReDDdDD', 'ghatDDdD',
                        'ghatDDdDD', 'GammahatUDD', 'GammahatUDDdD', 'Cart_to_xx','xxCart','xxSph','scalefactor_orthog']
 
-        function_list = ['reference_metric(True)']
+        self.function_list = ['reference_metric(True)']
 
-        run_test(self, path, module, module_name, global_list, function_list)
+        run_test(self)
 
     def test_SinhSpherical(self):
 
         par.set_parval_from_str("reference_metric::CoordSystem", 'SinhSpherical')
 
-        module = 'reference_metric'
+        self.module = 'reference_metric'
 
-        module_name = 'rfm_SinhSpherical'
+        self.module_name = 'rfm_SinhSpherical'
 
-        global_list = ['xxmin', 'xxmax', 'UnitVectors', 'ReU', 'ReDD', 'ghatDD', 'ghatUU', 'detgammahat',
+        self.global_list = ['xxmin', 'xxmax', 'UnitVectors', 'ReU', 'ReDD', 'ghatDD', 'ghatUU', 'detgammahat',
                        'detgammahatdD', 'detgammahatdDD', 'ReUdD', 'ReUdDD', 'ReDDdD', 'ReDDdDD', 'ghatDDdD',
                        'ghatDDdDD', 'GammahatUDD', 'GammahatUDDdD', 'Cart_to_xx','xxCart','xxSph','scalefactor_orthog']
 
-        function_list = ['reference_metric(True)']
+        self.function_list = ['reference_metric(True)']
 
-        run_test(self, path, module, module_name, global_list, function_list)
+        run_test(self)
 
     def test_SinhSphericalv2(self):
 
         par.set_parval_from_str("reference_metric::CoordSystem", 'SinhSphericalv2')
 
-        module = 'reference_metric'
+        self.module = 'reference_metric'
 
-        module_name = 'rfm_SinhSphericalv2'
+        self.module_name = 'rfm_SinhSphericalv2'
 
-        global_list = ['xxmin', 'xxmax', 'UnitVectors', 'ReU', 'ReDD', 'ghatDD', 'ghatUU', 'detgammahat',
+        self.global_list = ['xxmin', 'xxmax', 'UnitVectors', 'ReU', 'ReDD', 'ghatDD', 'ghatUU', 'detgammahat',
                        'detgammahatdD', 'detgammahatdDD', 'ReUdD', 'ReUdDD', 'ReDDdD', 'ReDDdDD', 'ghatDDdD',
                        'ghatDDdDD', 'GammahatUDD', 'GammahatUDDdD', 'Cart_to_xx','xxCart','xxSph','scalefactor_orthog']
 
-        function_list = ['reference_metric(True)']
+        self.function_list = ['reference_metric(True)']
 
-        run_test(self, path, module, module_name, global_list, function_list)
+        run_test(self)
 
     def test_NobleSphericalThetaOptionOne(self):
 
         par.set_parval_from_str("reference_metric::CoordSystem", 'NobleSphericalThetaOptionOne')
 
-        module = 'reference_metric'
+        self.module = 'reference_metric'
 
-        module_name = 'rfm_NobleSphericalThetaOptionOne'
+        self.module_name = 'rfm_NobleSphericalThetaOptionOne'
 
-        global_list = ['UnitVectors', 'ReU', 'ReDD', 'ghatDD', 'ghatUU', 'detgammahat',
+        self.global_list = ['UnitVectors', 'ReU', 'ReDD', 'ghatDD', 'ghatUU', 'detgammahat',
                        'detgammahatdD', 'detgammahatdDD', 'ReUdD', 'ReUdDD', 'ReDDdD', 'ReDDdDD', 'ghatDDdD',
                        'ghatDDdDD', 'GammahatUDD', 'GammahatUDDdD','xxCart','xxSph','scalefactor_orthog']
 
-        function_list = ['reference_metric(False)']
+        self.function_list = ['reference_metric(False)']
 
-        run_test(self, path, module, module_name, global_list, function_list)
+        run_test(self)
 
     def test_NobleSphericalThetaOptionTwo(self):
 
         par.set_parval_from_str("reference_metric::CoordSystem", 'NobleSphericalThetaOptionTwo')
 
-        module = 'reference_metric'
+        self.module = 'reference_metric'
 
-        module_name = 'rfm_NobleSphericalThetaOptionTwo'
+        self.module_name = 'rfm_NobleSphericalThetaOptionTwo'
 
-        global_list = ['UnitVectors', 'ReU', 'ReDD', 'ghatDD', 'ghatUU', 'detgammahat',
+        self.global_list = ['UnitVectors', 'ReU', 'ReDD', 'ghatDD', 'ghatUU', 'detgammahat',
                        'detgammahatdD', 'detgammahatdDD', 'ReUdD', 'ReUdDD', 'ReDDdD', 'ReDDdDD', 'ghatDDdD',
                        'ghatDDdDD', 'GammahatUDD', 'GammahatUDDdD','xxCart','xxSph','scalefactor_orthog']
 
-        function_list = ['reference_metric(False)']
+        self.function_list = ['reference_metric(False)']
 
-        run_test(self, path, module, module_name, global_list, function_list)
+        run_test(self)
 
     def test_Cylindrical(self):
 
         par.set_parval_from_str("reference_metric::CoordSystem", 'Cylindrical')
 
-        module = 'reference_metric'
+        self.module = 'reference_metric'
 
-        module_name = 'rfm_Cylindrical'
+        self.module_name = 'rfm_Cylindrical'
 
-        global_list = ['xxmin', 'xxmax', 'UnitVectors', 'ReU', 'ReDD', 'ghatDD', 'ghatUU', 'detgammahat',
+        self.global_list = ['xxmin', 'xxmax', 'UnitVectors', 'ReU', 'ReDD', 'ghatDD', 'ghatUU', 'detgammahat',
                        'detgammahatdD', 'detgammahatdDD', 'ReUdD', 'ReUdDD', 'ReDDdD', 'ReDDdDD', 'ghatDDdD',
                        'ghatDDdDD', 'GammahatUDD', 'GammahatUDDdD', 'Cart_to_xx','xxCart','xxSph','scalefactor_orthog']
 
-        function_list = ['reference_metric(True)']
+        self.function_list = ['reference_metric(True)']
 
-        run_test(self, path, module, module_name, global_list, function_list)
+        run_test(self)
 
     def test_SinhCylindrical(self):
 
         par.set_parval_from_str("reference_metric::CoordSystem", 'SinhCylindrical')
 
-        module = 'reference_metric'
+        self.module = 'reference_metric'
 
-        module_name = 'rfm_SinhCylindrical'
+        self.module_name = 'rfm_SinhCylindrical'
 
-        global_list = ['xxmin', 'xxmax', 'UnitVectors', 'ReU', 'ReDD', 'ghatDD', 'ghatUU', 'detgammahat',
+        self.global_list = ['xxmin', 'xxmax', 'UnitVectors', 'ReU', 'ReDD', 'ghatDD', 'ghatUU', 'detgammahat',
                        'detgammahatdD', 'detgammahatdDD', 'ReUdD', 'ReUdDD', 'ReDDdD', 'ReDDdDD', 'ghatDDdD',
                        'ghatDDdDD', 'GammahatUDD', 'GammahatUDDdD', 'Cart_to_xx','xxCart','xxSph','scalefactor_orthog']
 
-        function_list = ['reference_metric(True)']
+        self.function_list = ['reference_metric(True)']
 
-        run_test(self, path, module, module_name, global_list, function_list)
+        run_test(self)
 
     def test_SinhCylindricalv2(self):
 
         par.set_parval_from_str("reference_metric::CoordSystem", 'SinhCylindricalv2')
 
-        module = 'reference_metric'
+        self.module = 'reference_metric'
 
-        module_name = 'rfm_SinhCylindricalv2'
+        self.module_name = 'rfm_SinhCylindricalv2'
 
-        global_list = ['xxmin', 'xxmax', 'UnitVectors', 'ReU', 'ReDD', 'ghatDD', 'ghatUU', 'detgammahat',
+        self.global_list = ['xxmin', 'xxmax', 'UnitVectors', 'ReU', 'ReDD', 'ghatDD', 'ghatUU', 'detgammahat',
                        'detgammahatdD', 'detgammahatdDD', 'ReUdD', 'ReUdDD', 'ReDDdD', 'ReDDdDD', 'ghatDDdD',
                        'ghatDDdDD', 'GammahatUDD', 'GammahatUDDdD', 'Cart_to_xx','xxCart','xxSph','scalefactor_orthog']
 
-        function_list = ['reference_metric(True)']
+        self.function_list = ['reference_metric(True)']
 
-        run_test(self, path, module, module_name, global_list, function_list)
+        run_test(self)
 
     def test_SymTP(self):
 
         par.set_parval_from_str("reference_metric::CoordSystem", 'SymTP')
 
-        module = 'reference_metric'
+        self.module = 'reference_metric'
 
-        module_name = 'rfm_SymTP'
+        self.module_name = 'rfm_SymTP'
 
-        global_list = ['xxmin', 'xxmax', 'UnitVectors', 'ReU', 'ReDD', 'ghatDD', 'ghatUU', 'detgammahat',
+        self.global_list = ['xxmin', 'xxmax', 'UnitVectors', 'ReU', 'ReDD', 'ghatDD', 'ghatUU', 'detgammahat',
                        'detgammahatdD', 'detgammahatdDD', 'ReUdD', 'ReUdDD', 'ReDDdD', 'ReDDdDD', 'ghatDDdD',
                        'ghatDDdDD', 'GammahatUDD', 'GammahatUDDdD', 'Cart_to_xx','xxCart','xxSph','scalefactor_orthog']
 
-        function_list = ['reference_metric(True)']
+        self.function_list = ['reference_metric(True)']
 
-        run_test(self, path, module, module_name, global_list, function_list)
+        run_test(self)
 
     def test_SinhSymTP(self):
 
         par.set_parval_from_str("reference_metric::CoordSystem", 'SinhSymTP')
 
-        module = 'reference_metric'
+        self.module = 'reference_metric'
 
-        module_name = 'rfm_SinhSymTP'
+        self.module_name = 'rfm_SinhSymTP'
 
-        global_list = ['xxmin', 'xxmax', 'UnitVectors', 'ReU', 'ReDD', 'ghatDD', 'ghatUU', 'detgammahat',
+        self.global_list = ['xxmin', 'xxmax', 'UnitVectors', 'ReU', 'ReDD', 'ghatDD', 'ghatUU', 'detgammahat',
                        'detgammahatdD', 'detgammahatdDD', 'ReUdD', 'ReUdDD', 'ReDDdD', 'ReDDdDD', 'ghatDDdD',
                        'ghatDDdDD', 'GammahatUDD', 'GammahatUDDdD', 'Cart_to_xx','xxCart','xxSph','scalefactor_orthog']
 
-        function_list = ['reference_metric(True)']
+        self.function_list = ['reference_metric(True)']
 
-        run_test(self, path, module, module_name, global_list, function_list)
+        run_test(self)
 
     def test_Cartesian(self):
 
         par.set_parval_from_str("reference_metric::CoordSystem", 'Cartesian')
 
-        module = 'reference_metric'
+        self.module = 'reference_metric'
 
-        module_name = 'rfm_Cartesian'
+        self.module_name = 'rfm_Cartesian'
 
-        global_list = ['UnitVectors', 'ReU', 'ReDD', 'ghatDD', 'ghatUU', 'detgammahat',
+        self.global_list = ['UnitVectors', 'ReU', 'ReDD', 'ghatDD', 'ghatUU', 'detgammahat',
                        'detgammahatdD', 'detgammahatdDD', 'ReUdD', 'ReUdDD', 'ReDDdD', 'ReDDdDD', 'ghatDDdD',
                        'ghatDDdDD', 'GammahatUDD', 'GammahatUDDdD', 'Cart_to_xx','xxCart','xxSph','scalefactor_orthog']
 
-        function_list = ['reference_metric(True)']
+        self.function_list = ['reference_metric(True)']
 
-        run_test(self, path, module, module_name, global_list, function_list)
+        run_test(self)
 
 
 # Necessary for unittest class to work properly
