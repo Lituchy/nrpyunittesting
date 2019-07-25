@@ -44,8 +44,8 @@ if __name__ == '__main__':
     unittest.main()
 '''.format(logging_level.upper(), sys.path[0], module, module_name, global_list, function_list)
 
-    print(string)
-    print(sys.path[0])
+    # print(string)
+    # print(sys.path[0])
     full_path = sys.path[0] + '/temp_test_file.py'
     f = open(full_path, 'w')
     f.write(string)
@@ -57,15 +57,9 @@ if __name__ == '__main__':
     try:
         temp_test_file = importlib.import_module('temp_test_file')
     except ModuleNotFoundError:
-        print('Module not found...waiting 5 seconds')
-        import time
-        time.sleep(5)
-        try:
-            temp_test_file = importlib.import_module('temp_test_file')
-        except ModuleNotFoundError:
-            print('Module still not found. Now exiting without testing.')
-            exit(1)
-    #import temp_test_file
+        print('Module not found. Now exiting')
+        exit(1)
+
     import os
     suite = unittest.TestLoader().loadTestsFromModule(temp_test_file)
     unittest.TextTestRunner().run(suite)

@@ -1,7 +1,7 @@
 from UnitTesting.kevin_test import kevin_test
 
 
-def test_GiRaFFE_HO_v2():
+def test():
 
     module = 'GiRaFFE_HO.GiRaFFE_Higher_Order_v2'
 
@@ -16,4 +16,4 @@ def test_GiRaFFE_HO_v2():
 
 
 if __name__ == '__main__':
-    test_GiRaFFE_HO_v2()
+    test()
