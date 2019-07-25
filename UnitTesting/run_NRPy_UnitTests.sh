@@ -27,7 +27,7 @@ echo "########################################"
 #$PYTHONEXEC GiRaFFE_HO/tests/NRPyUnitTests_GiRaFFE_HO_Globals.py #&&
 
 
-#$PYTHONEXEC GiRaFFE_HO/tests/new_style_test.py
+#$PYTHONEXEC GiRaFFE_HO/tests/test_both_GiRaFFE.py
 
 $PYTHONEXEC GiRaFFE_HO/tests/test_GiRaFFE_HO.py &&
 $PYTHONEXEC GiRaFFE_HO/tests/test_GiRaFFE_HO_v2.py

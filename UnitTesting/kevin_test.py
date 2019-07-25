@@ -52,7 +52,9 @@ if __name__ == '__main__':
 
     # https://stackoverflow.com/questions/31559473/run-unittests-from-a-different-file
     import unittest
-    import temp_test_file
+    import importlib
+    temp_test_file = importlib.import_module('temp_test_file')
+    #import temp_test_file
     import os
     suite = unittest.TestLoader().loadTestsFromModule(temp_test_file)
     unittest.TextTestRunner().run(suite)
