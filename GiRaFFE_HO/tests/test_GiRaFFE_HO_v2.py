@@ -3,8 +3,6 @@ from UnitTesting.kevin_test import kevin_test
 
 def test_GiRaFFE_HO_v2():
 
-    logging_level = 'INFO'
-
     module = 'GiRaFFE_HO.GiRaFFE_Higher_Order_v2'
 
     module_name = 'GiRaFFE_HO_v2'
@@ -14,7 +12,7 @@ def test_GiRaFFE_HO_v2():
 
     function_list = ['GiRaFFE_Higher_Order_v2()']
 
-    kevin_test(logging_level, module, module_name, global_list, function_list)
+    kevin_test(module, module_name, global_list, function_list)
 
 
 if __name__ == '__main__':

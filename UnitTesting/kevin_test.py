@@ -2,7 +2,8 @@ import sys
 import cmdline_helper
 
 
-def kevin_test(logging_level, module, module_name, global_list, function_list):
+def kevin_test(module, module_name, global_list, function_list, logging_level='INFO'):
+
     string = '''
 import unittest
 import logging
@@ -19,7 +20,7 @@ class TestGlobals(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.path = b'{}'
+        cls.path = r'{}'
         setup_trusted_values_dict(cls.path)
 
     @classmethod
