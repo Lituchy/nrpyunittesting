@@ -10,7 +10,7 @@ def test_GiRaFFE_HO():
     module_name = 'GiRaFFE_HO'
 
     global_list = ['uD', 'uU', 'gammaUU', 'gammadet', 'u0alpha', 'alpsqrtgam', 'Stilde_rhsD', 'AevolParen',
-                        'PevolParenU', 'A_rhsD', 'psi6Phi_rhs']
+                   'PevolParenU', 'A_rhsD', 'psi6Phi_rhs']
 
     function_list = ['GiRaFFE_Higher_Order()']
 

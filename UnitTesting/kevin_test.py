@@ -19,7 +19,7 @@ class TestGlobals(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.path = '{}'
+        cls.path = b'{}'
         setup_trusted_values_dict(cls.path)
 
     @classmethod
@@ -62,8 +62,8 @@ if __name__ == '__main__':
         try:
             temp_test_file = importlib.import_module('temp_test_file')
         except ModuleNotFoundError:
-            print('Module still not found. Now exiting.')
-            exit(1)
+            print('Module still not found. Now exiting without testing.')
+            return
     #import temp_test_file
     import os
     suite = unittest.TestLoader().loadTestsFromModule(temp_test_file)
