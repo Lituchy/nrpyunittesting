@@ -26,8 +26,11 @@ echo "########################################"
 #$PYTHONEXEC FishboneMoncriefID/tests/NRPyUnitTests_FishboneMoncriefID_Globals.py &&
 #$PYTHONEXEC GiRaFFE_HO/tests/NRPyUnitTests_GiRaFFE_HO_Globals.py #&&
 
-$PYTHONEXEC GiRaFFE_HO/tests/test_globals_1.py &&
-$PYTHONEXEC GiRaFFE_HO/tests/test_globals_2.py
+
+#$PYTHONEXEC GiRaFFE_HO/tests/new_style_test.py
+
+$PYTHONEXEC GiRaFFE_HO/tests/test_GiRaFFE_HO.py &&
+$PYTHONEXEC GiRaFFE_HO/tests/test_GiRaFFE_HO_v2.py
 
 #$PYTHONEXEC GiRaFFEfood_HO/tests/NRPyUnitTests_GiRaFFEfood_HO_Globals.py &&
 #$PYTHONEXEC Maxwell/tests/NRPyUnitTests_Maxwell_Globals.py &&

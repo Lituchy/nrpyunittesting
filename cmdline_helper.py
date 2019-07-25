@@ -21,8 +21,10 @@
 # Authors: Brandon Clark
 #          Zach Etienne
 #          zachetie **at** gmail **dot* com
+#          Kevin Lituchy
 
 import io, os, shlex, subprocess, sys, time, multiprocessing
+
 
 # check_executable_exists(): Check to see whether an executable exists. 
 #                            Error out or return False if not exists;
@@ -31,13 +33,14 @@ def check_executable_exists(exec_name,error_if_not_found=True):
     cmd = "where" if os.name == "nt" else "which"
     try: 
         subprocess.check_output([cmd, exec_name])
-    except:
-        if error_out==True:
-            print("Sorry, cannot execute the command: "+exec_name)
+    except subprocess.CalledProcessError:
+        if error_if_not_found:
+            print("Sorry, cannot execute the command: " + exec_name)
             sys.exit(1)
         else:
             return False
     return True
+
 
 # C_compile(): Write a function to compile the Main C code into an executable file
 def C_compile(main_C_output_path, main_C_output_file):
@@ -66,11 +69,12 @@ def C_compile(main_C_output_path, main_C_output_file):
         sys.exit(1)
     print("Finished compilation.")
 
+
 # Execute(): Execute generated executable file, using taskset 
 #            if available. Calls Execute_input_string() to
 #            redirect output from stdout & stderr to desired
 #            destinations.
-def Execute(executable, executable_output_arguments = "", file_to_redirect_stdout = os.devnull):
+def Execute(executable, executable_output_arguments = "", file_to_redirect_stdout=os.devnull):
     # Step 1: Delete old version of executable file
     if file_to_redirect_stdout != os.devnull:
         delete_existing_files(file_to_redirect_stdout)
@@ -96,6 +100,7 @@ def Execute(executable, executable_output_arguments = "", file_to_redirect_stdou
     # Step 3: Execute the desired executable
     Execute_input_string(execute_string, file_to_redirect_stdout)
 
+
 # Execute_input_string(): Executes an input string and redirects 
 #            output from stdout & stderr to desired destinations.
 def Execute_input_string(input_string, file_to_redirect_stdout):
@@ -103,6 +108,7 @@ def Execute_input_string(input_string, file_to_redirect_stdout):
     start = time.time()
     # https://docs.python.org/3/library/subprocess.html
     args = shlex.split(input_string)
+    print('args: ' + str(args))
     # https://stackoverflow.com/questions/18421757/live-output-from-subprocess-command
     filename = "tmp.txt"
     with io.open(filename, 'wb') as writer, io.open(filename, 'rb', 1) as reader, io.open(file_to_redirect_stdout, 'w') as rdirect:
@@ -125,13 +131,14 @@ def Execute_input_string(input_string, file_to_redirect_stdout):
     end = time.time()
     print("Finished executing in "+str(end-start)+" seconds.")
 
+
 # delete_existing_files(file_or_wildcard): 
 #          Runs del file_or_wildcard in Windows, or
 #                rm file_or_wildcard in Linux/MacOS
 def delete_existing_files(file_or_wildcard):
     delete_string = ""
     if os.name == "nt":
-        delete_string += "del "+file_or_wildcard
+        delete_string += "del " + file_or_wildcard
     else:
-        delete_string += "rm -f "+file_or_wildcard
+        delete_string += "rm -f " + file_or_wildcard
     os.system(delete_string)
