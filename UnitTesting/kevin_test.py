@@ -48,7 +48,7 @@ if __name__ == '__main__':
     f.write(string)
     f.close()
 
-    import temp_test_file
+    # import temp_test_file
 
 
 if __name__ == '__main__':

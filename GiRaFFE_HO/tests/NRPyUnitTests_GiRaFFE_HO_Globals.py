@@ -35,7 +35,6 @@ class TestGlobals(unittest.TestCase):
     def setUp(self):
         import grid as gri
         gri.glb_gridfcs_list = []
-        #pass
 
     def test_globals(self):
 
