@@ -16,6 +16,8 @@ def test_GiRaFFE_HO():
 
     kevin_test(logging_level, module, module_name, global_list, function_list)
 
+    return True
+
 
 def test_GiRaFFE_HO_v2():
 
@@ -32,6 +34,7 @@ def test_GiRaFFE_HO_v2():
 
     kevin_test(logging_level, module, module_name, global_list, function_list)
 
+    return True
 
 if __name__ == '__main__':
     test_GiRaFFE_HO()

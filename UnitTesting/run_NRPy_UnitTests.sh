@@ -29,8 +29,9 @@ echo "########################################"
 
 #$PYTHONEXEC GiRaFFE_HO/tests/test_both_GiRaFFE.py
 
-$PYTHONEXEC GiRaFFE_HO/tests/test_GiRaFFE_HO.py &&
-$PYTHONEXEC GiRaFFE_HO/tests/test_GiRaFFE_HO_v2.py
+$PYTHONEXEC GiRaFFE_HO/tests/test_GiRaFFE_HO_v2.py &&
+$PYTHONEXEC GiRaFFE_HO/tests/test_GiRaFFE_HO.py
+
 
 #$PYTHONEXEC GiRaFFEfood_HO/tests/NRPyUnitTests_GiRaFFEfood_HO_Globals.py &&
 #$PYTHONEXEC Maxwell/tests/NRPyUnitTests_Maxwell_Globals.py &&
