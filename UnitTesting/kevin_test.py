@@ -53,7 +53,17 @@ if __name__ == '__main__':
     # https://stackoverflow.com/questions/31559473/run-unittests-from-a-different-file
     import unittest
     import importlib
-    temp_test_file = importlib.import_module('temp_test_file')
+    try:
+        temp_test_file = importlib.import_module('temp_test_file')
+    except ModuleNotFoundError:
+        print('Module not found...waiting 5 seconds')
+        import time
+        time.sleep(5)
+        try:
+            temp_test_file = importlib.import_module('temp_test_file')
+        except ModuleNotFoundError:
+            print('Module still not found. Now exiting.')
+            exit(1)
     #import temp_test_file
     import os
     suite = unittest.TestLoader().loadTestsFromModule(temp_test_file)
