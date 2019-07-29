@@ -1,4 +1,4 @@
-from UnitTesting.kevin_test import kevin_test
+from UnitTesting.kevin_test import create_and_run_test
 
 
 def test_GiRaFFE_HO():
@@ -12,7 +12,7 @@ def test_GiRaFFE_HO():
 
     function_list = ['GiRaFFE_Higher_Order()']
 
-    kevin_test(module, module_name, global_list, function_list)
+    create_and_run_test(module, module_name, global_list, function_list)
 
 
 def test_GiRaFFE_HO_v2():
@@ -26,9 +26,13 @@ def test_GiRaFFE_HO_v2():
 
     function_list = ['GiRaFFE_Higher_Order_v2()']
 
-    kevin_test(module, module_name, global_list, function_list)
+    create_and_run_test(module, module_name, global_list, function_list)
 
 
 if __name__ == '__main__':
-    test_GiRaFFE_HO()
-    test_GiRaFFE_HO_v2()
+    for func in dir():
+        if func[0:2] != '__' and func != 'create_and_run_test':
+            exec(func + '()')
+
+    # test_GiRaFFE_HO()
+    # test_GiRaFFE_HO_v2()

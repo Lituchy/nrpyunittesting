@@ -2,7 +2,7 @@ import sys
 import cmdline_helper as cmd
 
 
-def kevin_test(module, module_name, global_list, function_list, logging_level='INFO'):
+def create_and_run_test(module, module_name, global_list, function_list, logging_level='INFO'):
     string = '''
 import unittest
 import logging
