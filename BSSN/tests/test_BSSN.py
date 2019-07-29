@@ -23,7 +23,9 @@ def test_BrillLindquist():
 
     function_list = ['BrillLindquist(ComputeADMGlobalsOnly = True)']
 
-    create_and_run_test(module, module_name, global_list, function_list)
+    initialization_string = 'hello'
+
+    create_and_run_test(module, module_name, global_list, function_list, initialization_string=initialization_string)
 
 def test_constraints():
 
@@ -153,6 +155,7 @@ def test_UIUCBlackHole():
 
 
 if __name__ == '__main__':
+    # Running all functions in this file whose names start with 'test_'
     for func in dir():
         if func[0:5] == 'test_':
             exec(func + '()')

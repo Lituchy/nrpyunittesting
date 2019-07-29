@@ -2,7 +2,7 @@ import sys
 import cmdline_helper as cmd
 
 
-def create_and_run_test(module, module_name, global_list, function_list, logging_level='INFO'):
+def create_and_run_test(module, module_name, global_list, function_list, logging_level='INFO', initialization_string = ''):
     string = '''
 import unittest
 import logging
@@ -35,13 +35,15 @@ class TestGlobals(unittest.TestCase):
         self.global_list = {}
 
         self.function_list = {}
+        
+        self.initialization_string = '{}'
 
         run_test(self)
         
         
 if __name__ == '__main__':
     unittest.main()
-'''.format(logging_level.upper(), sys.path[0], module, module_name, global_list, function_list)
+'''.format(logging_level.upper(), sys.path[0], module, module_name, global_list, function_list, initialization_string)
 
     import os
     full_path = sys.path[0] + '/temp_test_file.py'

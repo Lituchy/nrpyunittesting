@@ -27,11 +27,17 @@ def run_test(self):
     # Asserting that all arguments have the correct type
     self.assertTrue(type(self.path) == str, "'path' argument of run_test has incorrect type -- should be str.")
     self.assertTrue(type(self.module) == str, "'module' argument of run_test has incorrect type -- should be str.")
-    self.assertTrue(type(self.module_name) == str, "'module_name' argument of run_test has incorrect type -- should be str.")
+    self.assertTrue(type(self.module_name) == str,
+                    "'module_name' argument of run_test has incorrect type -- should be str.")
     self.assertTrue(type(self.global_list) == list,
                     "'global_list' argument of run_test has incorrect type -- should be list.")
     self.assertTrue(type(self.function_list) == list,
                     "'function_list' argument of run_test has incorrect type -- should be list.")
+    self.assertTrue(type(self.initialization_string) == str,
+                    "'initialization_string' argument of run_test has incorrect type -- should be str.")
+
+    # logging.info(self.initialization_string)
+    # print(self.initialization_string)
 
     # Setting the precision
     mp.dps = precision
@@ -52,7 +58,7 @@ def run_test(self):
     try:
         self.module = import_module(self.module)
     except ImportError:
-        self.assertTrue(False, "Argument 'module' in run_test does not exist as a module. Check path input.")
+        self.assertTrue(False, "Argument 'module' in run_test does not exist as a module. Check path argument.")
 
     # Creating dictionary of expressions for all modules in ModDict
     var_dict = evaluate_globals(self.module, self.module_name, self.global_list, self.function_list)
