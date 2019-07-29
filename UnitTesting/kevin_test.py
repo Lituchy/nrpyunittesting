@@ -51,5 +51,5 @@ if __name__ == '__main__':
     f.write(string)
     f.close()
 
-    cmd.Execute_input_string('python ' + full_path, os.devnull)
+    cmd.Execute_input_string('python3 ' + full_path, os.devnull)
     os.remove(full_path)
