@@ -74,7 +74,7 @@ def C_compile(main_C_output_path, main_C_output_file):
 #            if available. Calls Execute_input_string() to
 #            redirect output from stdout & stderr to desired
 #            destinations.
-def Execute(executable, executable_output_arguments = "", file_to_redirect_stdout=os.devnull):
+def Execute(executable, executable_output_arguments="", file_to_redirect_stdout=os.devnull):
     # Step 1: Delete old version of executable file
     if file_to_redirect_stdout != os.devnull:
         delete_existing_files(file_to_redirect_stdout)
@@ -88,10 +88,10 @@ def Execute(executable, executable_output_arguments = "", file_to_redirect_stdou
         # https://stackoverflow.com/questions/49018413/filenotfounderror-subprocess-popendir-windows-7
         execute_string += "cmd /c "+executable.replace("_Playground", "")
     
-    taskset_exists = check_executable_exists("taskset",error_if_not_found=False)
-    if taskset_exists == True:
+    taskset_exists = check_executable_exists("taskset", error_if_not_found=False)
+    if taskset_exists:
         execute_string += "taskset -c 0"
-        N_physical_cores = int(multiprocessing.cpu_count()/2) # To account for hyperthreading
+        N_physical_cores = int(multiprocessing.cpu_count()/2)  # To account for hyper-threading
         for i in range(N_physical_cores-1):
             execute_string += ","+str(i+1)
         execute_string += " "

@@ -1,9 +1,8 @@
 import sys
-import cmdline_helper
+import cmdline_helper as cmd
 
 
 def kevin_test(module, module_name, global_list, function_list, logging_level='INFO'):
-
     string = '''
 import unittest
 import logging
@@ -13,7 +12,7 @@ from UnitTesting.setup_trusted_values_dict import setup_trusted_values_dict
 
 logging.basicConfig(level=logging.{})  
 
-Timer = RepeatedTimer(300, logging.info, '\\nPrinting every 5 minutes to prevent timeouts.\\n')
+# Timer = RepeatedTimer(300, logging.info, '\\nPrinting every 5 minutes to prevent timeouts.\\n')
 
 
 class TestGlobals(unittest.TestCase):
@@ -23,9 +22,9 @@ class TestGlobals(unittest.TestCase):
         cls.path = r'{}'
         setup_trusted_values_dict(cls.path)
 
-    @classmethod
-    def tearDownClass(cls):
-        Timer.stop()
+#   @classmethod
+#   def tearDownClass(cls):
+#       Timer.stop()
 
     def test_globals(self):
 
@@ -46,23 +45,11 @@ if __name__ == '__main__':
 
     # print(string)
     # print(sys.path[0])
+    import os
     full_path = sys.path[0] + '/temp_test_file.py'
     f = open(full_path, 'w')
     f.write(string)
     f.close()
 
-    # https://stackoverflow.com/questions/31559473/run-unittests-from-a-different-file
-    import unittest
-    import importlib
-    try:
-        temp_test_file = importlib.import_module('temp_test_file')
-    except ModuleNotFoundError:
-        print('Module not found. Now exiting')
-        exit(1)
-
-    import os
-    suite = unittest.TestLoader().loadTestsFromModule(temp_test_file)
-    unittest.TextTestRunner().run(suite)
+    cmd.Execute_input_string('python ' + full_path, os.devnull)
     os.remove(full_path)
-
-    # cmdline_helper.Execute_input_string("python temp_test_file.py", 'temp_file.txt')

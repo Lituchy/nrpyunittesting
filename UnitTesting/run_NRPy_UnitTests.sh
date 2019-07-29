@@ -27,13 +27,10 @@ echo "########################################"
 #$PYTHONEXEC GiRaFFE_HO/tests/NRPyUnitTests_GiRaFFE_HO_Globals.py #&&
 
 
-#$PYTHONEXEC GiRaFFE_HO/tests/test_both_GiRaFFE.py
-
-$PYTHONEXEC GiRaFFE_HO/tests/test_GiRaFFE_HO_v2.py &&
 $PYTHONEXEC GiRaFFE_HO/tests/test_GiRaFFE_HO.py
 
 #$PYTHONEXEC BSSN/tests/test_ADM.py &&
-#$PYTHONEXEC BSSN/tests/test_BrillLindquist.py &&
+#$PYTHONEXEC BSSN/tests/test_BrillLindquist.py #&&
 #$PYTHONEXEC BSSN/tests/test_Constraints.py &&
 #$PYTHONEXEC BSSN/tests/test_Gauge_RHS.py &&
 #$PYTHONEXEC BSSN/tests/test_Psi4.py &&
