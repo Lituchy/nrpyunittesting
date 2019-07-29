@@ -43,13 +43,11 @@ if __name__ == '__main__':
     unittest.main()
 '''.format(logging_level.upper(), sys.path[0], module, module_name, global_list, function_list)
 
-    # print(string)
-    # print(sys.path[0])
     import os
     full_path = sys.path[0] + '/temp_test_file.py'
     f = open(full_path, 'w')
     f.write(string)
     f.close()
 
-    cmd.Execute_input_string('python3 ' + full_path, os.devnull)
+    cmd.Execute_input_string('python ' + full_path, os.devnull)
     os.remove(full_path)
