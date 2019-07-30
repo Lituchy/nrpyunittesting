@@ -8,13 +8,13 @@ from UnitTesting.create_dict_string import create_dict_string
 # Called by run_test
 
 
-def first_time_print(mod, value_dict, path, write=True):
-    print('\nModule: ' + mod + '\nPlease copy the following code between the ##### and paste it into your ' +
+def first_time_print(self, write=True):
+    print('\nModule: ' + self.module_name + '\nPlease copy the following code between the ##### and paste it into your ' +
           'trusted_values_dict.py file:\n' + "#####\n\n# Generated on: " + str(date.today()) +
-          "\ntrusted_values_dict['" + mod + "Globals'] = " + create_dict_string(value_dict) + "\n\n#####")
+          "\ntrusted_values_dict['" + self.trusted_values_dict_name + "'] = " + create_dict_string(self.calculated_dict) + "\n\n#####")
 
     if write:
-        fw = open(path + '/trusted_values_dict.py', 'a')
-        fw.write("\n# Generated on: " + str(date.today()) + "\ntrusted_values_dict['" + mod + "Globals'] = "
-                 + str(value_dict) + '\n')
+        fw = open(self.path + '/trusted_values_dict.py', 'a')
+        fw.write("\n# Generated on: " + str(date.today()) + "\ntrusted_values_dict['" + self.trusted_values_dict_name + "'] = "
+                 + str(self.calculated_dict) + '\n')
         fw.close()

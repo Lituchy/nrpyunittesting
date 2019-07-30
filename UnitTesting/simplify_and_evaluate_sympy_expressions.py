@@ -15,11 +15,11 @@ import hashlib
 # Called by run_test
 
 
-def simplify_and_evaluate_sympy_expressions(expanded_var_dict, first_time=False):
+def simplify_and_evaluate_sympy_expressions(self):
 
     # If an empty variable dict is passed, return an empty dictionary
-    if expanded_var_dict == dict():
-        return dict()
+    if self.expanded_var_dict == {}:
+        return {}
 
     # Setting precision
     precision = standard_constants.precision
@@ -27,7 +27,7 @@ def simplify_and_evaluate_sympy_expressions(expanded_var_dict, first_time=False)
 
     # Creating free_symbols_set, which stores all free symbols from all expressions.
     free_symbols_set = set()
-    for val in expanded_var_dict.values():
+    for val in self.expanded_var_dict.values():
         free_symbols_set = free_symbols_set | val.free_symbols
 
     # Initializing variable_dictionary
@@ -56,8 +56,7 @@ def simplify_and_evaluate_sympy_expressions(expanded_var_dict, first_time=False)
     simplified_expression_dict = dict()
 
     # Evaluating each expression using the values in var_dict
-    for var, expression in expanded_var_dict.items():
-
+    for var, expression in self.expanded_var_dict.items():
         # Using sympy's cse algorithm to optimize our value substitution
         replaced, reduced = cse(expression, order='none')
         reduced = reduced[0]
@@ -91,7 +90,7 @@ def simplify_and_evaluate_sympy_expressions(expanded_var_dict, first_time=False)
         # If val is within [(2/3) * precision] decimal places of zero
         if val != mpf('0.0') and fabs(val) < 10 ** ((-2.0/3)*precision):
             # Output that near-zero result was found
-            if first_time:
+            if self.first_time:
                 logging.info("Found |result| (" + str(fabs(val)) +
                              ") close to zero. Checking if indeed it should be zero.")
             # Recalculate result with double the precision
@@ -99,7 +98,7 @@ def simplify_and_evaluate_sympy_expressions(expanded_var_dict, first_time=False)
                                        simplified_expression_dict[var][1], 2 * precision)
             # If the new result dropped in value, we know it should actually be zero. Otherwise, do nothing.
             if fabs(result) < 10 ** (-(4.0/3) * precision):
-                if first_time:
+                if self.first_time:
                     logging.info("After re-evaluating with twice the digits of precision, |result| dropped to " +
                                  str(result) + ". Setting value to zero")
                 value_dict[var] = mpf('0.0')

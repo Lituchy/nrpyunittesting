@@ -1,4 +1,4 @@
-from UnitTesting.kevin_test import create_and_run_test
+from UnitTesting.kevin_test import create_test
 
 
 def test_GiRaFFE_HO():
@@ -7,12 +7,11 @@ def test_GiRaFFE_HO():
 
     module_name = 'GiRaFFE_HO'
 
-    global_list = ['uD', 'uU', 'gammaUU', 'gammadet', 'u0alpha', 'alpsqrtgam', 'Stilde_rhsD', 'AevolParen',
-                   'PevolParenU', 'A_rhsD', 'psi6Phi_rhs']
+    function_and_global_dict = {'GiRaFFE_Higher_Order()': ['uD', 'uU', 'gammaUU', 'gammadet', 'u0alpha', 'alpsqrtgam',
+                                                             'Stilde_rhsD', 'AevolParen', 'PevolParenU', 'A_rhsD',
+                                                             'psi6Phi_rhs']}
 
-    function_list = ['GiRaFFE_Higher_Order()']
-
-    create_and_run_test(module, module_name, global_list, function_list)
+    create_test(module, module_name, function_and_global_dict)
 
 
 def test_GiRaFFE_HO_v2():
@@ -21,18 +20,13 @@ def test_GiRaFFE_HO_v2():
 
     module_name = 'GiRaFFE_HO_v2'
 
-    global_list = ['gammaUU', 'gammadet', 'SevolParenUD', 'Stilde_rhsD', 'AevolParen', 'PevolParenU', 'A_rhsD',
-                   'psi6Phi_rhs']
+    function_and_global_dict = {'GiRaFFE_Higher_Order_v2()': ['gammaUU', 'gammadet', 'SevolParenUD', 'Stilde_rhsD',
+                                                               'AevolParen', 'PevolParenU', 'A_rhsD', 'psi6Phi_rhs']}
 
-    function_list = ['GiRaFFE_Higher_Order_v2()']
-
-    create_and_run_test(module, module_name, global_list, function_list)
+    create_test(module, module_name, function_and_global_dict)
 
 
 if __name__ == '__main__':
     for func in dir():
-        if func[0:2] != '__' and func != 'create_and_run_test':
+        if func[0:5] == 'test_':
             exec(func + '()')
-
-    # test_GiRaFFE_HO()
-    # test_GiRaFFE_HO_v2()

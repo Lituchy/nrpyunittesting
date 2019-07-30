@@ -12,20 +12,20 @@ from UnitTesting.create_dict_string import create_dict_string
 # Called by run_test
 
 
-def calc_error(mod, calculated_dict, trusted_dict, output=True):
+def calc_error(self, output=True):
 
     # Setting precision
     mp.dps = precision
 
     # Creating sets to easily compare the keys of calculated_dict and trusted_dict
-    calculated_set = set(calculated_dict)
-    trusted_set = set(trusted_dict)
+    calculated_set = set(self.calculated_dict)
+    trusted_set = set(self.trusted_dict)
 
     # If the sets differ
     if calculated_set != trusted_set:
         # Print differing values if [output] is True
         if output:
-            logging.error('\n\t' + mod + ': Calculated dictionary and trusted dictionary have different variables.')
+            logging.error('\n\t' + self.module_name + ': Calculated dictionary and trusted dictionary have different variables.')
             calculated_minus_trusted = calculated_set - trusted_set
             trusted_minus_calculated = trusted_set - calculated_set
             if calculated_minus_trusted != set([]):
@@ -41,14 +41,14 @@ def calc_error(mod, calculated_dict, trusted_dict, output=True):
     bad_var_list = []
 
     # For each variable, print calculated and trusted values
-    for var in sorted(calculated_dict):
+    for var in sorted(self.calculated_dict):
 
         # Values to compare
-        calculated_val = calculated_dict[var]
-        trusted_val = trusted_dict[var]
+        calculated_val = self.calculated_dict[var]
+        trusted_val = self.trusted_dict[var]
 
         if output:
-            logging.debug('\n' + mod + ': ' + var + ': Calculated: ' + str(calculated_val) + '\n' + mod + ': ' + var
+            logging.debug('\n' + self.module_name + ': ' + var + ': Calculated: ' + str(calculated_val) + '\n' + self.module_name + ': ' + var
                           + ': Trusted:    ' + str(trusted_val) + '\n')
 
         # Calculate the error between both values
@@ -68,14 +68,14 @@ def calc_error(mod, calculated_dict, trusted_dict, output=True):
 
     # If we want to output and there exists at least one variable with error, print
     if output and bad_var_list != []:
-        logging.error('\n\nVariable(s) ' + str(bad_var_list) + ' in module ' + str(mod) +
+        logging.error('\n\nVariable(s) ' + str(bad_var_list) + ' in module ' + str(self.module_name) +
                       ' failed. Please check values.\n\n' + 'If you are confident that the newly calculated values' +
-                      ' are correct, comment out the old trusted values for ' + "'" + mod + "Globals'" +
+                      ' are correct, comment out the old trusted values for ' + "'" + self.module_name + "Globals'" +
                       ' in trusted_values_dict and copy the following code between the ##### into ' +
                       'trusted_values_dict. Make sure to fill out the TODO comment describing why the values' +
                       ' had to be changed. Then re-run test script.\n' + '#####\n\n# Generated on: ' +
                       str(date.today()) + '\n# Reason for changing values: TODO' + "\ntrusted_values_dict['" +
-                      mod + "Globals'] = " + create_dict_string(calculated_dict) + '\n\n#####')
+                      self.trusted_values_dict_name + "'] = " + create_dict_string(self.calculated_dict) + '\n\n#####')
 
     # Return True if all variables are good, False otherwise
     return bad_var_list == []

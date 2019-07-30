@@ -103,7 +103,7 @@ def Execute(executable, executable_output_arguments="", file_to_redirect_stdout=
 
 # Execute_input_string(): Executes an input string and redirects 
 #            output from stdout & stderr to desired destinations.
-def Execute_input_string(input_string, file_to_redirect_stdout):
+def Execute_input_string(input_string, file_to_redirect_stdout=os.devnull):
     print("Executing `"+input_string+"`...")
     start = time.time()
     # https://docs.python.org/3/library/subprocess.html

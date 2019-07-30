@@ -26,23 +26,8 @@ echo "########################################"
 #$PYTHONEXEC FishboneMoncriefID/tests/NRPyUnitTests_FishboneMoncriefID_Globals.py &&
 #$PYTHONEXEC GiRaFFE_HO/tests/NRPyUnitTests_GiRaFFE_HO_Globals.py #&&
 
-
 $PYTHONEXEC GiRaFFE_HO/tests/test_GiRaFFE_HO.py &&
-
 $PYTHONEXEC BSSN/tests/test_BSSN.py
-
-#$PYTHONEXEC BSSN/tests/test_ADM.py &&
-#$PYTHONEXEC BSSN/tests/test_BrillLindquist.py #&&
-#$PYTHONEXEC BSSN/tests/test_Constraints.py &&
-#$PYTHONEXEC BSSN/tests/test_Gauge_RHS.py &&
-#$PYTHONEXEC BSSN/tests/test_Psi4.py &&
-#$PYTHONEXEC BSSN/tests/test_Psi4Tetrads.py &&
-#$PYTHONEXEC BSSN/tests/test_Quantities.py &&
-#$PYTHONEXEC BSSN/tests/test_RHS.py &&
-#$PYTHONEXEC BSSN/tests/test_ShiftedKerrSchild.py &&
-#$PYTHONEXEC BSSN/tests/test_StaticTrumpet.py &&
-#$PYTHONEXEC BSSN/tests/test_T4UU.py &&
-#$PYTHONEXEC BSSN/tests/test_UIUCBlackHole.py
 
 #$PYTHONEXEC GiRaFFEfood_HO/tests/NRPyUnitTests_GiRaFFEfood_HO_Globals.py &&
 #$PYTHONEXEC Maxwell/tests/NRPyUnitTests_Maxwell_Globals.py &&
