@@ -42,7 +42,7 @@ class TestGlobals(unittest.TestCase):
         # Self-destruct if failed
         try:
             run_test(self)
-        except:
+        except AssertionError:
             import cmdline_helper as cmd
             cmd.delete_existing_files(self.path + '/temp_test_file.py')
 
