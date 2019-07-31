@@ -148,7 +148,17 @@ def test_UIUCBlackHole():
 
 
 if __name__ == '__main__':
-    # Running all functions in this file whose names start with 'test_'
-    for func in dir():
-        if func[0:5] == 'test_':
-            exec(func + '()')
+    failed = set()
+    for fun in dir():
+        if fun[0:5] == 'test_':
+            try:
+                exec(fun + '()')
+            except SystemExit:
+                failed.add(True)
+            else:
+                failed.add(False)
+
+    # print('failed: ' + str(failed))
+    if failed == set() or True in failed:
+        print('Calling exit(1)...')
+        exit(1)
