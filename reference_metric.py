@@ -1,13 +1,29 @@
-# reference_metric.py: In terms of uniform
-#     coordinate (xx[0],xx[1],xx[2]), define:
-#     1) scalefactor_orthog:
+# reference_metric.py: Define all needed quantities
+#     for a reference metric. 
+# Given uniform (reference metric) coordinate 
+#    (xx[0],xx[1],xx[2]), you must define:
+#     1) xxmin[3],xxmax[3]: Valid ranges for each
+#       uniform coordinate xx0,xx1,xx2
+#     2) xxSph[3]: Spherical coordinate (r,theta,phi),
+#       in terms of uniform coordinate xx0,xx1,xx2
+#     3) xxCart[3]: Cartesian coordinate (x,y,z),
+#       in terms of uniform coordinate xx0,xx1,xx2
+#     4) scalefactor_orthog:
 #       orthogonal coordinate scale factor
-#       (positive root of diagonal metric components),
-#     2) xxCart[]: Cartesian coordinate (x,y,z)
-#     3) xxSph[]: Spherical coordinate (r,theta,phi)
-#
+#       (positive root of diagonal reference metric 
+#       components)
+#     5) Cart_to_xx[3]: Inverse of xxCart:
+#       xx0,xx1,xx2 as functions of (x,y,z). 
+#       In the case that there exists no closed-form
+#       expression, then a root finder might be needed
+#     6) UnitVectors[3][3]: Unit vectors of reference 
+#       metric.
+
+# Author: Zachariah B. Etienne
+#         zachetie **at** gmail **dot* com
 
 import time
+import sys
 import sympy as sp
 
 import NRPy_param_funcs as par
@@ -335,7 +351,7 @@ def reference_metric(SymPySimplifyExpressions=True):
 
     else:
         print("CoordSystem == " + CoordSystem + " is not supported.")
-        exit(1)
+        sys.exit(1)
 
     # Finally, call ref_metric__hatted_quantities()
     #  to construct hatted metric, derivs of hatted
@@ -369,13 +385,13 @@ def ref_metric__hatted_quantities(SymPySimplifyExpressions=True):
         for j in range(DIM):
             if ReDD[i][j] != ReDD[j][i]:
                 print("Error: ReDD["+ str(i) + "][" + str(j) + "] != ReDD["+ str(j) + "][" + str(i) + ": " + str(ReDD[i][j]) + "!=" + str(ReDD[j][i]))
-                exit(1)
+                sys.exit(1)
             if ghatDD[i][j] != ghatDD[j][i]:
                 print("Error: ghatDD["+ str(i) + "][" + str(j) + "] != ghatDD["+ str(j) + "][" + str(i) + ": " + str(ghatDD[i][j]) + "!=" + str(ghatDD[j][i]))
-                exit(1)
+                sys.exit(1)
             if ghatUU[i][j] != ghatUU[j][i]:
                 print("Error: ghatUU["+ str(i) + "][" + str(j) + "] != ghatUU["+ str(j) + "][" + str(i) + ": " + str(ghatUU[i][j]) + "!=" + str(ghatUU[j][i]))
-                exit(1)
+                sys.exit(1)
 
     # Step 2: Compute det(ghat) and its 1st & 2nd derivatives
     global detgammahatdD,detgammahatdDD
