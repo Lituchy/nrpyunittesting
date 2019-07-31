@@ -42,7 +42,7 @@ class TestGlobals(unittest.TestCase):
         # Self-destruct if failed
         try:
             run_test(self)
-        except AssertionError:
+        except Exception:
             import cmdline_helper as cmd
             cmd.delete_existing_files(self.path + '/temp_test_file.py')
 
@@ -71,18 +71,15 @@ if __name__ == '__main__':
         with open(full_path, 'w') as file:
             file.write(file_string)
 
-        execution_string = 'python ' + full_path
-
-        if os.name == 'nt':
-            cmd.Execute_input_string(execution_string.replace('/', '\\'))
-        else:
-            cmd.Execute_input_string(execution_string)
+        try:
+            cmd.Execute_input_string('python ' + full_path)
+        except Exception:
+            raise SystemExit(module_name + ' could not be run.')
 
         try:
             import temp_test_file
         except ImportError:
-            logging.error('Module failed.')
-            raise SystemExit
+            raise SystemExit(module_name + ' failed')
         else:
-            logging.info('Module passed.')
+            logging.info(module_name + ' passed.')
             cmd.delete_existing_files(full_path)

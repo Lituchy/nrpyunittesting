@@ -38,5 +38,5 @@ if __name__ == '__main__':
 
     print(failed)
     if failed == set() or True in failed:
-        print('Called exit(1)')
+        print('Calling exit(1)...')
         exit(1)
