@@ -66,7 +66,7 @@ if __name__ == '__main__':
         logging.debug('temp_test_file.py for:\n\tmodule:   ' + module_name +
                       '\n\tfunction: ' + function + '\n' + file_string)
 
-        full_path = sys.path[0] + os.path.join('/temp_test_file.py')
+        full_path = os.path.join(sys.path[0], 'temp_test_file.py')
         print('full path: ' + full_path)
 
         with open(full_path, 'w') as file:
