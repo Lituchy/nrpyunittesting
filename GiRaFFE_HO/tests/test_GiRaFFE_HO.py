@@ -13,7 +13,6 @@ def test_GiRaFFE_HO():
 
     create_test(module, module_name, function_and_global_dict)
 
-
 def test_GiRaFFE_HO_v2():
 
     module = 'GiRaFFE_HO.GiRaFFE_Higher_Order_v2'
@@ -27,6 +26,6 @@ def test_GiRaFFE_HO_v2():
 
 
 if __name__ == '__main__':
-    for func in dir():
-        if func[0:5] == 'test_':
-            exec(func + '()')
+    for fun in dir():
+        if fun[0:5] == 'test_':
+            exec(fun + '()')

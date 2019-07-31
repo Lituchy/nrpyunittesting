@@ -1,5 +1,4 @@
 from UnitTesting.calc_error import calc_error
-from UnitTesting.create_trusted_globals_dict import create_trusted_globals_dict
 from UnitTesting.evaluate_globals import evaluate_globals
 from UnitTesting.expand_variable_dict import expand_variable_dict
 from UnitTesting.first_time_print import first_time_print
@@ -24,6 +23,14 @@ def run_test(self):
 
     logging.info('Currently working on module ' + self.module_name + '...')
 
+    # Asserting that all user-supplied arguments exist
+    self.assertTrue(hasattr(self, 'module'), "'module' argument of run_test does not exist. Please set.")
+    self.assertTrue(hasattr(self, 'module_name'), "'module_name' argument of run_test does not exist. Please set.")
+    self.assertTrue(hasattr(self, 'function'), "'function' argument of run_test does not exist. Please create "
+                                               "function_and_global_dict.")
+    self.assertTrue(hasattr(self, 'global_list'), "'global_list' argument of run_test does not exist. Please create "
+                                                  "function_and_global_dict.")
+
     # Asserting that all arguments have the correct type
     self.assertTrue(type(self.path) == str, "'path' argument of run_test has incorrect type -- should be str.")
     self.assertTrue(type(self.module) == str, "'module' argument of run_test has incorrect type -- should be str.")
@@ -31,13 +38,10 @@ def run_test(self):
                     "'module_name' argument of run_test has incorrect type -- should be str.")
     self.assertTrue(type(self.function) == str,
                     "'function' argument of run_test has incorrect type -- should be str.")
-    self.assertTrue(type(self.global_list) == list,
-                    "'global_list' argument of run_test has incorrect type -- should be list.")
+    self.assertTrue(type(self.global_list) == list and type(self.global_list[0] == str),
+                    "'global_list' argument of run_test has incorrect type -- should be list of strings.")
     self.assertTrue(type(self.initialization_string) == str,
                     "'initialization_string' argument of run_test has incorrect type -- should be str.")
-
-    # logging.info(self.initialization_string)
-    # print(self.initialization_string)
 
     # Setting the precision
     mp.dps = precision
@@ -52,7 +56,7 @@ def run_test(self):
     self.first_time = self.trusted_values_dict_name not in self.trusted_values_dict
 
     # Creating trusted dictionary based off names of modules in ModDict
-    self.trusted_dict = create_trusted_globals_dict(self)
+    self.trusted_values_dict_entry = {} if self.first_time else self.trusted_values_dict[self.trusted_values_dict_name]
 
     # Try to import [module], giving an error message if it's in the wrong format
     try:
@@ -64,7 +68,7 @@ def run_test(self):
     self.variable_dict = evaluate_globals(self)
 
     # Generating variable list and name list for module
-    self.expanded_var_dict = expand_variable_dict(self)
+    self.expanded_variable_dict = expand_variable_dict(self)
 
     # Calculating numerical list for module
     self.calculated_dict = simplify_and_evaluate_sympy_expressions(self)
@@ -84,6 +88,7 @@ def run_test(self):
             self.assertTrue(values_identical,
                             'Variable(s) above have different calculated and trusted values. Follow '
                             'instructions above.')
+            exit(1)
 
         # If every value is the same, completed module.
         logging.info('Completed module ' + self.module_name + ' with no errors.\n')
@@ -93,3 +98,4 @@ def run_test(self):
     if self.first_time:
         self.assertTrue(False, 'Automatically failing due to it being the first time for at least one module. '
                                'Please see above for the code to copy into your trusted_values_dict.')
+        exit(1)

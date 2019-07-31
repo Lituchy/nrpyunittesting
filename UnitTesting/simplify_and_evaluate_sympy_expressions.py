@@ -7,8 +7,8 @@ import UnitTesting.standard_constants as standard_constants
 import logging
 import hashlib
 
-# Takes in a variable dictionary [expanded_var_dict] and a boolean [first_time], and returns
-# a dictionary with each expression in [expanded_var_dict] evaluated to a numerical expression by assigning each
+# Takes in a variable dictionary [expanded_variable_dict] and a boolean [first_time], and returns
+# a dictionary with each expression in [expanded_variable_dict] evaluated to a numerical expression by assigning each
 # sympy variable to a deterministic pseudorandom number.
 # If [first_time] is True, near-zero values are checked if they indeed should be zero.
 
@@ -18,7 +18,7 @@ import hashlib
 def simplify_and_evaluate_sympy_expressions(self):
 
     # If an empty variable dict is passed, return an empty dictionary
-    if self.expanded_var_dict == {}:
+    if self.expanded_variable_dict == {}:
         return {}
 
     # Setting precision
@@ -27,7 +27,7 @@ def simplify_and_evaluate_sympy_expressions(self):
 
     # Creating free_symbols_set, which stores all free symbols from all expressions.
     free_symbols_set = set()
-    for val in self.expanded_var_dict.values():
+    for val in self.expanded_variable_dict.values():
         free_symbols_set = free_symbols_set | val.free_symbols
 
     # Initializing variable_dictionary
@@ -56,7 +56,7 @@ def simplify_and_evaluate_sympy_expressions(self):
     simplified_expression_dict = dict()
 
     # Evaluating each expression using the values in var_dict
-    for var, expression in self.expanded_var_dict.items():
+    for var, expression in self.expanded_variable_dict.items():
         # Using sympy's cse algorithm to optimize our value substitution
         replaced, reduced = cse(expression, order='none')
         reduced = reduced[0]

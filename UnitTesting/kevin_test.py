@@ -5,7 +5,7 @@ import logging
 
 def create_test(module, module_name, function_and_global_dict, logging_level='INFO', initialization_string=''):
 
-    exec('logging.basicConfig(level=logging.{})'.format(logging_level))
+    logging.basicConfig(level=logging_level)
 
     for function, global_list in function_and_global_dict.items():
         file_string = '''
@@ -51,12 +51,18 @@ if __name__ == '__main__':
         file_string = file_string.format(logging_level.upper(), sys.path[0], module, module_name, function,
                                          global_list, initialization_string, trusted_values_dict_name)
 
+        # with open('UnitTesting/run_test.py', 'r') as file:
+        #     run_test_string = file.read()
+        #
+        # file_string = file_string.replace('run_test(self)', run_test_string)
+
         logging.debug('temp_test_file.py for:\n\tmodule:   ' + module_name +
                       '\n\tfunction: ' + function + '\n' + file_string)
+
         full_path = sys.path[0] + '/temp_test_file.py'
-        f = open(full_path, 'w')
-        f.write(file_string)
-        f.close()
+
+        with open(full_path, 'w') as file:
+            file.write(file_string)
 
         cmd.Execute_input_string('python ' + full_path)
         cmd.delete_existing_files(full_path)

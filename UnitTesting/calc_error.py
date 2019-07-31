@@ -19,13 +19,14 @@ def calc_error(self, output=True):
 
     # Creating sets to easily compare the keys of calculated_dict and trusted_dict
     calculated_set = set(self.calculated_dict)
-    trusted_set = set(self.trusted_dict)
+    trusted_set = set(self.trusted_values_dict_entry)
 
     # If the sets differ
     if calculated_set != trusted_set:
         # Print differing values if [output] is True
         if output:
-            logging.error('\n\t' + self.module_name + ': Calculated dictionary and trusted dictionary have different variables.')
+            logging.error('\n\t' + self.module_name +
+                          ': Calculated dictionary and trusted dictionary have different variables.')
             calculated_minus_trusted = calculated_set - trusted_set
             trusted_minus_calculated = trusted_set - calculated_set
             if calculated_minus_trusted != set([]):
@@ -45,7 +46,7 @@ def calc_error(self, output=True):
 
         # Values to compare
         calculated_val = self.calculated_dict[var]
-        trusted_val = self.trusted_dict[var]
+        trusted_val = self.trusted_values_dict_entry[var]
 
         if output:
             logging.debug('\n' + self.module_name + ': ' + var + ': Calculated: ' + str(calculated_val) + '\n' + self.module_name + ': ' + var
