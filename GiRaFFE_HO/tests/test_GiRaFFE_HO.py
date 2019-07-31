@@ -26,15 +26,17 @@ def test_GiRaFFE_HO_v2():
 
 
 if __name__ == '__main__':
-    failed = []
+    failed = set()
     for fun in dir():
         if fun[0:5] == 'test_':
             try:
                 exec(fun + '()')
             except SystemExit:
-                failed.append(True)
+                failed.add(True)
             else:
-                failed.append(False)
+                failed.add(False)
 
-    if failed == [] or True in failed:
+    print(failed)
+    if failed == set() or True in failed:
+        print('Called exit(1)')
         exit(1)
