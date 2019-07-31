@@ -39,13 +39,15 @@ class TestGlobals(unittest.TestCase):
         
         self.trusted_values_dict_name = '{}_globals'
         
-        # Self-destruct if failed
         try:
             run_test(self)
         except AssertionError:
-            import cmdline_helper as cmd
-            cmd.delete_existing_files(self.path + '/temp_test_file.py')
-
+            pass
+        else:
+            import os
+            with open(os.path.join(self.path, 'success.txt'), 'w') as file:
+                pass
+                
                 
 if __name__ == '__main__':
     unittest.main()
@@ -76,17 +78,16 @@ if __name__ == '__main__':
         if sys.version_info[0] == 3:
             python_string += '3'
 
-
-        # Change by writing to a success file if it passes, error if no success file exists.
-        try:
-            cmd.Execute_input_string(python_string + ' ' + full_path)
-        except Exception:
-            raise SystemExit(module_name + ' could not be run.')
+        cmd.Execute_input_string(python_string + ' ' + full_path)
 
         try:
-            import temp_test_file
-        except ImportError:
-            raise SystemExit(module_name + ' failed')
+            success_file = os.path.join(sys.path[0], 'success.txt')
+            open(success_file)
+            cmd.delete_existing_files(success_file)
+        except IOError:
+            logging.error(module_name + ' failed.')
+            raise SystemExit
         else:
             logging.info(module_name + ' passed.')
-            cmd.delete_existing_files(full_path)
+
+        cmd.delete_existing_files(full_path)
