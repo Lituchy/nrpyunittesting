@@ -38,6 +38,7 @@ class TestGlobals(unittest.TestCase):
         
         self.trusted_values_dict_name = '{}_globals'
         
+        # Self-destruct if failed
         try:
             run_test(self)
         except AssertionError:

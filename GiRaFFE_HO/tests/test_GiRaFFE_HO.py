@@ -36,5 +36,5 @@ if __name__ == '__main__':
             else:
                 failed.append(False)
 
-    if False not in failed:
+    if failed == [] or True in failed:
         exit(1)
