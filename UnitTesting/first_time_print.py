@@ -17,5 +17,5 @@ def first_time_print(self, write=True):
     if write:
         fw = open(self.path + '/trusted_values_dict.py', 'a')
         fw.write("\n# Generated on: " + str(date.today()) + "\ntrusted_values_dict['" + self.trusted_values_dict_name + "'] = "
-                 + str(self.calculated_dict) + '\n')
+                 + create_dict_string(self.calculated_dict) + '\n')
         fw.close()

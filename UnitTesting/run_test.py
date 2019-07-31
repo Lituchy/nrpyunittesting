@@ -88,7 +88,6 @@ def run_test(self):
             self.assertTrue(values_identical,
                             'Variable(s) above have different calculated and trusted values. Follow '
                             'instructions above.')
-            exit(1)
 
         # If every value is the same, completed module.
         logging.info('Completed module ' + self.module_name + ' with no errors.\n')
@@ -98,4 +97,3 @@ def run_test(self):
     if self.first_time:
         self.assertTrue(False, 'Automatically failing due to it being the first time for at least one module. '
                                'Please see above for the code to copy into your trusted_values_dict.')
-        exit(1)

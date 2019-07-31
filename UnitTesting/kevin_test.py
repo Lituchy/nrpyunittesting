@@ -37,13 +37,18 @@ class TestGlobals(unittest.TestCase):
         self.initialization_string = """{}"""
         
         self.trusted_values_dict_name = '{}_globals'
+        
+        try:
+            run_test(self)
+        except AssertionError:
+            import cmdline_helper as cmd
+            cmd.delete_existing_files(self.path + '/temp_test_file.py')
 
-        run_test(self)
-        
-        
+                
 if __name__ == '__main__':
     unittest.main()
 '''
+
         trusted_values_dict_name = module_name
         if len(function_and_global_dict) > 1:
             trusted_values_dict_name += '_' + function[0:-2]
@@ -65,4 +70,12 @@ if __name__ == '__main__':
             file.write(file_string)
 
         cmd.Execute_input_string('python ' + full_path)
-        cmd.delete_existing_files(full_path)
+
+        try:
+            import temp_test_file
+        except ImportError:
+            logging.error('Module failed.')
+            raise SystemExit
+        else:
+            logging.info('Module passed.')
+            cmd.delete_existing_files(full_path)
