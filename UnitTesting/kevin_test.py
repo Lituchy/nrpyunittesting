@@ -1,6 +1,7 @@
 import sys
 import cmdline_helper as cmd
 import logging
+import os
 
 
 def create_test(module, module_name, function_and_global_dict, logging_level='INFO', initialization_string=''):
@@ -70,7 +71,12 @@ if __name__ == '__main__':
         with open(full_path, 'w') as file:
             file.write(file_string)
 
-        cmd.Execute_input_string('python ' + full_path)
+        execution_string = 'python ' + full_path
+
+        if os.name == 'nt':
+            cmd.Execute_input_string(execution_string.replace('/', '\\'))
+        else:
+            cmd.Execute_input_string(execution_string)
 
         try:
             import temp_test_file
