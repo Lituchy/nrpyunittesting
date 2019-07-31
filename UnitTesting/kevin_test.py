@@ -42,7 +42,7 @@ class TestGlobals(unittest.TestCase):
         # Self-destruct if failed
         try:
             run_test(self)
-        except Exception:
+        except:
             import cmdline_helper as cmd
             cmd.delete_existing_files(self.path + '/temp_test_file.py')
 
@@ -71,8 +71,14 @@ if __name__ == '__main__':
         with open(full_path, 'w') as file:
             file.write(file_string)
 
+        python_string = 'python'
+        if sys.version_info[0] == 3:
+            python_string += '3'
+
+
+        # Change by writing to a success file if it passes, error if no success file exists.
         try:
-            cmd.Execute_input_string('python ' + full_path)
+            cmd.Execute_input_string(python_string + ' ' + full_path)
         except Exception:
             raise SystemExit(module_name + ' could not be run.')
 
