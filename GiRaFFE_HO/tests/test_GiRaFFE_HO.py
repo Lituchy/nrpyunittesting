@@ -33,6 +33,8 @@ if __name__ == '__main__':
                 exec(fun + '()')
             except SystemExit:
                 failed.append(True)
+            else:
+                failed.append(False)
 
-    if True in failed:
+    if False not in failed:
         exit(1)
