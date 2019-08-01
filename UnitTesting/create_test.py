@@ -34,6 +34,7 @@ class TestGlobals(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.path = r'{}'
+        # Create trusted_values_dict.py if it doesn't exist
         setup_trusted_values_dict(cls.path)
 
     def test_globals(self):
@@ -50,13 +51,14 @@ class TestGlobals(unittest.TestCase):
         
         self.trusted_values_dict_name = '{}_globals'
         
-        # Testing if run_test threw an AssertionError
         try:
-            run_test(self)
-        # If it did, do nothing -- tests failed
+        
+{}
+{}
+        # Something failed
         except AssertionError:
             pass
-        # Otherwise, create success.txt -- tests passed.
+        # Nothing failed
         else:
             import os
             with open(os.path.join(self.path, 'success.txt'), 'w') as file:
@@ -70,18 +72,38 @@ if __name__ == '__main__':
         trusted_values_dict_name = module_name
 
         if len(function_and_global_dict) > 1:
-            trusted_values_dict_name += '_' + function[0:-2]
+            trusted_values_dict_name += '_' + function.split('(')[0]
 
+        # Copying the lines from run_test.py into our test file
+        with open('UnitTesting/run_test.py', 'r') as file:
+            run_test_string = file.read().split('def run_test(self):')
+
+        # Properly formatting run_test's imports
+        run_test_imports_list = run_test_string[0].split('\n')
+        final_run_test_imports_string = ''
+        for line in run_test_imports_list:
+            if line != '':
+                final_run_test_imports_string += '            ' + line + '\n'
+
+        # Properly formatting run_test's function
+        run_test_body_list = run_test_string[1].split('\n')
+        final_run_test_body_string = ''
+        for line in run_test_body_list:
+            final_run_test_body_string += '        ' + line + '\n'
+
+        # Formatting file_string with inputs
         file_string = file_string.format(logging_level.upper(), sys.path[0], module, module_name, function,
-                                         global_list, initialization_string, trusted_values_dict_name)
+                                         global_list, initialization_string, trusted_values_dict_name,
+                                         final_run_test_imports_string, final_run_test_body_string)
 
-        logging.debug('test file for:\n\tmodule:   ' + module_name +
-                      '\n\tfunction: ' + function + '\n' + file_string)
+        logging.debug(' Test file for:\n\tmodule:   ' + module_name + '\n\tfunction: ' + function + '\n' + file_string)
 
-        full_path = os.path.join(sys.path[0], module_name + '_' + function[:-2] + '.py')
+        test_file = module_name + '__' + function.split('(')[0] + '__test.py'
+
+        full_path = os.path.join(sys.path[0], test_file)
 
         with open(full_path, 'w') as file:
-            logging.info(' Creating file ' + module_name + '_' + function[:-2] + '.py in ' + sys.path[0] + ' for running test...\n')
+            logging.info(' Creating file ' + test_file + ' in ' + sys.path[0] + ' for running test...\n')
             file.write(file_string)
 
         python_string = 'python'
@@ -102,3 +124,4 @@ if __name__ == '__main__':
             logging.info(' ...Test for function ' + function + ' in module ' + module_name +
                          ' passed! Deleting test file...')
             cmd.delete_existing_files(full_path)
+            logging.info(' ...Deletion successful. Test complete.\n')

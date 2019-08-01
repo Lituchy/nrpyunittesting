@@ -1,7 +1,7 @@
 from UnitTesting.create_test import create_test
 
 
-def test_GiRaFFE_HO():
+def ftest_GiRaFFE_HO():
 
     module = 'GiRaFFE_HO.GiRaFFE_Higher_Order'
 

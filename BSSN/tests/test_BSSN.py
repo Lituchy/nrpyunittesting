@@ -158,7 +158,6 @@ if __name__ == '__main__':
             else:
                 failed.add(False)
 
-    # print('failed: ' + str(failed))
     if failed == set() or True in failed:
         print('Calling exit(1)...')
         exit(1)
