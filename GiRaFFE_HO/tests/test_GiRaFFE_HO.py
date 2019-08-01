@@ -22,8 +22,7 @@ def test_GiRaFFE_HO_v2():
     function_and_global_dict = {'GiRaFFE_Higher_Order_v2()': ['gammaUU', 'gammadet', 'SevolParenUD', 'Stilde_rhsD',
                                                               'AevolParen', 'PevolParenU', 'A_rhsD', 'psi6Phi_rhs']}
 
-    create_test(module, module_name, function_and_global_dict)
-
+    create_test(module, module_name, function_and_global_dict, logging_level='DEBUG')
 
 if __name__ == '__main__':
     failed = set()
