@@ -23,7 +23,6 @@ def create_test(module, module_name, function_and_global_dict, logging_level='IN
         file_string = '''
 import unittest
 import logging
-from UnitTesting.run_test import run_test
 from UnitTesting.setup_trusted_values_dict import setup_trusted_values_dict
 
 logging.basicConfig(level=logging.{})  
@@ -49,7 +48,7 @@ class TestGlobals(unittest.TestCase):
         
         self.initialization_string = """{}"""
         
-        self.trusted_values_dict_name = '{}_globals'
+        self.trusted_values_dict_name = '{}__globals'
         
         try:
         
@@ -69,10 +68,7 @@ if __name__ == '__main__':
     unittest.main()
 '''
 
-        trusted_values_dict_name = module_name
-
-        if len(function_and_global_dict) > 1:
-            trusted_values_dict_name += '_' + function.split('(')[0]
+        trusted_values_dict_name = module_name + '__' + function.split('(')[0]
 
         # Copying the lines from run_test.py into our test file
         with open('UnitTesting/run_test.py', 'r') as file:
@@ -96,14 +92,12 @@ if __name__ == '__main__':
                                          global_list, initialization_string, trusted_values_dict_name,
                                          final_run_test_imports_string, final_run_test_body_string)
 
-        logging.debug(' Test file for:\n\tmodule:   ' + module_name + '\n\tfunction: ' + function + '\n' + file_string)
+        logging.debug(' Test file for:\nmodule:   ' + module_name + '\nfunction: ' + function + '\n' + file_string)
 
-        test_file = module_name + '__' + function.split('(')[0] + '__test.py'
-
-        full_path = os.path.join(sys.path[0], test_file)
+        full_path = os.path.join(sys.path[0], trusted_values_dict_name + '__test.py')
 
         with open(full_path, 'w') as file:
-            logging.info(' Creating file ' + test_file + ' in ' + sys.path[0] + ' for running test...\n')
+            logging.info(' Creating file ' + full_path + ' for running test...\n')
             file.write(file_string)
 
         python_string = 'python'

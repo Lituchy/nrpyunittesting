@@ -11,6 +11,7 @@ import logging
 
 
 def run_test(self):
+    # TODO: Add steps (i.e. 1a, 2, 4c)
     logging.debug(' Beginning run_test...\n')
 
     logging.info(' Currently working on function ' + self.function + ' in module ' + self.module_name + '...\n')
@@ -22,8 +23,9 @@ def run_test(self):
     sys.path.append(self.path)
 
     # Import trusted_values_dict from trusted_values_dict.py in self.path
-    logging.debug(' Importing trusted_values_dict...\n')
+    logging.debug(' Importing trusted_values_dict...')
     self.trusted_values_dict = import_module('trusted_values_dict').trusted_values_dict
+    logging.debug(' ...Success: trusted_values_dict has been imported correctly.\n')
 
     # Set boolean self.first_time based on existence of desired trusted_values_dict entry
     self.first_time = self.trusted_values_dict_name not in self.trusted_values_dict
