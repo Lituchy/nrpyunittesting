@@ -1,4 +1,4 @@
-from UnitTesting.kevin_test import create_test
+from UnitTesting.create_test import create_test
 
 
 def test_GiRaFFE_HO():
@@ -20,7 +20,7 @@ def test_GiRaFFE_HO_v2():
     module_name = 'GiRaFFE_HO_v2'
 
     function_and_global_dict = {'GiRaFFE_Higher_Order_v2()': ['gammaUU', 'gammadet', 'SevolParenUD', 'Stilde_rhsD',
-                                                               'AevolParen', 'PevolParenU', 'A_rhsD', 'psi6Phi_rhs']}
+                                                              'AevolParen', 'PevolParenU', 'A_rhsD', 'psi6Phi_rhs']}
 
     create_test(module, module_name, function_and_global_dict)
 
@@ -29,6 +29,7 @@ if __name__ == '__main__':
     failed = set()
     for fun in dir():
         if fun[0:5] == 'test_':
+            print('\nTesting function ' + str(fun) + '...\n')
             try:
                 exec(fun + '()')
             except SystemExit:
@@ -36,7 +37,5 @@ if __name__ == '__main__':
             else:
                 failed.add(False)
 
-    # print('failed: ' + str(failed))
     if failed == set() or True in failed:
-        print('Calling exit(1)...')
         exit(1)

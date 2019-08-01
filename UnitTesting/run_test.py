@@ -11,37 +11,11 @@ import sys
 import logging
 
 
-# run_test takes in :
-# [self]- The unittest self object,
-# [path]- The path to the unit tests being run
-# [module]- The module being tested
-# [module_name]- The name of the module being tested
-# [global_list]- A list of globals
-# It then runs a unittest, comparing calculated values with trusted values.
-# Throws an [AssertionError] if [mod_dict] is empty
 def run_test(self):
 
-    logging.info('Currently working on module ' + self.module_name + '...')
+    logging.debug(' Beginning run_test...\n')
 
-    # Asserting that all user-supplied arguments exist
-    self.assertTrue(hasattr(self, 'module'), "'module' argument of run_test does not exist. Please set.")
-    self.assertTrue(hasattr(self, 'module_name'), "'module_name' argument of run_test does not exist. Please set.")
-    self.assertTrue(hasattr(self, 'function'), "'function' argument of run_test does not exist. Please create "
-                                               "function_and_global_dict.")
-    self.assertTrue(hasattr(self, 'global_list'), "'global_list' argument of run_test does not exist. Please create "
-                                                  "function_and_global_dict.")
-
-    # Asserting that all arguments have the correct type
-    self.assertTrue(type(self.path) == str, "'path' argument of run_test has incorrect type -- should be str.")
-    self.assertTrue(type(self.module) == str, "'module' argument of run_test has incorrect type -- should be str.")
-    self.assertTrue(type(self.module_name) == str,
-                    "'module_name' argument of run_test has incorrect type -- should be str.")
-    self.assertTrue(type(self.function) == str,
-                    "'function' argument of run_test has incorrect type -- should be str.")
-    self.assertTrue(type(self.global_list) == list and type(self.global_list[0] == str),
-                    "'global_list' argument of run_test has incorrect type -- should be list of strings.")
-    self.assertTrue(type(self.initialization_string) == str,
-                    "'initialization_string' argument of run_test has incorrect type -- should be str.")
+    logging.info(' Currently working on function ' + self.function + ' in module ' + self.module_name + '...\n')
 
     # Setting the precision
     mp.dps = precision
@@ -62,7 +36,9 @@ def run_test(self):
     try:
         self.module = import_module(self.module)
     except ImportError:
-        self.assertTrue(False, "Argument 'module' in run_test does not exist as a module. Check path argument.")
+        logging.error(" Attribute 'module' for " + self.module_name + " does not exist as a module. This attribute "
+                      "should be what you would type if you were importing 'module' in your own file.\n")
+        self.assertTrue(False)
 
     # Creating dictionary of expressions for all modules in ModDict
     self.variable_dict = evaluate_globals(self)

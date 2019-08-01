@@ -103,12 +103,15 @@ def Execute(executable, executable_output_arguments="", file_to_redirect_stdout=
 
 # Execute_input_string(): Executes an input string and redirects 
 #            output from stdout & stderr to desired destinations.
-def Execute_input_string(input_string, file_to_redirect_stdout=os.devnull):
-    print("Executing `"+input_string+"`...")
+def Execute_input_string(input_string, file_to_redirect_stdout=os.devnull, output=True):
+
+    if output:
+        print("Executing `"+input_string+"`...")
     start = time.time()
     # https://docs.python.org/3/library/subprocess.html
     args = shlex.split(input_string)
-    print('args: ' + str(args))
+    if output:
+        print('args: ' + str(args))
     # https://stackoverflow.com/questions/18421757/live-output-from-subprocess-command
     filename = "tmp.txt"
     with io.open(filename, 'wb') as writer, io.open(filename, 'rb', 1) as reader, io.open(file_to_redirect_stdout, 'w') as rdirect:
@@ -130,7 +133,8 @@ def Execute_input_string(input_string, file_to_redirect_stdout=os.devnull):
 #             for c in iter(lambda: process.stdout.read(1), ''):  # replace '' with b'' for Python 3<-- Doesn't work!
 #                 sys.stdout.write(f.read())
     end = time.time()
-    print("Finished executing in "+str(end-start)+" seconds.")
+    if output:
+        print("Finished executing in "+str(end-start)+" seconds.")
 
 
 # delete_existing_files(file_or_wildcard): 
