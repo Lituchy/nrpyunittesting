@@ -6,7 +6,6 @@ from UnitTesting.simplify_and_evaluate_sympy_expressions import simplify_and_eva
 from UnitTesting.standard_constants import precision
 from mpmath import mp
 from importlib import import_module
-import sys
 import logging
 
 
@@ -42,7 +41,7 @@ def run_test(self):
     logging.debug(' ...Successfully imported.\n')
 
     # Call self.function and then get expressions for all globals in self.global_list
-    logging.debug(' Calling evaluate_globals...')
+    logging.debug(' Calling evaluate_globals...\n')
     self.variable_dict = evaluate_globals(self)
     logging.debug(' ...Success: evaluate_globals ran without errors.\n')
 
@@ -76,6 +75,5 @@ def run_test(self):
                             'instructions above.')
         # Otherwise, test passes
         else:
-            logging.info(' Completed module ' + self.module_name + ' with no errors.\n')
             self.assertTrue(values_identical)
 

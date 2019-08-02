@@ -63,7 +63,7 @@ def test_Psi4_tetrads():
 
     create_test(module, module_name, function_and_global_dict)
 
-def ftest_quantities():
+def test_quantities():
 
     module = 'BSSN.BSSN_quantities'
 
@@ -85,13 +85,23 @@ def ftest_quantities():
 
                                 'phi_and_derivs()': ['phi_dD', 'phi_dupD', 'phi_dDD', 'exp_m4phi', 'phi_dBarD', 'phi_dBarDD']
                                 }
+    rfm_init_string = '''
+import reference_metric as rfm
+rfm.reference_metric()
+rfm.ref_metric__hatted_quantities()
+    '''
 
-#     initialization_string = '''
-# import reference_metric as rfm
-# rfm.ref_metric__hatted_quantities()
-#     '''
+    initialization_string_dict = {
+        'BSSN_basic_tensors()': rfm_init_string,
+        'gammabar__inverse_and_derivs()': rfm_init_string,
+        'detgammabar_and_derivs()': rfm_init_string,
+        'AbarUU_AbarUD_trAbar_AbarDD_dD()': rfm_init_string,
+        'RicciBar__gammabarDD_dHatD__DGammaUDD__DGammaU()': rfm_init_string,
+        'betaU_derivs()': rfm_init_string,
+        'phi_and_derivs()': rfm_init_string
+    }
 
-    create_test(module, module_name, function_and_global_dict, logging_level='DEBUG')
+    create_test(module, module_name, function_and_global_dict, logging_level='INFO', initialization_string_dict=initialization_string_dict)
 
 def test_RHSs():
 

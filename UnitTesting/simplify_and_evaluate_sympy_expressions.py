@@ -32,9 +32,8 @@ def simplify_and_evaluate_sympy_expressions(self):
     for val in self.expanded_variable_dict.values():
         free_symbols_set = free_symbols_set | val.free_symbols
 
-
-    # Initializing variable_dictionary
-    variable_dictionary = dict()
+    # Initializing free_symbols_dict
+    free_symbols_dict = dict()
 
     logging.debug(' ...Setting each free symbol to a random value...')
 
@@ -43,18 +42,18 @@ def simplify_and_evaluate_sympy_expressions(self):
     for var in free_symbols_set:
         # Make sure M_PI is set to its correct value, pi
         if str(var) == "M_PI":
-            variable_dictionary[var] = mpf(pi)
+            free_symbols_dict[var] = mpf(pi)
         # Then make sure M_SQRT1_2 is set to its correct value, 1/sqrt(2)
         elif str(var) == "M_SQRT1_2":
-            variable_dictionary[var] = mpf(1/sqrt(2))
+            free_symbols_dict[var] = mpf(1/sqrt(2))
         # All other free variables are set to random numbers
         else:
             # Take the variable [var], turn it into a string, encode the string, hash the string using the md5
             # algorithm, turn the hash into a hex number, turn the hex number into an int, set the random seed to
             # that int. This ensures each variable gets a unique but consistent value.
             random.seed(int(hashlib.md5(str(var).encode()).hexdigest(), 16))
-            # Store the random value in variable_dictionary as a mpf
-            variable_dictionary[var] = mpf(random.random())
+            # Store the random value in free_symbols_dict as a mpf
+            free_symbols_dict[var] = mpf(random.random())
 
     # Initialize value_dict and simplified_expression_dict
     value_dict = dict()
@@ -70,8 +69,8 @@ def simplify_and_evaluate_sympy_expressions(self):
         # Store the replaced, reduced result from cse into simplified_expression_dict
         simplified_expression_dict[var] = replaced, reduced
 
-        # Copying variable_dictionary into a new variable dictionary
-        new_var_dict = dict(variable_dictionary)
+        # Copying free_symbols_dict into a new variable dictionary
+        new_var_dict = dict(free_symbols_dict)
 
         # Replacing old expressions with new expressions and putting result in new variable dictionary
         for new, old in replaced:
@@ -103,7 +102,7 @@ def simplify_and_evaluate_sympy_expressions(self):
                 logging.info("Found |result| (" + str(fabs(val)) +
                              ") close to zero. Checking if indeed it should be zero.")
             # Recalculate result with double the precision
-            result = recalculate_value(variable_dictionary, simplified_expression_dict[var][0],
+            result = recalculate_value(free_symbols_dict, simplified_expression_dict[var][0],
                                        simplified_expression_dict[var][1], 2 * precision)
             # If the new result dropped in value, we know it should actually be zero. Otherwise, do nothing.
             if fabs(result) < 10 ** (-(4.0/3) * precision):
@@ -116,12 +115,12 @@ def simplify_and_evaluate_sympy_expressions(self):
 
 
 # Sub-function that recalculates value for variable with given precision
-def recalculate_value(variable_dictionary, replaced, reduced, precision):
+def recalculate_value(free_symbols_dict, replaced, reduced, precision):
 
     mp.dps = precision
 
-    # Copying variable_dictionary into a new variable dictionary
-    new_var_dict = dict(variable_dictionary)
+    # Copying free_symbols_dict into a new variable dictionary
+    new_var_dict = dict(free_symbols_dict)
 
     # Replacing old expressions with new expressions and putting result in new variable dictionary
     for new, old in replaced:

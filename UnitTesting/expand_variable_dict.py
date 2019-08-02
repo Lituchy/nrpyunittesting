@@ -1,4 +1,5 @@
 from UnitTesting.get_variable_dimension import get_variable_dimension
+import logging
 
 # [expand_variable_dict] takes in a variable dictionary [variable_dict] and returns a dictionary that represents
 # the expanded version of [variable_dict] according to the dimension of each variable in [variable_dict].

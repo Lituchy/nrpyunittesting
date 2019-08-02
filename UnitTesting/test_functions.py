@@ -1200,9 +1200,6 @@ class TestFunctions(unittest.TestCase):
         except IOError:
             self.assertFalse(True, msg='trusted_values_dict.py not created in correct location.')
 
-
-
-
         logging.info('\nAll setup_trusted_values_dict tests passed.\n')
 
         logging.info('\nAll file-writing first_time_print tests passed.\n')
