@@ -18,7 +18,7 @@ echo $PYTHONEXEC version info:
 $PYTHONEXEC --version
 echo "########################################"
 
-#$PYTHONEXEC UnitTesting/NRPyUnitTests_Functions.py &&
+#$PYTHONEXEC UnitTesting/test_functions.py #&&
 
 #$PYTHONEXEC BSSN/tests/test_BSSN.py &&
 #$PYTHONEXEC FishboneMoncriefID/tests/test_FishboneMoncriefID.py &&

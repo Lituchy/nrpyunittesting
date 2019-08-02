@@ -114,7 +114,7 @@ if __name__ == '__main__':
         if sys.version_info[0] == 3:
             python_string += '3'
 
-        cmd.Execute_input_string(python_string + ' ' + full_path, output=False)
+        cmd.Execute_input_string(python_string + ' ' + full_path, output=True)
 
         try:
             success_file = os.path.join(sys.path[0], 'success.txt')
@@ -122,12 +122,12 @@ if __name__ == '__main__':
             cmd.delete_existing_files(success_file)
         except IOError:
             logging.error(' Test for function ' + function + ' in module ' + module_name +
-                          ' failed! Please examine test file.')
+                          ' failed! Please examine test file.\n\n')
             raise SystemExit
         else:
             logging.info(' Test for function ' + function + ' in module ' + module_name +
                          ' passed! Deleting test file...')
             cmd.delete_existing_files(full_path)
-            logging.info(' ...Deletion successful. Test complete.\n\n'
-                         '----------------------------------------------------------------------\n'
-                         '----------------------------------------------------------------------\n')
+            logging.info(' ...Deletion successful. Test complete.\n\n')
+        logging.info('----------------------------------------------------------------------\n'
+                     '----------------------------------------------------------------------\n')

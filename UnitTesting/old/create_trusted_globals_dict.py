@@ -1,30 +1,16 @@
-from trusted_values_dict import trusted_values_dict
 
-# createTrustedGlobalsDict takes in a module dictionary [mod_dict] and a boolean list [first_times].
-# For each module, if [first_time] is True, then an empty dict is returned.
-# This ensures that when the dictionary is passed into [calc_error], there will be an error.
-# If [first_time] is False, then a dictionary that contains every module in ModDict as keys, and each module's
-# respective dictionary from trustedValuesDict as values. The naming convention for the dictionaries is as follows:
-#   trustedValuesDict['(MODULE_NAME)Globals'] -- The module name with 'Globals' concatenated on the end.
-#   This is consistent throughout all files.
-# Throws an [AssertionError] if [mod_dict] and [first_times] are different sizes.
-# Throws a [KeyError] if [first_time] is true for a module whose entry isn't in [trusted_values_dict].
+# create_trusted_globals_dict takes in a module name [module_name], a trusted values dictionary [trusted_values_dict],
+# and a boolean [first_time].
 
 # Called by run_test
 
 
-def create_trusted_globals_dict(mod_dict, first_times):
+def create_trusted_globals_dict(self):
 
-    assert len(mod_dict) == len(first_times)
-
-    trusted_dict = dict()
-    
-    for (mod, val), first_time in zip(mod_dict.items(),first_times):
-
-        if first_time:
-            trusted_dict[mod] = dict()
-        else:
-            dict_string = mod + 'Globals'
-            trusted_dict[mod] = trusted_values_dict[dict_string]
-
-    return trusted_dict
+    # If module is being run for the first time, a trusted_values_dict entry doesn't exist; return an empty dictionary.
+    if self.first_time:
+        return {}
+    # Otherwise, return the trusted_values_dict entry for the string [module_name] with the word 'Globals' concatenated
+    # onto its end -- this is the standard naming scheme for NRPy unit tests.
+    else:
+        return self.trusted_values_dict[self.trusted_values_dict_name]
