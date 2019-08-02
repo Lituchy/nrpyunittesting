@@ -20,23 +20,14 @@ echo "########################################"
 
 #$PYTHONEXEC UnitTesting/NRPyUnitTests_Functions.py &&
 
-#$PYTHONEXEC tests/NRPyUnitTests_Reference_Metric_Globals.py #&&
-#
-#$PYTHONEXEC BSSN/tests/test_NRPyUnitTests_BSSN_Globals.py #&&
-#$PYTHONEXEC FishboneMoncriefID/tests/NRPyUnitTests_FishboneMoncriefID_Globals.py &&
-#$PYTHONEXEC GiRaFFE_HO/tests/NRPyUnitTests_GiRaFFE_HO_Globals.py #&&
-
-$PYTHONEXEC GiRaFFE_HO/tests/test_GiRaFFE_HO.py &&
 $PYTHONEXEC BSSN/tests/test_BSSN.py &&
-$PYTHONEXEC u0_smallb_Poynting__Cartesian/tests/test_u0_smallb_Poynting__Cartesian.py
-
-#$PYTHONEXEC GiRaFFEfood_HO/tests/NRPyUnitTests_GiRaFFEfood_HO_Globals.py &&
-#$PYTHONEXEC Maxwell/tests/NRPyUnitTests_Maxwell_Globals.py &&
-#$PYTHONEXEC ScalarWave/tests/NRPyUnitTests_ScalarWave_Globals.py &&
-#$PYTHONEXEC ScalarWaveCurvilinear/tests/NRPyUnitTests_ScalarWaveCurvilinear_Globals.py &&
-#$PYTHONEXEC u0_smallb_Poynting__Cartesian/tests/NRPyUnitTests_u0_smallb_Poynting__Cartesian_Globals.py &&
-#$PYTHONEXEC WeylScal4NRPy/tests/NRPyUnitTests_WeylScal4NRPy_Globals.py
-
-#$PYTHONEXEC UnitTesting/kevin_test/test_file_creation.py
-
-#$PYTHONEXEC TOV/tests/NRPyUnitTests_TOV_ADM_T4UUmunu_Globals.py
+$PYTHONEXEC FishboneMoncriefID/tests/test_FishboneMoncriefID.py &&
+$PYTHONEXEC GiRaFFE_HO/tests/test_GiRaFFE_HO.py &&
+$PYTHONEXEC GiRaFFEfood_HO/tests/test_GiRaFFEfood_HO.py &&
+$PYTHONEXEC Maxwell/tests/test_Maxwell.py && #TODO: MaxwellCartesian_ID not working
+$PYTHONEXEC ScalarWave/tests/test_ScalarWave.py &&
+$PYTHONEXEC ScalarWaveCurvilinear/tests/test_ScalarWaveCurvilinear.py &&
+$PYTHONEXEC TOV/tests/test_TOV.py &&
+$PYTHONEXEC u0_smallb_Poynting__Cartesian/tests/test_u0_smallb_Poynting__Cartesian.py &&
+$PYTHONEXEC WeylScal4NRPy/tests/test_WeylScal4NRPy.py &&
+$PYTHONEXEC tests/test_reference_metric.py
