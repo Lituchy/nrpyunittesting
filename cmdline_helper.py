@@ -114,14 +114,17 @@ def Execute_input_string(input_string, file_to_redirect_stdout=os.devnull, outpu
         print('args: ' + str(args))
     # https://stackoverflow.com/questions/18421757/live-output-from-subprocess-command
     filename = "tmp.txt"
-    with io.open(filename, 'wb') as writer, io.open(filename, 'rb', 1) as reader, io.open(file_to_redirect_stdout, 'w') as rdirect:
-        process = subprocess.Popen(args, stdout=rdirect, stderr=writer)
-        while process.poll() is None:
-            # https://stackoverflow.com/questions/21689365/python-3-typeerror-must-be-str-not-bytes-with-sys-stdout-write/21689447
-            sys.stdout.write(reader.read().decode('utf-8'))
-            time.sleep(0.2)
-        # Read the remaining
-        sys.stdout.write(reader.read().decode('utf-8'))
+    process = subprocess.Popen(args)
+
+    # with io.open(filename, 'wb') as writer, io.open(filename, 'rb', 1) as reader, io.open(file_to_redirect_stdout, 'w') as rdirect:
+    #     process = subprocess.Popen(args, stdout=rdirect, stderr=writer)
+    #
+    #     while process.poll() is None:
+    #         # https://stackoverflow.com/questions/21689365/python-3-typeerror-must-be-str-not-bytes-with-sys-stdout-write/21689447
+    #         sys.stdout.write(reader.read().decode('utf-8'))
+    #         time.sleep(0.2)
+    #     # Read the remaining
+    #     sys.stdout.write(reader.read().decode('utf-8'))
     delete_existing_files(filename)
 # Old Python 2 version (broken for stdout redirect): if (sys.version_info < (3, 0)):
 #     else:
