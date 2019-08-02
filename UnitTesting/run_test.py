@@ -18,9 +18,6 @@ def run_test(self):
     # Set precision to the value defined in standard_constants
     mp.dps = precision
 
-    # Add self.path to sys.path to ensure file cross-reference compatability
-    # sys.path.append(self.path)
-
     # Import trusted_values_dict from trusted_values_dict.py in self.path
     logging.debug(' Importing trusted_values_dict...')
     self.trusted_values_dict = import_module('trusted_values_dict').trusted_values_dict
@@ -32,6 +29,7 @@ def run_test(self):
     # Set trusted_values_dict_entry its corresponding trusted_values_dict entry; if none exist, set to empty dict
     self.trusted_values_dict_entry = {} if self.first_time else self.trusted_values_dict[self.trusted_values_dict_name]
 
+    logging.debug(' Importing ' + self.module + '...')
     # Import self.module
     try:
         self.module = import_module(self.module)
@@ -40,6 +38,8 @@ def run_test(self):
         logging.error(" Attribute 'module' for " + self.module_name + " does not exist as a module. This attribute "
                       "should be what you would type if you were importing 'module' in your own file.\n")
         self.assertTrue(False)
+
+    logging.debug(' ...Successfully imported.\n')
 
     # Call self.function and then get expressions for all globals in self.global_list
     logging.debug(' Calling evaluate_globals...')

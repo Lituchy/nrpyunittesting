@@ -34,7 +34,9 @@ class TestGlobals(unittest.TestCase):
     def setUpClass(cls):
         cls.path = r'{}'
         # Create trusted_values_dict.py if it doesn't exist
+        logging.debug(' Calling setup_trusted_values_dict...')
         setup_trusted_values_dict(cls.path)
+        logging.debug(' ...Success: setup_trusted_values_dict ran without errors.\\n')
 
     def test_globals(self):
 

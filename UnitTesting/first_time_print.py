@@ -15,7 +15,9 @@ def first_time_print(self, write=True):
           "\ntrusted_values_dict['" + self.trusted_values_dict_name + "'] = " + create_dict_string(self.calculated_dict) + "\n\n#####")
 
     if write:
+        logging.debug(' Writing trusted_values_dict entry to trusted_values_dict.py...')
         fw = open(self.path + '/trusted_values_dict.py', 'a')
         fw.write("\n# Generated on: " + str(date.today()) + "\ntrusted_values_dict['" + self.trusted_values_dict_name + "'] = "
                  + create_dict_string(self.calculated_dict) + '\n')
         fw.close()
+        logging.debug(' ...Success: entry written to trusted_values_dict.py\n')

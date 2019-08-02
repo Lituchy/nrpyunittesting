@@ -21,6 +21,7 @@ def calc_error(self, output=True):
     calculated_set = set(self.calculated_dict)
     trusted_set = set(self.trusted_values_dict_entry)
 
+    logging.debug(' Checking that calculated and trusted dicts contain the same variables...')
     # If the sets differ
     if calculated_set != trusted_set:
         # Print differing values if [output] is True
@@ -38,9 +39,12 @@ def calc_error(self, output=True):
         # Automatically fail and don't proceed
         return False
 
+    logging.debug(' ...Success: same variables in both dicts.\n')
+
     # Initialize list of variables whose values differ
     bad_var_list = []
 
+    logging.debug(' Comparing all calculated and trusted values...')
     # For each variable, print calculated and trusted values
     for var in sorted(self.calculated_dict):
 
@@ -77,6 +81,8 @@ def calc_error(self, output=True):
                       ' had to be changed. Then re-run test script.\n' + '#####\n\n# Generated on: ' +
                       str(date.today()) + '\n# Reason for changing values: TODO' + "\ntrusted_values_dict['" +
                       self.trusted_values_dict_name + "'] = " + create_dict_string(self.calculated_dict) + '\n\n#####')
+    else:
+        logging.debug(' ...Success: all variables identical.\n')
 
     # Return True if all variables are good, False otherwise
     return bad_var_list == []

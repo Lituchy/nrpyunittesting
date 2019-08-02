@@ -26,12 +26,17 @@ def simplify_and_evaluate_sympy_expressions(self):
     mp.dps = precision
 
     # Creating free_symbols_set, which stores all free symbols from all expressions.
+
+    logging.debug(' Getting all free symbols...')
     free_symbols_set = set()
     for val in self.expanded_variable_dict.values():
         free_symbols_set = free_symbols_set | val.free_symbols
 
+
     # Initializing variable_dictionary
     variable_dictionary = dict()
+
+    logging.debug(' ...Setting each free symbol to a random value...')
 
     # Setting each variable in free_symbols_set to a random number in [0, 1) according to the hashed string
     # representation of each variable.
@@ -54,6 +59,8 @@ def simplify_and_evaluate_sympy_expressions(self):
     # Initialize value_dict and simplified_expression_dict
     value_dict = dict()
     simplified_expression_dict = dict()
+
+    logging.debug(' ...Calculating values for each variable based on free symbols...')
 
     # Evaluating each expression using the values in var_dict
     for var, expression in self.expanded_variable_dict.items():
@@ -84,6 +91,8 @@ def simplify_and_evaluate_sympy_expressions(self):
         # If value is a complex number, store it as a numerical mpc
         except TypeError:
             value_dict[var] = mpc(N(reduced))
+
+    logging.debug(' ...Double-checking all near-zero values to see if they should be zero...')
 
     # If [first_time] is True, double check all near-zero values to see if they should be zero.
     for var, val in value_dict.items():
