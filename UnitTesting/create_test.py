@@ -106,8 +106,9 @@ if __name__ == '__main__':
         full_path = os.path.join(sys.path[0], trusted_values_dict_name + '__test.py')
 
         with open(full_path, 'w') as file:
-            logging.info(' Creating file ' + full_path + ' for running test...\n')
+            logging.info(' Creating file ' + full_path + '...')
             file.write(file_string)
+            logging.info(' ...Success: File created.\n')
 
         python_string = 'python'
         if sys.version_info[0] == 3:
@@ -127,4 +128,6 @@ if __name__ == '__main__':
             logging.info(' Test for function ' + function + ' in module ' + module_name +
                          ' passed! Deleting test file...')
             cmd.delete_existing_files(full_path)
-            logging.info(' ...Deletion successful. Test complete.\n')
+            logging.info(' ...Deletion successful. Test complete.\n\n'
+                         '----------------------------------------------------------------------\n'
+                         '----------------------------------------------------------------------\n')

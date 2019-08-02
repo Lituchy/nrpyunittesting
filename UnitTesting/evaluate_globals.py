@@ -10,13 +10,13 @@ import logging
 
 def evaluate_globals(self):
 
-    logging.info(' Executing initialization_string...')
+    logging.debug(' Executing initialization_string...')
 
     logging.debug('initialization_string: ' + self.initialization_string)
 
     exec(self.initialization_string)
 
-    logging.info(' ...Successfully executed.\n')
+    logging.debug(' ...Successfully executed.\n')
 
     string_exec = self.module_name + '.' + self.function + '\n'
 
@@ -26,11 +26,11 @@ def evaluate_globals(self):
     # Initializing location
     var_dict = {}
 
-    logging.info(' Executing function call and global assignment...')
+    logging.debug(' Executing function call and global assignment...')
 
     # Executing string of execution with current globals and storing resulting globals in loc
     exec(string_exec, {self.module_name: self.module}, var_dict)
 
-    logging.info(' ...Successfully executed.\n')
+    logging.debug(' ...Successfully executed.\n')
 
     return var_dict

@@ -20,14 +20,14 @@ echo "########################################"
 
 #$PYTHONEXEC UnitTesting/NRPyUnitTests_Functions.py &&
 
-$PYTHONEXEC BSSN/tests/test_BSSN.py &&
-$PYTHONEXEC FishboneMoncriefID/tests/test_FishboneMoncriefID.py &&
-$PYTHONEXEC GiRaFFE_HO/tests/test_GiRaFFE_HO.py &&
-$PYTHONEXEC GiRaFFEfood_HO/tests/test_GiRaFFEfood_HO.py &&
-$PYTHONEXEC Maxwell/tests/test_Maxwell.py && #TODO: MaxwellCartesian_ID not working
-$PYTHONEXEC ScalarWave/tests/test_ScalarWave.py &&
-$PYTHONEXEC ScalarWaveCurvilinear/tests/test_ScalarWaveCurvilinear.py &&
-$PYTHONEXEC TOV/tests/test_TOV.py &&
-$PYTHONEXEC u0_smallb_Poynting__Cartesian/tests/test_u0_smallb_Poynting__Cartesian.py &&
-$PYTHONEXEC WeylScal4NRPy/tests/test_WeylScal4NRPy.py &&
-$PYTHONEXEC tests/test_reference_metric.py
+#$PYTHONEXEC BSSN/tests/test_BSSN.py &&
+#$PYTHONEXEC FishboneMoncriefID/tests/test_FishboneMoncriefID.py &&
+$PYTHONEXEC GiRaFFE_HO/tests/test_GiRaFFE_HO.py #&&
+#$PYTHONEXEC GiRaFFEfood_HO/tests/test_GiRaFFEfood_HO.py &&
+#$PYTHONEXEC Maxwell/tests/test_Maxwell.py && #TODO: MaxwellCartesian_ID not working
+#$PYTHONEXEC ScalarWave/tests/test_ScalarWave.py &&
+#$PYTHONEXEC ScalarWaveCurvilinear/tests/test_ScalarWaveCurvilinear.py &&
+#$PYTHONEXEC TOV/tests/test_TOV.py &&
+#$PYTHONEXEC u0_smallb_Poynting__Cartesian/tests/test_u0_smallb_Poynting__Cartesian.py &&
+#$PYTHONEXEC WeylScal4NRPy/tests/test_WeylScal4NRPy.py &&
+#$PYTHONEXEC tests/test_reference_metric.py

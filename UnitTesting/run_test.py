@@ -18,9 +18,9 @@ def run_test(self):
     mp.dps = precision
 
     # Import trusted_values_dict from trusted_values_dict.py in self.path
-    logging.debug(' Importing trusted_values_dict...')
+    logging.info(' Importing trusted_values_dict...')
     self.trusted_values_dict = import_module('trusted_values_dict').trusted_values_dict
-    logging.debug(' ...Success: trusted_values_dict has been imported correctly.\n')
+    logging.info(' ...Success: Imported trusted_values_dict.\n')
 
     # Set boolean self.first_time based on existence of desired trusted_values_dict entry
     self.first_time = self.trusted_values_dict_name not in self.trusted_values_dict
@@ -28,7 +28,7 @@ def run_test(self):
     # Set trusted_values_dict_entry its corresponding trusted_values_dict entry; if none exist, set to empty dict
     self.trusted_values_dict_entry = {} if self.first_time else self.trusted_values_dict[self.trusted_values_dict_name]
 
-    logging.debug(' Importing ' + self.module + '...')
+    logging.info(' Importing ' + self.module + '...')
     # Import self.module
     try:
         self.module = import_module(self.module)
@@ -38,35 +38,35 @@ def run_test(self):
                       "should be what you would type if you were importing 'module' in your own file.\n")
         self.assertTrue(False)
 
-    logging.debug(' ...Successfully imported.\n')
+    logging.info(' ...Success: Imported module.\n')
 
     # Call self.function and then get expressions for all globals in self.global_list
-    logging.debug(' Calling evaluate_globals...\n')
+    logging.info(' Calling evaluate_globals...')
     self.variable_dict = evaluate_globals(self)
-    logging.debug(' ...Success: evaluate_globals ran without errors.\n')
+    logging.info(' ...Success: evaluate_globals ran without errors.\n')
 
     # Expand self.variable_dict by breaking up all tensors into scalars.
-    logging.debug(' Calling expand_variable_dict...')
+    logging.info(' Calling expand_variable_dict...')
     self.expanded_variable_dict = expand_variable_dict(self)
-    logging.debug(' ...Success: expand_variable_dict ran without errors.\n')
+    logging.info(' ...Success: expand_variable_dict ran without errors.\n')
 
     # Assign each variable in each expression a random value and get a value for each expression.
-    logging.debug(' Calling simplify_and_evaluate_sympy_expressions...')
+    logging.info(' Calling simplify_and_evaluate_sympy_expressions...')
     self.calculated_dict = simplify_and_evaluate_sympy_expressions(self)
-    logging.debug(' ...Success: simplify_and_evaluate_sympy_expressions ran without errors.\n')
+    logging.info(' ...Success: simplify_and_evaluate_sympy_expressions ran without errors.\n')
 
     # TODO: Not failing when it should
     if self.first_time:
         # Print self.calculated_dict in a nice format and append it to trusted_values_dict
-        logging.debug(' Calling first_time_print since it is being run for the first time...')
+        logging.info(' Calling first_time_print since it is being run for the first time...')
         first_time_print(self)
-        logging.debug(' ...Success: first_time_print ran without errors.\n')
+        logging.info(' ...Success: first_time_print ran without errors.\n')
 
     else:
         # Calculate the error between the trusted values and the calculated values
-        logging.debug(' Calling calc_error...')
+        logging.info(' Calling calc_error...')
         values_identical = calc_error(self)
-        logging.debug(' ...Success: calc_error ran without errors.\n')
+        logging.info(' ...Success: calc_error ran without errors.\n')
 
         # If there is an error large enough, fail
         if not values_identical:
