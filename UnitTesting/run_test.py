@@ -12,7 +12,6 @@ import logging
 
 def run_test(self):
     # TODO: Add steps (i.e. 1a, 2, 4c)
-    logging.debug(' Beginning run_test...\n')
 
     logging.info(' Currently working on function ' + self.function + ' in module ' + self.module_name + '...\n')
 
@@ -20,7 +19,7 @@ def run_test(self):
     mp.dps = precision
 
     # Add self.path to sys.path to ensure file cross-reference compatability
-    sys.path.append(self.path)
+    # sys.path.append(self.path)
 
     # Import trusted_values_dict from trusted_values_dict.py in self.path
     logging.debug(' Importing trusted_values_dict...')
@@ -57,6 +56,7 @@ def run_test(self):
     self.calculated_dict = simplify_and_evaluate_sympy_expressions(self)
     logging.debug(' ...Success: simplify_and_evaluate_sympy_expressions ran without errors.\n')
 
+    # TODO: Not failing when it should
     if self.first_time:
         # Print self.calculated_dict in a nice format and append it to trusted_values_dict
         logging.debug(' Calling first_time_print since it is being run for the first time...')
@@ -78,3 +78,4 @@ def run_test(self):
         else:
             logging.info(' Completed module ' + self.module_name + ' with no errors.\n')
             self.assertTrue(values_identical)
+

@@ -111,11 +111,11 @@ if __name__ == '__main__':
             open(success_file)
             cmd.delete_existing_files(success_file)
         except IOError:
-            logging.error(' ...Test for function ' + function + ' in module ' + module_name +
+            logging.error(' Test for function ' + function + ' in module ' + module_name +
                           ' failed! Please examine test file.')
             raise SystemExit
         else:
-            logging.info(' ...Test for function ' + function + ' in module ' + module_name +
+            logging.info(' Test for function ' + function + ' in module ' + module_name +
                          ' passed! Deleting test file...')
             cmd.delete_existing_files(full_path)
             logging.info(' ...Deletion successful. Test complete.\n')

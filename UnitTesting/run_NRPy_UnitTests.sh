@@ -26,8 +26,9 @@ echo "########################################"
 #$PYTHONEXEC FishboneMoncriefID/tests/NRPyUnitTests_FishboneMoncriefID_Globals.py &&
 #$PYTHONEXEC GiRaFFE_HO/tests/NRPyUnitTests_GiRaFFE_HO_Globals.py #&&
 
-$PYTHONEXEC GiRaFFE_HO/tests/test_GiRaFFE_HO.py &&
-$PYTHONEXEC BSSN/tests/test_BSSN.py
+$PYTHONEXEC GiRaFFE_HO/tests/test_GiRaFFE_HO.py #&&
+#$PYTHONEXEC BSSN/tests/test_BSSN.py
+#$PYTHONEXEC u0_smallb_Poynting__Cartesian/tests/test_u0_smallb_Poynting__Cartesian.py
 
 #$PYTHONEXEC GiRaFFEfood_HO/tests/NRPyUnitTests_GiRaFFEfood_HO_Globals.py &&
 #$PYTHONEXEC Maxwell/tests/NRPyUnitTests_Maxwell_Globals.py &&
