@@ -60,13 +60,12 @@ def run_test(self):
         # Print self.calculated_dict in a nice format and append it to trusted_values_dict
         logging.info(' Calling first_time_print since it is being run for the first time...')
         first_time_print(self)
-        logging.info(' ...Success: first_time_print ran without errors.\n')
+        logging.info(' ...Success: first_time_print ran without errors. Automatically failing due to first_time.\n')
 
     else:
         # Calculate the error between the trusted values and the calculated values
         logging.info(' Calling calc_error...')
         values_identical = calc_error(self)
-        logging.info(' ...Success: calc_error ran without errors.\n')
 
         # If there is an error large enough, fail
         if not values_identical:
@@ -75,5 +74,6 @@ def run_test(self):
                             'instructions above.')
         # Otherwise, test passes
         else:
-            self.assertTrue(values_identical)
+            logging.info(' ...Success: calc_error ran without errors.\n')
+
 

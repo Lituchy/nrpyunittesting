@@ -1,5 +1,3 @@
-from UnitTesting.get_variable_dimension import get_variable_dimension
-import logging
 
 # [expand_variable_dict] takes in a variable dictionary [variable_dict] and returns a dictionary that represents
 # the expanded version of [variable_dict] according to the dimension of each variable in [variable_dict].
@@ -38,6 +36,23 @@ def expand_variable_dict(self):
     return result_dict
 
 # Sub-functions:
+
+
+# Takes in a tensor [tensor] and returns the rank of that tensor, along with the length of the tensor
+# scalar -> rank 0 tensor with length 1 -> 0, 1
+# vector with 5 elements -> rank 1 tensor with length 5 -> 1, 5
+# tensor with NxN elements -> rank 2 tensor with length N -> 2, N
+def get_variable_dimension(tensor):
+    dim = 0
+    length = 1
+
+    while isinstance(tensor, list):
+        if dim == 0:
+            length = len(tensor)
+        dim += 1
+        tensor = tensor[0]
+
+    return dim, length
 
 
 # iter_counter takes in a counter [counter] and a length [length] and returns the next number after counter

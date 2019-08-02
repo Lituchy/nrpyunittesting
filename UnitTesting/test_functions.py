@@ -12,7 +12,7 @@ logging.basicConfig(level=logging.INFO)
 
 class TestFunctions(unittest.TestCase):
 
-    def test_calc_error(self):
+    def ftest_calc_error(self):
 
         if version_info[0] == 2 or version_info[1] < 4:
             from UnitTesting.calc_error import calc_error
@@ -857,93 +857,10 @@ class TestFunctions(unittest.TestCase):
 
         logging.info('\nAll create_dict_string tests passed.\n')
 
-    def test_create_trusted_globals_dict(self):
-        from UnitTesting.create_trusted_globals_dict import create_trusted_globals_dict
-        from mpmath import mpf
+    def ftest_create_test(self):
+        pass
 
-        mod_dict = {}
-        trusted_values_dict = {}
-        first_times = {}
-        self.assertEqual({}, create_trusted_globals_dict(mod_dict, trusted_values_dict, first_times))
-
-        mod_dict = {'mod': []}
-        trusted_values_dict = {}
-        first_times = {'mod': True}
-        self.assertEqual({'mod': {}}, create_trusted_globals_dict(mod_dict, trusted_values_dict, first_times))
-
-        mod_dict = {'mod': ['hello', 'world']}
-        trusted_values_dict = {}
-        first_times = {'mod': True}
-        self.assertEqual({'mod': {}}, create_trusted_globals_dict(mod_dict, trusted_values_dict, first_times))
-
-        with self.assertRaises(KeyError):
-            mod_dict = {'mod': ['hello', 'world']}
-            trusted_values_dict = {}
-            first_times = {'mod': False}
-            create_trusted_globals_dict(mod_dict, trusted_values_dict, first_times)
-
-        with self.assertRaises(AssertionError):
-            mod_dict = {'mod': []}
-            trusted_values_dict = {}
-            first_times = {'mod': True, 'random': False}
-            create_trusted_globals_dict(mod_dict, trusted_values_dict, first_times)
-
-        with self.assertRaises(AssertionError):
-            mod_dict = {'mod1': 'hello', 'mod2': 'world'}
-            trusted_values_dict = {}
-            first_times = {'mod1': True}
-            create_trusted_globals_dict(mod_dict, trusted_values_dict, first_times)
-
-        with self.assertRaises(AssertionError):
-            mod_dict = {'a': 1, 'b': 2, 'c': 3}
-            trusted_values_dict = {}
-            first_times = {'d': 4, 'e': 5, 'f': 6}
-            create_trusted_globals_dict(mod_dict, trusted_values_dict, first_times)
-
-        with self.assertRaises(AssertionError):
-            mod_dict = {'a': 1, 'b': 2, 'c': 3}
-            trusted_values_dict = {}
-            first_times = {'d': 4, 'e': 5, 'f': 6}
-            create_trusted_globals_dict(mod_dict, trusted_values_dict, first_times)
-
-        from BSSN.tests.trusted_values_dict import trusted_values_dict
-
-        mod_dict = {'BrillLindquist': ['foo', 'bar']}
-        first_times = {'BrillLindquist': True}
-        self.assertEqual({'BrillLindquist': dict()}, create_trusted_globals_dict(mod_dict, trusted_values_dict,
-                                                                                 first_times))
-
-        from UnitTesting.calc_error import calc_error
-
-        mod_dict = {'BrillLindquist': ['foo', 'bar']}
-        first_times = {'BrillLindquist': False}
-        self.assertTrue(calc_error('BrillLindquist', trusted_values_dict['BrillLindquistGlobals']
-                        , create_trusted_globals_dict(mod_dict, trusted_values_dict, first_times)['BrillLindquist']))
-
-        mod_dict = {'BrillLindquist': ['foo', 'bar']}
-        first_times = {'BrillLindquist': False}
-        self.assertEqual({'BrillLindquist': trusted_values_dict['BrillLindquistGlobals']}
-                         , create_trusted_globals_dict(mod_dict, trusted_values_dict, first_times))
-
-        mod_dict = {'BrillLindquist': ['foo', 'bar'], 'mod': ['hello world']}
-        first_times = {'BrillLindquist': False, 'mod': True}
-        self.assertEqual({'BrillLindquist': trusted_values_dict['BrillLindquistGlobals'], 'mod': dict()},
-                         create_trusted_globals_dict(mod_dict, trusted_values_dict, first_times))
-
-        mod_dict = {'BrillLindquist': 1, 'ShiftedKerrSchild': 2}
-        first_times = {'BrillLindquist': False, 'ShiftedKerrSchild': False}
-        self.assertEqual({'BrillLindquist': trusted_values_dict['BrillLindquistGlobals']
-                         , 'ShiftedKerrSchild': trusted_values_dict['ShiftedKerrSchildGlobals']}
-                         , create_trusted_globals_dict(mod_dict, trusted_values_dict, first_times))
-
-        mod_dict = {'mod1': 1, 'mod2': 2, 'mod3': 3}
-        first_times = {'mod1': True, 'mod2': True, 'mod3': True}
-        self.assertEqual({'mod1': dict(), 'mod2': dict(), 'mod3': dict()},
-                         create_trusted_globals_dict(mod_dict, trusted_values_dict, first_times))
-
-        logging.info('\nAll create_trusted_globals_dict tests passed.\n')
-
-    def test_evaluate_globals(self):
+    def ftest_evaluate_globals(self):
         from UnitTesting.evaluate_globals import evaluate_globals
         from UnitTesting.functions_and_globals import functions_and_globals
         import NRPy_param_funcs as par
@@ -987,7 +904,7 @@ class TestFunctions(unittest.TestCase):
 
         logging.info('\nAll evaluate_globals tests passed.\n')
 
-    def test_expand_variable_dict(self):
+    def ftest_expand_variable_dict(self):
         from UnitTesting.expand_variable_dict import expand_variable_dict
 
         variable_dict = dict()
@@ -1024,7 +941,7 @@ class TestFunctions(unittest.TestCase):
 
         logging.info('\nAll expand_variable_dict tests passed.\n')
 
-    def test_first_time_print(self):
+    def ftest_first_time_print(self):
         from UnitTesting.first_time_print import first_time_print
         from datetime import date
         from UnitTesting.standard_constants import precision
@@ -1090,40 +1007,8 @@ class TestFunctions(unittest.TestCase):
 
         logging.info('\nAll first_time_print tests passed.\n')
 
-    def test_functions_and_globals(self):
-        from UnitTesting.functions_and_globals import functions_and_globals
-
-        basic_function_list = ['func1(), func2()']
-        basic_global_list = ['x', 'y', 'z']
-
-        self.assertEqual(functions_and_globals([], []), {'function_list': [], 'global_list': []})
-
-        self.assertEqual(functions_and_globals([], basic_global_list),
-                         {'function_list': [], 'global_list': basic_global_list})
-        self.assertEqual(functions_and_globals(basic_function_list, []),
-                         {'function_list': basic_function_list, 'global_list': []})
-        self.assertEqual(functions_and_globals(basic_function_list, basic_global_list),
-                         {'function_list': basic_function_list, 'global_list': basic_global_list})
-
-        with self.assertRaises(AssertionError):
-            functions_and_globals([1, 'hello', 'world'], [])
-
-        with self.assertRaises(AssertionError):
-            functions_and_globals(['hello', 'world'], [2])
-
-        with self.assertRaises(AssertionError):
-            functions_and_globals(['hello', 'world', 42], basic_global_list)
-
-        with self.assertRaises(AssertionError):
-            functions_and_globals('function()', [])
-
-        with self.assertRaises(AssertionError):
-            functions_and_globals([], 'glob')
-
-        logging.info('\nAll functions_and_globals tests passed.\n')
-
     def test_get_variable_dimension(self):
-        from UnitTesting.get_variable_dimension import get_variable_dimension
+        from UnitTesting.expand_variable_dict import get_variable_dimension
 
         rank0 = 4
         rank1 = [rank0, rank0+1, rank0]
@@ -1145,30 +1030,7 @@ class TestFunctions(unittest.TestCase):
 
         logging.info('\nAll get_variable_dimension tests passed.\n')
 
-    def test_is_first_time(self):
-        from UnitTesting.is_first_time import is_first_time
-        from BSSN.tests.trusted_values_dict import trusted_values_dict
-
-        mod_dict = {'BrillLindquist': 'Hello World'}
-        fake_mod_dict = {'fake_module': 'Goodbye World'}
-
-        self.assertEqual(is_first_time(dict(), dict()), dict())
-
-        self.assertEqual(is_first_time(mod_dict, trusted_values_dict), {'BrillLindquist': False})
-        self.assertEqual(is_first_time(fake_mod_dict, trusted_values_dict), {'fake_module': True})
-
-        large_mod_dict = {'BrillLindquist': 'Hello World', 'fake_module': 'Goodbye World'}
-
-        self.assertEqual(is_first_time(large_mod_dict, trusted_values_dict),
-                         {'BrillLindquist': False, 'fake_module': True})
-
-        mod_dict_wrong_capitalization = {'brillLindquist': 2}
-
-        self.assertEqual(is_first_time(mod_dict_wrong_capitalization, trusted_values_dict), {'brillLindquist': True})
-
-        logging.info('\nAll is_first_time tests passed.\n')
-
-    def test_run_test(self):
+    def ftest_run_test(self):
         from UnitTesting.run_test import run_test
 
         mod_dict = {}
@@ -1178,7 +1040,7 @@ class TestFunctions(unittest.TestCase):
 
         logging.info('\nAll run_test tests passed.\n')
 
-    def test_trusted_values_dict_creation(self):
+    def test_setup_trusted_values_dict(self):
 
         # Tests the setup_trusted_values_dict and the file-writing portion of first_time_print
         from UnitTesting.setup_trusted_values_dict import setup_trusted_values_dict
@@ -1202,9 +1064,7 @@ class TestFunctions(unittest.TestCase):
 
         logging.info('\nAll setup_trusted_values_dict tests passed.\n')
 
-        logging.info('\nAll file-writing first_time_print tests passed.\n')
-
-    def test_simplify_and_evaluate_sympy_expressions(self):
+    def ftest_simplify_and_evaluate_sympy_expressions(self):
         from UnitTesting.simplify_and_evaluate_sympy_expressions import simplify_and_evaluate_sympy_expressions
         from mpmath import mpf, mp, pi, sqrt
         import random
