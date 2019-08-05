@@ -110,6 +110,9 @@ if __name__ == '__main__':
             file.write(file_string)
             logging.info(' ...Success: File created.\n')
 
+        with open(full_path, 'r') as file:
+            logging.debug('File contents: \n\n' + file.read())
+
         logging.debug('$PYTHONEXEC is: ' + str(sys.argv[1]) + '\n')
 
         cmd.Execute_input_string(sys.argv[1] + ' ' + full_path, output=False)
