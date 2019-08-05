@@ -106,12 +106,13 @@ def Execute(executable, executable_output_arguments="", file_to_redirect_stdout=
 def Execute_input_string(input_string, file_to_redirect_stdout=os.devnull, output=True):
 
     if output:
+        print('input_string: ' + repr(input_string))
         print("Executing `"+input_string+"`...")
     start = time.time()
     # https://docs.python.org/3/library/subprocess.html
     args = shlex.split(input_string)
     if output:
-        print('args: ' + str(args))
+        print('args: ' + repr(args))
     # https://stackoverflow.com/questions/18421757/live-output-from-subprocess-command
     filename = "tmp.txt"
     with io.open(filename, 'wb') as writer, io.open(filename, 'rb', 1) as reader, io.open(file_to_redirect_stdout, 'w') as rdirect:
