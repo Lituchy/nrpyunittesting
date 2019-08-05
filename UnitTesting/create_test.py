@@ -37,12 +37,11 @@ logging.basicConfig(level=logging.{})
 
 class TestGlobals(unittest.TestCase):
 
-    @classmethod
-    def setUpClass(cls):
-        cls.path = r'{}'
+    def setUp(self):
+        self.path = '{}'
         # Create trusted_values_dict.py if it doesn't exist
         logging.debug(' Calling setup_trusted_values_dict...')
-        setup_trusted_values_dict(cls.path)
+        setup_trusted_values_dict(self.path)
         logging.debug(' ...Success: setup_trusted_values_dict ran without errors.\\n')
 
     def test_globals(self):
@@ -109,9 +108,6 @@ if __name__ == '__main__':
             logging.info(' Creating file ' + full_path + '...')
             file.write(file_string)
             logging.info(' ...Success: File created.\n')
-
-        with open(full_path, 'r') as file:
-            logging.debug('File contents: \n\n' + file.read())
 
         logging.debug('$PYTHONEXEC is: ' + str(sys.argv[1]) + '\n')
 
