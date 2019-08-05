@@ -11,7 +11,7 @@ def test_u0_smallb_Poynting__Cartesian():
                                                                             'smallb4U', 'g4UU', 'smallb4D',
                                                                             'smallb2etk', 'PoynSU']}
 
-    create_test(module, module_name, function_and_global_dict)
+    create_test(module, module_name, function_and_global_dict, logging_level='DEBUG')
 
 
 if __name__ == '__main__':

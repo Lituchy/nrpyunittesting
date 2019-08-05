@@ -80,7 +80,7 @@ if __name__ == '__main__':
         trusted_values_dict_name = module_name + '__' + function.split('(')[0]
 
         # Copying the lines from run_test.py into our test file
-        with open('UnitTesting/run_test.py', 'r') as file:
+        with open(os.path.join('UnitTesting','run_test.py'), 'r') as file:
             run_test_string = file.read().split('def run_test(self):')
 
         # Properly formatting run_test's imports
@@ -110,7 +110,7 @@ if __name__ == '__main__':
             file.write(file_string)
             logging.info(' ...Success: File created.\n')
 
-        logging.debug('\n$PYTHONEXEC is: ' + str(sys.argv[1]) + '\n')
+        logging.debug('$PYTHONEXEC is: ' + str(sys.argv[1]) + '\n')
 
         cmd.Execute_input_string(sys.argv[1] + ' ' + full_path, output=False)
 
