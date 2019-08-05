@@ -26,7 +26,7 @@ add_test () {
 
 #$PYTHONEXEC BSSN/tests/test_BSSN.py &&
 #$PYTHONEXEC FishboneMoncriefID/tests/test_FishboneMoncriefID.py &&
-add_test GiRaFFE_HO/tests/test_GiRaFFE_HO.py
+add_test GiRaFFE_HO/tests/test_GiRaFFE_HO.py &&
 add_test GiRaFFEfood_HO/tests/test_GiRaFFEfood_HO.py
 #$PYTHONEXEC Maxwell/tests/test_Maxwell.py && #TODO: MaxwellCartesian_ID not working
 #$PYTHONEXEC ScalarWave/tests/test_ScalarWave.py &&
