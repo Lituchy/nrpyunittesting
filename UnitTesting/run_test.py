@@ -32,7 +32,7 @@ def run_test(self):
     logging.info(' Importing ' + self.module + '...')
     try:
         self.module = import_module(self.module)
-    # If user supplied an incorrect module, log an error and break
+    # If user supplied an incorrect module, error
     except ImportError:
         logging.error(" Attribute 'module' for " + self.module_name + " does not exist as a module. This attribute "
                       "should be what you would type if you were importing 'module' in your own file.\n")

@@ -68,8 +68,8 @@ class TestGlobals(unittest.TestCase):
         # Nothing failed
         else:
             import os
-            with open(os.path.join(self.path, 'success.txt'), 'w') as file:
-                pass
+            file = open(os.path.join(self.path, 'success.txt'), 'w')
+            file.close()
                 
                 
 if __name__ == '__main__':
@@ -112,7 +112,7 @@ if __name__ == '__main__':
         logging.debug(' $PYTHONEXEC is: ' + str(sys.argv[1]) + '\n')
 
         logging.debug(' Calling Execute_input_string\n')
-        cmd.Execute_input_string(sys.argv[1] + ' ' + full_path, output=True)
+        cmd.Execute_input_string(sys.argv[1] + ' ' + full_path, output=False)
 
         try:
             success_file = os.path.join(sys.path[0], 'success.txt')

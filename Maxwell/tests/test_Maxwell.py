@@ -1,11 +1,23 @@
 from UnitTesting.create_test import create_test
 
 
-def test_MaxwellCartesian_Evol():
+def test_MaxwellCartesian_Evol_System_I():
 
     module = 'Maxwell.MaxwellCartesian_Evol'
 
-    module_name = 'MaxwellCartesian_Evol'
+    module_name = 'MaxwellCartesian_Evol_System_I'
+
+    function_and_global_dict = {'MaxwellCartesian_Evol()': ['ArhsD', 'ErhsD', 'psi_rhs', 'Cviola']}
+
+    initialization_string_dict = {'MaxwellCartesian_Evol()': 'import NRPy_param_funcs as par\npar.set_parval_from_str("System_to_use","System_I")'}
+
+    create_test(module, module_name, function_and_global_dict, initialization_string_dict=initialization_string_dict)
+
+def test_MaxwellCartesian_Evol_System_II():
+
+    module = 'Maxwell.MaxwellCartesian_Evol'
+
+    module_name = 'MaxwellCartesian_Evol_System_II'
 
     function_and_global_dict = {'MaxwellCartesian_Evol()': ['ArhsD', 'ErhsD', 'psi_rhs', 'Gamma_rhs', 'Cviola']}
 
@@ -18,14 +30,16 @@ def ftest_MaxwellCartesian_ID():
 
     module_name = 'MaxwellCartesian_ID'
 
-    function_and_global_dict = {'MaxwellCartesian_ID()': ['AidD', 'EidD', 'psi_ID', 'Gamma_ID']}
+    function_and_global_dict = {'MaxwellCartesian_ID()': ['AidD', 'EidD', 'psi_ID']}
+
+    initialization_string_dict = {'MaxwellCartesian_ID()': 'import NRPy_param_funcs as par\npar.set_parval_from_str("System_to_use","System_I")'}
 
 #     initialization_string_dict = {'MaxwellCartesian_ID()': '''
 # import NRPy_param_funcs as par
 # par.set_parval_from_str("System_to_use","System_I")
 # '''}
 
-    create_test(module, module_name, function_and_global_dict)
+    create_test(module, module_name, function_and_global_dict, initialization_string_dict=initialization_string_dict)
 
 
 if __name__ == '__main__':
