@@ -110,11 +110,13 @@ if __name__ == '__main__':
             file.write(file_string)
             logging.info(' ...Success: File created.\n')
 
-        python_string = 'python'
-        if sys.version_info[0] == 3:
-            python_string += '3'
+        # python_string = 'python'
+        # if sys.version_info[0] == 3:
+        #     python_string += '3'
 
-        cmd.Execute_input_string(python_string + ' ' + full_path, output=True)
+        logging.info('\nThe pythonexec is: ' + str(sys.argv[1]) + '\n')
+
+        cmd.Execute_input_string(sys.argv[1] + ' ' + full_path, output=True)
 
         try:
             success_file = os.path.join(sys.path[0], 'success.txt')
@@ -129,5 +131,5 @@ if __name__ == '__main__':
                          ' passed! Deleting test file...')
             cmd.delete_existing_files(full_path)
             logging.info(' ...Deletion successful. Test complete.\n\n')
-        logging.info('----------------------------------------------------------------------\n'
+        logging.info('\n----------------------------------------------------------------------\n'
                      '----------------------------------------------------------------------\n')
