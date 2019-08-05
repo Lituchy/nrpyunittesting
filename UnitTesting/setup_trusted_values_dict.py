@@ -1,4 +1,5 @@
 import logging
+import os
 
 
 # [setup_trusted_values_dict] takes in a path [path], and creates the file [trusted_values_dict.py] in the
@@ -12,13 +13,13 @@ def setup_trusted_values_dict(path):
     # Try opening [trusted_values_dict.py] in [directory].
     try:
         logging.debug(' Trying to open path/trusted_values_dict.py...')
-        fr = open(path + '/trusted_values_dict.py', 'r')
+        fr = open(os.path.join(path, 'trusted_values_dict.py'), 'r')
         logging.debug(' ...Success, file already exists.')
         fr.close()
     # If [trusted_values_dict.py] does not exist in [directory], create it with default content.
     except IOError:
         logging.info(' ...trusted_values_dict.py does not exist. Creating it...')
-        fw = open(path + '/trusted_values_dict.py', 'w+')
+        fw = open(os.path.join(path, 'trusted_values_dict.py'), 'w+')
         fw.write('from mpmath import mpf, mp, mpc\nfrom UnitTesting.standard_constants import precision\n\n'
                  'mp.dps = precision\ntrusted_values_dict = {}\n')
         fw.close()
