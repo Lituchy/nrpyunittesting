@@ -110,13 +110,9 @@ if __name__ == '__main__':
             file.write(file_string)
             logging.info(' ...Success: File created.\n')
 
-        # python_string = 'python'
-        # if sys.version_info[0] == 3:
-        #     python_string += '3'
+        logging.debug('\n$PYTHONEXEC is: ' + str(sys.argv[1]) + '\n')
 
-        logging.info('\nThe pythonexec is: ' + str(sys.argv[1]) + '\n')
-
-        cmd.Execute_input_string(sys.argv[1] + ' ' + full_path, output=True)
+        cmd.Execute_input_string(sys.argv[1] + ' ' + full_path, output=False)
 
         try:
             success_file = os.path.join(sys.path[0], 'success.txt')
@@ -124,12 +120,14 @@ if __name__ == '__main__':
             cmd.delete_existing_files(success_file)
         except IOError:
             logging.error(' Test for function ' + function + ' in module ' + module_name +
-                          ' failed! Please examine test file.\n\n')
+                          ' failed! Please examine test file.\n'
+                          '\n----------------------------------------------------------------------\n'
+                          '----------------------------------------------------------------------\n')
             raise SystemExit
         else:
             logging.info(' Test for function ' + function + ' in module ' + module_name +
                          ' passed! Deleting test file...')
             cmd.delete_existing_files(full_path)
-            logging.info(' ...Deletion successful. Test complete.\n\n')
-        logging.info('\n----------------------------------------------------------------------\n'
-                     '----------------------------------------------------------------------\n')
+            logging.info(' ...Deletion successful. Test complete.\n'
+                         '\n----------------------------------------------------------------------\n'
+                         '----------------------------------------------------------------------\n')
