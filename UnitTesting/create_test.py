@@ -38,7 +38,7 @@ logging.basicConfig(level=logging.{})
 class TestGlobals(unittest.TestCase):
 
     def setUp(self):
-        self.path = '{}'
+        self.path = r'{}'
         # Create trusted_values_dict.py if it doesn't exist
         logging.debug(' Calling setup_trusted_values_dict...')
         setup_trusted_values_dict(self.path)
