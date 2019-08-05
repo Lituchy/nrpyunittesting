@@ -89,7 +89,7 @@ if __name__ == '__main__':
             if line != '':
                 final_run_test_imports_string += '            ' + line + '\n'
 
-        # Properly formatting run_test's function
+        # Properly formatting run_test's body
         run_test_body_list = run_test_string[1].split('\n')
         final_run_test_body_string = ''
         for line in run_test_body_list:
@@ -109,8 +109,9 @@ if __name__ == '__main__':
             file.write(file_string)
             logging.info(' ...Success: File created.\n')
 
-        logging.debug('$PYTHONEXEC is: ' + str(sys.argv[1]) + '\n')
+        logging.debug(' $PYTHONEXEC is: ' + str(sys.argv[1]) + '\n')
 
+        logging.debug(' Calling Execute_input_string')
         cmd.Execute_input_string(sys.argv[1] + ' ' + full_path, output=False)
 
         try:

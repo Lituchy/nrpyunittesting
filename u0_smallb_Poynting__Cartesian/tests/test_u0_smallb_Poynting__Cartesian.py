@@ -18,7 +18,6 @@ if __name__ == '__main__':
     failed = set()
     for fun in dir():
         if fun[0:5] == 'test_':
-            print('\nTesting function ' + str(fun) + '...\n')
             try:
                 exec(fun + '()')
             except SystemExit:
