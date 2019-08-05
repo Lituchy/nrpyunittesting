@@ -114,6 +114,7 @@ def Execute_input_string(input_string, file_to_redirect_stdout=os.devnull, outpu
         args = shlex.split(input_string)
     else:
         args = input_string
+
     if output:
         print('args: ' + repr(args))
     # https://stackoverflow.com/questions/18421757/live-output-from-subprocess-command
