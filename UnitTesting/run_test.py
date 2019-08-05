@@ -69,7 +69,7 @@ def run_test(self):
         logging.info(' ...Success: first_time_print ran without errors. Automatically failing due to first_time.\n')
 
     else:
-        # Step 3.b: Call calc_error to calculate the error between the trusted values and the calculated values
+        # Step 4.b: Call calc_error to calculate the error between the trusted values and the calculated values
         logging.info(' Calling calc_error...')
         values_identical = calc_error(self)
 
