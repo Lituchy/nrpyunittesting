@@ -111,8 +111,8 @@ if __name__ == '__main__':
 
         logging.debug(' $PYTHONEXEC is: ' + str(sys.argv[1]) + '\n')
 
-        logging.debug(' Calling Execute_input_string')
-        cmd.Execute_input_string(sys.argv[1] + ' ' + full_path, output=False)
+        logging.debug(' Calling Execute_input_string\n')
+        cmd.Execute_input_string(sys.argv[1] + ' ' + full_path, output=True)
 
         try:
             success_file = os.path.join(sys.path[0], 'success.txt')
