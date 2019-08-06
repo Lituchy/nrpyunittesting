@@ -3,7 +3,6 @@ import indexedexp as ixp
 import grid as gri
 import finite_difference as fin
 from outputC import *
-import logging
 
 def MaxwellCartesian_ID():
     DIM = par.parval_from_str("grid::DIM")
@@ -18,8 +17,7 @@ def MaxwellCartesian_ID():
 
     # Step 2: Set the initial data
     system = par.parval_from_str("System_to_use")
-    logging.info('system: ' + system)
-    if system is "System_I" or system is "System_II":
+    if system == "System_I" or system == "System_II":
         global AidD,EidD,psi_ID
         AidD = ixp.zerorank1()
 
@@ -37,7 +35,7 @@ def MaxwellCartesian_ID():
                 EidD[i] += gammaDD[i][j] * EidU[j]
 
         psi_ID = sp.sympify(0)
-        if system is "System_II":
+        if system == "System_II":
             global Gamma_ID
             Gamma_ID = sp.sympify(0)
     else:
