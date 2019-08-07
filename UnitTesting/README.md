@@ -45,9 +45,39 @@ are recommended if the user will be doing any complex tests. We will
 follow the NRPy unit testing naming scheme in the tutorial below.
 
 To begin unit testing, create a directory in the module being tested
-called 'tests'. 
+called 'tests'. This will be the directory that houses all the tests for
+the given module, as well as the trusted_values_dict. Create a file in
+this directory called 'test_(your module name)'. This will be the file
+where you, the user, tells our infrastructure what tests to run. This
+file will initially be empty. Copy over the code from
+'UnitTesting/test_skeleton.py' into your test file. It contains a basic
+overview of what has to be filled in. Fill in 'module', 'module_name',
+and 'function_and_global_dict' according to the following concept:
 
+`module` contains a string representation of what the user would type if
+they were trying to import `module`. For example, if the user is wanting
+to test a module `BrillLindquist` in directory `BSSN` they may say `
+import BSSN.BrillLindquist as bl`. So, `module` should contain what the
+user is importing -- so in this case, `BSSN.BrillLindquist`.
 
+`module_name` is a string of whatever the user would like their module
+to be referenced as in their trusted_values_dict. In the example above,
+the user may set `module_name` to `BrillLindquist` or `bl`.
+
+`function_and_global_dict` is a Python dictionary whose keys are string
+representations of function calls to be enacted on `module`, and whose
+values are lists of string representations of globals that are created
+after the function is called. Using the same example as above,
+`function` may be `'BrillLindquist(ComputeADMGlobalsOnly = False)'` and
+the list of globals may be `['alphaCart', 'betaCartU', 'BCartU',
+'gammaCartDD', 'KCartDD']`. Then by extension,
+`function_and_global_dict` would be
+`{'BrillLindquist(ComputeADMGlobalsOnly = False)': ['alphaCart',
+'betaCartU', 'BCartU', 'gammaCartDD', 'KCartDD']}`
+
+Finally, `create_test` is called on these arguments, and the test will
+run. For much more in-depth information on unit testing and creating
+better tests, reading on is **strongly** encouraged.
 
 #### trusted_values_dict:
 A trusted_values_dict is a structure we use in NRPy Unit Testing whereby
@@ -178,3 +208,6 @@ module_name, for example, there doesn't exist anything in Python with
 the name BrillLindquist. So, we wrap it in a string. This is true of
 every input. Be careful with the dicts and lists, however: their
 arguments are strings, they aren't themselves strings.
+
+### In-depth Explanations:
+

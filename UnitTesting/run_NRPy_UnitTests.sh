@@ -22,11 +22,11 @@ add_test () {
   $PYTHONEXEC $1 $PYTHONEXEC
 }
 
-#$PYTHONEXEC UnitTesting/test_functions.py #&&
+$PYTHONEXEC UnitTesting/test_functions.py
 
 #add_test BSSN/tests/test_BSSN.py &&
 #add_test FishboneMoncriefID/tests/test_FishboneMoncriefID.py &&
-add_test GiRaFFE_HO/tests/test_GiRaFFE_HO.py #&&
+#add_test GiRaFFE_HO/tests/test_GiRaFFE_HO.py #&&
 #add_test GiRaFFEfood_HO/tests/test_GiRaFFEfood_HO.py
 #add_test Maxwell/tests/test_Maxwell.py &&
 #add_test ScalarWave/tests/test_ScalarWave.py &&

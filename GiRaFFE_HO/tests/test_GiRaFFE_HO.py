@@ -24,6 +24,7 @@ def test_GiRaFFE_HO_v2():
 
     create_test(module, module_name, function_and_global_dict)
 
+
 if __name__ == '__main__':
     failed = set()
     for fun in dir():

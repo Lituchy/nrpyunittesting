@@ -12,11 +12,6 @@ def test_your_module():
     create_test(module, module_name, function_and_global_dict)
 
 
-def test_your_next_module():
-    # you get the picture
-    pass
-
-
 if __name__ == '__main__':
     failed = set()
     for fun in dir():
