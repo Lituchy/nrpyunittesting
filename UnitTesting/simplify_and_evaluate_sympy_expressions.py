@@ -14,6 +14,8 @@ import hashlib
 
 # Called by run_test
 
+precision = standard_constants.precision
+
 
 def simplify_and_evaluate_sympy_expressions(self):
 
@@ -22,7 +24,6 @@ def simplify_and_evaluate_sympy_expressions(self):
         return {}
 
     # Setting precision
-    precision = standard_constants.precision
     mp.dps = precision
 
     # Creating free_symbols_set, which stores all free symbols from all expressions.
@@ -63,61 +64,30 @@ def simplify_and_evaluate_sympy_expressions(self):
 
     # Evaluating each expression using the values in var_dict
     for var, expression in self.expanded_variable_dict.items():
-        # Using sympy's cse algorithm to optimize our value substitution
+        # Using SymPy's cse algorithm to optimize our value substitution
         replaced, reduced = cse(expression, order='none')
         reduced = reduced[0]
-        # Store the replaced, reduced result from cse into simplified_expression_dict
-        simplified_expression_dict[var] = replaced, reduced
 
-        # Copying free_symbols_dict into a new variable dictionary
-        new_var_dict = dict(free_symbols_dict)
+        result_value = calculate_value(free_symbols_dict, replaced, reduced)
 
-        # Replacing old expressions with new expressions and putting result in new variable dictionary
-        for new, old in replaced:
-            keys = old.free_symbols
-            for key in keys:
-                old = old.subs(key, new_var_dict[key])
-            new_var_dict[new] = old
+        if fabs(result_value) != mpf('0.0') and fabs(result_value) < 10 ** ((-2.0/3)*precision):
+            logging.info("Found |result| (" + str(fabs(result_value)) + ") close to zero. "
+                         "Checking if indeed it should be zero.")
+            new_result_value = calculate_value(free_symbols_dict, replaced, reduced, precision_factor=2)
+            if fabs(new_result_value) < 10 ** (-(4.0/3) * precision):
+                logging.info("After re-evaluating with twice the digits of precision, |result| dropped to " +
+                             str(new_result_value) + ". Setting value to zero")
+                result_value = mpf('0.0')
 
-        # Evaluating expression after cse optimization
-        keys = reduced.free_symbols
-        for key in keys:
-            reduced = reduced.subs(key, new_var_dict[key])
-
-        # Adding our variable, value pair to our value_dict
-        try:
-            value_dict[var] = mpf(reduced)
-        # If value is a complex number, store it as a numerical mpc
-        except TypeError:
-            value_dict[var] = mpc(N(reduced))
-
-    logging.debug(' ...Double-checking all near-zero values to see if they should be zero...')
-
-    # If [first_time] is True, double check all near-zero values to see if they should be zero.
-    for var, val in value_dict.items():
-        # If val is within [(2/3) * precision] decimal places of zero
-        if val != mpf('0.0') and fabs(val) < 10 ** ((-2.0/3)*precision):
-            # Output that near-zero result was found
-            if self.first_time:
-                logging.info("Found |result| (" + str(fabs(val)) +
-                             ") close to zero. Checking if indeed it should be zero.")
-            # Recalculate result with double the precision
-            result = recalculate_value(free_symbols_dict, simplified_expression_dict[var][0],
-                                       simplified_expression_dict[var][1], 2 * precision)
-            # If the new result dropped in value, we know it should actually be zero. Otherwise, do nothing.
-            if fabs(result) < 10 ** (-(4.0/3) * precision):
-                if self.first_time:
-                    logging.info("After re-evaluating with twice the digits of precision, |result| dropped to " +
-                                 str(result) + ". Setting value to zero")
-                value_dict[var] = mpf('0.0')
+        value_dict[var] = result_value
 
     return value_dict
 
 
-# Sub-function that recalculates value for variable with given precision
-def recalculate_value(free_symbols_dict, replaced, reduced, precision):
+# Sub-function that calculates value for variable with precision multiplied by precision_factor
+def calculate_value(free_symbols_dict, replaced, reduced, precision_factor=1):
 
-    mp.dps = precision
+    mp.dps = precision_factor * precision
 
     # Copying free_symbols_dict into a new variable dictionary
     new_var_dict = dict(free_symbols_dict)
@@ -141,6 +111,6 @@ def recalculate_value(free_symbols_dict, replaced, reduced, precision):
     except TypeError:
         res = mpc(N(reduced))
 
-    mp.dps = standard_constants.precision
+    mp.dps = precision
 
     return res

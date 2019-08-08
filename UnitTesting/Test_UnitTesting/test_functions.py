@@ -524,6 +524,7 @@ trusted_values_dict['TestModule__globals'] = {}
 
         logging.info(' All expand_variable_dict tests passed.\n')
 
+    # TODO: Tests with write=True (writes to file)
     def test_first_time_print(self):
         from datetime import date
         from mpmath import mpf
@@ -632,8 +633,6 @@ trusted_values_dict['trusted_values_dict_name'] = {}
 '''.format(date.today(), {})
         first_time_print_helper(self, message=message, write=False)
 
-
-
     def test_get_variable_dimension(self):
         from UnitTesting.expand_variable_dict import get_variable_dimension
 
@@ -695,12 +694,9 @@ trusted_values_dict['trusted_values_dict_name'] = {}
         from UnitTesting.simplify_and_evaluate_sympy_expressions import simplify_and_evaluate_sympy_expressions
         from mpmath import mpf, mp, pi, sqrt
         import random
-        import UnitTesting.standard_constants as sc
         from sympy import symbols
         import hashlib
         from UnitTesting.calc_error import calc_error
-
-        mp.dps = sc.precision
 
         var_dict = {}
         self.assertEqual({}, simplify_and_evaluate_sympy_expressions(var_dict))
