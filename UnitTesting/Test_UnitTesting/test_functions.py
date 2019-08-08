@@ -528,7 +528,6 @@ trusted_values_dict['TestModule__globals'] = {}
         from datetime import date
         from mpmath import mpf
 
-
         self.module_name = 'TestModule'
         self.trusted_values_dict_name = 'TestModule__globals'
         self.calculated_dict = {}
@@ -587,32 +586,53 @@ trusted_values_dict['TestModule__globals'] = {}
 '''.format(date.today(), "{'x': mpf('0.0'), 'y': mpf('1.23456789012345678912345678912')}")
         first_time_print_helper(self, message=message, write=False)
 
+        self.calculated_dict = {'x': mpf('0.0'), 'y': mpf('1.23456789012345678912345')}
+        message = '''
+Module: TestModule
+Please copy the following code between the ##### and paste it into your trusted_values_dict.py file for this module:
 
+#####
 
-        # mod = 'TestModule4'
-        # value_dict = {'x': mpf('0.0'), 'y': mpf('1.23456789012345678912345')}
-        #
-        # captured_output = create_StringIO()
-        # first_time_print(mod, value_dict, path, False)
-        # self.assertEqual('\nModule: TestModule4\nPlease copy the following code between the ##### and paste it into' +
-        #                  ' your trusted_values_dict.py file:\n#####\n\n# Generated on: ' + str(date.today()) +
-        #                  "\ntrusted_values_dict['TestModule4Globals'] = {'x': mpf('0.0'), "
-        #                  "'y': mpf('1.23456789012345678912345')}\n\n#####\n", captured_output.getvalue())
-        #
-        # mod = 'TestModule5'
-        # value_dict = {'AZ': mpf('0.0'), 'ab': mpf('1.0')}
-        #
-        # captured_output = create_StringIO()
-        # first_time_print(mod, value_dict, path, False)
-        # self.assertEqual('\nModule: TestModule5\nPlease copy the following code between the ##### and paste it into' +
-        #                  ' your trusted_values_dict.py file:\n#####\n\n# Generated on: ' + str(date.today()) +
-        #                  "\ntrusted_values_dict['TestModule5Globals'] = {'ab': mpf('1.0'), "
-        #                  "'AZ': mpf('0.0')}\n\n#####\n", captured_output.getvalue())
-        #
-        # sys.stdout = sys.__stdout__
-        #
+# Generated on: {}
+trusted_values_dict['TestModule__globals'] = {}
+
+#####
+'''.format(date.today(), "{'x': mpf('0.0'), 'y': mpf('1.23456789012345678912345')}")
+        first_time_print_helper(self, message=message, write=False)
+
+        self.calculated_dict = {'AZ': mpf('0.0'), 'ab': mpf('1.0')}
+        message = '''
+Module: TestModule
+Please copy the following code between the ##### and paste it into your trusted_values_dict.py file for this module:
+
+#####
+
+# Generated on: {}
+trusted_values_dict['TestModule__globals'] = {}
+
+#####
+'''.format(date.today(), "{'ab': mpf('1.0'), 'AZ': mpf('0.0')}")
+        first_time_print_helper(self, message=message, write=False)
 
         logging.info(' All first_time_print tests passed.\n')
+
+        self.module_name = 'different_name'
+        self.trusted_values_dict_name = 'trusted_values_dict_name'
+        self.calculated_dict = {}
+        message = '''
+Module: different_name
+Please copy the following code between the ##### and paste it into your trusted_values_dict.py file for this module:
+
+#####
+
+# Generated on: {}
+trusted_values_dict['trusted_values_dict_name'] = {}
+
+#####
+'''.format(date.today(), {})
+        first_time_print_helper(self, message=message, write=False)
+
+
 
     def test_get_variable_dimension(self):
         from UnitTesting.expand_variable_dict import get_variable_dimension
