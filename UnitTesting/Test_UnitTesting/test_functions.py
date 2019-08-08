@@ -4,6 +4,10 @@ from sys import version_info
 
 logging.basicConfig(level='INFO')
 
+from mpmath import mp
+from UnitTesting.standard_constants import precision
+mp.dps = precision
+
 
 class TestFunctions(unittest.TestCase):
 
@@ -522,10 +526,8 @@ trusted_values_dict['TestModule__globals'] = {}
 
     def test_first_time_print(self):
         from datetime import date
-        from mpmath import mp, mpf
-        from UnitTesting.standard_constants import precision
+        from mpmath import mpf
 
-        mp.dps = precision
 
         self.module_name = 'TestModule'
         self.trusted_values_dict_name = 'TestModule__globals'
@@ -759,7 +761,7 @@ def first_time_print_helper(self, message='', write=False):
 
         with self.assertLogs(level='DEBUG') as logger:
             first_time_print(self, write)
-        self.assertEqual(logger.output, message)
+        self.assertEqual(logger.output, ['ERROR:root:' + message])
 
 
 def calc_error_helper(self, message, expected_result):
