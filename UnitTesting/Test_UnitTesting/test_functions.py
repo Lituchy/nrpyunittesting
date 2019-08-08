@@ -556,7 +556,7 @@ Please copy the following code between the ##### and paste it into your trusted_
 trusted_values_dict['TestModule__globals'] = {}
 
 #####
-'''.format(date.today(), {'alpha': 0, 'beta': 1, 'gamma': 3})
+'''.format(date.today(), "{'alpha': 0, 'beta': 1, 'gamma': 3}")
         first_time_print_helper(self, message=message, write=False)
 
         self.calculated_dict = {'beta': 0, 'gamma': 1, 'alpha': 3}
@@ -570,7 +570,7 @@ Please copy the following code between the ##### and paste it into your trusted_
 trusted_values_dict['TestModule__globals'] = {}
 
 #####
-'''.format(date.today(), {'alpha': 3, 'beta': 0, 'gamma': 1})
+'''.format(date.today(), "{'alpha': 3, 'beta': 0, 'gamma': 1}")
         first_time_print_helper(self, message=message, write=False)
 
         self.calculated_dict = {'x': mpf('0.0'), 'y': mpf('1.23456789012345678912345678912')}
@@ -584,8 +584,8 @@ Please copy the following code between the ##### and paste it into your trusted_
 trusted_values_dict['TestModule__globals'] = {}
 
 #####
-'''.format(date.today(), {'x': mpf('0.0'), 'y': mpf('1.23456789012345678912345678912')})
-        # first_time_print_helper(self, message=message, write=False)
+'''.format(date.today(), "{'x': mpf('0.0'), 'y': mpf('1.23456789012345678912345678912')}")
+        first_time_print_helper(self, message=message, write=False)
 
 
 
