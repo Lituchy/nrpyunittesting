@@ -73,14 +73,21 @@ def calc_error(self, output=True):
 
     # If we want to output and there exists at least one variable with error, print
     if output and bad_var_list != []:
-        logging.error('\n\nVariable(s) ' + str(bad_var_list) + ' in module ' + str(self.module_name) +
-                      ' failed. Please check values.\n\n' + 'If you are confident that the newly calculated values' +
-                      ' are correct, comment out the old trusted values for ' + "'" + self.module_name + "Globals'" +
-                      ' in trusted_values_dict and copy the following code between the ##### into ' +
-                      'trusted_values_dict. Make sure to fill out the TODO comment describing why the values' +
-                      ' had to be changed. Then re-run test script.\n' + '#####\n\n# Generated on: ' +
-                      str(date.today()) + '\n# Reason for changing values: TODO' + "\ntrusted_values_dict['" +
-                      self.trusted_values_dict_name + "'] = " + create_dict_string(self.calculated_dict) + '\n\n#####')
+        logging.error('''
+\nVariable(s) {} in module {} failed. Please check values.
+If you are confident that the newly calculated values are correct, comment out the old trusted values for 
+{} in your trusted_values_dict and copy the following code between the ##### into your trusted_values_dict. 
+Make sure to fill out the TODO comment describing why the values had to be changed. Then re-run test script.
+
+#####
+
+# Generated on: {}
+# Reason for changing values: TODO
+trusted_values_dict['{}'] = {}
+
+#####
+'''.format(bad_var_list, self.module_name, self.trusted_values_dict_name, date.today(),
+                   self.trusted_values_dict_name, create_dict_string(self.calculated_dict)))
     else:
         logging.debug(' ...Success: all variables identical.\n')
 

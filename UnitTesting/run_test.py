@@ -28,17 +28,6 @@ def run_test(self):
     # Step 1.e: Set trusted_values_dict_entry to its corresponding trusted_values_dict entry
     self.trusted_values_dict_entry = {} if self.first_time else self.trusted_values_dict[self.trusted_values_dict_name]
 
-    # Step 1.f: Import self.module
-    logging.info(' Importing ' + self.module + '...')
-    try:
-        self.module = import_module(self.module)
-    # If user supplied an incorrect module, error
-    except ImportError:
-        logging.error(" Attribute 'module' for " + self.module_name + " does not exist as a module. This attribute "
-                      "should be what you would type if you were importing 'module' in your own file.\n")
-        self.assertTrue(False)
-    logging.info(' ...Success: Imported module.\n')
-
     # Step 2: Calculation
 
     # Step 2.a: Call evaluate_globals to call self.function and get expressions for all globals in self.global_list

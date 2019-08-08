@@ -2,12 +2,7 @@ import unittest
 import logging
 from sys import version_info
 
-# TODO: Change level based on desired amount of output.
-# ERROR -> Outputs minimal information -- only when there's an error
-# INFO -> Outputs when starting and finishing a module, as well as everything in ERROR
-# DEBUG -> Displays all pairs of values being compared, as well as everything in INFO
-# NOTSET -> Displays symbolic dictionary for all modules, as well as everything in DEBUG
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level='INFO')
 
 
 class TestFunctions(unittest.TestCase):
@@ -136,13 +131,20 @@ class TestFunctions(unittest.TestCase):
                    'DEBUG:root: Comparing all calculated and trusted values...',
                    'DEBUG:root:' + '\nTestModule: ' + 'a' + ': Calculated: ' + '1.0' + '\nTestModule: ' + 'a' + ': Trusted:    ' + '2.0' + '\n',
                    'ERROR:root:' +
-                   '\n\nVariable(s) ' + "['a']" + ' in module TestModule failed. Please check values.\n\nIf you are ' +
-                   'confident that the newly calculated values are correct, comment out the old trusted values for ' +
-                   "'TestModuleGlobals' in trusted_values_dict and copy the following code between the ##### into " +
-                   'trusted_values_dict. Make sure to fill out the TODO comment describing why the values had to be ' +
-                   'changed. Then re-run test script.\n#####\n\n# Generated on: ' + str(date.today()) +
-                   '\n# Reason for changing' + " values: TODO\ntrusted_values_dict['TestModule__globals'] = {" + "'a'" +
-                   ": mpf('" + '1.0' + "')}\n\n#####"
+                   '''
+\nVariable(s) {} in module TestModule failed. Please check values.
+If you are confident that the newly calculated values are correct, comment out the old trusted values for 
+TestModule__globals in your trusted_values_dict and copy the following code between the ##### into your trusted_values_dict. 
+Make sure to fill out the TODO comment describing why the values had to be changed. Then re-run test script.
+
+#####
+
+# Generated on: {}
+# Reason for changing values: TODO
+trusted_values_dict['TestModule__globals'] = {}
+
+#####
+'''.format("['a']", str(date.today()), "{'a': mpf('1.0')}")
                    ]
         calc_error_helper(self, message, False)
 
@@ -172,14 +174,21 @@ class TestFunctions(unittest.TestCase):
                    'DEBUG:root: ...Success: same variables in both dicts.\n',
                    'DEBUG:root: Comparing all calculated and trusted values...',
                    'DEBUG:root:' + '\nTestModule: ' + 'b' + ': Calculated: ' + '0.0' + '\nTestModule: ' + 'b' + ': Trusted:    ' + '1.0e-15' + '\n',
-                   'ERROR:root:' +
-                   '\n\nVariable(s) ' + "['b']" + ' in module TestModule failed. Please check values.\n\nIf you are ' +
-                   'confident that the newly calculated values are correct, comment out the old trusted values for ' +
-                   "'TestModuleGlobals' in trusted_values_dict and copy the following code between the ##### into " +
-                   'trusted_values_dict. Make sure to fill out the TODO comment describing why the values had to be ' +
-                   'changed. Then re-run test script.\n#####\n\n# Generated on: ' + str(date.today()) +
-                   '\n# Reason for changing' + " values: TODO\ntrusted_values_dict['TestModule__globals'] = {" + "'b'" +
-                   ": mpf('" + '0.0' + "')}\n\n#####"
+                    'ERROR:root:' +
+                   '''
+\nVariable(s) {} in module TestModule failed. Please check values.
+If you are confident that the newly calculated values are correct, comment out the old trusted values for 
+TestModule__globals in your trusted_values_dict and copy the following code between the ##### into your trusted_values_dict. 
+Make sure to fill out the TODO comment describing why the values had to be changed. Then re-run test script.
+
+#####
+
+# Generated on: {}
+# Reason for changing values: TODO
+trusted_values_dict['TestModule__globals'] = {}
+
+#####
+'''.format("['b']", str(date.today()), "{'b': mpf('0.0')}")
                    ]
         calc_error_helper(self, message, False)
 
@@ -200,13 +209,20 @@ class TestFunctions(unittest.TestCase):
                    'DEBUG:root: Comparing all calculated and trusted values...',
                    'DEBUG:root:' + '\nTestModule: ' + 'alpha' + ': Calculated: ' + '1.0e-15' + '\nTestModule: ' + 'alpha' + ': Trusted:    ' + '0.0' + '\n',
                    'ERROR:root:' +
-                   '\n\nVariable(s) ' + "['alpha']" + ' in module TestModule failed. Please check values.\n\nIf you are ' +
-                   'confident that the newly calculated values are correct, comment out the old trusted values for ' +
-                   "'TestModuleGlobals' in trusted_values_dict and copy the following code between the ##### into " +
-                   'trusted_values_dict. Make sure to fill out the TODO comment describing why the values had to be ' +
-                   'changed. Then re-run test script.\n#####\n\n# Generated on: ' + str(date.today()) +
-                   '\n# Reason for changing' + " values: TODO\ntrusted_values_dict['TestModule__globals'] = {" + "'alpha'" +
-                   ": mpf('" + '1.0e-15' + "')}\n\n#####"
+                   '''
+\nVariable(s) {} in module TestModule failed. Please check values.
+If you are confident that the newly calculated values are correct, comment out the old trusted values for 
+TestModule__globals in your trusted_values_dict and copy the following code between the ##### into your trusted_values_dict. 
+Make sure to fill out the TODO comment describing why the values had to be changed. Then re-run test script.
+
+#####
+
+# Generated on: {}
+# Reason for changing values: TODO
+trusted_values_dict['TestModule__globals'] = {}
+
+#####
+'''.format("['alpha']", str(date.today()), "{'alpha': mpf('1.0e-15')}")
                    ]
         calc_error_helper(self, message, False)
 
@@ -227,13 +243,20 @@ class TestFunctions(unittest.TestCase):
                    'DEBUG:root: Comparing all calculated and trusted values...',
                    'DEBUG:root:' + '\nTestModule: ' + 'f' + ': Calculated: ' + '123.0123456781012345678901' + '\nTestModule: ' + 'f' + ': Trusted:    ' + '123.0123456789012345678901' + '\n',
                    'ERROR:root:' +
-                   '\n\nVariable(s) ' + "['f']" + ' in module TestModule failed. Please check values.\n\nIf you are ' +
-                   'confident that the newly calculated values are correct, comment out the old trusted values for ' +
-                   "'TestModuleGlobals' in trusted_values_dict and copy the following code between the ##### into " +
-                   'trusted_values_dict. Make sure to fill out the TODO comment describing why the values had to be ' +
-                   'changed. Then re-run test script.\n#####\n\n# Generated on: ' + str(date.today()) +
-                   '\n# Reason for changing' + " values: TODO\ntrusted_values_dict['TestModule__globals'] = {" + "'f'" +
-                   ": mpf('" + '123.0123456781012345678901' + "')}\n\n#####"
+                   '''
+\nVariable(s) {} in module TestModule failed. Please check values.
+If you are confident that the newly calculated values are correct, comment out the old trusted values for 
+TestModule__globals in your trusted_values_dict and copy the following code between the ##### into your trusted_values_dict. 
+Make sure to fill out the TODO comment describing why the values had to be changed. Then re-run test script.
+
+#####
+
+# Generated on: {}
+# Reason for changing values: TODO
+trusted_values_dict['TestModule__globals'] = {}
+
+#####
+'''.format("['f']", str(date.today()), "{'f': mpf('123.0123456781012345678901')}")
                    ]
         calc_error_helper(self, message, False)
 
@@ -245,13 +268,20 @@ class TestFunctions(unittest.TestCase):
                    'DEBUG:root:' + '\nTestModule: ' + 'a' + ': Calculated: ' + '0.0' + '\nTestModule: ' + 'a' + ': Trusted:    ' + '0.1' + '\n',
                    'DEBUG:root:' + '\nTestModule: ' + 'b' + ': Calculated: ' + '1.0' + '\nTestModule: ' + 'b' + ': Trusted:    ' + '1.0' + '\n',
                    'ERROR:root:' +
-                   '\n\nVariable(s) ' + "['a']" + ' in module TestModule failed. Please check values.\n\nIf you are ' +
-                   'confident that the newly calculated values are correct, comment out the old trusted values for ' +
-                   "'TestModuleGlobals' in trusted_values_dict and copy the following code between the ##### into " +
-                   'trusted_values_dict. Make sure to fill out the TODO comment describing why the values had to be ' +
-                   'changed. Then re-run test script.\n#####\n\n# Generated on: ' + str(date.today()) +
-                   '\n# Reason for changing' + " values: TODO\ntrusted_values_dict['TestModule__globals'] = {" + "'a'" +
-                   ": mpf('" + '0.0' + "'), " + "'b'" + ": mpf('" + '1.0' + "')}\n\n#####"
+                   '''
+\nVariable(s) {} in module TestModule failed. Please check values.
+If you are confident that the newly calculated values are correct, comment out the old trusted values for 
+TestModule__globals in your trusted_values_dict and copy the following code between the ##### into your trusted_values_dict. 
+Make sure to fill out the TODO comment describing why the values had to be changed. Then re-run test script.
+
+#####
+
+# Generated on: {}
+# Reason for changing values: TODO
+trusted_values_dict['TestModule__globals'] = {}
+
+#####
+'''.format("['a']", str(date.today()), "{'a': mpf('0.0'), 'b': mpf('1.0')}")
                    ]
         calc_error_helper(self, message, False)
 
@@ -263,13 +293,20 @@ class TestFunctions(unittest.TestCase):
                    'DEBUG:root:' + '\nTestModule: ' + 'a' + ': Calculated: ' + '0.0' + '\nTestModule: ' + 'a' + ': Trusted:    ' + '0.1' + '\n',
                    'DEBUG:root:' + '\nTestModule: ' + 'b' + ': Calculated: ' + '1.1' + '\nTestModule: ' + 'b' + ': Trusted:    ' + '1.0' + '\n',
                    'ERROR:root:' +
-                   '\n\nVariable(s) ' + "['a', 'b']" + ' in module TestModule failed. Please check values.\n\nIf you are ' +
-                   'confident that the newly calculated values are correct, comment out the old trusted values for ' +
-                   "'TestModuleGlobals' in trusted_values_dict and copy the following code between the ##### into " +
-                   'trusted_values_dict. Make sure to fill out the TODO comment describing why the values had to be ' +
-                   'changed. Then re-run test script.\n#####\n\n# Generated on: ' + str(date.today()) +
-                   '\n# Reason for changing' + " values: TODO\ntrusted_values_dict['TestModule__globals'] = {" + "'a'" +
-                   ": mpf('" + '0.0' + "'), " + "'b'" + ": mpf('" + '1.1' + "')}\n\n#####"
+                   '''
+\nVariable(s) {} in module TestModule failed. Please check values.
+If you are confident that the newly calculated values are correct, comment out the old trusted values for 
+TestModule__globals in your trusted_values_dict and copy the following code between the ##### into your trusted_values_dict. 
+Make sure to fill out the TODO comment describing why the values had to be changed. Then re-run test script.
+
+#####
+
+# Generated on: {}
+# Reason for changing values: TODO
+trusted_values_dict['TestModule__globals'] = {}
+
+#####
+'''.format("['a', 'b']", str(date.today()), "{'a': mpf('0.0'), 'b': mpf('1.1')}")
                    ]
         calc_error_helper(self, message, False)
 
@@ -281,13 +318,20 @@ class TestFunctions(unittest.TestCase):
                    'DEBUG:root:' + '\nTestModule: ' + 'a' + ': Calculated: ' + '0.0' + '\nTestModule: ' + 'a' + ': Trusted:    ' + '0.0' + '\n',
                    'DEBUG:root:' + '\nTestModule: ' + 'b' + ': Calculated: ' + '1.1' + '\nTestModule: ' + 'b' + ': Trusted:    ' + '1.0' + '\n',
                    'ERROR:root:' +
-                   '\n\nVariable(s) ' + "['b']" + ' in module TestModule failed. Please check values.\n\nIf you are ' +
-                   'confident that the newly calculated values are correct, comment out the old trusted values for ' +
-                   "'TestModuleGlobals' in trusted_values_dict and copy the following code between the ##### into " +
-                   'trusted_values_dict. Make sure to fill out the TODO comment describing why the values had to be ' +
-                   'changed. Then re-run test script.\n#####\n\n# Generated on: ' + str(date.today()) +
-                   '\n# Reason for changing' + " values: TODO\ntrusted_values_dict['TestModule__globals'] = {" + "'a'" +
-                   ": mpf('" + '0.0' + "'), " + "'b'" + ": mpf('" + '1.1' + "')}\n\n#####"
+                   '''
+\nVariable(s) {} in module TestModule failed. Please check values.
+If you are confident that the newly calculated values are correct, comment out the old trusted values for 
+TestModule__globals in your trusted_values_dict and copy the following code between the ##### into your trusted_values_dict. 
+Make sure to fill out the TODO comment describing why the values had to be changed. Then re-run test script.
+
+#####
+
+# Generated on: {}
+# Reason for changing values: TODO
+trusted_values_dict['TestModule__globals'] = {}
+
+#####
+'''.format("['b']", str(date.today()), "{'a': mpf('0.0'), 'b': mpf('1.1')}")
                    ]
         calc_error_helper(self, message, False)
 
@@ -325,157 +369,248 @@ class TestFunctions(unittest.TestCase):
         self.assertEqual("{'betaU[0]': mpf('1.0'), 'betaU[1]': mpf('0.0'), 'betaU[2]': mpf('-0.733235010089164696012176136719')}",
                          create_dict_string(calculated_dict))
 
-        logging.info('\nAll create_dict_string tests passed.\n')
+        logging.info(' All create_dict_string tests passed.\n')
 
     def ftest_create_test(self):
         pass
 
-    def ftest_evaluate_globals(self):
+    def test_evaluate_globals(self):
         from UnitTesting.evaluate_globals import evaluate_globals
-        from UnitTesting.functions_and_globals import functions_and_globals
-        import NRPy_param_funcs as par
-        from sympy import sqrt, symbols, sin
-        import indexedexp as ixp
-        import BSSN.BrillLindquist as BrillLindquist
-        import BSSN.StaticTrumpet as StaticTrumpet
+        import sympy as sp
 
-        self.assertEqual(dict(), evaluate_globals(dict(), dict()))
+        logging.getLogger().setLevel('CRITICAL')
 
-        mod_dict = {'BrillLindquist': functions_and_globals(['BrillLindquist(ComputeADMGlobalsOnly = True)'], ['alphaCart', 'betaCartU', 'BCartU', 'gammaCartDD', 'KCartDD'])}
+        self.module = ''
+        self.module_name = 'TestModule'
+        self.initialization_string = ''
+        self.function = ''
+        self.global_list = []
+        self.assertRaises(AssertionError, evaluate_globals, self)
 
-        locs = dict(locals())
+        self.module = 'random_string'
+        self.module_name = 'TestModule'
+        self.initialization_string = ''
+        self.function = ''
+        self.global_list = []
+        self.assertRaises(AssertionError, evaluate_globals, self)
 
-        thismodule = "Brill-Lindquist"
-        BH1_posn_x, BH1_posn_y, BH1_posn_z = par.Cparameters("REAL", thismodule,
-                                                             ["BH1_posn_x", "BH1_posn_y", "BH1_posn_z"])
-        BH1_mass = par.Cparameters("REAL", thismodule, ["BH1_mass"])
-        BH2_posn_x, BH2_posn_y, BH2_posn_z = par.Cparameters("REAL", thismodule,
-                                                             ["BH2_posn_x", "BH2_posn_y", "BH2_posn_z"])
-        BH2_mass = par.Cparameters("REAL", thismodule, ["BH2_mass"])
-        Cartxyz = ixp.declarerank1("Cartxyz")
-        Cartxyz0, Cartxyz1, Cartxyz2 = Cartxyz
+        a, b, c = sp.symbols('a b c')
 
-        result_dict = {'BrillLindquist': {'alphaCart': (BH1_mass/(2*sqrt((-BH1_posn_x + Cartxyz0)**2 + (-BH1_posn_y + Cartxyz1)**2 + (-BH1_posn_z + Cartxyz2)**2)) + BH2_mass/(2*sqrt((-BH2_posn_x + Cartxyz0)**2 + (-BH2_posn_y + Cartxyz1)**2 + (-BH2_posn_z + Cartxyz2)**2)) + 1)**(-2), 'betaCartU': [0, 0, 0], 'BCartU': [0, 0, 0], 'gammaCartDD': [[(BH1_mass/(2*sqrt((-BH1_posn_x + Cartxyz0)**2 + (-BH1_posn_y + Cartxyz1)**2 + (-BH1_posn_z + Cartxyz2)**2)) + BH2_mass/(2*sqrt((-BH2_posn_x + Cartxyz0)**2 + (-BH2_posn_y + Cartxyz1)**2 + (-BH2_posn_z + Cartxyz2)**2)) + 1)**4, 0, 0], [0, (BH1_mass/(2*sqrt((-BH1_posn_x + Cartxyz0)**2 + (-BH1_posn_y + Cartxyz1)**2 + (-BH1_posn_z + Cartxyz2)**2)) + BH2_mass/(2*sqrt((-BH2_posn_x + Cartxyz0)**2 + (-BH2_posn_y + Cartxyz1)**2 + (-BH2_posn_z + Cartxyz2)**2)) + 1)**4, 0], [0, 0, (BH1_mass/(2*sqrt((-BH1_posn_x + Cartxyz0)**2 + (-BH1_posn_y + Cartxyz1)**2 + (-BH1_posn_z + Cartxyz2)**2)) + BH2_mass/(2*sqrt((-BH2_posn_x + Cartxyz0)**2 + (-BH2_posn_y + Cartxyz1)**2 + (-BH2_posn_z + Cartxyz2)**2)) + 1)**4]], 'KCartDD': [[0, 0, 0], [0, 0, 0], [0, 0, 0]]}}
+        self.module = 'test_module'
+        self.module_name = 'TestModule'
+        self.initialization_string = ''
+        self.function = 'function(create_gamma=False)'
+        self.global_list = []
+        self.assertEqual({}, evaluate_globals(self))
 
-        self.assertEqual(result_dict, evaluate_globals(mod_dict, locs))
+        self.module = 'test_module'
+        self.module_name = 'TestModule'
+        self.initialization_string = ''
+        self.function = 'function(create_gamma=False)'
+        self.global_list = ['alpha']
+        self.assertEqual({'alpha': a + b + c}, evaluate_globals(self))
 
-        mod_dict = {'BrillLindquist': functions_and_globals(['BrillLindquist(ComputeADMGlobalsOnly = True)'], ['alphaCart', 'betaCartU', 'BCartU', 'gammaCartDD', 'KCartDD']),
-                    'StaticTrumpet': functions_and_globals(['StaticTrumpet(ComputeADMGlobalsOnly = True)'], ['alphaSph', 'betaSphU', 'BSphU', 'gammaSphDD', 'KSphDD'])}
+        self.module = 'test_module'
+        self.module_name = 'TestModule'
+        self.initialization_string = ''
+        self.function = 'function(create_gamma=False)'
+        self.global_list = ['alpha', 'betaU']
+        self.assertEqual({'alpha': a + b + c, 'betaU': [0, a**2 + 2*b**2 + c**2, sp.sqrt(a + b)]},
+                         evaluate_globals(self))
 
-        locs = locals()
+        self.module = 'test_module'
+        self.module_name = 'TestModule'
+        self.initialization_string = ''
+        self.function = 'function(create_gamma=False)'
+        self.global_list = ['gamma']
+        self.assertRaises(AttributeError, evaluate_globals, self)
 
-        r, th, ph = symbols('r th ph', real=True)
-        M = par.Cparameters("REAL", thismodule, ["M"])
+        self.module = 'test_module'
+        self.module_name = 'TestModule'
+        self.initialization_string = ''
+        self.function = 'function(create_gamma=True)'
+        self.global_list = ['alpha', 'betaU', 'gamma']
+        self.assertEqual({'alpha': a + b + c, 'betaU': [0, a**2 + 2*b**2 + c**2, sp.sqrt(a + b)], 'gamma': sp.atan2(b, a)},
+                         evaluate_globals(self))
 
-        result_dict = {'BrillLindquist': {'alphaCart': (BH1_mass/(2*sqrt((-BH1_posn_x + Cartxyz0)**2 + (-BH1_posn_y + Cartxyz1)**2 + (-BH1_posn_z + Cartxyz2)**2)) + BH2_mass/(2*sqrt((-BH2_posn_x + Cartxyz0)**2 + (-BH2_posn_y + Cartxyz1)**2 + (-BH2_posn_z + Cartxyz2)**2)) + 1)**(-2), 'betaCartU': [0, 0, 0], 'BCartU': [0, 0, 0], 'gammaCartDD': [[(BH1_mass/(2*sqrt((-BH1_posn_x + Cartxyz0)**2 + (-BH1_posn_y + Cartxyz1)**2 + (-BH1_posn_z + Cartxyz2)**2)) + BH2_mass/(2*sqrt((-BH2_posn_x + Cartxyz0)**2 + (-BH2_posn_y + Cartxyz1)**2 + (-BH2_posn_z + Cartxyz2)**2)) + 1)**4, 0, 0], [0, (BH1_mass/(2*sqrt((-BH1_posn_x + Cartxyz0)**2 + (-BH1_posn_y + Cartxyz1)**2 + (-BH1_posn_z + Cartxyz2)**2)) + BH2_mass/(2*sqrt((-BH2_posn_x + Cartxyz0)**2 + (-BH2_posn_y + Cartxyz1)**2 + (-BH2_posn_z + Cartxyz2)**2)) + 1)**4, 0], [0, 0, (BH1_mass/(2*sqrt((-BH1_posn_x + Cartxyz0)**2 + (-BH1_posn_y + Cartxyz1)**2 + (-BH1_posn_z + Cartxyz2)**2)) + BH2_mass/(2*sqrt((-BH2_posn_x + Cartxyz0)**2 + (-BH2_posn_y + Cartxyz1)**2 + (-BH2_posn_z + Cartxyz2)**2)) + 1)**4]], 'KCartDD': [[0, 0, 0], [0, 0, 0], [0, 0, 0]]},
-                       'StaticTrumpet': {'alphaSph': r/(M + r), 'betaSphU': [M*r/(M + r)**2, 0, 0], 'BSphU': [0, 0, 0], 'gammaSphDD': [[(M/r + 1)**2, 0, 0], [0, r**2*(M/r + 1)**2, 0], [0, 0, r**2*(M/r + 1)**2*sin(th)**2]], 'KSphDD': [[-M/r**2, 0, 0], [0, M, 0], [0, 0, M*sin(th)**2]]}}
+        self.module = 'test_module'
+        self.module_name = 'TestModule'
+        self.initialization_string = ''
+        self.function = 'function2(create_gamma=False)'
+        self.global_list = ['alpha2']
+        self.assertRaises(NameError, evaluate_globals, self)
 
-        self.assertEqual(result_dict, evaluate_globals(mod_dict, locs))
+        self.module = 'test_module'
+        self.module_name = 'TestModule'
+        self.initialization_string = ''
+        self.function = 'function2(create_gamma=False)'
+        self.global_list = ['betaU2']
+        self.assertRaises(NameError, evaluate_globals, self)
 
-        logging.info('\nAll evaluate_globals tests passed.\n')
+        a2, b2, c2 = sp.symbols('a2 b2 c2')
 
-    def ftest_expand_variable_dict(self):
+        self.module = 'test_module'
+        self.module_name = 'TestModule'
+        self.initialization_string = 'import test_module as tm\ntm.init_function2()\n'
+        self.function = 'function2(create_gamma=False)'
+        self.global_list = ['alpha2', 'betaU2']
+        self.assertEqual({'alpha2': a2 + b2 + c2, 'betaU2': [0, a2**2 + 2*b2**2 + c2**2, sp.sqrt(a2 + b2)]},
+                         evaluate_globals(self))
+
+        self.module = 'test_module'
+        self.module_name = 'TestModule'
+        self.initialization_string = ''
+        self.function = 'function2(create_gamma=False)'
+        self.global_list = ['alpha2', 'betaU2']
+        self.assertEqual({'alpha2': a2 + b2 + c2, 'betaU2': [0, a2**2 + 2*b2**2 + c2**2, sp.sqrt(a2 + b2)]},
+                         evaluate_globals(self))
+
+        self.module = 'test_module'
+        self.module_name = 'TestModule'
+        self.initialization_string = ''
+        self.function = 'function2(create_gamma=False)'
+        self.global_list = ['alpha2', 'betaU2', 'gamma2']
+        self.assertRaises(AttributeError, evaluate_globals, self)
+
+        self.module = 'test_module'
+        self.module_name = 'TestModule'
+        self.initialization_string = ''
+        self.function = 'function2(create_gamma=True)'
+        self.global_list = ['alpha2', 'betaU2', 'gamma2']
+        self.assertEqual({'alpha2': a2 + b2 + c2, 'betaU2': [0, a2 ** 2 + 2 * b2 ** 2 + c2 ** 2, sp.sqrt(a2 + b2)],
+                         'gamma2': sp.atan2(b2, a2)}, evaluate_globals(self))
+
+        logging.getLogger().setLevel('INFO')
+        logging.info(' All evaluate_globals tests passed.\n')
+
+    def test_expand_variable_dict(self):
         from UnitTesting.expand_variable_dict import expand_variable_dict
 
-        variable_dict = dict()
+        self.variable_dict = dict()
         result_dict = dict()
-        self.assertEqual(result_dict, expand_variable_dict(variable_dict))
+        self.assertEqual(result_dict, expand_variable_dict(self))
 
-        variable_dict = {'alpha': 1}
+        self.variable_dict = {'alpha': 1}
         result_tuple = {'alpha': 1}
-        self.assertEqual(result_tuple, expand_variable_dict(variable_dict))
+        self.assertEqual(result_tuple, expand_variable_dict(self))
 
-        variable_dict = {'alphaD': [1, 2]}
+        self.variable_dict = {'alphaD': [1, 2]}
         result_tuple = {'alphaD[0]': 1, 'alphaD[1]': 2}
-        self.assertEqual(result_tuple, expand_variable_dict(variable_dict))
+        self.assertEqual(result_tuple, expand_variable_dict(self))
 
-        variable_dict = {'alphaDD': [[1, 2], [4, 3]]}
+        self.variable_dict = {'alphaDD': [[1, 2], [4, 3]]}
         result_tuple = {'alphaDD[0][0]': 1, 'alphaDD[0][1]': 2, 'alphaDD[1][0]':4 , 'alphaDD[1][1]':3}
-        self.assertEqual(result_tuple, expand_variable_dict(variable_dict))
+        self.assertEqual(result_tuple, expand_variable_dict(self))
 
-        variable_dict = {'aDD': [[1, 2, 3, 4, 5], [2, 3, 4, 5, 6], [2, 8, 9, 7, 6], [0, 0, 0, 0, 0], [3, 1, 4, 1, 5]]}
+        self.variable_dict = {'aDD': [[1, 2, 3, 4, 5], [2, 3, 4, 5, 6], [2, 8, 9, 7, 6], [0, 0, 0, 0, 0], [3, 1, 4, 1, 5]]}
         result_tuple = {'aDD[0][0]': 1, 'aDD[0][1]': 2, 'aDD[0][2]': 3, 'aDD[0][3]': 4, 'aDD[0][4]': 5,
                         'aDD[1][0]': 2, 'aDD[1][1]': 3, 'aDD[1][2]': 4, 'aDD[1][3]': 5, 'aDD[1][4]': 6,
                         'aDD[2][0]': 2, 'aDD[2][1]': 8, 'aDD[2][2]': 9, 'aDD[2][3]': 7, 'aDD[2][4]': 6,
                         'aDD[3][0]': 0, 'aDD[3][1]': 0, 'aDD[3][2]': 0, 'aDD[3][3]': 0, 'aDD[3][4]': 0,
                         'aDD[4][0]': 3, 'aDD[4][1]': 1, 'aDD[4][2]': 4, 'aDD[4][3]': 1, 'aDD[4][4]': 5}
-        self.assertEqual(result_tuple, expand_variable_dict(variable_dict))
+        self.assertEqual(result_tuple, expand_variable_dict(self))
 
-        variable_dict = {'alpha': 4, 'beta': 5}
+        self.variable_dict = {'alpha': 4, 'beta': 5}
         result_tuple = {'alpha': 4, 'beta': 5}
-        self.assertEqual(result_tuple, expand_variable_dict(variable_dict))
+        self.assertEqual(result_tuple, expand_variable_dict(self))
 
-        variable_dict = {'alphaD': [1, 2], 'beta': 3}
+        self.variable_dict = {'alphaD': [1, 2], 'beta': 3}
         result_tuple = {'alphaD[0]': 1, 'alphaD[1]': 2, 'beta': 3}
-        self.assertEqual(result_tuple, expand_variable_dict(variable_dict))
+        self.assertEqual(result_tuple, expand_variable_dict(self))
 
-        logging.info('\nAll expand_variable_dict tests passed.\n')
+        logging.info(' All expand_variable_dict tests passed.\n')
 
-    def ftest_first_time_print(self):
-        from UnitTesting.first_time_print import first_time_print
+    def test_first_time_print(self):
         from datetime import date
+        from mpmath import mp, mpf
         from UnitTesting.standard_constants import precision
-        import os
-        import sys
-        from mpmath import mpf, mp
 
         mp.dps = precision
 
-        path = os.path.abspath(__file__)
+        self.module_name = 'TestModule'
+        self.trusted_values_dict_name = 'TestModule__globals'
+        self.calculated_dict = {}
+        message = '''
+Module: TestModule
+Please copy the following code between the ##### and paste it into your trusted_values_dict.py file for this module:
 
-        mod = 'TestModule'
-        value_dict = {}
+#####
 
-        captured_output = create_StringIO()
-        first_time_print(mod, value_dict, path, False)
-        self.assertEqual('\nModule: TestModule\nPlease copy the following code between the ##### and paste it into' +
-                         ' your trusted_values_dict.py file:\n#####\n\n# Generated on: ' + str(date.today()) +
-                         "\ntrusted_values_dict['TestModuleGlobals'] = {}\n\n#####\n", captured_output.getvalue())
+# Generated on: {}
+trusted_values_dict['TestModule__globals'] = {}
 
-        mod = 'TestModule2'
-        value_dict = {'alpha': 0, 'beta': 1, 'gamma': 3}
+#####
+'''.format(date.today(), {})
+        first_time_print_helper(self, message=message, write=False)
 
-        captured_output = create_StringIO()
-        first_time_print(mod, value_dict, path, False)
-        self.assertEqual('\nModule: TestModule2\nPlease copy the following code between the ##### and paste it into' +
-                         ' your trusted_values_dict.py file:\n#####\n\n# Generated on: ' + str(date.today()) +
-                         "\ntrusted_values_dict['TestModule2Globals'] = {'alpha': 0, 'beta': 1, 'gamma': 3}\n\n#####\n",
-                         captured_output.getvalue())
+        self.calculated_dict = {'alpha': 0, 'beta': 1, 'gamma': 3}
+        message = '''
+Module: TestModule
+Please copy the following code between the ##### and paste it into your trusted_values_dict.py file for this module:
 
-        mod = 'TestModule3'
-        value_dict = {'beta': 0, 'gamma': 1, 'alpha': 3}
+#####
 
-        captured_output = create_StringIO()
-        first_time_print(mod, value_dict, path, False)
-        self.assertEqual('\nModule: TestModule3\nPlease copy the following code between the ##### and paste it into' +
-                         ' your trusted_values_dict.py file:\n#####\n\n# Generated on: ' + str(date.today()) +
-                         "\ntrusted_values_dict['TestModule3Globals'] = {'alpha': 3, 'beta': 0, 'gamma': 1}\n\n#####\n",
-                         captured_output.getvalue())
+# Generated on: {}
+trusted_values_dict['TestModule__globals'] = {}
 
-        mod = 'TestModule4'
-        value_dict = {'x': mpf('0.0'), 'y': mpf('1.23456789012345678912345')}
+#####
+'''.format(date.today(), {'alpha': 0, 'beta': 1, 'gamma': 3})
+        first_time_print_helper(self, message=message, write=False)
 
-        captured_output = create_StringIO()
-        first_time_print(mod, value_dict, path, False)
-        self.assertEqual('\nModule: TestModule4\nPlease copy the following code between the ##### and paste it into' +
-                         ' your trusted_values_dict.py file:\n#####\n\n# Generated on: ' + str(date.today()) +
-                         "\ntrusted_values_dict['TestModule4Globals'] = {'x': mpf('0.0'), "
-                         "'y': mpf('1.23456789012345678912345')}\n\n#####\n", captured_output.getvalue())
+        self.calculated_dict = {'beta': 0, 'gamma': 1, 'alpha': 3}
+        message = '''
+Module: TestModule
+Please copy the following code between the ##### and paste it into your trusted_values_dict.py file for this module:
 
-        mod = 'TestModule5'
-        value_dict = {'AZ': mpf('0.0'), 'ab': mpf('1.0')}
+#####
 
-        captured_output = create_StringIO()
-        first_time_print(mod, value_dict, path, False)
-        self.assertEqual('\nModule: TestModule5\nPlease copy the following code between the ##### and paste it into' +
-                         ' your trusted_values_dict.py file:\n#####\n\n# Generated on: ' + str(date.today()) +
-                         "\ntrusted_values_dict['TestModule5Globals'] = {'ab': mpf('1.0'), "
-                         "'AZ': mpf('0.0')}\n\n#####\n", captured_output.getvalue())
+# Generated on: {}
+trusted_values_dict['TestModule__globals'] = {}
 
-        sys.stdout = sys.__stdout__
+#####
+'''.format(date.today(), {'alpha': 3, 'beta': 0, 'gamma': 1})
+        first_time_print_helper(self, message=message, write=False)
+
+        self.calculated_dict = {'x': mpf('0.0'), 'y': mpf('1.23456789012345678912345678912')}
+        message = '''
+Module: TestModule
+Please copy the following code between the ##### and paste it into your trusted_values_dict.py file for this module:
+
+#####
+
+# Generated on: {}
+trusted_values_dict['TestModule__globals'] = {}
+
+#####
+'''.format(date.today(), {'x': mpf('0.0'), 'y': mpf('1.23456789012345678912345678912')})
+        # first_time_print_helper(self, message=message, write=False)
 
 
-        logging.info('\nAll first_time_print tests passed.\n')
+
+        # mod = 'TestModule4'
+        # value_dict = {'x': mpf('0.0'), 'y': mpf('1.23456789012345678912345')}
+        #
+        # captured_output = create_StringIO()
+        # first_time_print(mod, value_dict, path, False)
+        # self.assertEqual('\nModule: TestModule4\nPlease copy the following code between the ##### and paste it into' +
+        #                  ' your trusted_values_dict.py file:\n#####\n\n# Generated on: ' + str(date.today()) +
+        #                  "\ntrusted_values_dict['TestModule4Globals'] = {'x': mpf('0.0'), "
+        #                  "'y': mpf('1.23456789012345678912345')}\n\n#####\n", captured_output.getvalue())
+        #
+        # mod = 'TestModule5'
+        # value_dict = {'AZ': mpf('0.0'), 'ab': mpf('1.0')}
+        #
+        # captured_output = create_StringIO()
+        # first_time_print(mod, value_dict, path, False)
+        # self.assertEqual('\nModule: TestModule5\nPlease copy the following code between the ##### and paste it into' +
+        #                  ' your trusted_values_dict.py file:\n#####\n\n# Generated on: ' + str(date.today()) +
+        #                  "\ntrusted_values_dict['TestModule5Globals'] = {'ab': mpf('1.0'), "
+        #                  "'AZ': mpf('0.0')}\n\n#####\n", captured_output.getvalue())
+        #
+        # sys.stdout = sys.__stdout__
+        #
+
+        logging.info(' All first_time_print tests passed.\n')
 
     def test_get_variable_dimension(self):
         from UnitTesting.expand_variable_dict import get_variable_dimension
@@ -498,7 +633,7 @@ class TestFunctions(unittest.TestCase):
         with self.assertRaises(IndexError):
             get_variable_dimension([])
 
-        logging.info('\nAll get_variable_dimension tests passed.\n')
+        logging.info(' All get_variable_dimension tests passed.\n')
 
     def ftest_run_test(self):
         from UnitTesting.run_test import run_test
@@ -610,6 +745,23 @@ def create_StringIO():
     return captured_output
 
 
+def first_time_print_helper(self, message='', write=False):
+    from UnitTesting.first_time_print import first_time_print
+
+    if version_info[0] == 2 or version_info[1] < 4:
+
+        from testfixtures import LogCapture
+        with LogCapture() as logger:
+            first_time_print(self, write)
+        logger.check(('root', 'ERROR', message))
+
+    else:
+
+        with self.assertLogs(level='DEBUG') as logger:
+            first_time_print(self, write)
+        self.assertEqual(logger.output, message)
+
+
 def calc_error_helper(self, message, expected_result):
     from UnitTesting.calc_error import calc_error
 
@@ -625,14 +777,14 @@ def calc_error_helper(self, message, expected_result):
         tuple_tuple = tuple(tuple_list)
 
         from testfixtures import LogCapture
-        with LogCapture() as log:
+        with LogCapture() as logger:
             self.assertTrue(expected_result == calc_error(self))
-        log.check(*tuple_tuple)
+        logger.check(*tuple_tuple)
 
     else:
 
         with self.assertLogs(level='DEBUG') as logger:
-            self.assertTrue(expected_result == calc_error(self))
+            self.assertEqual(expected_result, calc_error(self))
         self.assertEqual(logger.output, message)
 
 
