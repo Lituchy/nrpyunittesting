@@ -1,7 +1,6 @@
 # Step 1.a: Initialize core Python/UnitTesting modules
 from UnitTesting.calc_error import calc_error
 from UnitTesting.evaluate_globals import evaluate_globals
-from UnitTesting.expand_variable_dict import expand_variable_dict
 from UnitTesting.first_time_print import first_time_print
 from UnitTesting.cse_simplify_and_evaluate_sympy_expressions import cse_simplify_and_evaluate_sympy_expressions
 from UnitTesting.standard_constants import precision
@@ -24,6 +23,7 @@ def run_test(self):
 
     # Step 1.d: Set boolean self.first_time based on existence of desired trusted_values_dict entry
     self.first_time = self.trusted_values_dict_name not in self.trusted_values_dict
+    logging.debug(' First time: ' + str(self.first_time))
 
     # Step 1.e: Set trusted_values_dict_entry to its corresponding trusted_values_dict entry
     self.trusted_values_dict_entry = {} if self.first_time else self.trusted_values_dict[self.trusted_values_dict_name]
@@ -36,9 +36,9 @@ def run_test(self):
     logging.info(' ...Success: evaluate_globals ran without errors.\n')
 
     # Step 2.b: Call expand_variable_dict to break up all tensors into scalars with associated names.
-    logging.info(' Calling expand_variable_dict...')
-    self.expanded_variable_dict = expand_variable_dict(self)
-    logging.info(' ...Success: expand_variable_dict ran without errors.\n')
+    # logging.info(' Calling expand_variable_dict...')
+    # self.expanded_variable_dict = expand_variable_dict(self)
+    # logging.info(' ...Success: expand_variable_dict ran without errors.\n')
 
     # Step 2.c: Call simplify_and_evaluate_sympy_expressions to assign each variable in each expression a random value
     #           and calculate the numerical result

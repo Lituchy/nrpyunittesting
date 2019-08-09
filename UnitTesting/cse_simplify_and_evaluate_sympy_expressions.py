@@ -6,13 +6,19 @@ from sympy import cse, N
 import UnitTesting.standard_constants as standard_constants
 import logging
 import hashlib
+from UnitTesting.expand_variable_dict import expand_variable_dict
 
-# Takes in a variable dictionary [expanded_variable_dict] and a boolean [first_time], and returns
-# a dictionary with each expression in [expanded_variable_dict] evaluated to a numerical expression by assigning each
-# sympy variable to a deterministic pseudorandom number.
-# If [first_time] is True, near-zero values are checked if they indeed should be zero.
+# cse_simplify_and_evaluate_sympy_expressions gets self.expanded_variable_dict by calling expand_variable_dict() on
+# self.variable_dict and assigns. It then gets every free symbol in self.expanded_variable dict and assigns them random,
+# but consistent, mpf values. It then looks at each expression in self.expanded_variable_dict, uses SymPy's CSE
+# algorithm to optimize our random value substitution, and gets a mpf (or mpc if the result is complex) value for each
+# expression. It then checks whether any of these expressions are super close to zero -- if a value is, recalculate it
+# at twice the precision. If the value drops off in magnitude, set it to exactly zero. Finally, return a dictionary
+# where each variable is assigned its respective value.
 
 # Called by run_test
+
+# Uses self.variable_dict
 
 precision = standard_constants.precision
 
@@ -20,8 +26,10 @@ precision = standard_constants.precision
 def cse_simplify_and_evaluate_sympy_expressions(self):
 
     # If an empty variable dict is passed, return an empty dictionary
-    if self.expanded_variable_dict == {}:
+    if self.variable_dict == {}:
         return {}
+
+    self.expanded_variable_dict = expand_variable_dict(self.variable_dict)
 
     # Setting precision
     mp.dps = precision
@@ -59,8 +67,8 @@ def cse_simplify_and_evaluate_sympy_expressions(self):
             # Store the random value in free_symbols_dict as a mpf
             free_symbols_dict[var] = mpf(random.random())
 
-    # Initialize value_dict and simplified_expression_dict
-    value_dict = dict()
+    # Initialize calculated_dict and simplified_expression_dict
+    calculated_dict = dict()
     simplified_expression_dict = dict()
 
     logging.debug(' ...Calculating values for each variable based on free symbols...')
@@ -82,9 +90,9 @@ def cse_simplify_and_evaluate_sympy_expressions(self):
                              str(new_result_value) + ". Setting value to zero")
                 result_value = mpf('0.0')
 
-        value_dict[var] = result_value
+        calculated_dict[var] = result_value
 
-    return value_dict
+    return calculated_dict
 
 
 # Sub-function that calculates value for variable with precision multiplied by precision_factor
@@ -107,7 +115,7 @@ def calculate_value(free_symbols_dict, replaced, reduced, precision_factor=1):
     for key in keys:
         reduced = reduced.subs(key, new_var_dict[key])
 
-    # Adding our variable, value pair to our value_dict
+    # Adding our variable, value pair to our calculated_dict
     try:
         res = mpf(reduced)
     # If value is a complex number, store it as a mpc

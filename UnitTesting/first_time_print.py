@@ -9,6 +9,8 @@ import os
 
 # Called by run_test
 
+# Uses self.module_name, self.trusted_values_dict_name, self.calculated_dict, self.path
+
 
 def first_time_print(self, write=True):
     logging.error('''

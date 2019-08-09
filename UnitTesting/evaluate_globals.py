@@ -1,12 +1,13 @@
 import logging
 from importlib import import_module
 
-# [evaluate_globals] takes in a module [module], a module name [module_name], a list of globals [global_list], and a
-# list of functions [function_list]. It uses executes code that imports [module] as [module_name], calls all the
-# functions in [function_list] on [module_name], gets the expressions for each global in [global_list], and stores the
-# globals in a dictionary [var_dict].
+# evaluate_globals sequentially imports self.module, runs self.initialization_string, calls self.function on
+# self.module, and gets an expression for each global in self.global_list. It returns a dictionary whose keys represent
+# the names of the globals and whose values represent the expressions calculated for each respective global.
 
 # Called by run_test
+
+# Uses self.module, self.module_name, self.initialization_string, self.function, self.global_list
 
 
 def evaluate_globals(self):
@@ -34,7 +35,10 @@ def evaluate_globals(self):
 
     logging.debug(' ...Successfully executed.')
 
-    string_exec = self.module_name + '.' + self.function + '\n'
+    if self.function != '':
+        string_exec = self.module_name + '.' + self.function + '\n'
+    else:
+        string_exec = ''
 
     for glob in self.global_list:
         string_exec += glob + '=' + self.module_name + '.' + glob + '\n'

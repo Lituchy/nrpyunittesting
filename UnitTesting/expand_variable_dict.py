@@ -4,16 +4,16 @@
 # Example: expand_variable_dict( { 'alpha': 0, 'betaU': [1, 3, 2] } ) --> { 'alpha': 0, 'betaU[0]': 1, 'betaU[1]': 3,
 #                                                                           'betaU[2]': 2 }
 
-# Called by run_test
+# Called by cse_simplify_and_evaluate_sympy_expressions
 
 
-def expand_variable_dict(self):
+def expand_variable_dict(variable_dict):
 
     # Initialize the result dictionary
     result_dict = dict()
 
     # Iterate through all elements of variable_dict
-    for var, expression_list in self.variable_dict.items():
+    for var, expression_list in variable_dict.items():
 
         # Getting the dimension and length of expression list
         dim, length = get_variable_dimension(expression_list)

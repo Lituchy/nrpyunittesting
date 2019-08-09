@@ -4,15 +4,16 @@ from datetime import date
 from UnitTesting.standard_constants import precision
 from UnitTesting.create_dict_string import create_dict_string
 
-# Takes in a module [mod], a calculated dictionary [calculated_dict], and a trusted dictionary [trusted_dict],
-# and computes the error for each result-trusted pair.
-# Returns a boolean [good] that represents if any two value pairs didn't differ by more than
-# [standard_constants.precision/2] decimal places.
+# calc_error loops through each item in self.calculated_dict and self.trusted_values_dict_entry,
+# and makes sure that the difference between each respective value's number of decimal in the dictionaries places is
+# less than 2/3 of the precision. It returns a boolean representing whether or not any variables differed.
 
 # Called by run_test
 
+# Uses self.calculated_dict, self.trusted_values_dict_entry, self.module_name
 
-def calc_error(self, output=True):
+
+def calc_error(self):
 
     # Setting precision
     mp.dps = precision
@@ -25,17 +26,15 @@ def calc_error(self, output=True):
     # If the sets differ
     if calculated_set != trusted_set:
         # Print differing values if [output] is True
-        if output:
-            logging.error('\n\t' + self.module_name +
-                          ': Calculated dictionary and trusted dictionary have different variables.')
-            calculated_minus_trusted = calculated_set - trusted_set
-            trusted_minus_calculated = trusted_set - calculated_set
-            if calculated_minus_trusted != set([]):
-                logging.error('\n\tCalculated Dictionary variables not in Trusted Dictionary: \n\t' +
-                              str(sorted(calculated_minus_trusted)))
-            if trusted_minus_calculated != set([]):
-                logging.error('\n\tTrusted Dictionary variables not in Calculated Dictionary: \n\t' +
-                              str(sorted(trusted_minus_calculated)))
+        logging.error(' {}: Calculated dictionary and trusted dictionary have different variables.'.format(self.module_name))
+        calculated_minus_trusted = calculated_set - trusted_set
+        trusted_minus_calculated = trusted_set - calculated_set
+        if calculated_minus_trusted != set([]):
+            logging.error(' Calculated Dictionary variables not in Trusted Dictionary: ' +
+                          str(sorted(calculated_minus_trusted)))
+        if trusted_minus_calculated != set([]):
+            logging.error(' Trusted Dictionary variables not in Calculated Dictionary: ' +
+                          str(sorted(trusted_minus_calculated)))
         # Automatically fail and don't proceed
         return False
 
@@ -52,9 +51,8 @@ def calc_error(self, output=True):
         calculated_val = self.calculated_dict[var]
         trusted_val = self.trusted_values_dict_entry[var]
 
-        if output:
-            logging.debug('\n' + self.module_name + ': ' + var + ': Calculated: ' + str(calculated_val) + '\n' + self.module_name + ': ' + var
-                          + ': Trusted:    ' + str(trusted_val) + '\n')
+        logging.debug('\n' + self.module_name + ': ' + var + ': Calculated: ' + str(calculated_val) + '\n' + self.module_name + ': ' + var
+                      + ': Trusted:    ' + str(trusted_val) + '\n')
 
         # Calculate the error between both values
         if trusted_val == 0:
@@ -72,7 +70,7 @@ def calc_error(self, output=True):
             bad_var_list.append(var)
 
     # If we want to output and there exists at least one variable with error, print
-    if output and bad_var_list != []:
+    if bad_var_list != []:
         logging.error('''
 \nVariable(s) {} in module {} failed. Please check values.
 If you are confident that the newly calculated values are correct, comment out the old trusted values for 
