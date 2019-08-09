@@ -31,7 +31,10 @@ def simplify_and_evaluate_sympy_expressions(self):
     logging.debug(' Getting all free symbols...')
     free_symbols_set = set()
     for val in self.expanded_variable_dict.values():
-        free_symbols_set = free_symbols_set | val.free_symbols
+        try:
+            free_symbols_set = free_symbols_set | val.free_symbols
+        except AttributeError:
+            pass
 
     # Initializing free_symbols_dict
     free_symbols_dict = dict()

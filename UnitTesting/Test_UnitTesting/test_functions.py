@@ -690,62 +690,82 @@ trusted_values_dict['trusted_values_dict_name'] = {}
 
         logging.info('\nAll setup_trusted_values_dict tests passed.\n')
 
-    def ftest_simplify_and_evaluate_sympy_expressions(self):
+    def test_simplify_and_evaluate_sympy_expressions(self):
         from UnitTesting.simplify_and_evaluate_sympy_expressions import simplify_and_evaluate_sympy_expressions
         from mpmath import mpf, mp, pi, sqrt
         import random
         from sympy import symbols
         import hashlib
-        from UnitTesting.calc_error import calc_error
 
-        var_dict = {}
-        self.assertEqual({}, simplify_and_evaluate_sympy_expressions(var_dict))
-        self.assertEqual({}, simplify_and_evaluate_sympy_expressions(var_dict, True))
+        mp.dps = precision
+
+        self.expanded_variable_dict = {}
+        self.assertEqual({}, simplify_and_evaluate_sympy_expressions(self))
 
         M_PI, M_SQRT1_2 = symbols('M_PI M_SQRT1_2')
 
-        var_dict = {'a': M_PI}
-        trusted_dict = {'a': mpf(pi)}
-        self.assertTrue(calc_error('mod', simplify_and_evaluate_sympy_expressions(var_dict), trusted_dict, False))
+        self.expanded_variable_dict = {'a': 0, 'b': M_PI}
+        self.assertEqual({'a': 0, 'b': mpf(pi)}, simplify_and_evaluate_sympy_expressions(self))
 
-        var_dict = {'b': M_SQRT1_2}
-        trusted_dict = {'b': mpf(1/sqrt(2))}
-        self.assertTrue(calc_error('mod', simplify_and_evaluate_sympy_expressions(var_dict), trusted_dict, False))
+        self.expanded_variable_dict = {'a': M_PI}
+        expected_result = {'a': mpf(pi)}
+        actual_result = simplify_and_evaluate_sympy_expressions(self)
+        for key, val in expected_result.items():
+            self.assertAlmostEqual(val, actual_result[key], 20)
 
-        var_dict = {'alpha': M_PI+M_SQRT1_2}
-        trusted_dict = {'alpha': mpf(pi)+mpf(1/sqrt(2))}
-        self.assertTrue(calc_error('mod', simplify_and_evaluate_sympy_expressions(var_dict), trusted_dict, False))
+        self.expanded_variable_dict = {'b': M_SQRT1_2}
+        expected_result = {'b': mpf(1/sqrt(2))}
+        actual_result = simplify_and_evaluate_sympy_expressions(self)
+        for key, val in expected_result.items():
+            self.assertAlmostEqual(val, actual_result[key], 20)
+
+        self.expanded_variable_dict = {'alpha': M_PI + M_SQRT1_2}
+        expected_result = {'alpha': mpf(pi) + mpf(1/sqrt(2))}
+        actual_result = simplify_and_evaluate_sympy_expressions(self)
+        for key, val in expected_result.items():
+            self.assertAlmostEqual(val, actual_result[key], 20)
 
         x, y, z = symbols('x y z')
-
         symbs = {x: 0, y: 0, z: 0}
 
         for symb in symbs:
             random.seed(int(hashlib.md5(str(symb).encode()).hexdigest(), 16))
             symbs[symb] = mpf(random.random())
 
-        var_dict = {'a': x}
-        trusted_dict = {'a': symbs[x]}
-        self.assertTrue(calc_error('mod', simplify_and_evaluate_sympy_expressions(var_dict), trusted_dict, False))
+        self.expanded_variable_dict = {'a': x}
+        expected_result = {'a': symbs[x]}
+        actual_result = simplify_and_evaluate_sympy_expressions(self)
+        for key, val in expected_result.items():
+            self.assertAlmostEqual(val, actual_result[key], 20)
 
-        var_dict = {'b': x+y}
-        trusted_dict = {'b': symbs[x] + symbs[y]}
-        self.assertTrue(calc_error('mod', simplify_and_evaluate_sympy_expressions(var_dict), trusted_dict, False))
+        self.expanded_variable_dict = {'b': x + y}
+        expected_result = {'b': symbs[x] + symbs[y]}
+        actual_result = simplify_and_evaluate_sympy_expressions(self)
+        for key, val in expected_result.items():
+            self.assertAlmostEqual(val, actual_result[key], 20)
 
-        var_dict = {'a': x, 'b': y, 'c': z}
-        trusted_dict = {'a': symbs[x], 'b': symbs[y], 'c': symbs[z]}
-        self.assertTrue(calc_error('mod', simplify_and_evaluate_sympy_expressions(var_dict), trusted_dict, False))
+        self.expanded_variable_dict = {'a': x, 'b': y, 'c': z}
+        expected_result = {'a': symbs[x], 'b': symbs[y], 'c': symbs[z]}
+        actual_result = simplify_and_evaluate_sympy_expressions(self)
+        for key, val in expected_result.items():
+            self.assertAlmostEqual(val, actual_result[key], 20)
 
-        var_dict = {'a': x**2, 'b': (x+y)/z}
-        trusted_dict = {'a': symbs[x]**2, 'b': (symbs[x]+symbs[y])/symbs[z]}
-        self.assertTrue(calc_error('mod', simplify_and_evaluate_sympy_expressions(var_dict), trusted_dict, False))
+        self.expanded_variable_dict = {'a': x**2, 'b': (x + y)/z}
+        expected_result = {'a': symbs[x]**2, 'b': (symbs[x] + symbs[y]) / symbs[z]}
+        actual_result = simplify_and_evaluate_sympy_expressions(self)
+        for key, val in expected_result.items():
+            self.assertAlmostEqual(val, actual_result[key])
 
-        var_dict = {'a': x**2 + 1, 'b': (x**2)**2, 'c': x**2 + y**2, 'd': 1-x**2, 'e': x**2*z}
-        trusted_dict = {'a': symbs[x]**2 + 1, 'b': symbs[x]**4, 'c': symbs[x]**2 + symbs[y]**2,
-                        'd': 1-symbs[x]**2, 'e': symbs[x]**2*symbs[z]}
-        self.assertTrue(calc_error('mod', simplify_and_evaluate_sympy_expressions(var_dict), trusted_dict, False))
+        self.expanded_variable_dict = {'a': x**2 + 1, 'b': (x**2)**2, 'c': x**2 + y**2, 'd': 1-x**2, 'e': x**2 * z}
+        expected_result = {'a': symbs[x]**2 + 1, 'b': symbs[x]**4, 'c': symbs[x]**2 + symbs[y]**2,
+                           'd': 1-symbs[x]**2, 'e': symbs[x]**2*symbs[z]}
+        actual_result = simplify_and_evaluate_sympy_expressions(self)
+        for key, val in expected_result.items():
+            self.assertAlmostEqual(val, actual_result[key])
 
-        logging.info('\nAll simplify_and_evaluate_sympy_expressions tests passed\n')
+        self.expanded_variable_dict = {}
+
+        logging.info(' All simplify_and_evaluate_sympy_expressions tests passed\n')
 
 
 # Sub-function for test_first_time_print
