@@ -56,7 +56,7 @@ class TestGlobals(unittest.TestCase):
         
         self.initialization_string = """{}"""
         
-        self.trusted_values_dict_name = '{}__globals'
+        self.trusted_values_dict_name = '{}globals'
         
         try:
         
@@ -76,7 +76,8 @@ if __name__ == '__main__':
     unittest.main()
 '''
 
-        trusted_values_dict_name = module_name + '__' + function.split('(')[0]
+        trusted_values_dict_name = module_name + '__' + \
+                                   function.replace('()', '__').replace('(', '__').replace(')', '__').replace(' ', '')
 
         # Copying the lines from run_test.py into our test file
         with open(os.path.join('UnitTesting', 'run_test.py'), 'r') as file:
@@ -102,7 +103,7 @@ if __name__ == '__main__':
 
         logging.debug(' Test file for:\nmodule:   ' + module_name + '\nfunction: ' + function + '\n' + file_string)
 
-        full_path = os.path.join(sys.path[0], trusted_values_dict_name + '__test.py')
+        full_path = os.path.join(sys.path[0], trusted_values_dict_name + 'test.py')
 
         with open(full_path, 'w') as file:
             logging.info(' Creating file ' + full_path + '...')

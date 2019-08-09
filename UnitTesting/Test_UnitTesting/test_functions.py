@@ -400,21 +400,21 @@ trusted_values_dict['TestModule__globals'] = {}
 
         a, b, c = sp.symbols('a b c')
 
-        self.module = 'test_module'
+        self.module = 'module_for_testing'
         self.module_name = 'TestModule'
         self.initialization_string = ''
         self.function = 'function(create_gamma=False)'
         self.global_list = []
         self.assertEqual({}, evaluate_globals(self))
 
-        self.module = 'test_module'
+        self.module = 'module_for_testing'
         self.module_name = 'TestModule'
         self.initialization_string = ''
         self.function = 'function(create_gamma=False)'
         self.global_list = ['alpha']
         self.assertEqual({'alpha': a + b + c}, evaluate_globals(self))
 
-        self.module = 'test_module'
+        self.module = 'module_for_testing'
         self.module_name = 'TestModule'
         self.initialization_string = ''
         self.function = 'function(create_gamma=False)'
@@ -422,14 +422,14 @@ trusted_values_dict['TestModule__globals'] = {}
         self.assertEqual({'alpha': a + b + c, 'betaU': [0, a**2 + 2*b**2 + c**2, sp.sqrt(a + b)]},
                          evaluate_globals(self))
 
-        self.module = 'test_module'
+        self.module = 'module_for_testing'
         self.module_name = 'TestModule'
         self.initialization_string = ''
         self.function = 'function(create_gamma=False)'
         self.global_list = ['gamma']
         self.assertRaises(AttributeError, evaluate_globals, self)
 
-        self.module = 'test_module'
+        self.module = 'module_for_testing'
         self.module_name = 'TestModule'
         self.initialization_string = ''
         self.function = 'function(create_gamma=True)'
@@ -437,14 +437,14 @@ trusted_values_dict['TestModule__globals'] = {}
         self.assertEqual({'alpha': a + b + c, 'betaU': [0, a**2 + 2*b**2 + c**2, sp.sqrt(a + b)], 'gamma': sp.atan2(b, a)},
                          evaluate_globals(self))
 
-        self.module = 'test_module'
+        self.module = 'module_for_testing'
         self.module_name = 'TestModule'
         self.initialization_string = ''
         self.function = 'function2(create_gamma=False)'
         self.global_list = ['alpha2']
         self.assertRaises(NameError, evaluate_globals, self)
 
-        self.module = 'test_module'
+        self.module = 'module_for_testing'
         self.module_name = 'TestModule'
         self.initialization_string = ''
         self.function = 'function2(create_gamma=False)'
@@ -453,15 +453,15 @@ trusted_values_dict['TestModule__globals'] = {}
 
         a2, b2, c2 = sp.symbols('a2 b2 c2')
 
-        self.module = 'test_module'
+        self.module = 'module_for_testing'
         self.module_name = 'TestModule'
-        self.initialization_string = 'import test_module as tm\ntm.init_function2()\n'
+        self.initialization_string = 'import module_for_testing as tm\ntm.init_function2()\n'
         self.function = 'function2(create_gamma=False)'
         self.global_list = ['alpha2', 'betaU2']
         self.assertEqual({'alpha2': a2 + b2 + c2, 'betaU2': [0, a2**2 + 2*b2**2 + c2**2, sp.sqrt(a2 + b2)]},
                          evaluate_globals(self))
 
-        self.module = 'test_module'
+        self.module = 'module_for_testing'
         self.module_name = 'TestModule'
         self.initialization_string = ''
         self.function = 'function2(create_gamma=False)'
@@ -469,14 +469,14 @@ trusted_values_dict['TestModule__globals'] = {}
         self.assertEqual({'alpha2': a2 + b2 + c2, 'betaU2': [0, a2**2 + 2*b2**2 + c2**2, sp.sqrt(a2 + b2)]},
                          evaluate_globals(self))
 
-        self.module = 'test_module'
+        self.module = 'module_for_testing'
         self.module_name = 'TestModule'
         self.initialization_string = ''
         self.function = 'function2(create_gamma=False)'
         self.global_list = ['alpha2', 'betaU2', 'gamma2']
         self.assertRaises(AttributeError, evaluate_globals, self)
 
-        self.module = 'test_module'
+        self.module = 'module_for_testing'
         self.module_name = 'TestModule'
         self.initialization_string = ''
         self.function = 'function2(create_gamma=True)'
@@ -690,8 +690,8 @@ trusted_values_dict['trusted_values_dict_name'] = {}
 
         logging.info('\nAll setup_trusted_values_dict tests passed.\n')
 
-    def test_simplify_and_evaluate_sympy_expressions(self):
-        from UnitTesting.simplify_and_evaluate_sympy_expressions import simplify_and_evaluate_sympy_expressions
+    def test_cse_simplify_and_evaluate_sympy_expressions(self):
+        from UnitTesting.cse_simplify_and_evaluate_sympy_expressions import cse_simplify_and_evaluate_sympy_expressions
         from mpmath import mpf, mp, pi, sqrt
         import random
         from sympy import symbols
@@ -700,28 +700,28 @@ trusted_values_dict['trusted_values_dict_name'] = {}
         mp.dps = precision
 
         self.expanded_variable_dict = {}
-        self.assertEqual({}, simplify_and_evaluate_sympy_expressions(self))
+        self.assertEqual({}, cse_simplify_and_evaluate_sympy_expressions(self))
 
         M_PI, M_SQRT1_2 = symbols('M_PI M_SQRT1_2')
 
         self.expanded_variable_dict = {'a': 0, 'b': M_PI}
-        self.assertEqual({'a': 0, 'b': mpf(pi)}, simplify_and_evaluate_sympy_expressions(self))
+        self.assertEqual({'a': 0, 'b': mpf(pi)}, cse_simplify_and_evaluate_sympy_expressions(self))
 
         self.expanded_variable_dict = {'a': M_PI}
         expected_result = {'a': mpf(pi)}
-        actual_result = simplify_and_evaluate_sympy_expressions(self)
+        actual_result = cse_simplify_and_evaluate_sympy_expressions(self)
         for key, val in expected_result.items():
             self.assertAlmostEqual(val, actual_result[key], 20)
 
         self.expanded_variable_dict = {'b': M_SQRT1_2}
         expected_result = {'b': mpf(1/sqrt(2))}
-        actual_result = simplify_and_evaluate_sympy_expressions(self)
+        actual_result = cse_simplify_and_evaluate_sympy_expressions(self)
         for key, val in expected_result.items():
             self.assertAlmostEqual(val, actual_result[key], 20)
 
         self.expanded_variable_dict = {'alpha': M_PI + M_SQRT1_2}
         expected_result = {'alpha': mpf(pi) + mpf(1/sqrt(2))}
-        actual_result = simplify_and_evaluate_sympy_expressions(self)
+        actual_result = cse_simplify_and_evaluate_sympy_expressions(self)
         for key, val in expected_result.items():
             self.assertAlmostEqual(val, actual_result[key], 20)
 
@@ -734,38 +734,38 @@ trusted_values_dict['trusted_values_dict_name'] = {}
 
         self.expanded_variable_dict = {'a': x}
         expected_result = {'a': symbs[x]}
-        actual_result = simplify_and_evaluate_sympy_expressions(self)
+        actual_result = cse_simplify_and_evaluate_sympy_expressions(self)
         for key, val in expected_result.items():
             self.assertAlmostEqual(val, actual_result[key], 20)
 
         self.expanded_variable_dict = {'b': x + y}
         expected_result = {'b': symbs[x] + symbs[y]}
-        actual_result = simplify_and_evaluate_sympy_expressions(self)
+        actual_result = cse_simplify_and_evaluate_sympy_expressions(self)
         for key, val in expected_result.items():
             self.assertAlmostEqual(val, actual_result[key], 20)
 
         self.expanded_variable_dict = {'a': x, 'b': y, 'c': z}
         expected_result = {'a': symbs[x], 'b': symbs[y], 'c': symbs[z]}
-        actual_result = simplify_and_evaluate_sympy_expressions(self)
+        actual_result = cse_simplify_and_evaluate_sympy_expressions(self)
         for key, val in expected_result.items():
             self.assertAlmostEqual(val, actual_result[key], 20)
 
         self.expanded_variable_dict = {'a': x**2, 'b': (x + y)/z}
         expected_result = {'a': symbs[x]**2, 'b': (symbs[x] + symbs[y]) / symbs[z]}
-        actual_result = simplify_and_evaluate_sympy_expressions(self)
+        actual_result = cse_simplify_and_evaluate_sympy_expressions(self)
         for key, val in expected_result.items():
             self.assertAlmostEqual(val, actual_result[key])
 
         self.expanded_variable_dict = {'a': x**2 + 1, 'b': (x**2)**2, 'c': x**2 + y**2, 'd': 1-x**2, 'e': x**2 * z}
         expected_result = {'a': symbs[x]**2 + 1, 'b': symbs[x]**4, 'c': symbs[x]**2 + symbs[y]**2,
                            'd': 1-symbs[x]**2, 'e': symbs[x]**2*symbs[z]}
-        actual_result = simplify_and_evaluate_sympy_expressions(self)
+        actual_result = cse_simplify_and_evaluate_sympy_expressions(self)
         for key, val in expected_result.items():
             self.assertAlmostEqual(val, actual_result[key])
 
         self.expanded_variable_dict = {}
 
-        logging.info(' All simplify_and_evaluate_sympy_expressions tests passed\n')
+        logging.info(' All cse_simplify_and_evaluate_sympy_expressions tests passed\n')
 
 
 # Sub-function for test_first_time_print

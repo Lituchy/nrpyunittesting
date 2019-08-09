@@ -1,36 +1,36 @@
-import sympy as sp
+from UnitTesting.create_test import create_test
 
 
-# Generic module that can be used for testing, specifically test_functions
-# function() can be called in isolation. init_function2() must be called before function2() is called.
-def function(create_gamma=False):
-    global alpha, betaU
+def test_module_for_testing_no_gamma():
 
-    a, b, c = sp.symbols('a b c')
+    module = 'module_for_testing'
 
-    alpha = a + b + c
-    betaU = [0, a**2 + 2*b**2 + c**2, sp.sqrt(a + b)]
+    module_name = 'test_module'
 
-    if create_gamma:
-        global gamma
+    function_and_global_dict = {'function(create_gamma=False)': ['alpha', 'betaU'],
+                                'function(create_gamma=True)': ['alpha', 'betaU', 'gamma'],
+                                'function2(create_gamma=False)': ['alpha2', 'betaU2'],
+                                'function2(create_gamma=True)': ['alpha2', 'betaU2', 'gamma2']}
 
-        gamma = sp.atan2(b, a)
+    initialization_string = 'import module_for_testing as mft\nmft.init_function2()'
 
+    initialization_string_dict = {'function2(create_gamma=False)': initialization_string,
+                                  'function2(create_gamma=True)': initialization_string}
 
-def function2(create_gamma=False):
-
-    global alpha2, betaU2
-
-    alpha2 = a2 + b2 + c2
-
-    betaU2 = [0, a2**2 + 2*b2**2 + c2**2, sp.sqrt(a2 + b2)]
-
-    if create_gamma:
-        global gamma2
-
-        gamma2 = sp.atan2(b2, a2)
+    create_test(module, module_name, function_and_global_dict, initialization_string_dict=initialization_string_dict)
 
 
-def init_function2():
-    global a2, b2, c2
-    a2, b2, c2 = sp.symbols('a2 b2 c2')
+if __name__ == '__main__':
+    failed = set()
+    for fun in dir():
+        if fun[0:5] == 'test_':
+            print('\nTesting function ' + str(fun) + '...\n')
+            try:
+                exec(fun + '()')
+            except SystemExit:
+                failed.add(True)
+            else:
+                failed.add(False)
+
+    if failed == set() or True in failed:
+        exit(1)

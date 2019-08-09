@@ -3,7 +3,7 @@ from UnitTesting.calc_error import calc_error
 from UnitTesting.evaluate_globals import evaluate_globals
 from UnitTesting.expand_variable_dict import expand_variable_dict
 from UnitTesting.first_time_print import first_time_print
-from UnitTesting.simplify_and_evaluate_sympy_expressions import simplify_and_evaluate_sympy_expressions
+from UnitTesting.cse_simplify_and_evaluate_sympy_expressions import cse_simplify_and_evaluate_sympy_expressions
 from UnitTesting.standard_constants import precision
 from mpmath import mp
 from importlib import import_module
@@ -42,9 +42,9 @@ def run_test(self):
 
     # Step 2.c: Call simplify_and_evaluate_sympy_expressions to assign each variable in each expression a random value
     #           and calculate the numerical result
-    logging.info(' Calling simplify_and_evaluate_sympy_expressions...')
-    self.calculated_dict = simplify_and_evaluate_sympy_expressions(self)
-    logging.info(' ...Success: simplify_and_evaluate_sympy_expressions ran without errors.\n')
+    logging.info(' Calling cse_simplify_and_evaluate_sympy_expressions...')
+    self.calculated_dict = cse_simplify_and_evaluate_sympy_expressions(self)
+    logging.info(' ...Success: cse_simplify_and_evaluate_sympy_expressions ran without errors.\n')
 
     # Step 3: Comparison
 

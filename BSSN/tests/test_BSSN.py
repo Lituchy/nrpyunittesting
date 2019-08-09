@@ -18,8 +18,8 @@ def test_BrillLindquist():
 
     module_name = 'BrillLindquist'
 
-    function_and_global_dict = {'BrillLindquist(ComputeADMGlobalsOnly = True)': ['alphaCart', 'betaCartU', 'BCartU', 
-                                                                                 'gammaCartDD', 'KCartDD']}
+    function_and_global_dict = {'BrillLindquist(ComputeADMGlobalsOnly=True)': ['alphaCart', 'betaCartU', 'BCartU',
+                                                                               'gammaCartDD', 'KCartDD']}
 
     create_test(module, module_name, function_and_global_dict)
 
@@ -119,7 +119,7 @@ def test_ShiftedKerrSchild():
 
     module_name = 'ShiftedKerrSchild'
     
-    function_and_global_dict = {'ShiftedKerrSchild(ComputeADMGlobalsOnly = True)': ['alphaSph', 'betaSphU', 'BSphU', 
+    function_and_global_dict = {'ShiftedKerrSchild(ComputeADMGlobalsOnly=True)': ['alphaSph', 'betaSphU', 'BSphU',
                                                                                     'gammaSphDD', 'KSphDD']}
 
     create_test(module, module_name, function_and_global_dict)
@@ -130,7 +130,7 @@ def test_StaticTrumpet():
 
     module_name = 'StaticTrumpet'
     
-    function_and_global_dict = {'StaticTrumpet(ComputeADMGlobalsOnly = True)': ['alphaSph', 'betaSphU', 'BSphU', 
+    function_and_global_dict = {'StaticTrumpet(ComputeADMGlobalsOnly=True)': ['alphaSph', 'betaSphU', 'BSphU',
                                                                                 'gammaSphDD', 'KSphDD']}
 
     create_test(module, module_name, function_and_global_dict)
@@ -151,7 +151,7 @@ def test_UIUCBlackHole():
 
     module_name = 'UIUCBlackHole'
     
-    function_and_global_dict = {'UIUCBlackHole(ComputeADMGlobalsOnly = True)': ['alphaSph', 'betaSphU', 'BSphU', 
+    function_and_global_dict = {'UIUCBlackHole(ComputeADMGlobalsOnly=True)': ['alphaSph', 'betaSphU', 'BSphU',
                                                                                 'gammaSphDD', 'KSphDD']}
 
     create_test(module, module_name, function_and_global_dict)

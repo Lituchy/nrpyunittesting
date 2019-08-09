@@ -17,7 +17,7 @@ import hashlib
 precision = standard_constants.precision
 
 
-def simplify_and_evaluate_sympy_expressions(self):
+def cse_simplify_and_evaluate_sympy_expressions(self):
 
     # If an empty variable dict is passed, return an empty dictionary
     if self.expanded_variable_dict == {}:
