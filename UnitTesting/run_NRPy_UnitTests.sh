@@ -29,7 +29,7 @@ add_test () {
 }
 
 #$PYTHONEXEC UnitTesting/Test_UnitTesting/test_functions.py &&
-#add_test UnitTesting/Test_UnitTesting/test_module.py #&&
+add_test UnitTesting/Test_UnitTesting/test_module.py #&&
 #
 #add_test BSSN/tests/test_BSSN.py &&
 #add_test FishboneMoncriefID/tests/test_FishboneMoncriefID.py &&
@@ -47,13 +47,13 @@ add_test u0_smallb_Poynting__Cartesian/tests/test_u0_smallb_Poynting__Cartesian.
 
 file=$(<$failed_tests_file)
 
-if [ $file == $"Failures:" ]
+if [ "$file" == $"Failures:" ]
 then
   printf "All tests passed!\n\n"
   exit 0
 else
   printf "Tests failed!\n\n"
-  printf $file
+  printf "$file"
   printf "\n\n"
   exit 1
 fi
