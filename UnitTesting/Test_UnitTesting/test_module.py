@@ -1,7 +1,7 @@
 from UnitTesting.create_test import create_test
 
 
-def test_module_for_testing_no_gamma():
+def test_module_for_testing_no_gamma(logging_level='INFO'):
 
     module = 'module_for_testing'
 
@@ -17,7 +17,7 @@ def test_module_for_testing_no_gamma():
     initialization_string_dict = {'function2(create_gamma=False)': initialization_string,
                                   'function2(create_gamma=True)': initialization_string}
 
-    create_test(module, module_name, function_and_global_dict, initialization_string_dict=initialization_string_dict)
+    create_test(module, module_name, function_and_global_dict, initialization_string_dict=initialization_string_dict, logging_level=logging_level)
 
 
 if __name__ == '__main__':
