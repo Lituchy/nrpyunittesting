@@ -31,5 +31,7 @@ if __name__ == '__main__':
                 failed_functions.append(fun)
 
     if failed_functions != []:
-        print(failed_functions)
+        import sys
+        with open(sys.argv[2], 'a') as file:
+            file.write(sys.argv[0] + ': ' + str(failed_functions) + '\n')
         exit(1)

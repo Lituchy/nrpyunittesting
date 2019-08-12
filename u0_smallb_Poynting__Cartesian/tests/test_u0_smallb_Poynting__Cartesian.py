@@ -15,15 +15,17 @@ def test_u0_smallb_Poynting__Cartesian():
 
 
 if __name__ == '__main__':
-    failed = set()
+    failed_functions = []
     for fun in dir():
         if fun[0:5] == 'test_':
+            print('\nTesting function ' + str(fun) + '...\n')
             try:
                 exec(fun + '()')
             except SystemExit:
-                failed.add(True)
-            else:
-                failed.add(False)
+                failed_functions.append(fun)
 
-    if failed == set() or True in failed:
+    if failed_functions != []:
+        import sys, os
+        with open(os.path.join('UnitTesting', 'failed_tests.txt'), 'a') as file:
+            file.write(sys.argv[0] + ': ' + str(failed_functions) + '\n')
         exit(1)
