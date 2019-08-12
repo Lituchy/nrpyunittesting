@@ -23,12 +23,6 @@ def failed_tests_rerun():
 
             function = getattr(module, function_string)
             print(function)
-            #function()
-
-
-
-        #imp.load_source('mod', module)
-        #print(mod)
 
 
 if __name__ == '__main__':

@@ -34,6 +34,8 @@ def test_module_for_testing_gamma():
 
 
 if __name__ == '__main__':
+    import sys
+    print('sys.argv: ' + str(sys.argv) + ' ' + str(len(sys.argv)))
     failed_functions = []
     for fun in dir():
         if fun[0:5] == 'test_':
