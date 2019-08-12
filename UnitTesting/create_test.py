@@ -17,7 +17,6 @@ def create_test(module, module_name, function_and_global_dict, logging_level='IN
     assert type(initialization_string_dict) == dict, "initialization_string is " + str(type(initialization_string_dict)) + " -- it should be type dict. Please check input for initialization_string_dict in " + module_name
     assert all(name in function_and_global_dict for name in initialization_string_dict), "initialization_string_dict contains key not in function_and_global_dict. Please check input for initialization_string_dict in " + module_name
 
-    #logging.basicConfig(level='DEBUG', filename='logging_output.log')
     logging.basicConfig(level=logging_level)
 
     for function, global_list in function_and_global_dict.items():
