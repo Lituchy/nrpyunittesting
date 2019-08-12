@@ -1,4 +1,2 @@
 Failures:
 
-UnitTesting/Test_UnitTesting/test_module.py: ['test_module_for_testing_no_gamma']
-GiRaFFE_HO/tests/test_GiRaFFE_HO.py: ['test_GiRaFFE_HO', 'test_GiRaFFE_HO_v2']

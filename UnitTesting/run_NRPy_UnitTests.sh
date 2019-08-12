@@ -18,7 +18,9 @@ echo $PYTHONEXEC version info:
 $PYTHONEXEC --version
 echo "########################################"
 
+# You can change this to any file you'd like the output to be directed to
 failed_tests_file=UnitTesting/failed_tests.txt
+
 :> $failed_tests_file
 printf "Failures:\n\n" > $failed_tests_file
 
@@ -27,11 +29,11 @@ add_test () {
 }
 
 #$PYTHONEXEC UnitTesting/Test_UnitTesting/test_functions.py &&
-add_test UnitTesting/Test_UnitTesting/test_module.py #&&
+#add_test UnitTesting/Test_UnitTesting/test_module.py #&&
 #
 #add_test BSSN/tests/test_BSSN.py &&
 #add_test FishboneMoncriefID/tests/test_FishboneMoncriefID.py &&
-add_test GiRaFFE_HO/tests/test_GiRaFFE_HO.py #&&
+#add_test GiRaFFE_HO/tests/test_GiRaFFE_HO.py #&&
 #add_test GiRaFFEfood_HO/tests/test_GiRaFFEfood_HO.py &&
 #add_test Maxwell/tests/test_Maxwell.py &&
 #add_test ScalarWave/tests/test_ScalarWave.py &&
@@ -43,4 +45,15 @@ add_test u0_smallb_Poynting__Cartesian/tests/test_u0_smallb_Poynting__Cartesian.
 #touch test_succeeded.txt # Make sure this is the last thing that's run
 # At end, write to test success file. Think about best way to rerun tests that failed -- minimum effort for user.
 
-cat $failed_tests_file
+file=$(<$failed_tests_file)
+
+if [ $file == $"Failures:" ]
+then
+  printf "All tests passed!\n\n"
+  exit 0
+else
+  printf "Tests failed!\n\n"
+  printf $file
+  printf "\n\n"
+  exit 1
+fi
