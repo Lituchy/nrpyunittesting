@@ -6,6 +6,11 @@ import os
 
 def create_test(module, module_name, function_and_global_dict, logging_level='INFO', initialization_string_dict=None):
 
+    print('sys.argv: ' + str(sys.argv) + ' ' + str(len(sys.argv)))
+
+    if len(sys.argv) > 3:
+        logging_level = sys.argv[3]
+
     if initialization_string_dict is None:
         initialization_string_dict = {}
 

@@ -3,7 +3,7 @@ import unittest
 import logging
 from UnitTesting.setup_trusted_values_dict import setup_trusted_values_dict
 
-logging.basicConfig(level=logging.INFO)  
+logging.basicConfig(level=logging.DEBUG)  
 
 
 class TestGlobals(unittest.TestCase):
@@ -21,13 +21,13 @@ class TestGlobals(unittest.TestCase):
 
         self.module_name = 'test_module'
 
-        self.function = 'function(create_gamma=False)'
+        self.function = 'function(create_gamma=True)'
         
-        self.global_list = ['alpha', 'betaU']
+        self.global_list = ['alpha', 'betaU', 'gamma']
         
         self.initialization_string = """"""
         
-        self.trusted_values_dict_name = 'test_module__function__create_gamma=False__globals'
+        self.trusted_values_dict_name = 'test_module__function__create_gamma=True__globals'
         
         try:
         
