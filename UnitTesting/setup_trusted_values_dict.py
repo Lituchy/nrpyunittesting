@@ -12,7 +12,7 @@ def setup_trusted_values_dict(path):
 
     # Try opening [trusted_values_dict.py] in [directory].
     try:
-        logging.debug(' Trying to open path/trusted_values_dict.py...')
+        logging.debug(' Trying to open {}/trusted_values_dict.py...'.format(path))
         fr = open(os.path.join(path, 'trusted_values_dict.py'), 'r')
         logging.debug(' ...Success, file already exists.')
         fr.close()

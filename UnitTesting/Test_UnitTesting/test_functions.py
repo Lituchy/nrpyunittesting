@@ -659,10 +659,14 @@ trusted_values_dict['trusted_values_dict_name'] = {}
 
         logging.info(' All get_variable_dimension tests passed.')
 
-    def test_run_test(self):
+    def ftest_run_test(self):
+        import sys
         from UnitTesting.run_test import run_test
+        from UnitTesting.setup_trusted_values_dict import setup_trusted_values_dict
 
-        logging.getLogger().setLevel('CRITICAL')
+        logging.getLogger().setLevel('ERROR')
+        setup_trusted_values_dict(sys.path[0])
+        logging.getLogger().setLevel('INFO')
 
         self.module = 'module_for_testing'
         self.module_name = 'test_module'
@@ -670,6 +674,7 @@ trusted_values_dict['trusted_values_dict_name'] = {}
         self.function = ''
         self.global_list = []
         self.initialization_string = ''
+        self.path = sys.path[0]
         self.assertRaises(AssertionError, run_test, self)
 
         self.module = 'module_for_testing'
@@ -679,35 +684,49 @@ trusted_values_dict['trusted_values_dict_name'] = {}
         self.global_list = ['alpha', 'betaU']
         self.initialization_string = ''
 
-        self.assertIsNone(run_test(self))
-
-        logging.getLogger().setLevel('INFO')
+        #self.assertIsNone(run_test(self))
 
         logging.info(' All run_test tests passed.')
 
-    def ftest_setup_trusted_values_dict(self):
+    def test_setup_trusted_values_dict(self):
 
         # Tests the setup_trusted_values_dict and the file-writing portion of first_time_print
         from UnitTesting.setup_trusted_values_dict import setup_trusted_values_dict
         import sys
         import os
+        import cmdline_helper as cmd
+
+        logging.getLogger().setLevel('CRITICAL')
 
         path = sys.path[0]
+        full_path = os.path.join(path, 'trusted_values_dict.py')
 
-        self.assertFalse(os.path.exists(path + '/trusted_values_dict.py'))
+        cmd.delete_existing_files(full_path)
+
+        self.assertFalse(os.path.exists(full_path))
 
         setup_trusted_values_dict(path)
 
-        try:
-            fr = open(path + '/trusted_values_dict.py', 'r')
-            self.assertEqual(fr.read(), 'from mpmath import mpf, mp, mpc\nfrom UnitTesting.standard_constants import '
-                                        'precision\n\nmp.dps = precision\ntrusted_values_dict = {}\n')
-            fr.close()
-            os.remove(path + '/trusted_values_dict.py')
-        except IOError:
-            self.assertFalse(True, msg='trusted_values_dict.py not created in correct location.')
+        self.assertTrue(os.path.exists(full_path))
 
-        logging.info('\nAll setup_trusted_values_dict tests passed.\n')
+        with open(full_path, 'r') as file:
+            expected_string = '''from mpmath import mpf, mp, mpc
+from UnitTesting.standard_constants import precision
+
+mp.dps = precision
+trusted_values_dict = {}
+'''
+            self.assertEqual(file.read(), expected_string)
+
+        setup_trusted_values_dict(path)
+
+        self.assertTrue(os.path.exists(full_path))
+
+        cmd.delete_existing_files(full_path)
+
+        logging.getLogger().setLevel('INFO')
+
+        logging.info(' All setup_trusted_values_dict tests passed.\n')
 
     def test_cse_simplify_and_evaluate_sympy_expressions(self):
         from UnitTesting.cse_simplify_and_evaluate_sympy_expressions import cse_simplify_and_evaluate_sympy_expressions
@@ -807,6 +826,8 @@ def calc_error_helper(self, message, expected_result):
 
     if version_info[0] == 2 or version_info[1] < 4:
 
+        from testfixtures import LogCapture
+
         tuple_list = []
 
         for string in message:
@@ -816,7 +837,6 @@ def calc_error_helper(self, message, expected_result):
 
         tuple_tuple = tuple(tuple_list)
 
-        from testfixtures import LogCapture
         with LogCapture() as logger:
             self.assertTrue(expected_result == calc_error(self))
         logger.check(*tuple_tuple)
@@ -825,6 +845,20 @@ def calc_error_helper(self, message, expected_result):
 
         with self.assertLogs(level='DEBUG') as logger:
             self.assertEqual(expected_result, calc_error(self))
+        self.assertEqual(logger.output, message)
+
+
+def run_test_helper(self, message, expected_result):
+    from UnitTesting.run_test import run_test
+
+    if version_info[0] == 2 or version_info[1] < 4:
+
+        pass
+
+    else:
+
+        with self.assertLogs(level='DEBUG') as logger:
+            self.assertEqual(expected_result, run_test(self))
         self.assertEqual(logger.output, message)
 
 

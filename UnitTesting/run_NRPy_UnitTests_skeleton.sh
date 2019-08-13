@@ -28,7 +28,6 @@ add_test () {
   $PYTHONEXEC $1 $PYTHONEXEC $failed_tests_file $2 $3
 }
 
-
 # TODO: Add tests here using add_test [path to test file]
 
 contents=$(<$failed_tests_file)
