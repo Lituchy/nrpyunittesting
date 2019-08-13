@@ -1,20 +1,12 @@
 #!/bin/bash
 
-failed_tests_file=UnitTesting/failed_tests.txt
-contents=$(<$failed_tests_file)
+while IFS=': ' read -r col1 col2
+do
+    if [ "$col1" != "Failures" ] && [ "$col1" != "" ]
+    then
+      add_test "$col1" "DEBUG" "$col2"
+      echo "col1: $col1"
+      echo "col2: $col2"
+    fi
+done <UnitTesting/failed_tests.txt
 
-IFS=': ' read -ra ADDR <<< "$contents"
-
-for i in "${ADDR[@]}"; do
-  echo "$i"
-done
-
-#while read line; do
-#    split=$(echo $line | tr ":" "\n")
-#    #echo "$split"
-#    for part in $split
-#    do
-#      echo "$part"
-#    done
-#    #echo "$line"
-#done < "$failed_tests_file"

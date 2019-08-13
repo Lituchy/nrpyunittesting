@@ -13,9 +13,6 @@ def test_u0_smallb_Poynting__Cartesian():
 
     create_test(module, module_name, function_and_global_dict)
 
-def test_abcd():
-    print('\n\n\nabcd\n\n\n')
-
 
 if __name__ == '__main__':
     import sys
@@ -41,4 +38,3 @@ if __name__ == '__main__':
         function_list = ast.literal_eval(sys.argv[4])
         for function in function_list:
             globals()[function]()
-
