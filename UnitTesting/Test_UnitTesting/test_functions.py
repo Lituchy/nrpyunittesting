@@ -724,7 +724,7 @@ trusted_values_dict['trusted_values_dict_name'] = {}
         M_PI, M_SQRT1_2 = symbols('M_PI M_SQRT1_2')
 
         self.variable_dict = {'a': 1, 'b': M_PI}
-        self.assertEqual({'a': 0, 'b': mpf(pi)}, cse_simplify_and_evaluate_sympy_expressions(self))
+        self.assertEqual({'a': mpf('1.0'), 'b': mpf(pi)}, cse_simplify_and_evaluate_sympy_expressions(self))
 
         self.variable_dict = {'a': M_PI}
         expected_result = {'a': mpf(pi)}
@@ -826,7 +826,6 @@ def calc_error_helper(self, message, expected_result):
         with self.assertLogs(level='DEBUG') as logger:
             self.assertEqual(expected_result, calc_error(self))
         self.assertEqual(logger.output, message)
-
 
 
 # Necessary for unittest class to work properly

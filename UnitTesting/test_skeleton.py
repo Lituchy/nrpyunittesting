@@ -12,17 +12,28 @@ def test_your_module():
     create_test(module, module_name, function_and_global_dict)
 
 
+# Ignore this -- it's to ensure bash functionality
 if __name__ == '__main__':
-    failed = set()
-    for fun in dir():
-        if fun[0:5] == 'test_':
-            print('\nTesting function ' + str(fun) + '...\n')
-            try:
-                exec(fun + '()')
-            except SystemExit:
-                failed.add(True)
-            else:
-                failed.add(False)
+    import sys
 
-    if failed == set() or True in failed:
-        exit(1)
+    if len(sys.argv) <= 3:
+        failed_functions = []
+        for fun in dir():
+            if fun[0:5] == 'test_':
+                print('\nTesting function ' + str(fun) + '...\n')
+                try:
+                    exec(fun + '()')
+                except SystemExit:
+                    failed_functions.append(fun)
+
+        if failed_functions != []:
+            import sys, os
+            with open(os.path.join('UnitTesting', 'failed_tests.txt'), 'a') as file:
+                file.write(sys.argv[0] + ': ' + str(failed_functions) + '\n')
+            exit(1)
+
+    else:
+        import ast
+        function_list = ast.literal_eval(sys.argv[4])
+        for function in function_list:
+            globals()[function]()

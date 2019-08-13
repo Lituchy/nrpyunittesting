@@ -88,8 +88,7 @@ def test_quantities():
     rfm_init_string = '''
 import reference_metric as rfm
 rfm.reference_metric()
-rfm.ref_metric__hatted_quantities()
-    '''
+rfm.ref_metric__hatted_quantities()'''
 
     initialization_string_dict = {
         'BSSN_basic_tensors()': rfm_init_string,
