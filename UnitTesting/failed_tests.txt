@@ -1,3 +1,2 @@
 Failures:
 
-u0_smallb_Poynting__Cartesian/tests/test_u0_smallb_Poynting__Cartesian.py: ['test_u0_smallb_Poynting__Cartesian']
