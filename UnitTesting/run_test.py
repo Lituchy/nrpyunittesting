@@ -54,6 +54,7 @@ def run_test(self):
         logging.info(' Calling first_time_print since it is being run for the first time...')
         first_time_print(self)
         logging.info(' ...Success: first_time_print ran without errors. Automatically failing due to first_time.\n')
+        self.assertTrue(False)
 
     else:
         # Step 3.b: Call calc_error to calculate the error between the trusted values and the calculated values

@@ -38,3 +38,4 @@ if __name__ == '__main__':
         function_list = ast.literal_eval(sys.argv[4])
         for function in function_list:
             globals()[function]()
+

@@ -49,11 +49,9 @@ if __name__ == '__main__':
         if failed_functions != []:
             import sys, os
             with open(os.path.join('UnitTesting', 'failed_tests.txt'), 'a') as file:
-                file.write(sys.argv[0] + ': ' + str(failed_functions) + '\n')
+                for function in failed_functions:
+                    file.write(sys.argv[0] + ': ' + str(function) + '\n')
             exit(1)
 
     else:
-        import ast
-        function_list = ast.literal_eval(sys.argv[4])
-        for function in function_list:
-            globals()[function]()
+        globals()[sys.argv[4]]()

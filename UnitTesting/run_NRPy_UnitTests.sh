@@ -28,7 +28,6 @@ add_test () {
   $PYTHONEXEC $1 $PYTHONEXEC $failed_tests_file $2 $3
 }
 
-$PYTHONEXEC UnitTesting/Test_UnitTesting/test_functions.py
 add_test UnitTesting/Test_UnitTesting/test_module.py
 #
 #add_test BSSN/tests/test_BSSN.py
@@ -42,6 +41,9 @@ add_test UnitTesting/Test_UnitTesting/test_module.py
 #add_test TOV/tests/test_TOV.py
 #add_test u0_smallb_Poynting__Cartesian/tests/test_u0_smallb_Poynting__Cartesian.py
 #add_test WeylScal4NRPy/tests/test_WeylScal4NRPy.py
+
+#$PYTHONEXEC UnitTesting/Test_UnitTesting/test_functions.py
+
 
 contents=$(<$failed_tests_file)
 
