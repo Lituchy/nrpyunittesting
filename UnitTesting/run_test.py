@@ -48,7 +48,6 @@ def run_test(self):
 
     # Step 3: Comparison
 
-    # TODO: Not failing when it should
     if self.first_time:
         # Step 3.a: Print self.calculated_dict in a nice format and append it to trusted_values_dict
         logging.info(' Calling first_time_print since it is being run for the first time...')

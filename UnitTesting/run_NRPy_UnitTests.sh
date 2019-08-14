@@ -65,5 +65,9 @@ else
     fi
   done <UnitTesting/failed_tests.txt
 
+  printf "Completed by re-running following tests with logging_level=DEBUG\n\n"
+  printf "$contents \n\n"
+  printf '%s\n' '----------------------------------------------------------------------'
+
   exit 1
 fi
