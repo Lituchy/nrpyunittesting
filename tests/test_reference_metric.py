@@ -191,17 +191,24 @@ par.set_parval_from_str("reference_metric::CoordSystem", "Cartesian")
 
 
 if __name__ == '__main__':
-    failed_functions = []
-    for fun in dir():
-        if fun[0:5] == 'test_':
-            print('\nTesting function ' + str(fun) + '...\n')
-            try:
-                exec(fun + '()')
-            except SystemExit:
-                failed_functions.append(fun)
+    import sys
 
-    if failed_functions != []:
-        import sys
-        with open(sys.argv[2], 'a') as file:
-            file.write(sys.argv[0] + ': ' + str(failed_functions) + '\n')
-        exit(1)
+    if len(sys.argv) <= 3:
+        failed_functions = []
+        for fun in dir():
+            if fun[0:5] == 'test_':
+                print('\nTesting ' + str(fun) + '...\n')
+                try:
+                    exec(fun + '()')
+                except SystemExit:
+                    failed_functions.append(fun)
+
+        if failed_functions != []:
+            import sys, os
+            with open(os.path.join('UnitTesting', 'failed_tests.txt'), 'a') as file:
+                for function in failed_functions:
+                    file.write(sys.argv[0] + ': ' + str(function) + '\n')
+            exit(1)
+
+    else:
+        globals()[sys.argv[4]]()
