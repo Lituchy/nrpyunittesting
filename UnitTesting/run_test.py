@@ -30,18 +30,13 @@ def run_test(self):
 
     # Step 2: Calculation
 
-    # Step 2.a: Call evaluate_globals to call self.function and get expressions for all globals in self.global_list
+    # Step 2.a: Call evaluate_globals which calls self.function and gets expressions for all globals in self.global_list
     logging.info(' Calling evaluate_globals...')
     self.variable_dict = evaluate_globals(self)
     logging.info(' ...Success: evaluate_globals ran without errors.\n')
 
-    # Step 2.b: Call expand_variable_dict to break up all tensors into scalars with associated names.
-    # logging.info(' Calling expand_variable_dict...')
-    # self.expanded_variable_dict = expand_variable_dict(self)
-    # logging.info(' ...Success: expand_variable_dict ran without errors.\n')
-
-    # Step 2.c: Call simplify_and_evaluate_sympy_expressions to assign each variable in each expression a random value
-    #           and calculate the numerical result
+    # Step 2.b: Call cse_simplify_and_evaluate_sympy_expressions to assign each variable in each expression a random
+    #           value and calculate the numerical result
     logging.info(' Calling cse_simplify_and_evaluate_sympy_expressions...')
     self.calculated_dict = cse_simplify_and_evaluate_sympy_expressions(self)
     logging.info(' ...Success: cse_simplify_and_evaluate_sympy_expressions ran without errors.\n')
