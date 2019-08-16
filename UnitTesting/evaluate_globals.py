@@ -52,7 +52,7 @@ def evaluate_globals(self):
 
     logging.debug(' Executing function call and global assignment...')
 
-    # Execute string_exec with imported_module as enviroment and store result in var_dict
+    # Execute string_exec with imported_module as environment and store result in var_dict
     exec(string_exec, {self.module_name: imported_module}, var_dict)
 
     logging.debug(' ...Successfully executed.')

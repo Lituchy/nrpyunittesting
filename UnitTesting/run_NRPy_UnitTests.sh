@@ -30,6 +30,9 @@ add_test () {
 
 # Change boolean to true/false depending on if you want the tests that fail to automatically re-run with
 # logging_level='DEBUG'
+# By default, this boolean is set to true. A motivation for changing it to false would be if every test is failing, and
+# the sheer amount of output given with the logging level is too much to process. Having it set to true is most useful
+# when only one or two modules fail.
 rerun_if_fail=true
 
 add_test UnitTesting/Test_UnitTesting/test_module.py
