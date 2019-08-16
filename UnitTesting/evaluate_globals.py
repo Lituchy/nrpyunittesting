@@ -25,8 +25,6 @@ def evaluate_globals(self):
     except ValueError:
         logging.error(" Attribute 'module' for " + self.module_name + " is empty -- it must have a value.")
         self.assertTrue(False)
-    else:
-        imported_module = None
 
     logging.debug(' ...Success: Imported module.')
 
