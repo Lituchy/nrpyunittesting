@@ -14,6 +14,7 @@ def evaluate_globals(self):
 
     logging.debug(' Importing ' + self.module + '...')
 
+    # Try to import self.module
     try:
         imported_module = import_module(self.module)
     # If user supplied an incorrect module, error
@@ -24,6 +25,8 @@ def evaluate_globals(self):
     except ValueError:
         logging.error(" Attribute 'module' for " + self.module_name + " is empty -- it must have a value.")
         self.assertTrue(False)
+    else:
+        imported_module = None
 
     logging.debug(' ...Success: Imported module.')
 
@@ -31,24 +34,27 @@ def evaluate_globals(self):
 
     logging.debug('initialization_string: ' + self.initialization_string)
 
+    # Execute self.initialization_string
     exec(self.initialization_string)
 
     logging.debug(' ...Successfully executed.')
 
+    # If the user supplied a function, add it to string_exec
     if self.function != '':
         string_exec = self.module_name + '.' + self.function + '\n'
     else:
         string_exec = ''
 
+    # Add each global to string_exec
     for glob in self.global_list:
         string_exec += glob + '=' + self.module_name + '.' + glob + '\n'
 
-    # Initializing location
+    # Initializing location that result will be stored in
     var_dict = {}
 
     logging.debug(' Executing function call and global assignment...')
 
-    # Executing string of execution with current globals and storing resulting globals in loc
+    # Execute string_exec with imported_module as enviroment and store result in var_dict
     exec(string_exec, {self.module_name: imported_module}, var_dict)
 
     logging.debug(' ...Successfully executed.')

@@ -7,6 +7,13 @@ import UnitTesting.standard_constants as standard_constants
 import logging
 import hashlib
 
+# Called by run_test
+# Uses self.variable_dict
+
+# Setting precision
+precision = standard_constants.precision
+
+
 # cse_simplify_and_evaluate_sympy_expressions gets self.expanded_variable_dict by calling expand_variable_dict() on
 # self.variable_dict. It then gets every free symbol in self.expanded_variable dict and assigns them random,
 # but consistent, mpf values. It then looks at each expression in self.expanded_variable_dict, uses SymPy's CSE
@@ -14,27 +21,19 @@ import hashlib
 # expression. It then checks whether any of these expressions are super close to zero -- if a value is, recalculate it
 # at twice the precision. If the value drops off in magnitude, set it to exactly zero. Finally, return a dictionary
 # where each variable is assigned its respective value.
-
-# Called by run_test
-
-# Uses self.variable_dict
-
-precision = standard_constants.precision
-
-
 def cse_simplify_and_evaluate_sympy_expressions(self):
 
     # If an empty variable dict is passed, return an empty dictionary
     if self.variable_dict == {}:
         return {}
 
+    # Call expand_variable_dict
     self.expanded_variable_dict = expand_variable_dict(self.variable_dict)
 
     # Setting precision
     mp.dps = precision
 
     # Creating free_symbols_set, which stores all free symbols from all expressions.
-
     logging.debug(' Getting all free symbols...')
     free_symbols_set = set()
     for val in self.expanded_variable_dict.values():
@@ -78,8 +77,10 @@ def cse_simplify_and_evaluate_sympy_expressions(self):
         replaced, reduced = cse(expression, order='none')
         reduced = reduced[0]
 
+        # Calculate our result_value
         result_value = calculate_value(free_symbols_dict, replaced, reduced)
 
+        # Check if result_value is near-zero, and double checking if it should be zero
         if fabs(result_value) != mpf('0.0') and fabs(result_value) < 10 ** ((-2.0/3)*precision):
             logging.info("Found |result| (" + str(fabs(result_value)) + ") close to zero. "
                          "Checking if indeed it should be zero.")
@@ -89,6 +90,7 @@ def cse_simplify_and_evaluate_sympy_expressions(self):
                              str(new_result_value) + ". Setting value to zero")
                 result_value = mpf('0.0')
 
+        # Store result_value in calculated_dict
         calculated_dict[var] = result_value
 
     return calculated_dict
@@ -97,6 +99,7 @@ def cse_simplify_and_evaluate_sympy_expressions(self):
 # Sub-function that calculates value for variable with precision multiplied by precision_factor
 def calculate_value(free_symbols_dict, replaced, reduced, precision_factor=1):
 
+    # Set precision to [precision] multiplied by [precision_factor]
     mp.dps = precision_factor * precision
 
     # Copying free_symbols_dict into a new variable dictionary
@@ -124,6 +127,7 @@ def calculate_value(free_symbols_dict, replaced, reduced, precision_factor=1):
     mp.dps = precision
 
     return res
+
 
 # [expand_variable_dict] takes in a variable dictionary [variable_dict] and returns a dictionary that represents
 # the expanded version of [variable_dict] according to the dimension of each variable in [variable_dict].
@@ -156,8 +160,6 @@ def expand_variable_dict(variable_dict):
                 counter = increment_counter(counter, length)
 
     return result_dict
-
-# Sub-functions:
 
 
 # Takes in a tensor [tensor] and returns the rank of that tensor, along with the length of the tensor
