@@ -80,7 +80,7 @@ if __name__ == '__main__':
 '''
 
         trusted_values_dict_name = module_name + '__' + \
-                                   function.replace('()', '__').replace('(', '__').replace(')', '__').replace(' ', '')
+                function.replace('()', '__').replace('(', '__').replace(')', '__').replace(' ', '').replace('=', '_')
 
         # Copying the lines from run_test.py into our test file
         with open(os.path.join('UnitTesting', 'run_test.py'), 'r') as file:
@@ -107,6 +107,13 @@ if __name__ == '__main__':
         logging.debug(' Test file for:\nmodule:   ' + module_name + '\nfunction: ' + function + '\n' + file_string)
 
         full_path = os.path.join(sys.path[0], trusted_values_dict_name + 'test.py')
+
+        if ' ' in full_path:
+            logging.error(' ' + full_path)
+            logging.error(' It seems there is a space in one of your directories listed in the path above. '
+                          'Please change this.')
+
+            raise SystemExit
 
         with open(full_path, 'w') as file:
             logging.info(' Creating file ' + full_path + '...')
