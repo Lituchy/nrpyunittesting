@@ -15,7 +15,7 @@ precision = standard_constants.precision
 
 
 # cse_simplify_and_evaluate_sympy_expressions gets self.expanded_variable_dict by calling expand_variable_dict() on
-# self.variable_dict. It then gets every free symbol in self.expanded_variable dict and assigns them random,
+# self.variable_dict. It then gets every free symbol in the resulting expanded_variable_dict and assigns them random,
 # but consistent, mpf values. It then looks at each expression in self.expanded_variable_dict, uses SymPy's CSE
 # algorithm to optimize our random value substitution, and gets a mpf (or mpc if the result is complex) value for each
 # expression. It then checks whether any of these expressions are super close to zero -- if a value is, recalculate it
@@ -28,7 +28,7 @@ def cse_simplify_and_evaluate_sympy_expressions(self):
         return {}
 
     # Call expand_variable_dict
-    self.expanded_variable_dict = expand_variable_dict(self.variable_dict)
+    expanded_variable_dict = expand_variable_dict(self.variable_dict)
 
     # Setting precision
     mp.dps = precision
@@ -36,7 +36,7 @@ def cse_simplify_and_evaluate_sympy_expressions(self):
     # Creating free_symbols_set, which stores all free symbols from all expressions.
     logging.debug(' Getting all free symbols...')
     free_symbols_set = set()
-    for val in self.expanded_variable_dict.values():
+    for val in expanded_variable_dict.values():
         try:
             free_symbols_set = free_symbols_set | val.free_symbols
         except AttributeError:
@@ -72,7 +72,7 @@ def cse_simplify_and_evaluate_sympy_expressions(self):
     logging.debug(' ...Calculating values for each variable based on free symbols...')
 
     # Evaluating each expression using the values in var_dict
-    for var, expression in self.expanded_variable_dict.items():
+    for var, expression in expanded_variable_dict.items():
         # Using SymPy's cse algorithm to optimize our value substitution
         replaced, reduced = cse(expression, order='none')
         reduced = reduced[0]

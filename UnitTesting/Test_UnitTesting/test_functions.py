@@ -527,7 +527,6 @@ trusted_values_dict['TestModule__globals'] = {}
 
         logging.info(' All expand_variable_dict tests passed.')
 
-    # TODO: Tests with write=True (writes to file)
     def test_first_time_print(self):
         from datetime import date
         from mpmath import mpf
@@ -845,20 +844,6 @@ def calc_error_helper(self, message, expected_result):
 
         with self.assertLogs(level='DEBUG') as logger:
             self.assertEqual(expected_result, calc_error(self))
-        self.assertEqual(logger.output, message)
-
-
-def run_test_helper(self, message, expected_result):
-    from UnitTesting.run_test import run_test
-
-    if version_info[0] == 2 or version_info[1] < 4:
-
-        pass
-
-    else:
-
-        with self.assertLogs(level='DEBUG') as logger:
-            self.assertEqual(expected_result, run_test(self))
         self.assertEqual(logger.output, message)
 
 
