@@ -25,7 +25,6 @@
 
 import io, os, shlex, subprocess, sys, time, multiprocessing, getpass, platform
 
-
 # check_executable_exists(): Check to see whether an executable exists. 
 #                            Error out or return False if not exists;
 #                            return True if executable exists in PATH.
@@ -41,9 +40,8 @@ def check_executable_exists(exec_name,error_if_not_found=True):
             return False
     return True
 
-
 # C_compile(): Write a function to compile the Main C code into an executable file
-def C_compile(main_C_output_path, main_C_output_file):
+def C_compile(main_C_output_path, main_C_output_file, compile_mode="optimized", custom_compile_string=""):
     print("Compiling executable...")
     # Step 1: Check for gcc compiler
     check_executable_exists("gcc")
@@ -55,25 +53,42 @@ def C_compile(main_C_output_path, main_C_output_file):
     delete_existing_files(main_C_output_file)
     
     # Step 3: Compile the executable
-    compile_string = "gcc -Ofast -fopenmp -march=native "+str(main_C_output_path)+" -o "+str(main_C_output_file)+" -lm"
-    Execute_input_string(compile_string, os.devnull)
-    # Check if executable exists (i.e., compile was successful), if not, try with more conservative compile flags.
-    if not os.path.isfile(main_C_output_file):
-        # Step 3.A: Revert to more compatible gcc compile option
-        print("Most optimized compilation failed. Removing -march=native:")
-        compile_string = "gcc -Ofast -fopenmp "+str(main_C_output_path)+" -o "+str(main_C_output_file)+" -lm"
+    if compile_mode=="safe":
+        compile_string = "gcc -O2 -g -fopenmp "+str(main_C_output_path)+" -o "+str(main_C_output_file)+" -lm"
         Execute_input_string(compile_string, os.devnull)
-    if not os.path.isfile(main_C_output_file):
-        # Step 3.B: Revert to maximally compatible gcc compile option
-        print("Next-to-most optimized compilation failed. Moving to maximally-compatible gcc compile option:")
-        compile_string = "gcc -O2 "+str(main_C_output_path)+" -o "+str(main_C_output_file)+" -lm"
+        # Check if executable exists (i.e., compile was successful), if not, try with more conservative compile flags.
+        if not os.path.isfile(main_C_output_file):
+            print("Sorry, compilation failed")
+            sys.exit(1)
+    elif compile_mode=="custom":
+        Execute_input_string(custom_compile_string, os.devnull)
+        # Check if executable exists (i.e., compile was successful), if not, try with more conservative compile flags.
+        if not os.path.isfile(main_C_output_file):
+            print("Sorry, compilation failed")
+            sys.exit(1)
+    elif compile_mode=="optimized":
+        compile_string = "gcc -Ofast -fopenmp -march=native "+str(main_C_output_path)+" -o "+str(main_C_output_file)+" -lm"
         Execute_input_string(compile_string, os.devnull)
-    # Step 3.C: If there are still missing components within the compiler, say compilation failed
-    if not os.path.isfile(main_C_output_file):
-        print("Sorry, compilation failed")
+        # Check if executable exists (i.e., compile was successful), if not, try with more conservative compile flags.
+        if not os.path.isfile(main_C_output_file):
+            # Step 3.A: Revert to more compatible gcc compile option
+            print("Most optimized compilation failed. Removing -march=native:")
+            compile_string = "gcc -Ofast -fopenmp "+str(main_C_output_path)+" -o "+str(main_C_output_file)+" -lm"
+            Execute_input_string(compile_string, os.devnull)
+        if not os.path.isfile(main_C_output_file):
+            # Step 3.B: Revert to maximally compatible gcc compile option
+            print("Next-to-most optimized compilation failed. Moving to maximally-compatible gcc compile option:")
+            compile_string = "gcc -O2 "+str(main_C_output_path)+" -o "+str(main_C_output_file)+" -lm"
+            Execute_input_string(compile_string, os.devnull)
+        # Step 3.C: If there are still missing components within the compiler, say compilation failed
+        if not os.path.isfile(main_C_output_file):
+            print("Sorry, compilation failed")
+            sys.exit(1)
+    else:
+        print("Sorry, compile_mode = \""+compile_mode+"\" unsupported.")
         sys.exit(1)
+        
     print("Finished compilation.")
-
 
 # Execute(): Execute generated executable file, using taskset 
 #            if available. Calls Execute_input_string() to
@@ -117,7 +132,6 @@ def Execute(executable, executable_output_arguments="", file_to_redirect_stdout=
     # Step 3: Execute the desired executable
     Execute_input_string(execute_string, file_to_redirect_stdout)
 
-
 # Execute_input_string(): Executes an input string and redirects 
 #            output from stdout & stderr to desired destinations.
 def Execute_input_string(input_string, file_to_redirect_stdout=os.devnull, output=True):
@@ -157,7 +171,6 @@ def Execute_input_string(input_string, file_to_redirect_stdout=os.devnull, outpu
     end = time.time()
     if output:
         print("Finished executing in "+str(end-start)+" seconds.")
-
 
 # delete_existing_files(file_or_wildcard): 
 #          Runs del file_or_wildcard in Windows, or
