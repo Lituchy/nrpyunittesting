@@ -22,6 +22,8 @@ def create_test(module, module_name, function_and_global_dict, logging_level='IN
 
     logging.basicConfig(level=logging_level)
 
+    failed = False
+
     for function, global_list in function_and_global_dict.items():
 
         initialization_string = initialization_string_dict.get(function, '')
@@ -134,7 +136,7 @@ if __name__ == '__main__':
                           ' failed! Please examine test file.\n'
                           '\n----------------------------------------------------------------------\n'
                           '----------------------------------------------------------------------\n')
-            raise SystemExit
+            failed = True
         else:
             logging.info(' Test for function ' + function + ' in module ' + module_name +
                          ' passed! Deleting test file...')
@@ -142,3 +144,6 @@ if __name__ == '__main__':
             logging.info(' ...Deletion successful. Test complete.\n'
                          '\n----------------------------------------------------------------------\n'
                          '----------------------------------------------------------------------\n')
+
+    if failed:
+        raise SystemExit

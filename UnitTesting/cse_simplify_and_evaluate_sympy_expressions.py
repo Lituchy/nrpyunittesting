@@ -75,7 +75,6 @@ def cse_simplify_and_evaluate_sympy_expressions(self):
     for var, expression in expanded_variable_dict.items():
         # Using SymPy's cse algorithm to optimize our value substitution
         replaced, reduced = cse(expression, order='none')
-        reduced = reduced[0]
 
         # Calculate our result_value
         result_value = calculate_value(free_symbols_dict, replaced, reduced)
@@ -99,23 +98,22 @@ def cse_simplify_and_evaluate_sympy_expressions(self):
 # Sub-function that calculates value for variable with precision multiplied by precision_factor
 def calculate_value(free_symbols_dict, replaced, reduced, precision_factor=1):
 
+    reduced = reduced[0]
+
     # Set precision to [precision] multiplied by [precision_factor]
     mp.dps = precision_factor * precision
 
-    # Copying free_symbols_dict into a new variable dictionary
-    new_var_dict = dict(free_symbols_dict)
-
-    # Replacing old expressions with new expressions and putting result in new variable dictionary
+    # Replacing old expressions with new expressions and storing result in free_symbols_dict
     for new, old in replaced:
         keys = old.free_symbols
         for key in keys:
-            old = old.subs(key, new_var_dict[key])
-        new_var_dict[new] = old
+            old = old.subs(key, free_symbols_dict[key])
+        free_symbols_dict[new] = old
 
     # Evaluating expression after cse optimization
     keys = reduced.free_symbols
     for key in keys:
-        reduced = reduced.subs(key, new_var_dict[key])
+        reduced = reduced.subs(key, free_symbols_dict[key])
 
     # Adding our variable, value pair to our calculated_dict
     try:
@@ -152,7 +150,7 @@ def expand_variable_dict(variable_dict):
             # Initialize our counter of the correct dimension
             counter = '0' * dim
             # Call flatten on our expression list to get a flattened list
-            flattened_list = flatten(expression_list, [])
+            flattened_list = flatten(expression_list)
 
             # Append next element to var list and increment counter
             for elt in flattened_list:
@@ -220,7 +218,11 @@ def form_string(var, counter):
 
 # Function used for removing nested lists in python.
 # https://www.geeksforgeeks.org/python-convert-a-nested-list-into-a-flat-list/
-def flatten(l, fl):
+def flatten(l, fl=None):
+
+    if fl is None:
+        fl = []
+
     for i in l:
         if type(i) == list:
             flatten(i, fl)
