@@ -23,9 +23,8 @@ def calc_error(self):
     trusted_set = set(self.trusted_values_dict_entry)
 
     logging.debug(' Checking that calculated and trusted dicts contain the same variables...')
-    # If the sets differ
+    # If the sets differ, output the differing variables
     if calculated_set != trusted_set:
-        # Print differing values if [output] is True
         logging.error(' {}: Calculated dictionary and trusted dictionary have different variables.'.format(self.module_name))
         calculated_minus_trusted = calculated_set - trusted_set
         trusted_minus_calculated = trusted_set - calculated_set
@@ -44,13 +43,14 @@ def calc_error(self):
     bad_var_list = []
 
     logging.debug(' Comparing all calculated and trusted values...')
-    # For each variable, print calculated and trusted values
+    # Loop through all variables in sorted order
     for var in sorted(self.calculated_dict):
 
         # Values to compare
         calculated_val = self.calculated_dict[var]
         trusted_val = self.trusted_values_dict_entry[var]
 
+        # For each variable, print calculated and trusted values
         logging.debug('\n' + self.module_name + ': ' + var + ': Calculated: ' + str(calculated_val) + '\n' + self.module_name + ': ' + var
                       + ': Trusted:    ' + str(trusted_val) + '\n')
 

@@ -1,34 +1,6 @@
-
-#[report]
-#exclude_lines =
-#    # Have to re-enable the standard pragma
-#    pragma: no cover
-#
-#    # Don't care about import statements in our modules, as we're calling their functions
-#    import
-#
-#[run]
-#omit =
-#    # omit the test files being called to run the modules
-#    */BSSN/test/*
-
-#    # omit init
-#    */__init__.py
-#
-#    # omitting specific files that are called by our modules
-#    */BSSN/BSSN_quantities.py
-#    */BSSN/ADM_Exact_Spherical_or_Cartesian_to_BSSNCurvilinear.py
-#    */BSSN/BSSN_ID_function_string.py
-#
-#include =
-#    # only include the modules being tested
-#    */BSSN/*
-
 [run]
-include =
-    */test/*
-
 omit =
-    */run_test.py
-    */first_time_print.py
-    */calc_error.py
+    */site-packages/*
+    *__test.py
+    outputC.py
+    */__init__.py

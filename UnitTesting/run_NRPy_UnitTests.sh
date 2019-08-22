@@ -1,7 +1,9 @@
 #!/bin/bash
 
+# Set proper path
 export PYTHONPATH=`pwd`:`pwd`/UnitTesting
 
+# Make sure the Python interpreter to use was passed in
 if [ -z "$1" ]
 then
     echo "ERROR: Was expecting parameter."
@@ -18,8 +20,8 @@ echo $PYTHONEXEC version info:
 $PYTHONEXEC --version
 echo "########################################"
 
+# Overwrite failed_tests.txt
 failed_tests_file=UnitTesting/failed_tests.txt
-
 :> $failed_tests_file
 printf "Failures:\n\n" > $failed_tests_file
 
@@ -53,6 +55,7 @@ add_test WeylScal4NRPy/tests/test_WeylScal4NRPy.py
 # TODO: add your tests here
 
 
+# Checking failed_tests.txt to see what failed
 contents=$(<$failed_tests_file)
 
 if [ "$contents" == $"Failures:" ]
@@ -64,6 +67,7 @@ else
   printf "$contents \n\n"
   printf '%s\n' '----------------------------------------------------------------------'
 
+  # If tests failed and rerun_if_fail is true, the rerun failed tests with logging level DEBUG
   if $rerun_if_fail
   then
     printf "Re-running failed tests with logging_level=DEBUG:\n\n"
