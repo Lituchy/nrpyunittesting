@@ -687,7 +687,7 @@ trusted_values_dict['trusted_values_dict_name'] = {}
 
         logging.info(' All run_test tests passed.')
 
-    def test_setup_trusted_values_dict(self):
+    def ftest_setup_trusted_values_dict(self):
 
         # Tests the setup_trusted_values_dict and the file-writing portion of first_time_print
         from UnitTesting.setup_trusted_values_dict import setup_trusted_values_dict
