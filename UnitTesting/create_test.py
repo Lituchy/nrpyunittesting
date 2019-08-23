@@ -44,8 +44,12 @@ def create_test(module, module_name, function_and_global_dict, logging_level='IN
 import unittest
 import logging
 from UnitTesting.setup_trusted_values_dict import setup_trusted_values_dict
+from UnitTesting.RepeatedTimer import RepeatedTimer
 
 logging.basicConfig(level=logging.{})  
+
+def timer_output():
+    logging.info(' Printing every 5 minutes to prevent Travis CI timeout.')
 
 
 class TestGlobals(unittest.TestCase):
@@ -56,6 +60,12 @@ class TestGlobals(unittest.TestCase):
         logging.debug(' Calling setup_trusted_values_dict...')
         setup_trusted_values_dict(self.path)
         logging.debug(' ...Success: setup_trusted_values_dict ran without errors.\\n')
+        self.timer = RepeatedTimer(300, timer_output)
+    
+    
+    def tearDown(self):
+        self.timer.stop()
+        
 
     def test_globals(self):
 
