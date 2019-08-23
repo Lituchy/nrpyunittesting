@@ -147,9 +147,11 @@ if __name__ == '__main__':
         logging.debug(' $PYTHONEXEC is: ' + str(sys.argv[1]) + '\n')
 
         logging.debug(' Calling Execute_input_string\n')
+
         # Use cmdline_helper to execute the test
+        # cmd.Execute_input_string('coverage run -a' + ' ' + full_path, output=False)
         cmd.Execute_input_string(sys.argv[1] + ' ' + full_path, output=False)
-        # cmd.Execute_input_string('coverage run' + ' ' + full_path, output=False)
+
         # See if success.txt was created -- if so, the test passed. Otherwise, the test failed
         try:
             success_file = os.path.join(sys.path[0], 'success.txt')

@@ -13,6 +13,7 @@ def test_GiRaFFE_HO():
 
     create_test(module, module_name, function_and_global_dict)
 
+
 def test_GiRaFFE_HO_v2():
 
     module = 'GiRaFFE_HO.GiRaFFE_Higher_Order_v2'

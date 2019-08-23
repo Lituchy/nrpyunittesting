@@ -491,7 +491,7 @@ trusted_values_dict['TestModule__globals'] = {}
         logging.info(' All evaluate_globals tests passed.')
 
     def test_expand_variable_dict(self):
-        from UnitTesting.expand_variable_dict import expand_variable_dict
+        from UnitTesting.cse_simplify_and_evaluate_sympy_expressions import expand_variable_dict
 
         variable_dict = dict()
         result_dict = dict()
@@ -636,7 +636,7 @@ trusted_values_dict['trusted_values_dict_name'] = {}
         logging.info(' All first_time_print tests passed.')
 
     def test_get_variable_dimension(self):
-        from UnitTesting.expand_variable_dict import get_variable_dimension
+        from UnitTesting.cse_simplify_and_evaluate_sympy_expressions import get_variable_dimension
 
         rank0 = 4
         rank1 = [rank0, rank0+1, rank0]
